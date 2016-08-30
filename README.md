@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 akka
 ==============
 
@@ -50,3 +51,7 @@ Using Vaadin pre-releases
 
 If Vaadin pre-releases are not enabled by default, use the Maven parameter
 "-P vaadin-prerelease" or change the activation default value of the profile in pom.xml .
+=======
+# akka-web
+Tutorial on Akka Actors in Web Environment
+>>>>>>> 79eb85d1298343c6a3477af3be62d8c9f2867b4f
