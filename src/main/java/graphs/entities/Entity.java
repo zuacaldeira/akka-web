@@ -1,4 +1,4 @@
-package actors.entities;
+package graphs.entities;
 
 import org.neo4j.ogm.annotation.GraphId;
 
@@ -26,9 +26,8 @@ public abstract class Entity {
 
         Entity entity = (Entity) o;
 
-        if (!id.equals(entity.id)) return false;
+        return id.equals(entity.id);
 
-        return true;
     }
 
     @Override

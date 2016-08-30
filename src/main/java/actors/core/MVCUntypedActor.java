@@ -1,5 +1,7 @@
 package actors.core;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.DiagnosticLoggingAdapter;
 import akka.event.Logging;
@@ -13,4 +15,9 @@ public abstract class MVCUntypedActor extends UntypedActor {
     public MVCUntypedActor() {
         log = Logging.getLogger(this);
     }
+
+    protected ActorRef createChildActor(Class<?> actorClass) {
+        return getContext().actorOf(Props.create(actorClass), actorClass.getSimpleName());
+    }
+
 }

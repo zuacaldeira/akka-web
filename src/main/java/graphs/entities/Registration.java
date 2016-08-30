@@ -1,4 +1,4 @@
-package actors.entities;
+package graphs.entities;
 
 import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
@@ -15,6 +15,9 @@ public class Registration extends Entity {
 
     @EndNode
     private Account account;
+
+    public Registration() {
+    }
 
     public Registration(User user, Account account) {
         this.user = user;

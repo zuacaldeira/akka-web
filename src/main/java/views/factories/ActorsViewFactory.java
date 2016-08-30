@@ -1,7 +1,5 @@
 package views.factories;
 
-import akka.actor.ActorRef;
-
 import java.util.List;
 
 /**
@@ -9,7 +7,7 @@ import java.util.List;
  */
 public class ActorsViewFactory {
 
-    public static ActorView getActorView(ActorRef actor, List<String> messages) {
+    public static ActorView getActorView(Class<?> actor, List<String> messages) {
         return new InactiveActorView(actor, messages);
     }
 }

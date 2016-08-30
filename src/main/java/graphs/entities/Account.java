@@ -1,4 +1,4 @@
-package actors.entities;
+package graphs.entities;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -10,6 +10,9 @@ public class Account extends Entity {
     private  String email;
     private  String password;
 
+    public Account() {
+    }
+
     public Account(String email, String password) {
         this.email = email;
         this.password = password;
@@ -19,12 +22,12 @@ public class Account extends Entity {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

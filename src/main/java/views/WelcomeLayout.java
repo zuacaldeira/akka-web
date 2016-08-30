@@ -1,25 +1,26 @@
 package views;
 
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
 import actors.core.WelcomeActor;
+import actors.messages.AkkaMessages;
 import views.factories.ActorView;
 import views.factories.ActorsViewFactory;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by zua on 28.08.16.
  */
 public class WelcomeLayout extends TopLayout {
 
-    private ActorRef welcomeActor;
 
     public WelcomeLayout() {
     }
 
     @Override
     protected void initActors() {
-        welcomeActor = ActorSystem.create().actorOf(WelcomeActor.PROPS, WelcomeActor.NAME);
-        ActorView actorView = ActorsViewFactory.getActorView(welcomeActor, WelcomeActor.MESSAGES);
+        List<String> messages = Arrays.asList(AkkaMessages.REGISTER, AkkaMessages.LOGIN);
+        ActorView actorView = ActorsViewFactory.getActorView(WelcomeActor.class, messages);
         addComponent(actorView);
     }
 

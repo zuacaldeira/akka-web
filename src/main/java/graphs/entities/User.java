@@ -1,4 +1,4 @@
-package actors.entities;
+package graphs.entities;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -9,6 +9,9 @@ import org.neo4j.ogm.annotation.NodeEntity;
 public class User extends Entity {
     private String email;
     private String fullname;
+
+    public User() {
+    }
 
     public User(String email, String fullname) {
         this.email = email;
