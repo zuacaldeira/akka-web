@@ -8,8 +8,12 @@ import org.neo4j.ogm.session.Session;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scala.concurrent.Await;
+import scala.concurrent.duration.Duration;
 
 import java.util.Collections;
+
+import static akka.pattern.Patterns.ask;
 
 /**
  * Created by zua on 30.08.16.
@@ -43,6 +47,12 @@ public abstract class AbstractActorTest {
     public ActorRef createActor(Class<?> aclass) {
         return actorSystem.actorOf(Props.create(aclass), aclass.getSimpleName());
     }
+
+    public ActorRef createActor(Class<?> aClass, ActorRef supervisor) throws Exception {
+        return (ActorRef) Await.result(ask(supervisor,
+                Props.create(aClass), 5000), Duration.create("1 minute"));
+    }
+
 
 
     @Test

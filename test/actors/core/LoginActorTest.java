@@ -4,7 +4,7 @@ package actors.core;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
 import akka.actor.ActorRef;
-import akka.actor.Terminated;
+import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import akka.testkit.TestProbe;
 import graphs.Neo4jSessionFactory;
@@ -13,6 +13,7 @@ import graphs.entities.Registration;
 import graphs.entities.User;
 import org.neo4j.ogm.session.Session;
 import org.testng.annotations.Test;
+import scala.concurrent.duration.Duration;
 
 /**
  * Created by zua on 30.08.16.
@@ -39,12 +40,14 @@ public class LoginActorTest extends AbstractActorTest {
     public void testInvalidLogin() throws Exception {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef loginActor = createActor(LoginActor.class);
+                Props superProps = Props.create(Supervisor.class);
+                ActorRef supervisor = getActorSystem().actorOf(superProps, "supervisor");
+                ActorRef loginActor = createActor(LoginActor.class, supervisor);
 
                 TestProbe probe = new TestProbe(getActorSystem());
                 probe.watch(loginActor);
                 loginActor.tell(new LoginMessage(USERNAME, PASSWORD), getRef());
-                probe.expectMsgClass(Terminated.class);
+                probe.expectTerminated(loginActor, Duration.create("1 minute"));
             }
         };
     }
