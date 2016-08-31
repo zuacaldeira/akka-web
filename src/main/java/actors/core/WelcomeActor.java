@@ -8,10 +8,11 @@ import akka.actor.ActorRef;
 /**
  * Created by zua on 28.08.16.
  */
-public class WelcomeActor extends MVCUntypedActor {
+public class WelcomeActor extends Supervisor {
+
 
     @Override
-    public void onReceive(Object message) throws Throwable {
+    public void onReceive(Object message) {
         if (message instanceof RegisterMessage) {
             ActorRef ref = createChildActor(RegisterActor.class);
             ref.forward(message, getContext());

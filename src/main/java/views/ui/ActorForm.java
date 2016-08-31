@@ -1,12 +1,11 @@
-package views.factories;
+package views.ui;
 
 import akka.actor.ActorRef;
-import com.vaadin.ui.FormLayout;
 
 /**
  * Created by zua on 29.08.16.
  */
-public class ActorForm extends FormLayout {
+public class ActorForm extends MyForm {
     private final ActorRef actor;
 
     public ActorForm(ActorRef actor) {

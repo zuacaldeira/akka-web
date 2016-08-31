@@ -1,20 +1,22 @@
-package views.factories;
+package views.actors;
 
-import akka.actor.ActorRef;
 import actors.messages.AkkaMessages;
-import com.vaadin.event.LayoutEvents;
+import akka.actor.ActorRef;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
+import views.ui.LoginForm;
+import views.ui.RegisterForm;
 
 /**
  * Created by zua on 29.08.16.
  */
-public class MessageView extends Button implements Button.ClickListener, LayoutEvents.LayoutClickListener {
-    private final Object content;
+public class MessageView extends Button implements Button.ClickListener {
+    private Object content;
     private final ActorRef actor;
+    private Window window;
 
     public MessageView(ActorRef actor, Object content) {
         this.content = content;
@@ -28,25 +30,32 @@ public class MessageView extends Button implements Button.ClickListener, LayoutE
 
     @Override
     public void buttonClick(ClickEvent clickEvent) {
-        Window w = new Window(content.toString());
+        window = new Window(content.toString());
         switch (content.toString()) {
             case AkkaMessages.REGISTER:
-                w.setContent(new RegisterForm(actor));
+                window.setContent(new RegisterForm(actor));
                 break;
             case AkkaMessages.LOGIN:
-                w.setContent(new LoginForm(actor));
+                window.setContent(new LoginForm(actor));
                 break;
             default:
-                w.setContent(new Label("Unknown"));
+                window.setContent(new Label("Unknown"));
                 break;
         }
 
-        w.center();
-        getUI().addWindow(w);
+        window.center();
+        getUI().addWindow(window);
     }
 
-    @Override
-    public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
+    public ActorRef getActor() {
+        return actor;
+    }
 
+    public Object getContent() {
+        return content;
+    }
+
+    public Window getWindow() {
+        return window;
     }
 }

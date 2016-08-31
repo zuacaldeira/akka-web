@@ -1,4 +1,4 @@
-package views;
+package views.ui;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;

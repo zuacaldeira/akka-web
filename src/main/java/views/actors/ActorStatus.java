@@ -1,4 +1,4 @@
-package views.factories;
+package views.actors;
 
 /**
  * Created by zua on 29.08.16.

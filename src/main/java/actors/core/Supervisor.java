@@ -3,7 +3,6 @@ package actors.core;
 import akka.actor.OneForOneStrategy;
 import akka.actor.Props;
 import akka.actor.SupervisorStrategy;
-import akka.actor.UntypedActor;
 import akka.japi.Function;
 import scala.concurrent.duration.Duration;
 
@@ -11,7 +10,7 @@ import scala.concurrent.duration.Duration;
 /**
  * Created by zua on 31.08.16.
  */
-public class Supervisor extends UntypedActor {
+public class Supervisor extends MVCUntypedActor {
 
     private static SupervisorStrategy strategy =
             new OneForOneStrategy(10, Duration.create("1 minute"),

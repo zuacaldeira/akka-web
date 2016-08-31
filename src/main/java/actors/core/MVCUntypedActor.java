@@ -9,6 +9,7 @@ import akka.event.Logging;
 /**
  * Created by zua on 28.08.16.
  */
+
 public abstract class MVCUntypedActor extends UntypedActor {
     protected final DiagnosticLoggingAdapter log;
 
@@ -19,5 +20,4 @@ public abstract class MVCUntypedActor extends UntypedActor {
     protected ActorRef createChildActor(Class<?> actorClass) {
         return getContext().actorOf(Props.create(actorClass), actorClass.getSimpleName());
     }
-
 }

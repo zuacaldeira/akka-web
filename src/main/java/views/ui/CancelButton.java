@@ -1,4 +1,4 @@
-package views.factories;
+package views.ui;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;

@@ -1,4 +1,4 @@
-package views.factories;
+package views.ui;
 
 import akka.actor.ActorRef;
 import actors.messages.RegisterMessage;

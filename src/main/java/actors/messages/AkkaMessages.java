@@ -13,8 +13,11 @@ public class AkkaMessages {
     public static final String LOGIN = "Login";
     public static final String VIEW = "View";
     public static final String DO_NOT_HANDLE = "Do not handle";
+    public static final List<String> WELCOME_ACTOR_MESSAGES = getMessages(new String[]{REGISTER, LOGIN});
+    public static final List<String> REGISTER_ACTOR_MESSAGES = getMessages(new String[]{REGISTER});
+    public static final List<String> LOGIN_ACTOR_MESSAGES = getMessages(new String[]{LOGIN});
 
-    public static List<String> getMessages(String... messages) {
+    private static List<String> getMessages(String... messages) {
         return Arrays.asList(messages);
     }
 }
