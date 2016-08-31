@@ -3,25 +3,36 @@ package actors.core;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import graphs.Neo4jSessionFactory;
+import org.neo4j.ogm.session.Session;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Collections;
 
 /**
  * Created by zua on 30.08.16.
  */
-public class AbstractActorTest {
+public abstract class AbstractActorTest {
 
     private ActorSystem actorSystem;
 
     @BeforeMethod
     public void setUp() {
         actorSystem = ActorSystem.create("TestActorSystem");
+        deleteDatabase();
     }
 
 
     @AfterMethod
     public void tearDown() {
         actorSystem.shutdown();
+    }
+
+    private void deleteDatabase() {
+        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+        session.query("MATCH (n) DETACH DELETE n", Collections.EMPTY_MAP);
     }
 
 
@@ -32,4 +43,8 @@ public class AbstractActorTest {
     public ActorRef createActor(Class<?> aclass) {
         return actorSystem.actorOf(Props.create(aclass), aclass.getSimpleName());
     }
+
+
+    @Test
+    public abstract void testUnhandled();
 }

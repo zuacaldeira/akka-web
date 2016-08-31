@@ -35,4 +35,14 @@ public class WelcomeActorTest extends AbstractActorTest {
         };
     }
 
+    @Override
+    public void testUnhandled() {
+        new JavaTestKit(getActorSystem()) {
+            {
+                ActorRef welcomeActor = createActor(WelcomeActor.class);
+                welcomeActor.tell(AkkaMessages.DO_NOT_HANDLE, getRef());
+                expectNoMsg();
+            }
+        };
+    }
 }

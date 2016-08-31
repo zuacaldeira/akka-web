@@ -8,13 +8,13 @@ import org.neo4j.ogm.annotation.StartNode;
  * Created by zua on 30.08.16.
  */
 @RelationshipEntity(type = "login")
-public class Login {
+public class Login extends Entity {
 
     @StartNode
-    private final User user;
+    private User user;
 
     @EndNode
-    private final Account account;
+    private Account account;
 
     public Login(User user, Account account) {
         this.user = user;
@@ -23,5 +23,17 @@ public class Login {
 
     public User getUser() {
         return user;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

@@ -23,6 +23,9 @@ public class WelcomeActor extends MVCUntypedActor {
             getSender().tell(AkkaMessages.DONE, getSelf());
             log.info("Sent login message");
         }
+        else {
+            unhandled(message);
+        }
     }
 
 

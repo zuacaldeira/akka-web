@@ -24,4 +24,14 @@ public class RegisterActorTest extends AbstractActorTest {
         };
     }
 
+    @Override
+    public void testUnhandled() {
+        new JavaTestKit(getActorSystem()) {
+            {
+                ActorRef registerActor = createActor(RegisterActor.class);
+                registerActor.tell(AkkaMessages.DO_NOT_HANDLE, getRef());
+                expectNoMsg();
+            }
+        };
+    }
 }

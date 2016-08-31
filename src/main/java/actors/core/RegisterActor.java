@@ -19,6 +19,9 @@ public class RegisterActor extends MVCUntypedActor {
             register((RegisterMessage) message);
             getSender().tell(AkkaMessages.DONE, getSelf());
         }
+        else {
+            unhandled(message);
+        }
     }
 
     private void register(RegisterMessage message) {
@@ -32,7 +35,7 @@ public class RegisterActor extends MVCUntypedActor {
                         new Account(message.getEmail(), message.getPassword())));
 
         // Read a Node
-        log.info("Registered [user({})]", session.countEntitiesOfType(User.class));
+        log.info("Stored registration for user [{}]", message.getFullname());
     }
 
 }
