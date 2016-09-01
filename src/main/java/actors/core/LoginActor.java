@@ -2,24 +2,17 @@ package actors.core;
 
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
-import akka.actor.Props;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
 import org.neo4j.ogm.session.Session;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by zua on 28.08.16.
  */
 public class LoginActor extends MVCUntypedActor {
-
-    public static final akka.actor.Props PROPS = Props.create(LoginActor.class);
-    public static final String NAME = LoginActor.class.getSimpleName();
-    public static final List<String> MESSAGES = Arrays.asList(AkkaMessages.LOGIN);
 
     @Override
     public void onReceive(Object message) throws Throwable {
