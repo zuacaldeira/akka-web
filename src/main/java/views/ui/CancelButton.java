@@ -14,6 +14,6 @@ public class CancelButton extends Button {
      */
     public CancelButton() {
         super("Cancel");
-        setIcon(FontAwesome.SAVE);
+        setIcon(FontAwesome.TIMES);
     }
 }
