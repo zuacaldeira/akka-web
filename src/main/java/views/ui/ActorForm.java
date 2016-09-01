@@ -34,15 +34,13 @@ public class ActorForm extends MyForm {
         if (!(o instanceof ActorForm)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         ActorForm that = (ActorForm) o;
-        return Objects.equals(actor, that.actor);
+        return actor == that.actor;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), actor);
+        return Objects.hash(actor);
     }
 }
