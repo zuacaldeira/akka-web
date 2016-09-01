@@ -8,6 +8,9 @@ import com.vaadin.ui.Button;
  */
 public class SendButton extends Button {
 
+    /**
+     * Creates a send button, to be used globally in the application.
+     */
     public SendButton() {
         super("Send");
         setIcon(FontAwesome.SEND);

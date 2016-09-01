@@ -20,15 +20,17 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        Component initialView = getInitialView(vaadinRequest);
+        Component initialView = getInitialView();
         setContent(initialView);
     }
 
-    private Component getInitialView(VaadinRequest vaadinRequest) {
-        Component layout = new WelcomeLayout();
-        return layout;
+    private Component getInitialView() {
+        return new WelcomeLayout();
     }
 
+    /**
+     * A servlet to process the application requests.
+     */
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {

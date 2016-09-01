@@ -22,7 +22,7 @@ public class MessageViewTest {
         String content = AkkaMessages.REGISTER;
         MessageView mv = new MessageView(ref, content);
         assertEquals(ref, mv.getActor());
-        assertEquals(content, mv.getContent());
+        assertEquals(content, mv.getMessage());
         assertTrue(mv.getListeners(Button.ClickEvent.class).contains(mv));
     }
 

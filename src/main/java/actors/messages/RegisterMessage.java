@@ -6,8 +6,15 @@ package actors.messages;
 public class RegisterMessage {
     private final String email;
     private final String password;
-    private String fullname;
+    private final String fullname;
 
+    /**
+     * Creates a register message to be given to an register actor
+     *
+     * @param email
+     * @param password
+     * @param fullname
+     */
     public RegisterMessage(String email, String password, String fullname) {
         this.email = email;
         this.password = password;

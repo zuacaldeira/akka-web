@@ -8,6 +8,9 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public abstract class TopLayout extends HorizontalLayout {
 
+    /**
+     * Initializes the common layout features of the main layouts
+     */
     public TopLayout() {
         setSizeFull();
         setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);

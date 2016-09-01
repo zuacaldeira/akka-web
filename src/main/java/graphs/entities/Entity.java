@@ -3,6 +3,11 @@ package graphs.entities;
 import org.neo4j.ogm.annotation.GraphId;
 
 /**
+ * Base class of neo4j nodes hierarchy.
+ *
+ * This class specifies an {@code id} that serves as identifier in the
+ * underlying graph database.
+ *
  * Created by zua on 30.08.16.
  */
 public abstract class Entity {
@@ -21,11 +26,14 @@ public abstract class Entity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || id == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || id == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Entity entity = (Entity) o;
-
         return id.equals(entity.id);
 
     }

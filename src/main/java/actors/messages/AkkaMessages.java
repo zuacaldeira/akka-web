@@ -14,6 +14,8 @@ public class AkkaMessages {
     public static final String VIEW = "View";
     public static final String DO_NOT_HANDLE = "Do not handle";
 
+    private AkkaMessages() {}
+
     private static List<String> getMessages(String... messages) {
         return Arrays.asList(messages);
     }

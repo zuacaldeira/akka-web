@@ -11,14 +11,14 @@ public class Neo4jSessionFactory {
     private static Neo4jSessionFactory singleton = new Neo4jSessionFactory();
     private final SessionFactory sessionFactory ;
 
-    public static Neo4jSessionFactory getInstance() {
-        return singleton;
-    }
-
     private Neo4jSessionFactory() {
         sessionFactory = new SessionFactory(getConfiguration(), "");
     }
 
+    public static Neo4jSessionFactory getInstance() {
+        return singleton;
+    }
+    
     private Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.driverConfiguration()

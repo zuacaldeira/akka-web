@@ -8,10 +8,6 @@ import views.factories.ActorsViewFactory;
  */
 public class WelcomeLayout extends TopLayout {
 
-
-    public WelcomeLayout() {
-    }
-
     @Override
     protected void initActors() {
         ActorView actorView = ActorsViewFactory.getWelcomeActorView();

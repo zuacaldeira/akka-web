@@ -13,6 +13,9 @@ import akka.event.Logging;
 public abstract class MVCUntypedActor extends UntypedActor {
     protected final DiagnosticLoggingAdapter log;
 
+    /**
+     * Default constructor initializes the logging adapter.
+     */
     public MVCUntypedActor() {
         log = Logging.getLogger(this);
     }

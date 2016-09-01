@@ -42,8 +42,7 @@ public class LoginActor extends MVCUntypedActor {
     private String getCypherQuery(LoginMessage message) {
         String match = "MATCH (u : User) -[r : register]-> (a : Account)";
         String where = " WHERE u.email=" + "'" + message.getUsername() + "'";
-        String cypher = match + where + " RETURN r";
-        return cypher;
+        return match + where + " RETURN r";
     }
 
 }
