@@ -10,7 +10,7 @@ public class WelcomeLayout extends TopLayout {
 
     @Override
     protected void initActors() {
-        ActorView actorView = ActorsViewFactory.getWelcomeActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getWelcomeActorView();
         addComponent(actorView);
     }
 

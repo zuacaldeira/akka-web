@@ -32,18 +32,30 @@ public class LoginForm extends ActorForm implements Button.ClickListener {
         addComponents(emailField, passwordField, new HorizontalLayout(cancel, send));
     }
 
+    public TextField getEmailField() {
+        return emailField;
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public SendButton getSend() {
+        return send;
+    }
+
+    public CancelButton getCancel() {
+        return cancel;
+    }
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
-        if(clickEvent.getButton() == cancel) {
-            emailField.clear();
-            passwordField.clear();
-            ((Window)getParent()).close();
-        }
-        else if(clickEvent.getButton().equals(send)) {
+        if(clickEvent.getButton() == send) {
             getActor().tell(new LoginMessage(emailField.getValue(), passwordField.getValue()), getActor());
-            ((Window)getParent()).close();
         }
+        emailField.clear();
+        passwordField.clear();
+        ((Window)getParent()).close();
     }
 
     @Override
@@ -54,16 +66,14 @@ public class LoginForm extends ActorForm implements Button.ClickListener {
         if (!(o instanceof LoginForm)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         LoginForm that = (LoginForm) o;
-        return Objects.equals(emailField, that.emailField) &&
-                Objects.equals(passwordField, that.passwordField);
+        return Objects.equals(emailField.getValue(), that.emailField.getValue()) &&
+                Objects.equals(passwordField.getValue(), that.passwordField.getValue());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), emailField, passwordField);
+        return Objects.hash(super.hashCode(), emailField.getValue().hashCode(), passwordField.getValue().hashCode());
     }
 }

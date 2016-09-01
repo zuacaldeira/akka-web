@@ -15,7 +15,7 @@ public class WelcomeActorViewTest {
 
     @Test
     public void testWelcomeActorView() {
-        ActorView actorView = ActorsViewFactory.getWelcomeActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getWelcomeActorView();
         assertNotNull(actorView);
         assertNotNull(actorView.getActorRef());
         assertEquals(2, actorView.getMessages().size());

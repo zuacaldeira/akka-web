@@ -13,9 +13,8 @@ import static org.testng.Assert.assertNotNull;
 public class ActorsViewFactoryTest {
     @Test
     public void testGetWelcomeActorView() throws Exception {
-        WelcomeActorView view = ActorsViewFactory.getWelcomeActorView();
+        WelcomeActorView view = ActorsViewFactory.getInstance().getWelcomeActorView();
         assertNotNull(view.getActorRef());
         assertEquals(AkkaMessages.getWelcomeActorMessages(), view.getMessages());
     }
-
 }

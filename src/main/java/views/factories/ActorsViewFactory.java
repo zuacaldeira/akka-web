@@ -7,12 +7,17 @@ import views.actors.WelcomeActorView;
  */
 public class ActorsViewFactory {
 
+    private static final ActorsViewFactory instance = new ActorsViewFactory();
+
     private ActorsViewFactory(){
         // Hides the default constructor
     }
 
-    public static WelcomeActorView getWelcomeActorView() {
-        return new WelcomeActorView();
+    public static ActorsViewFactory getInstance() {
+        return instance;
     }
 
+    public WelcomeActorView getWelcomeActorView() {
+        return new WelcomeActorView();
+    }
 }
