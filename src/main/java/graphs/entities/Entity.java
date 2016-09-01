@@ -2,6 +2,8 @@ package graphs.entities;
 
 import org.neo4j.ogm.annotation.GraphId;
 
+import java.util.Objects;
+
 /**
  * Base class of neo4j nodes hierarchy.
  *
@@ -23,23 +25,20 @@ public abstract class Entity {
         this.id = id;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || id == null || getClass() != o.getClass()) {
+        if (!(o instanceof Entity)) {
             return false;
         }
-
         Entity entity = (Entity) o;
-        return id.equals(entity.id);
-
+        return Objects.equals(id, entity.id);
     }
 
     @Override
     public int hashCode() {
-        return (id == null) ? -1 : id.hashCode();
+        return Objects.hash(id);
     }
 }

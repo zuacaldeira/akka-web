@@ -2,6 +2,8 @@ package graphs.entities;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
+import java.util.Objects;
+
 /**
  * Account entity node.
  * Defines a user account node in the graph database.
@@ -48,32 +50,25 @@ public class Account extends Entity {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Account)) {
+        if (!(o instanceof Account)){
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-
         Account account = (Account) o;
-
-        if (!email.equals(account.email)) {
-            return false;
-        }
-        return password.equals(account.password);
-
+        return Objects.equals(email, account.email) &&
+                Objects.equals(password, account.password);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        return result;
+        return Objects.hash(super.hashCode(), email, password);
     }
 }
