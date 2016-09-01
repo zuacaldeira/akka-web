@@ -1,6 +1,5 @@
 package views.factories;
 
-import views.actors.ActorView;
 import views.actors.WelcomeActorView;
 
 /**
@@ -12,7 +11,7 @@ public class ActorsViewFactory {
         // Hides the default constructor
     }
 
-    public static ActorView getWelcomeActorView() {
+    public static WelcomeActorView getWelcomeActorView() {
         return new WelcomeActorView();
     }
 
