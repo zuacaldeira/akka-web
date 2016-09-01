@@ -14,11 +14,11 @@ import views.ui.RegisterForm;
  * Created by zua on 29.08.16.
  */
 public class MessageView extends Button implements Button.ClickListener {
-    private Object content;
+    private String content;
     private final ActorRef actor;
     private Window window;
 
-    public MessageView(ActorRef actor, Object content) {
+    public MessageView(ActorRef actor, String content) {
         this.content = content;
         this.actor = actor;
         setCaption(content.toString());

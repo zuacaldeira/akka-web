@@ -8,6 +8,6 @@ import actors.messages.AkkaMessages;
  */
 public class WelcomeActorView extends ActorView {
     public WelcomeActorView() {
-        super(WelcomeActor.class, AkkaMessages.WELCOME_ACTOR_MESSAGES);
+        super(WelcomeActor.class, AkkaMessages.getWelcomeActorMessages());
     }
 }

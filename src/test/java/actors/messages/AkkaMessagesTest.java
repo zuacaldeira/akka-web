@@ -12,20 +12,20 @@ public class AkkaMessagesTest {
 
     @Test
     public void testWelcomeActorMessages() {
-        assertTrue(AkkaMessages.WELCOME_ACTOR_MESSAGES.contains(AkkaMessages.REGISTER));
-        assertTrue(AkkaMessages.WELCOME_ACTOR_MESSAGES.contains(AkkaMessages.LOGIN));
+        assertTrue(AkkaMessages.getWelcomeActorMessages().contains(AkkaMessages.REGISTER));
+        assertTrue(AkkaMessages.getWelcomeActorMessages().contains(AkkaMessages.LOGIN));
     }
 
     @Test
     public void testRegisterActorMessages() {
-        assertTrue(AkkaMessages.REGISTER_ACTOR_MESSAGES.contains(AkkaMessages.REGISTER));
-        assertFalse(AkkaMessages.REGISTER_ACTOR_MESSAGES.contains(AkkaMessages.LOGIN));
+        assertTrue(AkkaMessages.getRegisterActorMessages().contains(AkkaMessages.REGISTER));
+        assertFalse(AkkaMessages.getRegisterActorMessages().contains(AkkaMessages.LOGIN));
     }
 
     @Test
     public void testLoginActorMessages() {
-        assertFalse(AkkaMessages.LOGIN_ACTOR_MESSAGES.contains(AkkaMessages.REGISTER));
-        assertTrue(AkkaMessages.LOGIN_ACTOR_MESSAGES.contains(AkkaMessages.LOGIN));
+        assertFalse(AkkaMessages.getLoginActorMessages().contains(AkkaMessages.REGISTER));
+        assertTrue(AkkaMessages.getLoginActorMessages().contains(AkkaMessages.LOGIN));
     }
 
 }
