@@ -27,7 +27,6 @@ public class AccountTest {
         };
     }
 
-
     @Test(dataProvider = "inequals")
     public void testInequals(Object a, Object b) throws Exception {
         assertFalse(a.equals(b));
@@ -48,5 +47,4 @@ public class AccountTest {
                 {new Account("u", "p"), new User("u", "f")},
         };
     }
-
 }
