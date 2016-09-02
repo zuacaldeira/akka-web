@@ -1,5 +1,6 @@
 package views.actors;
 
+import actors.core.ActorSystemsNames;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -27,7 +28,7 @@ public abstract class ActorView extends VerticalLayout{
      * @param messages The messages the actor is supposed to process
      */
     public ActorView(Class<?> actor, List<String> messages) {
-        this.actorRef = ActorSystem.create(ActorSystems.ACTOR_SYSTEM_VIEW).actorOf(Props.create(actor));
+        this.actorRef = ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias()).actorOf(Props.create(actor));
         this.messages = messages;
 
         setSizeUndefined();
@@ -72,16 +73,14 @@ public abstract class ActorView extends VerticalLayout{
         if (!(o instanceof ActorView)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         ActorView that = (ActorView) o;
-        return Objects.equals(actorRef, that.actorRef) &&
+        return Objects.equals(actorRef.path(), that.actorRef.path()) &&
                 Objects.equals(messages, that.messages);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), actorRef, messages);
+        return Objects.hash(super.hashCode(), actorRef.path(), messages);
     }
 }

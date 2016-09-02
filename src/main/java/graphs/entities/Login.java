@@ -57,9 +57,7 @@ public class Login extends Entity {
         if (!(o instanceof Login)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         Login login = (Login) o;
         return Objects.equals(user, login.user) &&
                 Objects.equals(account, login.account);
