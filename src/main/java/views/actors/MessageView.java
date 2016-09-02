@@ -4,11 +4,7 @@ import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.ValoTheme;
-import views.ui.LoginForm;
-import views.ui.RegisterForm;
+import views.factories.ActorsViewFactory;
 
 import java.util.Objects;
 
@@ -18,7 +14,6 @@ import java.util.Objects;
 public class MessageView extends Button implements Button.ClickListener {
     private String message;
     private final ActorRef actor;
-    private Window window;
 
     /**
      * Creates a message view, for a specific actor and message.
@@ -32,27 +27,23 @@ public class MessageView extends Button implements Button.ClickListener {
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
         setSizeUndefined();
-        setStyleName(ValoTheme.BUTTON_BORDERLESS);
+        setStyleName("message");
         addClickListener(this);
     }
 
     @Override
     public void buttonClick(ClickEvent clickEvent) {
-        window = new Window(message);
         switch (message) {
             case AkkaMessages.REGISTER:
-                window.setContent(new RegisterForm(actor));
+                getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
                 break;
             case AkkaMessages.LOGIN:
-                window.setContent(new LoginForm(actor));
+                getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
                 break;
             default:
-                window.setContent(new Label(AkkaMessages.UNKNOWN));
+                //getUI().setContent(ActorsViewFactory.getRegisterActor());
                 break;
         }
-
-        window.center();
-        getUI().addWindow(window);
     }
 
     public ActorRef getActor() {
@@ -61,10 +52,6 @@ public class MessageView extends Button implements Button.ClickListener {
 
     public Object getMessage() {
         return message;
-    }
-
-    public Window getWindow() {
-        return window;
     }
 
     @Override

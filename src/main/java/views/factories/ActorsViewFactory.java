@@ -1,5 +1,7 @@
 package views.factories;
 
+import views.actors.LoginActorView;
+import views.actors.RegisterActorView;
 import views.actors.WelcomeActorView;
 
 /**
@@ -19,5 +21,11 @@ public class ActorsViewFactory {
 
     public WelcomeActorView getWelcomeActorView() {
         return new WelcomeActorView();
+    }
+    public RegisterActorView getRegisterActorView() {
+        return new RegisterActorView();
+    }
+    public LoginActorView getLoginActorView() {
+        return new LoginActorView();
     }
 }

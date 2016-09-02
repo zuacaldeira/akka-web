@@ -28,6 +28,8 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+$main-color: #37c3ee;
+$secondary-color: #ff9535;
 
 @import "../valo/valo.scss";
 
@@ -35,8 +37,17 @@
   @include valo;
 
   // Insert your own theme rules here
-  .inactive {
-    background-color: grey;
-    color: black;
+  .v-ui {
+    background-color: black;
+  }
+
+  .actor {
+    border-radius: 50%;
+    background-color: $main-color;
+    color: white;
+  }
+  .message {
+    background-color: $secondary-color;
+    color: $main-color;
   }
 }

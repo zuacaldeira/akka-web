@@ -7,12 +7,9 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import views.ui.LoginForm;
-import views.ui.RegisterForm;
 
 import static org.testng.Assert.*;
 
@@ -29,49 +26,6 @@ public class MessageViewTest {
         assertEquals(content, mv.getMessage());
         assertTrue(mv.getListeners(Button.ClickEvent.class).contains(mv));
     }
-
-    @Test
-    public void testRegisterButtonClick() throws Exception {
-        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
-        String content = AkkaMessages.REGISTER;
-        MessageView mv = new MessageView(ref, content);
-        try {
-            assertNull(mv.getUI());
-            mv.buttonClick(null);
-        } catch (NullPointerException npx) {
-            assertNotNull(mv.getWindow());
-            assertTrue(mv.getWindow().getContent() instanceof RegisterForm);
-        }
-    }
-
-    @Test
-    public void testLoginButtonClick() throws Exception {
-        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
-        String content = AkkaMessages.LOGIN;
-        MessageView mv = new MessageView(ref, content);
-        try {
-            assertNull(mv.getUI());
-            mv.buttonClick(null);
-        } catch (NullPointerException npx) {
-            assertNotNull(mv.getWindow());
-            assertTrue(mv.getWindow().getContent() instanceof LoginForm);
-        }
-    }
-
-    @Test
-    public void testUnknownButtonClick() throws Exception {
-        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
-        String content = AkkaMessages.UNKNOWN;
-        MessageView mv = new MessageView(ref, content);
-        try {
-            assertNull(mv.getUI());
-            mv.buttonClick(null);
-        } catch (NullPointerException npx) {
-            assertNotNull(mv.getWindow());
-            assertTrue(mv.getWindow().getContent() instanceof Label);
-        }
-    }
-
 
 
     @Test(dataProvider = "equals")

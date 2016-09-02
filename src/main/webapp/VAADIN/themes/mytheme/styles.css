@@ -12968,7 +12968,17 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
-.mytheme .inactive {
-	background-color: grey;
-	color: black;
+.mytheme .v-ui {
+	background-color: black;
+}
+
+.mytheme .actor {
+	border-radius: 50%;
+	background-color: #37c3ee;
+	color: white;
+}
+
+.mytheme .message {
+	background-color: #ff9535;
+	color: #37c3ee;
 }

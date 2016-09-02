@@ -17,4 +17,8 @@ public class WelcomeActorView extends ActorView {
         super(WelcomeActor.class, AkkaMessages.getWelcomeActorMessages());
     }
 
+    @Override
+    protected void addContent() {
+
+    }
 }

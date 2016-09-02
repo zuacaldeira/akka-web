@@ -1,0 +1,1822 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.22)  2 SEP 2016 21:14
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**\input main.tex
+(./main.tex (/usr/local/texlive/2015/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (./main.aux
+
+! Package babel Error: Unknown language `english'. Either you have
+(babel)                misspelled its name, it has not been installed,
+(babel)                or you requested it in a previous run. Fix its name,
+(babel)                install it or just rerun the file, respectively.
+
+See the babel package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.20 \select@language{english}
+                              
+You may proceed, but expect unexpected results
+
+! Undefined control sequence.
+l.24 \pgfsyspdfmark
+                    {pgfid2}{0}{52099153}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 \pgfsyspdfmark {p
+                      gfid2}{0}{52099153}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.25 \pgfsyspdfmark
+                    {pgfid1}{7030046}{43131372}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.26 \ttl@finishall
+                   
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+ (./structure.tex
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 \usepackage
+               {titlesec} % Allows customization of titles
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 \usepackage
+               {graphicx} % Required for including pictures
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.8 \graphicspath
+                 {{Pictures/}} % Specifies the directory where pictures are ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \usepackage
+                {lipsum} % Inserts dummy text
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \usepackage
+                {tikz} % Required for drawing custom shapes
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 \usepackage
+                [english]{babel} % English language/hyphenation
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 \usepackage
+                {enumitem} % Customize lists
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.17 \setlist
+             {nolistsep} % Reduce spacing between bullet points and numbered...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 \usepackage
+                {booktabs} % Required for nicer horizontal rules in tables
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \usepackage
+                {eso-pic} % Required for specifying an image background in t...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \usepackage
+                {titletoc} % Required for manipulating the table of contents
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.29 \contentsmargin
+                    {0cm} % Removes the default margin
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.31 \titlecontents
+                   {chapter}[1.25cm] % Indentation
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 {\addvspace{15pt}
+                      \large\sffamily\bfseries} % Spacing and font options f...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.33 {\color
+            {ocre!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{o...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.33 {\color{ocre!60}\contentslabel
+                                   [\Large\thecontentslabel]{1.25cm}\color{o...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.33 ...!60}\contentslabel[\Large\thecontentslabel
+                                                  ]{1.25cm}\color{ocre}} % C...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.33 ...bel[\Large\thecontentslabel]{1.25cm}\color
+                                                  {ocre}} % Chapter number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.35 {\color
+            {ocre!60}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\t...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.35 ...or{ocre!60}\normalsize\sffamily\bfseries\;
+                                                  \titlerule*[.5pc]{.}\;\the...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 35.
+! Undefined control sequence.
+l.35 ...}\normalsize\sffamily\bfseries\;\titlerule
+                                                  *[.5pc]{.}\;\thecontentspa...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.35 ...es\;\titlerule*[.5pc]{.}\;\thecontentspage
+                                                  } % Page number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Extra }, or forgotten $.
+l.35 ...s\;\titlerule*[.5pc]{.}\;\thecontentspage}
+                                                   % Page number
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Undefined control sequence.
+l.37 \titlecontents
+                   {section}[1.25cm] % Indentation
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 {\addvspace{5pt}
+                     \sffamily\bfseries} % Spacing and font options for sect...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 {\addvspace{5pt}\sffamily
+                              \bfseries} % Spacing and font options for sect...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 {\addvspace{5pt}\sffamily\bfseries
+                                       } % Spacing and font options for sect...
+
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! Undefined control sequence.
+l.39 {\contentslabel
+                    [\thecontentslabel]{1.25cm}} % Section number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.39 {\contentslabel[\thecontentslabel
+                                      ]{1.25cm}} % Section number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 {\sffamily
+               \hfill\color{black}\thecontentspage} % Page number
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+! Undefined control sequence.
+l.41 {\sffamily\hfill\color
+                           {black}\thecontentspage} % Page number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.41 {\sffamily\hfill\color{black}\thecontentspage
+                                                  } % Page number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.44 \titlecontents
+                   {subsection}[1.25cm] % Indentation
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 {\addvspace{1pt}
+                     \sffamily\small} % Spacing and font options for subsect...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 {\addvspace{1pt}\sffamily
+                              \small} % Spacing and font options for subsect...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 45.
+
+! Undefined control sequence.
+l.46 {\contentslabel
+                    [\thecontentslabel]{1.25cm}} % Subsection number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.46 {\contentslabel[\thecontentslabel
+                                      ]{1.25cm}} % Subsection number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 {\sffamily
+               \;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+! Undefined control sequence.
+l.48 {\sffamily\;\titlerule
+                           *[.5pc]{.}\;\thecontentspage} % Page number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.48 ...ly\;\titlerule*[.5pc]{.}\;\thecontentspage
+                                                  } % Page number
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.50 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (233.87637pt too wide) in paragraph at lines 29--50
+[]\OT1/cmr/m/n/10 0cm chap-ter[1.25cm]  ocre!60[\OT1/cmr/m/n/14.4 ]1.25cmocre  
+\OT1/cmr/m/n/10 ocre!60$ \OMS/cmsy/m/n/10 ^^C\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 
+:\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 pc\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 : []\OT1
+/cmr/m/n/10 [1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 25\OML/cmm/m/it/10 cm\OT1/cmr/m
+/n/10 ][][][][][][][1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 25\OML/cmm/m/it/10 cm\OT
+1/cmr/m/n/10 ][][][][][]$ 
+ []
+
+! Undefined control sequence.
+l.56 \titlecontents
+                   {lsection}[0em] % Indendating
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.63 \titlecontents
+                   {lsubsection}[.5em] % Indentation
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.73 \usepackage
+                {fancyhdr} % Required for header and footer configuration
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+<argument> \undefinedpagestyle 
+                               
+l.75 \pagestyle{fancy}
+                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.78 \fancyhf
+             {} \fancyhead[LE,RO]{\sffamily\normalsize\thepage} % Font setti...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.78 \fancyhf{} \fancyhead
+                          [LE,RO]{\sffamily\normalsize\thepage} % Font setti...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.79 \fancyhead
+               [LO]{\rightmark} % Print the nearest section name on the left...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.80 \fancyhead
+               [RE]{\leftmark} % Print the current chapter name on the right...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \headrulewidth undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.81 \renewcommand{\headrulewidth}
+                                  {0.5pt} % Width of the rule under the header
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: \footrulewidth undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 \renewcommand{\footrulewidth}
+                                  {0pt} % Removes the rule in the footer
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.84 \fancypagestyle
+                    {plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}} ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.84 \fancypagestyle{plain}{\fancyhead
+                                      {}\renewcommand{\headrulewidth}{0pt}} ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.100 \usepackage
+                 {amsmath,amsfonts,amssymb,amsthm} % For math equations, the...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+\c@notation=\count88
+! Undefined control sequence.
+l.110 \newtheoremstyle
+                      {ocrenumbox}% % Theorem style name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.115 {\small\bf\sffamily\color
+                               {ocre}}% % Theorem head font
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.116 {\;
+         }% Punctuation after theorem head
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.116 {\;}
+          % Punctuation after theorem head
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 118.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.118 {\small\sffamily
+                      \color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifno...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+! Undefined control sequence.
+l.118 {\small\sffamily\color
+                            {ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifno...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.118 {\small\sffamily\color{ocre}\thmname
+                                          {#1}\nobreakspace\thmnumber{\@ifno...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.118 {\small\sffamily\color{ocre}\thmname{#
+                                            1}\nobreakspace\thmnumber{\@ifno...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.118 ...{ocre}\thmname{#1}\nobreakspace\thmnumber
+                                                  {\@ifnotempty{#1}{}\@upn{#...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.118 ...e{#1}\nobreakspace\thmnumber{\@ifnotempty
+                                                  {#1}{}\@upn{#2}}% Theorem ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.118 ...#1}\nobreakspace\thmnumber{\@ifnotempty{#
+                                                  1}{}\@upn{#2}}% Theorem te...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.118 ...akspace\thmnumber{\@ifnotempty{#1}{}\@upn
+                                                  {#2}}% Theorem text (e.g. ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.118 ...space\thmnumber{\@ifnotempty{#1}{}\@upn{#
+                                                  2}}% Theorem text (e.g. Th...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.119 \thmnote
+              {\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.119 \thmnote{\nobreakspace\the\thm@notefont
+                                             \sffamily\bfseries\color{black}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `\relax' after \the.
+\sffamily ->\protect 
+                     \sffamily  
+l.119 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries\color{black}---\...
+I'm forgetting what you said and using zero instead.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.119 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries\color{black}---\...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.119 ...kspace\the\thm@notefont\sffamily\bfseries
+                                                  \color{black}---\nobreaksp...
+
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! Undefined control sequence.
+l.119 ...\the\thm@notefont\sffamily\bfseries\color
+                                                  {black}---\nobreakspace#3....
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.119 ...ly\bfseries\color{black}---\nobreakspace#
+                                                  3.}} % Optional theorem note
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: \qedsymbol undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.120 \renewcommand{\qedsymbol}
+                               {$\blacksquare$}% Optional qed square
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.121 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.122 \newtheoremstyle
+                      {blacknumex}% Theorem style name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.128 {\;
+         }% Punctuation after theorem head
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.128 {\;}
+          % Punctuation after theorem head
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 130.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.130 {\small\sffamily
+                      {\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 130.
+
+! Undefined control sequence.
+<argument> \blacksquare 
+                        
+l.130 ...l\sffamily{\tiny\ensuremath{\blacksquare}
+                                                  }\nobreakspace\thmname{#1}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.130 ...emath{\blacksquare}}\nobreakspace\thmname
+                                                  {#1}\nobreakspace\thmnumbe...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.130 ...ath{\blacksquare}}\nobreakspace\thmname{#
+                                                  1}\nobreakspace\thmnumber{...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.130 ...kspace\thmname{#1}\nobreakspace\thmnumber
+                                                  {\@ifnotempty{#1}{}\@upn{#...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.130 ...e{#1}\nobreakspace\thmnumber{\@ifnotempty
+                                                  {#1}{}\@upn{#2}}% Theorem ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.130 ...#1}\nobreakspace\thmnumber{\@ifnotempty{#
+                                                  1}{}\@upn{#2}}% Theorem te...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.130 ...akspace\thmnumber{\@ifnotempty{#1}{}\@upn
+                                                  {#2}}% Theorem text (e.g. ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.130 ...space\thmnumber{\@ifnotempty{#1}{}\@upn{#
+                                                  2}}% Theorem text (e.g. Th...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.131 \thmnote
+              {\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreaksp...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.131 \thmnote{\nobreakspace\the\thm@notefont
+                                             \sffamily\bfseries---\nobreaksp...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `\relax' after \the.
+\sffamily ->\protect 
+                     \sffamily  
+l.131 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries---\nobreakspace#...
+I'm forgetting what you said and using zero instead.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries---\nobreakspace#...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.131 ...kspace\the\thm@notefont\sffamily\bfseries
+                                                  ---\nobreakspace#3.}}% Opt...
+
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! You can't use `macro parameter character #' in math mode.
+l.131 ...tefont\sffamily\bfseries---\nobreakspace#
+                                                  3.}}% Optional theorem note
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.132 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.133 \newtheoremstyle
+                      {blacknumbox} % Theorem style name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.139 {\;
+         }% Punctuation after theorem head
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.139 {\;}
+          % Punctuation after theorem head
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 141.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.141 {\small\sffamily
+                      \thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+! Undefined control sequence.
+l.141 {\small\sffamily\thmname
+                              {#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.141 {\small\sffamily\thmname{#
+                                1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.141 ...family\thmname{#1}\nobreakspace\thmnumber
+                                                  {\@ifnotempty{#1}{}\@upn{#...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.141 ...e{#1}\nobreakspace\thmnumber{\@ifnotempty
+                                                  {#1}{}\@upn{#2}}% Theorem ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.141 ...#1}\nobreakspace\thmnumber{\@ifnotempty{#
+                                                  1}{}\@upn{#2}}% Theorem te...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.141 ...akspace\thmnumber{\@ifnotempty{#1}{}\@upn
+                                                  {#2}}% Theorem text (e.g. ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.141 ...space\thmnumber{\@ifnotempty{#1}{}\@upn{#
+                                                  2}}% Theorem text (e.g. Th...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.142 \thmnote
+              {\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreaksp...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.142 \thmnote{\nobreakspace\the\thm@notefont
+                                             \sffamily\bfseries---\nobreaksp...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `\relax' after \the.
+\sffamily ->\protect 
+                     \sffamily  
+l.142 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries---\nobreakspace#...
+I'm forgetting what you said and using zero instead.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries---\nobreakspace#...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 ...kspace\the\thm@notefont\sffamily\bfseries
+                                                  ---\nobreakspace#3.}}% Opt...
+
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! You can't use `macro parameter character #' in math mode.
+l.142 ...tefont\sffamily\bfseries---\nobreakspace#
+                                                  3.}}% Optional theorem note
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.143 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+l.147 \newtheoremstyle
+                      {ocrenum}% % Theorem style name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.152 {\small\bf\sffamily\color
+                               {ocre}}% % Theorem head font
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.153 {\;
+         }% Punctuation after theorem head
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.153 {\;}
+          % Punctuation after theorem head
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 155.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.155 {\small\sffamily
+                      \color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifno...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+! Undefined control sequence.
+l.155 {\small\sffamily\color
+                            {ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifno...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.155 {\small\sffamily\color{ocre}\thmname
+                                          {#1}\nobreakspace\thmnumber{\@ifno...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.155 {\small\sffamily\color{ocre}\thmname{#
+                                            1}\nobreakspace\thmnumber{\@ifno...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.155 ...{ocre}\thmname{#1}\nobreakspace\thmnumber
+                                                  {\@ifnotempty{#1}{}\@upn{#...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.155 ...e{#1}\nobreakspace\thmnumber{\@ifnotempty
+                                                  {#1}{}\@upn{#2}}% Theorem ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.155 ...#1}\nobreakspace\thmnumber{\@ifnotempty{#
+                                                  1}{}\@upn{#2}}% Theorem te...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.155 ...akspace\thmnumber{\@ifnotempty{#1}{}\@upn
+                                                  {#2}}% Theorem text (e.g. ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.155 ...space\thmnumber{\@ifnotempty{#1}{}\@upn{#
+                                                  2}}% Theorem text (e.g. Th...
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Undefined control sequence.
+l.156 \thmnote
+              {\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.156 \thmnote{\nobreakspace\the\thm@notefont
+                                             \sffamily\bfseries\color{black}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `\relax' after \the.
+\sffamily ->\protect 
+                     \sffamily  
+l.156 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries\color{black}---\...
+I'm forgetting what you said and using zero instead.
+
+
+! LaTeX Error: Command \sffamily invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.156 ...e{\nobreakspace\the\thm@notefont\sffamily
+                                                  \bfseries\color{black}---\...
+
+Please use the math alphabet \mathsf instead of the \sffamily command. 
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.156 ...kspace\the\thm@notefont\sffamily\bfseries
+                                                  \color{black}---\nobreaksp...
+
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! Undefined control sequence.
+l.156 ...\the\thm@notefont\sffamily\bfseries\color
+                                                  {black}---\nobreakspace#3....
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `macro parameter character #' in math mode.
+l.156 ...ly\bfseries\color{black}---\nobreakspace#
+                                                  3.}} % Optional theorem note
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: \qedsymbol undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.157 \renewcommand{\qedsymbol}
+                               {$\blacksquare$}% Optional qed square
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.159 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+\c@dummy=\count89
+! Undefined control sequence.
+<recently read> \numberwithin 
+                              
+l.162 \numberwithin
+                   {dummy}{section}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.163 \theoremstyle
+                   {ocrenumbox}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\c@problem=\count90
+\c@exerciseT=\count91
+! Undefined control sequence.
+l.167 \theoremstyle
+                   {blacknumex}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\c@exampleT=\count92
+! Undefined control sequence.
+l.169 \theoremstyle
+                   {blacknumbox}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\c@vocabulary=\count93
+\c@definitionT=\count94
+! Undefined control sequence.
+l.173 \theoremstyle
+                   {ocrenum}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.180 \RequirePackage
+                     [framemethod=default]{mdframed} % Required for creating...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.183 \newmdenv
+               [skipabove=7pt,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (11.09875pt too wide) in paragraph at lines 183--193
+[]\OT1/cmss/bx/n/10 [skipabove=7pt, skip-be-low=7pt, back-ground-color=black!5,
+ line-color=ocre,
+ []
+
+! Undefined control sequence.
+l.195 \newmdenv
+               [skipabove=7pt,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (19.55426pt too wide) in paragraph at lines 195--210
+[]\OT1/cmss/bx/n/10 [skipabove=7pt, skip-be-low=7pt, right-line=false, left-lin
+e=true, topline=false,
+ []
+
+
+Overfull \hbox (14.87383pt too wide) in paragraph at lines 195--210
+\OT1/cmss/bx/n/10 gin=5pt, in-nerright-mar-gin=5pt, in-ner-top-mar-gin=5pt, in-
+ner-bot-tom-mar-gin=5pt,
+ []
+
+! Undefined control sequence.
+l.212 \newmdenv
+               [skipabove=7pt,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (19.55426pt too wide) in paragraph at lines 212--226
+[]\OT1/cmss/bx/n/10 [skipabove=7pt, skip-be-low=7pt, right-line=false, left-lin
+e=true, topline=false,
+ []
+
+
+Overfull \hbox (10.75713pt too wide) in paragraph at lines 212--226
+\OT1/cmss/bx/n/10 bot-tom-line=false, line-color=ocre, in-ner-left-mar-gin=5pt,
+ in-nerright-mar-gin=5pt,
+ []
+
+
+Overfull \hbox (0.81264pt too wide) in paragraph at lines 212--226
+\OT1/cmss/bx/n/10 in-ner-top-mar-gin=0pt, left-mar-gin=0cm, right-mar-gin=0cm, 
+linewidth=4pt, in-
+ []
+
+! Undefined control sequence.
+l.228 \newmdenv
+               [skipabove=7pt,
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (19.55426pt too wide) in paragraph at lines 228--243
+[]\OT1/cmss/bx/n/10 [skipabove=7pt, skip-be-low=7pt, right-line=false, left-lin
+e=true, topline=false,
+ []
+
+
+Overfull \hbox (5.35435pt too wide) in paragraph at lines 228--243
+\OT1/cmss/bx/n/10 gin=5pt, in-nerright-mar-gin=5pt, in-ner-top-mar-gin=5pt, lef
+t-mar-gin=0cm, right-
+ []
+
+
+! LaTeX Error: Can be used only in preamble.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.291 \usepackage
+                 {hyperref}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.292 \hypersetup
+                 {hidelinks,backref=true,pagebackref=true,hyperindex=true,co...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (171.2577pt too wide) in paragraph at lines 291--293
+[]\OT1/cmss/bx/n/10 hyperref hidelinks,backref=true,pagebackref=true,hyperindex
+=true,colorlinks=false,breaklinks=true,urlcolor=
+ []
+
+
+Overfull \hbox (11.48495pt too wide) in paragraph at lines 291--293
+\OT1/cmss/bx/n/10 ocre,bookmarks=true,bookmarksopen=false,pdftitle=Title,pdfaut
+hor=Author 
+ []
+
+) [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+]
+[2
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 11.
+ [1] [2
+
+]
+
+! LaTeX Error: Environment tikzpicture undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \tableofcontents
+                     {}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+\@makeschapterhead ...mber picture,overlay] \node 
+                                                  at (current page.north wes...
+l.12 \tableofcontents
+                     {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment tikzpicture undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \tableofcontents
+                     {}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+\@makeschapterhead ...mber picture,overlay] \node 
+                                                  [anchor=north west,inner s...
+l.12 \tableofcontents
+                     {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\@makeschapterhead ... at (0,0) {\includegraphics 
+                                                  [width=\paperwidth ]{\thec...
+l.12 \tableofcontents
+                     {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   ]
+l.12 \tableofcontents
+                     {}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   ]
+l.12 \tableofcontents
+                     {}
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+\@makeschapterhead ...{\thechapterimage }}; \draw 
+                                                  [anchor=west] (5cm,-9cm) n...
+l.12 \tableofcontents
+                     {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\@makeschapterhead ...family \bfseries \textcolor 
+                                                  {black}{#1\strut \makebox ...
+l.12 \tableofcontents
+                     {}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{document} ended by \end{tikzpicture}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \tableofcontents
+                     {}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{tikzpicture}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 \tableofcontents
+                     {}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (650.9383pt too wide) in paragraph at lines 12--12
+\OT1/cmss/m/n/10 opac-ity=1,draw=ocre,draw opac-ity=1,line width=1.5pt]\OT1/cms
+s/bx/n/20.74 blackContents|[]\OT1/cmss/m/n/10 ;
+ []
+
+(./main.toc
+
+! Package babel Error: Unknown language `english'. Either you have
+(babel)                misspelled its name, it has not been installed,
+(babel)                or you requested it in a previous run. Fix its name,
+(babel)                install it or just rerun the file, respectively.
+
+See the babel package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \select@language {english}
+                              
+You may proceed, but expect unexpected results
+
+! Undefined control sequence.
+l.2 \contentsfinish
+                   
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+\tf@toc=\write3
+\openout3 = `main.toc'.
+
+ [3] (./main.aux) )
+(\end occurred inside a group at level 5)
+
+### simple group (level 5) entered at line 153 ({)
+### simple group (level 4) entered at line 139 ({)
+### simple group (level 3) entered at line 128 ({)
+### simple group (level 2) entered at line 116 ({)
+### simple group (level 1) entered at line 35 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 365 strings out of 493089
+ 3933 string characters out of 6134841
+ 57199 words of memory out of 5000000
+ 3914 multiletter control sequences out of 15000+600000
+ 10910 words of font info for 38 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 23i,6n,17p,311b,371s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mss10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ssbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb>
+Output written on main.pdf (5 pages, 72065 bytes).
+PDF statistics:
+ 44 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

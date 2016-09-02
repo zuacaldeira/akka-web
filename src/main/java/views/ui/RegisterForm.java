@@ -3,6 +3,7 @@ package views.ui;
 import actors.messages.RegisterMessage;
 import akka.actor.ActorRef;
 import com.vaadin.ui.*;
+import views.factories.ActorsViewFactory;
 
 import java.util.Objects;
 
@@ -13,8 +14,6 @@ import java.util.Objects;
 public class RegisterForm extends ActorForm implements Button.ClickListener {
     private final PasswordField passwordField;
     private final TextField emailField;
-    private final CancelButton cancel;
-    private final SendButton send;
     private final TextField fullnameField;
 
     /**
@@ -29,30 +28,18 @@ public class RegisterForm extends ActorForm implements Button.ClickListener {
         fullnameField = new TextField("Fullname");
         passwordField = new PasswordField("Password");
 
-        cancel = new CancelButton();
-        cancel.addClickListener(this);
-
-        send = new SendButton();
-        send.addClickListener(this);
-
         addComponents(
                 fullnameField,
                 emailField,
-                passwordField,
-                new HorizontalLayout(cancel, send)
+                passwordField
         );
     }
 
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
-        if(clickEvent.getButton() == send) {
-            getActor().tell(new RegisterMessage(emailField.getValue(), passwordField.getValue(), fullnameField.getValue()), getActor());
-        }
-        emailField.clear();
-        passwordField.clear();
-        fullnameField.clear();
-        ((Window)getParent()).close();
+        getActor().tell(new RegisterMessage(emailField.getValue(), passwordField.getValue(), fullnameField.getValue()), getActor());
+        getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
     }
 
     @Override
@@ -81,16 +68,8 @@ public class RegisterForm extends ActorForm implements Button.ClickListener {
         return emailField;
     }
 
-    public CancelButton getCancel() {
-        return cancel;
-    }
-
     public PasswordField getPasswordField() {
         return passwordField;
-    }
-
-    public SendButton getSend() {
-        return send;
     }
 
     public TextField getFullName() {

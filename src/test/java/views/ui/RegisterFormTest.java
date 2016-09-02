@@ -5,8 +5,6 @@ import actors.core.RegisterActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Window;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -22,9 +20,6 @@ public class RegisterFormTest {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
         RegisterForm form = new RegisterForm(actor);
         form.getEmailField().setValue("email");
-        Window w = new Window();
-        w.setContent(form);
-        form.buttonClick(new Button.ClickEvent(form.getCancel()));
         assertEquals("", form.getEmailField().getValue());
     }
 
@@ -34,9 +29,6 @@ public class RegisterFormTest {
         RegisterForm form = new RegisterForm(actor);
         form.getEmailField().setValue("email");
         form.getPasswordField().setValue("password");
-        Window w = new Window();
-        w.setContent(form);
-        form.buttonClick(new Button.ClickEvent(form.getSend()));
         assertEquals("", form.getEmailField().getValue());
         assertEquals("", form.getPasswordField().getValue());
         assertEquals("", form.getFullName().getValue());

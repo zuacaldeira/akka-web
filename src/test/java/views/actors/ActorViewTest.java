@@ -25,8 +25,14 @@ public class ActorViewTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorView av1 = new ActorView(WelcomeActor.class, new LinkedList<>()) {};
-        ActorView av2 = new ActorView(WelcomeActor.class, new LinkedList<>()) {};
+        ActorView av1 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
+            @Override
+            protected void addContent() {}
+        };
+        ActorView av2 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
+            @Override
+            protected void addContent() {}
+        };
         return new Object[][] {
                 {av1, av2}, {av1, av1}
         };

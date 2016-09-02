@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean install jetty:run
+mvn clean install sonar:sonar jetty:run

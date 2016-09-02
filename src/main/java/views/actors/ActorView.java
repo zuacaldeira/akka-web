@@ -20,6 +20,7 @@ public abstract class ActorView extends VerticalLayout{
     private final ActorRef actorRef;
     private final List<String> messages;
     private VerticalLayout mailboxes;
+    private Label actorNameLabel;
 
     /**
      * Basic actor view.
@@ -34,10 +35,20 @@ public abstract class ActorView extends VerticalLayout{
         setSizeUndefined();
         setSpacing(true);
 
-        addComponent(new Label(actor.getSimpleName()));
+        addActorName(actor.getSimpleName());
+        addContent();
         addMailboxes();
 
         setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+        setStyleName("actor");
+    }
+
+    protected abstract void addContent();
+
+    private void addActorName(String name) {
+        actorNameLabel = new Label(name);
+        actorNameLabel.setSizeUndefined();
+        addComponent(actorNameLabel);
     }
 
     private void addMailboxes() {
@@ -51,6 +62,7 @@ public abstract class ActorView extends VerticalLayout{
         });
 
         addComponent(mailboxes);
+        mailboxes.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
     }
 
     public ActorRef getActorRef() {
