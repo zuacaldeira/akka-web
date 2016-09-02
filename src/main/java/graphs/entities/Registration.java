@@ -58,9 +58,6 @@ public class Registration extends Entity {
         if (!(o instanceof Registration)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
         Registration that = (Registration) o;
         return Objects.equals(user, that.user) &&
                 Objects.equals(account, that.account);

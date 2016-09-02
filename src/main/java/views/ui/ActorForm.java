@@ -36,11 +36,11 @@ public class ActorForm extends MyForm {
         }
 
         ActorForm that = (ActorForm) o;
-        return actor == that.actor;
+        return Objects.equals(actor, that.actor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actor);
+        return Objects.hash(actor.path());
     }
 }

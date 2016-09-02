@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -50,11 +51,27 @@ public class LoginTest {
         assertEquals(a.hashCode(), b.hashCode());
     }
 
+    @Test(dataProvider = "inequals")
+    public void testInequals(Login a, Object b) throws Exception {
+        assertFalse(a.equals(b));
+    }
+
     @DataProvider(name = "equals")
     public Object[][] equals() {
         return new Object[][] {
             {new Login(new User(), new Account()), new Login(new User(), new Account())},
             {new Login(new User("e", "f"), new Account("u", "p")), new Login(new User("e", "f"), new Account("u", "p"))}
+        };
+    }
+
+    @DataProvider(name = "inequals")
+    public Object[][] inequals() {
+        Login login1 = new Login(new User(), new Account());
+        Login login2 = new Login(new User("e", "f"), new Account("u", "p"));
+        return new Object[][] {
+                {login1, login2},
+                {login2, login1},
+                {login1, new User()}
         };
     }
 

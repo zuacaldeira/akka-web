@@ -81,6 +81,6 @@ public abstract class ActorView extends VerticalLayout{
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), actorRef.path(), messages);
+        return Objects.hash(actorRef.path(), messages);
     }
 }

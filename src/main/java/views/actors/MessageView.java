@@ -75,9 +75,7 @@ public class MessageView extends Button implements Button.ClickListener {
         if (!(o instanceof MessageView)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         MessageView that = (MessageView) o;
         return Objects.equals(message, that.message) &&
                 Objects.equals(actor, that.actor);
@@ -85,6 +83,6 @@ public class MessageView extends Button implements Button.ClickListener {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), message, actor);
+        return Objects.hash(message, actor);
     }
 }
