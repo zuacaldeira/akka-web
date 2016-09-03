@@ -17,25 +17,30 @@ public class RegisterActor extends MVCUntypedActor {
     public void onReceive(Object message) throws Throwable {
         if( message instanceof RegisterMessage) {
             register((RegisterMessage) message);
-            getSender().tell(AkkaMessages.DONE, getSelf());
         }
         else {
             unhandled(message);
         }
     }
 
-    private void register(RegisterMessage message) {
+    private void register(RegisterMessage message) throws IllegalRegistrationException {
         // Store a new exchange in Neo4J
         // Create driver
-        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-
-        session.save(
-                new Registration(
-                        new User(message.getEmail(), message.getFullname()),
-                        new Account(message.getEmail(), message.getPassword())));
-
-        // Read a Node
-        log.info("Stored registration for user [{}]", message.getFullname());
+        try {
+            Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+            session.save(
+                    new Registration(
+                            new User(message.getEmail(), message.getFullname()),
+                            new Account(message.getEmail(), message.getPassword())));
+            // Return a confirmation message to the caller
+            getSender().tell(AkkaMessages.DONE, getSelf());
+            // Read a Node
+            log.info("Stored registration for user [{}]", message.getFullname());
+        } catch(Exception e) {
+            IllegalRegistrationException ex = new IllegalRegistrationException(e.getMessage());
+            getSender().tell(ex, getSelf());
+            throw ex;
+        }
     }
 
 }

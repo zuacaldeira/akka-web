@@ -1,6 +1,5 @@
 package views.ui;
 
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -13,7 +12,6 @@ public abstract class TopLayout extends HorizontalLayout {
      */
     public TopLayout() {
         setSizeFull();
-        setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         initActors();
     }
 

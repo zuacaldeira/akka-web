@@ -18,24 +18,30 @@ public class LoginActor extends MVCUntypedActor {
     public void onReceive(Object message) throws Throwable {
         if( message instanceof LoginMessage) {
             login((LoginMessage) message);
-            getSender().tell(AkkaMessages.DONE, getSelf());
         }
         else {
             unhandled(message);
         }
     }
 
-    private void login(LoginMessage message) {
+    private void login(LoginMessage message) throws IllegalLoginException {
         // Create driver
         Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
 
         Registration r = session.queryForObject(Registration.class, getCypherQuery(message), Collections.emptyMap());
         if (r != null) {
             session.save(new Login(r.getUser(), r.getAccount()));
-            log.info("Login of [user({})]", message.getUsername());
+            // Notifies the sender
+            getSender().tell(AkkaMessages.DONE, getSelf());
+            // Log success
+            log.info("Success: Login of [user({})]", message.getUsername());
         }
         else {
-            throw new IllegalStateException("Cannot login unregistered user " + message.getUsername());
+            IllegalLoginException e = new IllegalLoginException(message.getUsername());
+            // Notifies the sender
+            getSender().tell(e, getSelf());
+            // Fail for supervision strategy
+            throw e;
         }
     }
 

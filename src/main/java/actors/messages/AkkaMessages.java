@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class AkkaMessages {
     public static final String UNKNOWN = "Unknown";
+    public static final String CANCEL = "Cancel";
     public static final String DONE = "Done";
     public static final String REGISTER = "Register";
     public static final String LOGIN = "Login";
@@ -31,4 +32,5 @@ public class AkkaMessages {
     public static List<String> getLoginActorMessages() {
         return getMessages(LOGIN);
     }
+
 }

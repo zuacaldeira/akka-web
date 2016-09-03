@@ -12973,6 +12973,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .actor {
+	margin-border: 50%;
 	background-color: #37c3ee;
 	color: white;
 	opacity: 0.85;

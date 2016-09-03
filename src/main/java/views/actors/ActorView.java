@@ -1,6 +1,7 @@
 package views.actors;
 
 import actors.core.ActorSystemsNames;
+import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -30,6 +31,12 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         this.actorRef = ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias()).actorOf(Props.create(actor));
         this.messages = messages;
 
+        mailboxes = new HorizontalLayout();
+        mailboxes.setSpacing(true);
+        mailboxes.setSizeFull();
+        mailboxes.setHeightUndefined();
+        mailboxes.setDefaultComponentAlignment(Alignment.MIDDLE_RIGHT);
+
         setWidth("33%");
         setHeight("100%");
         setMargin(true);
@@ -53,20 +60,19 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     }
 
     private void addMailboxes() {
-        mailboxes = new HorizontalLayout();
-        mailboxes.setMargin(true);
-        mailboxes.setSpacing(true);
-        mailboxes.setSizeFull();
-
         messages.stream().forEach(m -> {
             MessageView mv = new MessageView(actorRef, m);
             mv.addClickListener(this);
             mailboxes.addComponent(mv);
-            mailboxes.setComponentAlignment(mv, Alignment.MIDDLE_CENTER);
         });
-
         addComponent(mailboxes);
-        mailboxes.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+    }
+
+    protected void addCancelButton() {
+        MessageView cancel = new MessageView(getActorRef(), AkkaMessages.CANCEL);
+        cancel.addClickListener(this);
+        mailboxes.addComponent(cancel, 0);
+
     }
 
     public ActorRef getActorRef() {
