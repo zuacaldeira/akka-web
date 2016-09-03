@@ -1,6 +1,7 @@
 package views.actors;
 
 import actors.core.WelcomeActor;
+import com.vaadin.ui.Button;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,10 +29,20 @@ public class ActorViewTest {
         ActorView av1 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
             @Override
             protected void addContent() {}
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+
+            }
         };
         ActorView av2 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
             @Override
             protected void addContent() {}
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+
+            }
         };
         return new Object[][] {
                 {av1, av2}, {av1, av1}

@@ -1,19 +1,17 @@
 package views.ui;
 
-import actors.messages.LoginMessage;
 import akka.actor.ActorRef;
-import com.vaadin.ui.*;
+import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.TextField;
 
 import java.util.Objects;
 
 /**
  * Created by zua on 29.08.16.
  */
-public class LoginForm extends ActorForm implements Button.ClickListener {
+public class LoginForm extends ActorForm {
     private final TextField emailField;
     private final PasswordField passwordField;
-    private final SendButton send;
-    private final CancelButton cancel;
 
     /**
      * Creates a new Login form, with a reference to the actor responsible for logins.
@@ -24,12 +22,7 @@ public class LoginForm extends ActorForm implements Button.ClickListener {
         super(actor);
         emailField = new TextField("email");
         passwordField = new PasswordField("Password");
-        cancel = new CancelButton();
-        send = new SendButton();
-        cancel.addClickListener(this);
-        send.addClickListener(this);
-
-        addComponents(emailField, passwordField, new HorizontalLayout(cancel, send));
+        addComponents(emailField, passwordField);
     }
 
     public TextField getEmailField() {
@@ -40,23 +33,6 @@ public class LoginForm extends ActorForm implements Button.ClickListener {
         return passwordField;
     }
 
-    public SendButton getSend() {
-        return send;
-    }
-
-    public CancelButton getCancel() {
-        return cancel;
-    }
-
-    @Override
-    public void buttonClick(Button.ClickEvent clickEvent) {
-        if(clickEvent.getButton() == send) {
-            getActor().tell(new LoginMessage(emailField.getValue(), passwordField.getValue()), getActor());
-        }
-        emailField.clear();
-        passwordField.clear();
-        ((Window)getParent()).close();
-    }
 
     @Override
     public boolean equals(Object o) {

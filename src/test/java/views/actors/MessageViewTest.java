@@ -6,7 +6,6 @@ import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.vaadin.ui.Button;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -24,7 +23,6 @@ public class MessageViewTest {
         MessageView mv = new MessageView(ref, content);
         assertEquals(ref, mv.getActor());
         assertEquals(content, mv.getMessage());
-        assertTrue(mv.getListeners(Button.ClickEvent.class).contains(mv));
     }
 
 

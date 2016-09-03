@@ -4,9 +4,7 @@ import actors.core.ActorSystemsNames;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,10 +14,10 @@ import java.util.Objects;
  *
  * Created by zua on 29.08.16.
  */
-public abstract class ActorView extends VerticalLayout{
+public abstract class ActorView extends VerticalLayout implements Button.ClickListener {
     private final ActorRef actorRef;
     private final List<String> messages;
-    private VerticalLayout mailboxes;
+    private HorizontalLayout mailboxes;
     private Label actorNameLabel;
 
     /**
@@ -32,7 +30,9 @@ public abstract class ActorView extends VerticalLayout{
         this.actorRef = ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias()).actorOf(Props.create(actor));
         this.messages = messages;
 
-        setSizeUndefined();
+        setWidth("33%");
+        setHeight("100%");
+        setMargin(true);
         setSpacing(true);
 
         addActorName(actor.getSimpleName());
@@ -49,16 +49,20 @@ public abstract class ActorView extends VerticalLayout{
         actorNameLabel = new Label(name);
         actorNameLabel.setSizeUndefined();
         addComponent(actorNameLabel);
+        setComponentAlignment(actorNameLabel, Alignment.MIDDLE_CENTER);
     }
 
     private void addMailboxes() {
-        mailboxes = new VerticalLayout();
+        mailboxes = new HorizontalLayout();
         mailboxes.setMargin(true);
         mailboxes.setSpacing(true);
+        mailboxes.setSizeFull();
 
         messages.stream().forEach(m -> {
             MessageView mv = new MessageView(actorRef, m);
+            mv.addClickListener(this);
             mailboxes.addComponent(mv);
+            mailboxes.setComponentAlignment(mv, Alignment.MIDDLE_CENTER);
         });
 
         addComponent(mailboxes);
@@ -73,7 +77,7 @@ public abstract class ActorView extends VerticalLayout{
         return messages;
     }
 
-    public VerticalLayout getMailboxes() {
+    public HorizontalLayout getMailboxes() {
         return mailboxes;
     }
 

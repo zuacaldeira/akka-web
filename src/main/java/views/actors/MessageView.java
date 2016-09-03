@@ -1,17 +1,15 @@
 package views.actors;
 
-import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
-import views.factories.ActorsViewFactory;
 
 import java.util.Objects;
 
 /**
  * Created by zua on 29.08.16.
  */
-public class MessageView extends Button implements Button.ClickListener {
+public class MessageView extends Button {
     private String message;
     private final ActorRef actor;
 
@@ -26,24 +24,7 @@ public class MessageView extends Button implements Button.ClickListener {
         this.actor = actor;
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
-        setSizeUndefined();
         setStyleName("message");
-        addClickListener(this);
-    }
-
-    @Override
-    public void buttonClick(ClickEvent clickEvent) {
-        switch (message) {
-            case AkkaMessages.REGISTER:
-                getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
-                break;
-            case AkkaMessages.LOGIN:
-                getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
-                break;
-            default:
-                //getUI().setContent(ActorsViewFactory.getRegisterActor());
-                break;
-        }
     }
 
     public ActorRef getActor() {

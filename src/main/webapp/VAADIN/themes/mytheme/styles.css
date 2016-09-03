@@ -12973,9 +12973,9 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .actor {
-	border-radius: 50%;
 	background-color: #37c3ee;
 	color: white;
+	opacity: 0.85;
 }
 
 .mytheme .message {

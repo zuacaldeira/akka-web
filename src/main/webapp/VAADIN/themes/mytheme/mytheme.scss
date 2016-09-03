@@ -42,9 +42,9 @@ $secondary-color: #ff9535;
   }
 
   .actor {
-    border-radius: 50%;
     background-color: $main-color;
     color: white;
+    opacity: .85;
   }
   .message {
     background-color: $secondary-color;

@@ -15,24 +15,6 @@ import static org.testng.Assert.*;
  * Created by zua on 01.09.16.
  */
 public class RegisterFormTest {
-    @Test
-    public void testClickCancel() throws Exception {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        RegisterForm form = new RegisterForm(actor);
-        form.getEmailField().setValue("email");
-        assertEquals("", form.getEmailField().getValue());
-    }
-
-    @Test
-    public void testClickSend() throws Exception {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        RegisterForm form = new RegisterForm(actor);
-        form.getEmailField().setValue("email");
-        form.getPasswordField().setValue("password");
-        assertEquals("", form.getEmailField().getValue());
-        assertEquals("", form.getPasswordField().getValue());
-        assertEquals("", form.getFullName().getValue());
-    }
 
     @Test(dataProvider = "equals")
     public void testEquals(RegisterForm a, RegisterForm b) throws Exception {
