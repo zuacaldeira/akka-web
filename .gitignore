@@ -1,4 +1,6 @@
 *.class
+target/
+out/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -13,4 +15,12 @@ hs_err_pid*
 # IDEA File #
 .idea/
 *.iml
-target/
+
+
+
+# latex
+**/*.aux
+**/*.log
+**/*.out
+**/*.toc
+**/*.gz

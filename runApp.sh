@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean compile jetty:run
+mvn clean compile install jetty:run
