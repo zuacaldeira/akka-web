@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import akka.actor.ActorRef;
 
@@ -9,8 +9,9 @@ import java.util.Objects;
  *
  * Created by zua on 29.08.16.
  */
-public class ActorForm extends MyForm {
+public abstract class ActorForm extends MyForm {
     private final ActorRef actor;
+    private boolean edited = false;
 
     /**
      * A form that as an underlying actor acting as a controller.

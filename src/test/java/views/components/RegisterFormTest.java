@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import actors.core.LoginActor;
 import actors.core.RegisterActor;

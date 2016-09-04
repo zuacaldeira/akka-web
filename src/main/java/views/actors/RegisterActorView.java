@@ -1,6 +1,6 @@
 package views.actors;
 
-import actors.core.IllegalRegistrationException;
+import actors.core.exceptions.IllegalRegistrationException;
 import actors.core.RegisterActor;
 import actors.messages.AkkaMessages;
 import actors.messages.RegisterMessage;
@@ -13,7 +13,7 @@ import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 import views.factories.ActorsViewFactory;
-import views.ui.RegisterForm;
+import views.components.RegisterForm;
 
 /**
  * Created by zua on 02.09.16.
@@ -40,14 +40,15 @@ public class RegisterActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessages.REGISTER)) {
+        if (event.getButton().getCaption().equals(AkkaMessages.REGISTER) && isFormEdited()) {
             try {
+                registerForm.validate();
                 Timeout timeout = new Timeout(Duration.create(1, "minute"));
                 RegisterMessage message = createRegisterMessage();
                 Future<Object> future = Patterns.ask(
-                                            getActorRef(),
-                                            message,
-                                            timeout);
+                        getActorRef(),
+                        message,
+                        timeout);
                 Object result = Await.result(future, timeout.duration());
                 if(result instanceof IllegalRegistrationException){
                     throw (IllegalRegistrationException) result;
@@ -55,18 +56,25 @@ public class RegisterActorView extends ActorView {
                 getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
                 Notification.show((result != null) ? result.toString(): "NO MESSAGE", Notification.Type.TRAY_NOTIFICATION);
             } catch (IllegalRegistrationException irx) {
-                Notification.show("ERROR: " + irx.getMessage(), Notification.Type.ERROR_MESSAGE);
-                irx.printStackTrace();
+                logException(irx);
             } catch (Exception e) {
-                Notification.show("ERROR: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
-                e.printStackTrace();
+                logException(new IllegalRegistrationException(e.getMessage()));
             }
             cleanRegisterForm();
+        }
+        else if (event.getButton().getCaption().equals(AkkaMessages.REGISTER) && !isFormEdited()) {
+            Notification.show("Empty form", Notification.Type.ERROR_MESSAGE);
         }
 
         else if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)){
             getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
         }
+    }
+
+    private boolean isFormEdited() {
+        return !registerForm.getEmailField().getValue().isEmpty()
+                || !registerForm.getPasswordField().getValue().isEmpty()
+                || !registerForm.getFullName().getValue().isEmpty();
     }
 
     private RegisterMessage createRegisterMessage() {

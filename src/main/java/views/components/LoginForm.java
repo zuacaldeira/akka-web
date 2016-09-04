@@ -1,9 +1,10 @@
-package views.ui;
+package views.components;
 
 import akka.actor.ActorRef;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import views.components.validators.PasswordValidator;
 
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class LoginForm extends ActorForm {
     private void initPasswordField() {
         passwordField = new PasswordField("Password");
         passwordField.setRequired(true);
-        passwordField.addValidator(new PasswordValidator());
+        passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setValidationVisible(true);
     }
 
@@ -66,5 +67,15 @@ public class LoginForm extends ActorForm {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), emailField.getValue().hashCode(), passwordField.getValue().hashCode());
+    }
+
+    @Override
+    public void validate(Object value) throws InvalidValueException {
+        emailField.validate();
+        passwordField.validate();
+    }
+
+    public void validate() {
+        validate(null);
     }
 }

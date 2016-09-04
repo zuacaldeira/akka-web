@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import actors.core.LoginActor;
 import actors.core.WelcomeActor;
@@ -34,7 +34,17 @@ public class ActorFormTest {
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
         return new Object[][]{
-                {new ActorForm(actor), new ActorForm(actor)}
+                {new ActorForm(actor) {
+                    @Override
+                    public void validate(Object value) throws InvalidValueException {
+
+                    }
+                }, new ActorForm(actor) {
+                    @Override
+                    public void validate(Object value) throws InvalidValueException {
+
+                    }
+                }}
         };
     }
 
@@ -43,7 +53,22 @@ public class ActorFormTest {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
         ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
         return new Object[][]{
-                {new ActorForm(actor), new ActorForm(actor2)}, {new ActorForm(actor), null}
+                {new ActorForm(actor) {
+                    @Override
+                    public void validate(Object value) throws InvalidValueException {
+
+                    }
+                }, new ActorForm(actor2) {
+                    @Override
+                    public void validate(Object value) throws InvalidValueException {
+
+                    }
+                }}, {new ActorForm(actor) {
+            @Override
+            public void validate(Object value) throws InvalidValueException {
+
+            }
+        }, null}
         };
     }
 }

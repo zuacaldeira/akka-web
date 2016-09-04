@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import views.actors.ActorView;
 import views.factories.ActorsViewFactory;

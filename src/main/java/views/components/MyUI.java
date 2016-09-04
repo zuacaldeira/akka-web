@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;

@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import org.testng.annotations.Test;
 import views.actors.WelcomeActorView;

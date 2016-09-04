@@ -1,4 +1,4 @@
-package views.ui;
+package views.components;
 
 import com.vaadin.ui.Component;
 import org.testng.annotations.Test;

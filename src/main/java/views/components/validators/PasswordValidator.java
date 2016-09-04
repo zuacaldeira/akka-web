@@ -1,4 +1,4 @@
-package views.ui;
+package views.components.validators;
 
 import com.vaadin.data.Validator;
 
@@ -7,10 +7,15 @@ import com.vaadin.data.Validator;
  */
 public class PasswordValidator implements Validator {
     private static final int MIN_SIZE = 6;
+    private final String message;
+
+    public PasswordValidator(String message) {
+        this.message = message;
+    }
 
     @Override
     public void validate(Object value) throws InvalidValueException {
-        String prefix = "Invalid email: ";
+        String prefix = message;
         if(value == null) {
             throw new InvalidValueException(prefix + "null");
         }

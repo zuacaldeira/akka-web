@@ -9,6 +9,8 @@ import com.vaadin.ui.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Base class for designing actors views, composed by a label and a button for each message the actor processes.
@@ -20,6 +22,8 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     private final List<String> messages;
     private HorizontalLayout mailboxes;
     private Label actorNameLabel;
+    private transient Logger log;
+
 
     /**
      * Basic actor view.
@@ -28,7 +32,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
      * @param messages The messages the actor is supposed to process
      */
     public ActorView(Class<?> actor, List<String> messages) {
-        this.actorRef = ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias()).actorOf(Props.create(actor));
+        this.actorRef = createActorRef(actor);
         this.messages = messages;
 
         mailboxes = new HorizontalLayout();
@@ -41,13 +45,22 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         setHeight("100%");
         setMargin(true);
         setSpacing(true);
+        log = Logger.getLogger(this.getClass().getSimpleName());
 
         addActorName(actor.getSimpleName());
         addContent();
         addMailboxes();
 
         setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+
+        setExpandRatio(actorNameLabel, .2f);
+        setExpandRatio(mailboxes, .1f);
         setStyleName("actor");
+    }
+
+    protected ActorRef createActorRef(Class<?> actor) {
+        return ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias())
+                .actorOf(Props.create(actor), actor.getSimpleName());
     }
 
     protected abstract void addContent();
@@ -86,6 +99,25 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     public HorizontalLayout getMailboxes() {
         return mailboxes;
     }
+
+    public Logger getLog() {
+        return log;
+    }
+
+    protected void logException(Exception ilx) throws Exception {
+        String msg = ilx.getMessage();
+        Notification.show(msg, Notification.Type.ERROR_MESSAGE);
+        log.log(Level.SEVERE, msg);
+        throw ilx;
+    }
+
+    protected void logException(IllegalArgumentException ilx) {
+        String msg = ilx.getMessage();
+        Notification.show(msg, Notification.Type.ERROR_MESSAGE);
+        log.log(Level.SEVERE, msg);
+        throw ilx;
+    }
+
 
     @Override
     public boolean equals(Object o) {
