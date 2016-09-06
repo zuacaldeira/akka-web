@@ -9,6 +9,8 @@ import graphs.entities.Registration;
 import graphs.entities.User;
 import org.neo4j.ogm.session.Session;
 
+import java.util.Collections;
+
 /**
  * Created by zua on 28.08.16.
  */
@@ -29,14 +31,20 @@ public class RegisterActor extends MVCUntypedActor {
         // Create driver
         try {
             Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-            session.save(
-                    new Registration(
-                            new User(message.getEmail(), message.getFullname()),
-                            new Account(message.getEmail(), message.getPassword())));
-            // Return a confirmation message to the caller
-            getSender().tell(AkkaMessages.DONE, getSelf());
-            // Read a Node
-            log.info("Stored registration for user [{}]", message.getFullname());
+            User u = session.queryForObject(User.class, "MATCH (u:User) WHERE u.email=" + message.getEmail(), Collections.EMPTY_MAP);
+            if(u == null) {
+                session.save(
+                        new Registration(
+                                new User(message.getEmail(), message.getFullname()),
+                                new Account(message.getEmail(), message.getPassword())));
+                // Return a confirmation message to the caller
+                getSender().tell(AkkaMessages.DONE, getSelf());
+                // Read a Node
+                log.info("Stored registration for user [{}]", message.getFullname());
+            }
+            else if(u != null) {
+                throw new IllegalRegistrationException("User already exists: " + message.getEmail());
+            }
         } catch(IllegalRegistrationException e) {
             log.error("Error during storage of registration for user {}", message.getFullname());
             getSender().tell(e, getSelf());
