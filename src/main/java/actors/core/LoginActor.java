@@ -62,12 +62,10 @@ public class LoginActor extends MVCUntypedActor {
             if(registration != null) {
                 return registration;
             }
+            throw new NoSuchRegistrationException(message.getUsername());
         } catch (RuntimeException ex) { // duplications detected
-            logException(new MultipleRegistrationException(message.getUsername()));
+            throw new MultipleRegistrationException(message.getUsername());
         }
-        // No registration found
-        logException(new NoSuchRegistrationException(message.getUsername()));
-        return null;
     }
 
     private void logException(IllegalLoginException e) {

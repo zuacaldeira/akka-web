@@ -27,12 +27,17 @@ public abstract class SeleniumTest {
         selenium = new FirefoxDriver();
         selenium.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         getWelcomePage();
+        wait5Seconds();
+    }
+
+    private void wait5Seconds() {
         try {
             wait(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
 
     public void stop(){
         selenium.quit();
@@ -43,6 +48,7 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.LOGIN
         ).click();
+        wait5Seconds();
     }
 
     protected void clickCancel() {
@@ -50,6 +56,7 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.CANCEL
         ).click();
+        wait5Seconds();
     }
 
     protected void clickRegister() {
@@ -57,6 +64,7 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.REGISTER
         ).click();
+        wait5Seconds();
     }
 
     protected void clickSend() {
@@ -64,12 +72,13 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.SEND
         ).click();
+        wait5Seconds();
     }
 
     protected WebElement getButton(final List<WebElement> elementsByClassName, final String name) {
         for(WebElement e: elementsByClassName) {
-            System.out.println("Found mailbox: " + e.getText());
             if(e.getText().contains(name) || name.contains(e.getText())) {
+                System.out.println("Found mailbox: " + e.getText());
                 return e;
             }
         }
@@ -100,5 +109,9 @@ public abstract class SeleniumTest {
     protected void fillForm(String style, String... data) {
         WebElement form = selenium.findElement(By.className(style));
         form.sendKeys(data);
+    }
+
+    public boolean isUserPage() {
+        return selenium.getCurrentUrl().equalsIgnoreCase(PAGE + "/user");
     }
 }

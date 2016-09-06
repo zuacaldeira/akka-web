@@ -228,6 +228,7 @@
 						</property>
 					</properties>
 					<excludes>
+						<exclude>**/*ActorTest*.java</exclude>
 						<exclude>**/*SeleniumTest*.java</exclude>
 					</excludes>
 				</configuration>
@@ -244,6 +245,7 @@
 						</goals>
 						<configuration>
 							<includes>
+                                <include>**/*ActorTest*.java</include>
 								<include>**/*SeleniumTest*.java</include>
 							</includes>
 						</configuration>
@@ -254,8 +256,13 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.5.201505241946</version>
+				<configuration>
+					<dataFile>reports/jacoco.exec</dataFile>
+					<destFile>${argLine}</destFile>
+				</configuration>
 				<executions>
 					<execution>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>

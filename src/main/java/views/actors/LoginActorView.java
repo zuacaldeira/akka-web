@@ -2,18 +2,18 @@ package views.actors;
 
 import actors.core.LoginActor;
 import actors.core.exceptions.IllegalLoginException;
+import actors.core.exceptions.IllegalRegistrationException;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Notification;
 import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
-import views.factories.ActorsViewFactory;
 import views.components.LoginForm;
+import views.factories.ActorsViewFactory;
 
 /**
  * Created by zua on 02.09.16.
@@ -43,24 +43,40 @@ public class LoginActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessages.LOGIN) && isFormEdited()) {
-            /* Asks the login actor to login a user, and waits for the response */
-            try {
-                loginForm.validate();
-                Object response = askToLogin();
-                getLog().info((response != null) ? response.toString(): "NO MESSAGE");
-                getUI().getPage().setLocation("/user");
-            } catch (Exception e) {
-                logException(new IllegalLoginException(e.getMessage()));
-            }
-            cleanLoginForm();
+        if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)){
+            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
         }
-        else if (event.getButton().getCaption().equals(AkkaMessages.LOGIN) && !isFormEdited()) {
-            Notification.show("Empty form", Notification.Type.ERROR_MESSAGE);
+
+        else if(!isFormEdited()) {
+            getLog().info("Empty form: going back to welcome page");
+            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+        }
+
+        else if (event.getButton().getCaption().equals(AkkaMessages.LOGIN)) {
+            /* Asks the login actor to login a user, and waits for the response */
+            login();
+            getLog().info("Login successfull: moving to user area");
+            getUI().getPage().setLocation("/user");
         }
 
         else if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)) {
             getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+        }
+
+    }
+
+    private void login() {
+        Object result = null;
+        try {
+            loginForm.validate();
+            result = askToLogin();
+            getLog().info((result != null) ? result.toString(): "NO MESSAGE");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        if(result instanceof IllegalRegistrationException){
+            throw (IllegalRegistrationException) result;
         }
 
     }
