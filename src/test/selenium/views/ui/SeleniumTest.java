@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import views.actors.StyleClassNames;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by zua on 04.09.16.
@@ -16,18 +17,21 @@ public abstract class SeleniumTest {
     private static final String PROTOCOL = "http://";
     private static final String ADDRESS = "localhost:8080/";
     private static final String PAGE = PROTOCOL + ADDRESS;
-    static {
-        System.setProperty("webdriver.gecko.driver", "src/test/tools/geckodriver");
-    }
-
 
     private void getWelcomePage() {
         selenium.get(PAGE);
     }
 
-    public void start() {
+    public synchronized void  start() {
+        System.setProperty("webdriver.gecko.driver", "src/test/tools/geckodriver");
         selenium = new FirefoxDriver();
+        selenium.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         getWelcomePage();
+        try {
+            wait(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void stop(){

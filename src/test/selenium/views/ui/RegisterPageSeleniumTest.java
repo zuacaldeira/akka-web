@@ -1,6 +1,5 @@
 package views.ui;
 
-import actors.core.exceptions.IllegalRegistrationException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -21,7 +20,7 @@ public class RegisterPageSeleniumTest extends SeleniumTest {
         stop();
     }
 
-    @Test(dataProvider = "invalidRegisterData", expectedExceptions = IllegalRegistrationException.class)
+    @Test(dataProvider = "invalidRegisterData")
     public void testInvalidRegister(String username, String password, String fullname) throws Exception {
         start();
         clickRegister();
