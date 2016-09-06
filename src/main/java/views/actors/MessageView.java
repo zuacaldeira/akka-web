@@ -25,6 +25,7 @@ public class MessageView extends Button {
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
         setStyleName("message");
+        setId(message);
         setSizeUndefined();
     }
 

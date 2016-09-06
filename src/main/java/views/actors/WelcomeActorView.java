@@ -17,6 +17,8 @@ public class WelcomeActorView extends ActorView {
      */
     public WelcomeActorView() {
         super(WelcomeActor.class, AkkaMessages.getWelcomeActorMessages());
+        setStyleName(StyleClassNames.WELCOME_ACTOR);
+        setId(StyleClassNames.WELCOME_ACTOR);
     }
 
     @Override

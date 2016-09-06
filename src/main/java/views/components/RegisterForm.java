@@ -4,6 +4,7 @@ import akka.actor.ActorRef;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import views.actors.StyleClassNames;
 import views.components.validators.FullNameValidator;
 import views.components.validators.PasswordConfirmationValidator;
 import views.components.validators.PasswordValidator;
@@ -32,21 +33,25 @@ public class RegisterForm extends ActorForm {
         emailField.addValidator(new EmailValidator("Invalid email"));
         emailField.setRequired(true);
         emailField.setValidationVisible(true);
+        emailField.setStyleName(StyleClassNames.EMAIL);
 
         fullnameField = new TextField("Fullname");
         fullnameField.addValidator(new FullNameValidator("Invalid full name"));
         fullnameField.setRequired(true);
         fullnameField.setValidationVisible(true);
+        fullnameField.setStyleName(StyleClassNames.FULLNAME);
 
         passwordField = new PasswordField("Password");
         passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setRequired(true);
         passwordField.setValidationVisible(true);
+        passwordField.setStyleName(StyleClassNames.PASSWORD);
 
         passwordConfirmationField = new PasswordField("Confirmation");
         passwordConfirmationField.addValidator(new PasswordConfirmationValidator("Invalid password confirmation", passwordField));
         passwordConfirmationField.setRequired(true);
         passwordConfirmationField.setValidationVisible(true);
+        passwordConfirmationField.setStyleName(StyleClassNames.PASSWORD_CONFIRMATION);
 
         addComponents(
                 fullnameField,
@@ -54,6 +59,8 @@ public class RegisterForm extends ActorForm {
                 passwordField,
                 passwordConfirmationField
         );
+
+        //setStyleName(StyleClassNames.REGISTER_FORM);
     }
 
 

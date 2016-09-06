@@ -1,5 +1,6 @@
 package views.components;
 
+import actors.messages.AkkaMessages;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 
@@ -14,5 +15,6 @@ public class SendButton extends Button {
     public SendButton() {
         super("Send");
         setIcon(FontAwesome.SEND);
+        setId(AkkaMessages.SEND);
     }
 }

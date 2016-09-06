@@ -1,5 +1,6 @@
 package actors.messages;
 
+import actors.messages.LoginMessage;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

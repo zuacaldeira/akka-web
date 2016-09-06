@@ -28,8 +28,8 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
-$main-color: #37c3ee;
-$secondary-color: #ff9535;
+$main-color: #086c5e;
+$secondary-color: #ff310f;
 
 @import "../valo/valo.scss";
 
@@ -45,10 +45,56 @@ $secondary-color: #ff9535;
     margin-border: 50%;
     background-color: $main-color;
     color: white;
-    opacity: .85;
+    font-weight: bold;
   }
-  .message {
+
+  .actorName {
+    font-size: 300%;
+  }
+
+  .welcomeActor {
+    margin-border: 50%;
+    background-color: $main-color;
+    color: white;
+    font-weight: bold;
+  }
+
+  .loginActor {
+    margin-border: 50%;
     background-color: $secondary-color;
-    color: $main-color;
+    color: white;
+    font-weight: bold;
+  }
+
+  .registerActor {
+    margin-border: 50%;
+    background-color: $secondary-color;
+    color: white;
+    font-weight: bold;
+  }
+
+  .message {
+    background-color: $main-color;
+    color: white;
+  }
+
+  .email {
+    background-color: $main-color;
+    color: $secondary-color;
+  }
+
+  .password {
+    background-color: $main-color;
+    color: $secondary-color;
+  }
+
+  .passwordConfirmation {
+    background-color: $main-color;
+    color: $secondary-color;
+  }
+
+  .fullname {
+    background-color: $main-color;
+    color: $secondary-color;
   }
 }

@@ -67,16 +67,20 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
 
     private void addActorName(String name) {
         actorNameLabel = new Label(name);
-        actorNameLabel.setSizeUndefined();
+        actorNameLabel.setSizeFull();
         addComponent(actorNameLabel);
-        setComponentAlignment(actorNameLabel, Alignment.MIDDLE_CENTER);
+        setComponentAlignment(actorNameLabel, Alignment.BOTTOM_CENTER);
+        setStyleName(StyleClassNames.ACTOR_NAME);
     }
 
     private void addMailboxes() {
         messages.stream().forEach(m -> {
             MessageView mv = new MessageView(actorRef, m);
             mv.addClickListener(this);
+            mv.setStyleName(StyleClassNames.MESSAGE);
+            mv.setId(m);
             mailboxes.addComponent(mv);
+
         });
         addComponent(mailboxes);
     }
@@ -84,6 +88,8 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     protected void addCancelButton() {
         MessageView cancel = new MessageView(getActorRef(), AkkaMessages.CANCEL);
         cancel.addClickListener(this);
+        cancel.setStyleName(StyleClassNames.MESSAGE);
+        cancel.setId(AkkaMessages.CANCEL);
         mailboxes.addComponent(cancel, 0);
 
     }
@@ -108,14 +114,12 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         String msg = ilx.getMessage();
         Notification.show(msg, Notification.Type.ERROR_MESSAGE);
         log.log(Level.SEVERE, msg);
-        throw ilx;
     }
 
     protected void logException(IllegalArgumentException ilx) {
         String msg = ilx.getMessage();
         Notification.show(msg, Notification.Type.ERROR_MESSAGE);
         log.log(Level.SEVERE, msg);
-        throw ilx;
     }
 
 

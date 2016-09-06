@@ -4,6 +4,7 @@ import akka.actor.ActorRef;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import views.actors.StyleClassNames;
 import views.components.validators.PasswordValidator;
 
 import java.util.Objects;
@@ -31,6 +32,7 @@ public class LoginForm extends ActorForm {
         emailField = new TextField("email");
         emailField.setRequired(true);
         emailField.addValidator(new EmailValidator("Invalid Email"));
+        emailField.setStyleName(StyleClassNames.EMAIL);
     }
 
     private void initPasswordField() {
@@ -38,6 +40,7 @@ public class LoginForm extends ActorForm {
         passwordField.setRequired(true);
         passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setValidationVisible(true);
+        passwordField.setStyleName(StyleClassNames.PASSWORD);
     }
 
 

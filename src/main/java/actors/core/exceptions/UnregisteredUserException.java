@@ -1,6 +1,4 @@
-package actors.core;
-
-import actors.core.exceptions.IllegalLoginException;
+package actors.core.exceptions;
 
 /**
  * Created by zua on 04.09.16.

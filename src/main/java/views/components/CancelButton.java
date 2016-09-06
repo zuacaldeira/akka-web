@@ -1,5 +1,6 @@
 package views.components;
 
+import actors.messages.AkkaMessages;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 
@@ -15,5 +16,6 @@ public class CancelButton extends Button {
     public CancelButton() {
         super("Cancel");
         setIcon(FontAwesome.TIMES);
+        setId(AkkaMessages.CANCEL);
     }
 }

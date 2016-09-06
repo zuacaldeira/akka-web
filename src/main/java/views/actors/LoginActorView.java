@@ -29,6 +29,8 @@ public class LoginActorView extends ActorView {
     public LoginActorView() {
         super(LoginActor.class, AkkaMessages.getLoginActorMessages());
         addCancelButton();
+        setStyleName(StyleClassNames.LOGIN_ACTOR);
+        setId(StyleClassNames.LOGIN_ACTOR);
     }
 
     @Override
@@ -43,8 +45,8 @@ public class LoginActorView extends ActorView {
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessages.LOGIN) && isFormEdited()) {
             /* Asks the login actor to login a user, and waits for the response */
-            loginForm.validate();
             try {
+                loginForm.validate();
                 Object response = askToLogin();
                 getLog().info((response != null) ? response.toString(): "NO MESSAGE");
                 getUI().getPage().setLocation("/user");

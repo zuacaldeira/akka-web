@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean compile install jetty:run
+mvn clean install -DskipITs=true jetty:run
