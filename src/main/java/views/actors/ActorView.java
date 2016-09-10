@@ -7,9 +7,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.vaadin.ui.*;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -19,78 +17,104 @@ import java.util.logging.Logger;
  */
 public abstract class ActorView extends VerticalLayout implements Button.ClickListener {
     private final ActorRef actorRef;
-    private final List<String> messages;
-    private HorizontalLayout mailboxes;
-    private Label actorNameLabel;
     private transient Logger log;
+    private Label actorNameLabel;
+    private Mailboxes mailboxes;
+    private Component actorContent;
 
 
     /**
      * Basic actor view.
      *
      * @param actor The underlying actor
-     * @param messages The messages the actor is supposed to process
      */
-    public ActorView(Class<?> actor, List<String> messages) {
+    public ActorView(Class<?> actor) {
         this.actorRef = createActorRef(actor);
-        this.messages = messages;
-
-        mailboxes = new HorizontalLayout();
-        mailboxes.setSpacing(true);
-        mailboxes.setSizeFull();
-        mailboxes.setHeightUndefined();
-        mailboxes.setDefaultComponentAlignment(Alignment.MIDDLE_RIGHT);
-
-        setWidth("33%");
-        setHeight("100%");
+        log = Logger.getLogger(this.getClass().getSimpleName());
         setMargin(true);
         setSpacing(true);
-        log = Logger.getLogger(this.getClass().getSimpleName());
-
-        addActorName(actor.getSimpleName());
-        addContent();
-        addMailboxes();
-
-        setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
-
-        setExpandRatio(actorNameLabel, .2f);
-        setExpandRatio(mailboxes, .1f);
-        setStyleName("actor");
+        setSizeFull();
+        setWidth("50%");
+        initBase();
+        align();
     }
+
+    private void align() {
+        setComponentAlignment(actorNameLabel, Alignment.BOTTOM_CENTER);
+        setComponentAlignment(actorContent, Alignment.MIDDLE_CENTER);
+        setComponentAlignment(mailboxes, Alignment.TOP_CENTER);
+    }
+
+    private void initBase() {
+        initBaseComponents();
+        initExpandRatios();
+    }
+
+    private void initExpandRatios() {
+        setExpandRatio(actorNameLabel, .4f);
+        setExpandRatio(actorContent, .5f);
+        setExpandRatio(mailboxes, .1f);
+    }
+
+    private void initBaseComponents() {
+        actorNameLabel = getActorName(actorRef.path().name());
+        actorContent = createActorContent();
+        mailboxes = createMailboxes();
+        addComponents(actorNameLabel, actorContent, mailboxes);
+    }
+
+    protected abstract Component createActorContent();
 
     protected ActorRef createActorRef(Class<?> actor) {
         return ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias())
                 .actorOf(Props.create(actor), actor.getSimpleName());
     }
 
-    protected abstract void addContent();
-
-    private void addActorName(String name) {
+    private Label getActorName(String name) {
         actorNameLabel = new Label(name);
-        actorNameLabel.setSizeFull();
-        addComponent(actorNameLabel);
-        setComponentAlignment(actorNameLabel, Alignment.BOTTOM_CENTER);
-        setStyleName(StyleClassNames.ACTOR_NAME);
+        actorNameLabel.setSizeUndefined();
+        actorNameLabel.setStyleName(StyleClassNames.ACTOR_NAME);
+        return  actorNameLabel;
     }
 
-    private void addMailboxes() {
-        messages.stream().forEach(m -> {
-            MessageView mv = new MessageView(actorRef, m);
-            mv.addClickListener(this);
-            mv.setStyleName(StyleClassNames.MESSAGE);
-            mv.setId(m);
-            mailboxes.addComponent(mv);
+    private Mailboxes createMailboxes() {
+        mailboxes = new Mailboxes();
+        mailboxes.setSizeUndefined();
+        mailboxes.setSpacing(true);
+        return mailboxes;
+    }
 
-        });
-        addComponent(mailboxes);
+    protected void addMessage(String message, boolean enabled) {
+        getMailboxes().addComponent(createMessage(message, enabled));
+    }
+
+    public MessageView getMessage(String message) {
+        int n = getMailboxes().getComponentCount();
+        for(int i = 0; i < n; i++) {
+            MessageView messageView = (MessageView) getMailboxes().getComponent(i);
+            if(messageView.getMessage().equals(message)) {
+                return (MessageView) getMailboxes().getComponent(i);
+            }
+        }
+        return null;
+    }
+
+    protected MessageView createMessage(String message, boolean enabled) {
+        MessageView mv = new MessageView(actorRef, message);
+        mv.addClickListener(this);
+        mv.addStyleName(StyleClassNames.MESSAGE);
+        mv.setId(message);
+        mv.setEnabled(enabled);
+        if(enabled) {
+            mv.addStyleName(StyleClassNames.ENABLED);
+        }
+        return mv;
     }
 
     protected void addCancelButton() {
-        MessageView cancel = new MessageView(getActorRef(), AkkaMessages.CANCEL);
-        cancel.addClickListener(this);
-        cancel.setStyleName(StyleClassNames.MESSAGE);
-        cancel.setId(AkkaMessages.CANCEL);
-        mailboxes.addComponent(cancel, 0);
+        MessageView cancel = createMessage(AkkaMessages.CANCEL, true);
+        cancel.addStyleName(StyleClassNames.CANCEL);
+        getMailboxes().addComponent(cancel, 0);
 
     }
 
@@ -98,28 +122,12 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         return actorRef;
     }
 
-    public List<String> getMessages() {
-        return messages;
-    }
-
-    public HorizontalLayout getMailboxes() {
-        return mailboxes;
+    public Mailboxes getMailboxes() {
+        return (Mailboxes) getComponent(getComponentCount()-1);
     }
 
     public Logger getLog() {
         return log;
-    }
-
-    protected void logException(Exception ilx) throws Exception {
-        String msg = ilx.getMessage();
-        Notification.show(msg, Notification.Type.ERROR_MESSAGE);
-        log.log(Level.SEVERE, msg);
-    }
-
-    protected void logException(IllegalArgumentException ilx) {
-        String msg = ilx.getMessage();
-        Notification.show(msg, Notification.Type.ERROR_MESSAGE);
-        log.log(Level.SEVERE, msg);
     }
 
 
@@ -133,12 +141,12 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         }
 
         ActorView that = (ActorView) o;
-        return Objects.equals(actorRef.path(), that.actorRef.path()) &&
-                Objects.equals(messages, that.messages);
+        return Objects.equals(actorRef.path(), that.actorRef.path());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actorRef.path(), messages);
+        return Objects.hash(actorRef.path());
     }
+
 }

@@ -1,6 +1,7 @@
 package views.components;
 
 import akka.actor.ActorRef;
+import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -12,7 +13,7 @@ import java.util.Objects;
 /**
  * Created by zua on 29.08.16.
  */
-public class LoginForm extends ActorForm {
+public class LoginForm extends ActorForm implements Property.ValueChangeListener {
     private  TextField emailField;
     private PasswordField passwordField;
 
@@ -26,6 +27,7 @@ public class LoginForm extends ActorForm {
         initEmailField();
         initPasswordField();
         addComponents(emailField, passwordField);
+        setFormState(MyForm.State.EMPTY);
     }
 
     private void initEmailField() {
@@ -39,7 +41,6 @@ public class LoginForm extends ActorForm {
         passwordField = new PasswordField("Password");
         passwordField.setRequired(true);
         passwordField.addValidator(new PasswordValidator("Invalid password"));
-        passwordField.setValidationVisible(true);
         passwordField.setStyleName(StyleClassNames.PASSWORD);
     }
 
@@ -69,7 +70,7 @@ public class LoginForm extends ActorForm {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), emailField.getValue().hashCode(), passwordField.getValue().hashCode());
+        return Objects.hash(emailField.getValue(), passwordField.getValue());
     }
 
     @Override
@@ -80,5 +81,15 @@ public class LoginForm extends ActorForm {
 
     public void validate() {
         validate(null);
+    }
+
+    @Override
+    public void valueChange(Property.ValueChangeEvent event) {
+        try {
+            validate();
+            setFormState(State.COMPLETE);
+        } catch (InvalidValueException ivx) {
+            setFormState(State.INCOMPLETE);
+        }
     }
 }

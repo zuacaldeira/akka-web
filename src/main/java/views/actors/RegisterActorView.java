@@ -1,13 +1,12 @@
 package views.actors;
 
 import actors.core.RegisterActor;
-import actors.core.exceptions.IllegalRegistrationException;
 import actors.messages.AkkaMessages;
 import actors.messages.RegisterMessage;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Notification;
 import scala.concurrent.Await;
 import scala.concurrent.Future;
@@ -15,75 +14,70 @@ import scala.concurrent.duration.Duration;
 import views.components.RegisterForm;
 import views.factories.ActorsViewFactory;
 
+import java.util.logging.Level;
+
 /**
  * Created by zua on 02.09.16.
  */
 public class RegisterActorView extends ActorView {
+    public static final String NAME = "RegisterActorView";
     private RegisterForm registerForm;
 
     /**
      * Register actor view.
      */
     public RegisterActorView() {
-        super(RegisterActor.class, AkkaMessages.getRegisterActorMessages());
+        super(RegisterActor.class);
         addCancelButton();
+        addMessage(AkkaMessages.REGISTER, false);
         setStyleName(StyleClassNames.REGISTER_ACTOR);
         setId(StyleClassNames.REGISTER_ACTOR);
     }
 
     @Override
-    protected void addContent() {
+    protected Component createActorContent() {
         registerForm = new RegisterForm(getActorRef());
-        registerForm.setSizeUndefined();
-        addComponent(registerForm);
-        setComponentAlignment(registerForm, Alignment.MIDDLE_CENTER);
-
+        registerForm.setWidth("100%");
+        return registerForm;
     }
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)){
-            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+            getUI().setContent((Component) ActorsViewFactory.getInstance().getWelcomeActorView());
+            cleanRegisterForm();
         }
 
         else if(!isFormEdited()) {
-            Notification.show("Empty form", Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("Empty form", Notification.Type.WARNING_MESSAGE);
             getLog().info("Empty form");
-            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
         }
 
         else if (event.getButton().getCaption().equals(AkkaMessages.REGISTER)) {
-            registerNewAccount();
-            getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            try {
+                Object result = registerNewAccount();
+                if(result.equals(AkkaMessages.DONE)) {
+                    getLog().info(result.toString());
+                    getUI().setContent((Component) ActorsViewFactory.getInstance().getLoginActorView());
+                } else {
+                    getLog().log(Level.SEVERE, result.toString());
+                    getUI().setContent((Component) ActorsViewFactory.getInstance().getWelcomeActorView());
+                }
+            }catch (Exception e) {
+                getLog().log(Level.SEVERE, e.getMessage());
+                getUI().setContent((Component) ActorsViewFactory.getInstance().getWelcomeActorView());
+            }
         }
     }
 
-    private void registerNewAccount() {
-        Object result = null;
-        try {
-            registerForm.validate();
+    private Object registerNewAccount() throws Exception {
             Timeout timeout = new Timeout(Duration.create(1, "minute"));
             RegisterMessage message = createRegisterMessage();
             Future<Object> future = Patterns.ask(
                     getActorRef(),
                     message,
                     timeout);
-            result = getResultOrException(future, timeout);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        if(result instanceof IllegalRegistrationException){
-            throw (IllegalRegistrationException) result;
-        }
-    }
-
-    private Object getResultOrException(Future<Object> future, Timeout timeout) {
-        try {
             return Await.result(future, timeout.duration());
-        } catch (Exception e) {
-            return new IllegalRegistrationException(e.getMessage());
-        }
     }
 
     private boolean isFormEdited() {

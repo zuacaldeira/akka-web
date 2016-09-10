@@ -16,4 +16,6 @@ public class StyleClassNames {
     public static final String PASSWORD_CONFIRMATION = "passwordConfirmation";
     public static final String ACTOR_NAME = "actorName";
     public static final String REGISTER_FORM = "registerForm";
+    public static final String ENABLED = "enabled";
+    public static final String CANCEL = "Camcel";
 }

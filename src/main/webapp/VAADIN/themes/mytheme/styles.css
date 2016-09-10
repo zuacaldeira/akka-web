@@ -12974,57 +12974,57 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .actor {
 	margin-border: 50%;
-	background-color: #086c5e;
 	color: white;
 	font-weight: bold;
 }
 
 .mytheme .actorName {
-	font-size: 300%;
+	font-size: 200%;
+	color: white;
+	text-align: center;
 }
 
 .mytheme .welcomeActor {
 	margin-border: 50%;
-	background-color: #086c5e;
-	color: white;
 	font-weight: bold;
 }
 
 .mytheme .loginActor {
 	margin-border: 50%;
-	background-color: #ff310f;
-	color: white;
 	font-weight: bold;
 }
 
 .mytheme .registerActor {
 	margin-border: 50%;
-	background-color: #ff310f;
-	color: white;
 	font-weight: bold;
 }
 
 .mytheme .message {
-	background-color: #086c5e;
-	color: white;
+	background: transparent;
+	color: tomato;
+	border: none;
+}
+
+.mytheme .enabled {
+	color: darkseagreen;
 }
 
 .mytheme .email {
-	background-color: #086c5e;
-	color: #ff310f;
+	background-color: transparent;
+	color: white;
 }
 
 .mytheme .password {
-	background-color: #086c5e;
-	color: #ff310f;
+	background-color: transparent;
+	color: white;
 }
 
 .mytheme .passwordConfirmation {
-	background-color: #086c5e;
-	color: #ff310f;
+	background-color: transparent;
+	color: white;
 }
 
 .mytheme .fullname {
-	background-color: #086c5e;
-	color: #ff310f;
+	background-color: transparent;
+	color: white;
 }

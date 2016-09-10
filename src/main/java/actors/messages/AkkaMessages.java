@@ -15,6 +15,7 @@ public class AkkaMessages {
     public static final String VIEW = "View";
     public static final String DO_NOT_HANDLE = "Do not handle";
     public static final String SEND = "Send";
+    public static final String ERROR = "Error";
 
     private AkkaMessages() {}
 

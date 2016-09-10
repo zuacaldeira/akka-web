@@ -28,8 +28,8 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
-$main-color: #086c5e;
-$secondary-color: #ff310f;
+$main-color: white;
+$secondary-color: black;
 
 @import "../valo/valo.scss";
 
@@ -43,58 +43,67 @@ $secondary-color: #ff310f;
 
   .actor {
     margin-border: 50%;
-    background-color: $main-color;
     color: white;
     font-weight: bold;
   }
 
   .actorName {
-    font-size: 300%;
+    font-size: 200%;
+    color: $main-color;
+    text-align: center;
   }
 
   .welcomeActor {
     margin-border: 50%;
-    background-color: $main-color;
-    color: white;
     font-weight: bold;
   }
 
   .loginActor {
     margin-border: 50%;
-    background-color: $secondary-color;
-    color: white;
     font-weight: bold;
   }
 
   .registerActor {
     margin-border: 50%;
-    background-color: $secondary-color;
-    color: white;
     font-weight: bold;
   }
 
   .message {
-    background-color: $main-color;
-    color: white;
+    background: transparent;
+    color: tomato;
+    border: none;
   }
 
+  .enabled {
+    color: darkseagreen;
+  }
+/*
+  .button-small {
+    background: transparent;
+    color: tomato;
+  }
+*/
   .email {
-    background-color: $main-color;
-    color: $secondary-color;
+    background-color: transparent;
+    color: $main-color;
   }
 
   .password {
-    background-color: $main-color;
-    color: $secondary-color;
+    background-color: transparent;;
+    color: $main-color;
   }
 
   .passwordConfirmation {
-    background-color: $main-color;
-    color: $secondary-color;
+    background-color: transparent;
+    color: $main-color;
   }
 
   .fullname {
-    background-color: $main-color;
-    color: $secondary-color;
+    background-color: transparent;
+    color: $main-color;
+  }
+
+  .cancel {
+
   }
 }

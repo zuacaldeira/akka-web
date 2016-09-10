@@ -27,32 +27,24 @@ public class RegisterActor extends MVCUntypedActor {
     }
 
     private void register(RegisterMessage message) throws IllegalRegistrationException {
-        // Store a new exchange in Neo4J
-        // Create driver
         try {
+            //  Create session
             Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+            // query the graph for a matching user
             User u = session.queryForObject(User.class, "MATCH (u:User) WHERE u.email=" + message.getEmail(), Collections.EMPTY_MAP);
-            if(u == null) {
-                session.save(
-                        new Registration(
-                                new User(message.getEmail(), message.getFullname()),
-                                new Account(message.getEmail(), message.getPassword())));
-                // Return a confirmation message to the caller
-                getSender().tell(AkkaMessages.DONE, getSelf());
-                // Read a Node
-                log.info("Stored registration for user [{}]", message.getFullname());
-            }
-            else if(u != null) {
+            // If we found one, then this registration is invalid because it will lead to duplicated regustrations
+            if(u != null) {
                 throw new IllegalRegistrationException("User already exists: " + message.getEmail());
             }
-        } catch(IllegalRegistrationException e) {
-            log.error("Error during storage of registration for user {}", message.getFullname());
-            getSender().tell(e, getSelf());
-            throw e;
+            // Otherwise, store a new registration in the graph
+            session.save(new Registration(new User(message.getEmail(), message.getFullname()), new Account(message.getEmail(), message.getPassword())));
+            // Return a confirmation message to the caller
+            getSender().tell(AkkaMessages.DONE, getSelf());
+            log.info("Stored registration for user [{}]", message.getFullname());
         } catch(Exception e) {
+            // An error occurred, inform sender and exits
             log.error("Error during storage of registration for user {}", message.getFullname());
-            IllegalRegistrationException ex = new IllegalRegistrationException(e.getMessage());
-            getSender().tell(ex, getSelf());
+            getSender().tell(AkkaMessages.ERROR + ": " + e.getMessage(), getSelf());
             throw e;
         }
     }

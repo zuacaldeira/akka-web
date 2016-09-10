@@ -10,6 +10,7 @@ public class UserUI extends AkkaUI {
     @Override
     protected void init(VaadinRequest request) {
         checkCredentials(request);
+        setContent(new WelcomeLayout());
     }
 
     private void checkCredentials(VaadinRequest request) {

@@ -37,11 +37,11 @@ public abstract class ActorForm extends MyForm {
         }
 
         ActorForm that = (ActorForm) o;
-        return Objects.equals(actor, that.actor);
+        return Objects.equals(actor.path().name(), that.actor.path().name());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actor.path());
+        return Objects.hash(actor.path().name());
     }
 }
