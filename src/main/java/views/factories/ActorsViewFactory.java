@@ -19,13 +19,14 @@ public class ActorsViewFactory {
         return instance;
     }
 
-    public WelcomeActorView getWelcomeActorView() {
-        return new WelcomeActorView();
-    }
     public RegisterActorView getRegisterActorView() {
         return new RegisterActorView();
     }
     public LoginActorView getLoginActorView() {
         return new LoginActorView();
     }
+    public WelcomeActorView getWelcomeActorView() {
+        return new WelcomeActorView();
+    }
+
 }

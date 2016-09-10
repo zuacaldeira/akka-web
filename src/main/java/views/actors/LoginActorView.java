@@ -2,13 +2,12 @@ package views.actors;
 
 import actors.core.LoginActor;
 import actors.core.exceptions.IllegalLoginException;
-import actors.core.exceptions.IllegalRegistrationException;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
@@ -20,6 +19,7 @@ import views.factories.ActorsViewFactory;
  */
 public class LoginActorView extends ActorView {
 
+    public static final String NAME = "LoginActorView";
     private LoginForm loginForm;
 
 
@@ -27,24 +27,23 @@ public class LoginActorView extends ActorView {
      * Login actor view.
      */
     public LoginActorView() {
-        super(LoginActor.class, AkkaMessages.getLoginActorMessages());
+        super(LoginActor.class);
         addCancelButton();
-        setStyleName(StyleClassNames.LOGIN_ACTOR);
-        setId(StyleClassNames.LOGIN_ACTOR);
+        addMessage(AkkaMessages.LOGIN, false);
     }
 
     @Override
-    protected void addContent() {
-        loginForm = new views.components.LoginForm(getActorRef());
-        loginForm.setSizeUndefined();
-        addComponent(loginForm);
-        setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);
+    protected Component createActorContent() {
+        loginForm = new LoginForm(getActorRef());
+        loginForm.setWidth("50%");
+        return loginForm;
     }
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)){
-            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+            cleanLoginForm();
+            navigateToWelcomePage();
         }
 
         else if(!isFormEdited()) {
@@ -54,15 +53,19 @@ public class LoginActorView extends ActorView {
 
         else if (event.getButton().getCaption().equals(AkkaMessages.LOGIN)) {
             /* Asks the login actor to login a user, and waits for the response */
-            login();
-            getLog().info("Login successfull: moving to user area");
-            getUI().getPage().setLocation("/user");
+            try {
+                login();
+                getLog().info("Login successful: moving to user area");
+                getUI().getPage().setLocation("/user");
+            } catch (Exception e) {
+                getLog().info("Login failed: " + e.getMessage());
+                navigateToWelcomePage();
+            }
         }
+    }
 
-        else if (event.getButton().getCaption().equals(AkkaMessages.CANCEL)) {
-            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
-        }
-
+    private void navigateToWelcomePage() {
+        getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
     }
 
     private void login() {
@@ -75,8 +78,8 @@ public class LoginActorView extends ActorView {
             throw new RuntimeException(e);
         }
 
-        if(result instanceof IllegalRegistrationException){
-            throw (IllegalRegistrationException) result;
+        if(result instanceof IllegalLoginException){
+            throw (IllegalLoginException) result;
         }
 
     }
@@ -91,9 +94,6 @@ public class LoginActorView extends ActorView {
         LoginMessage message = new LoginMessage(loginForm.getEmailField().getValue(), loginForm.getPasswordField().getValue());
         Future<Object> future = Patterns.ask(getActorRef(), message, timeout);
         Object result = Await.result(future, timeout.duration());
-        if(result instanceof IllegalLoginException){
-            throw (IllegalLoginException) result;
-        }
         return result;
     }
 

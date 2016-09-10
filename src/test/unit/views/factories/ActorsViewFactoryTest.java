@@ -1,10 +1,8 @@
 package views.factories;
 
-import actors.messages.AkkaMessages;
 import org.testng.annotations.Test;
 import views.actors.WelcomeActorView;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 /**
@@ -13,8 +11,9 @@ import static org.testng.Assert.assertNotNull;
 public class ActorsViewFactoryTest {
     @Test
     public void testGetWelcomeActorView() throws Exception {
-        WelcomeActorView view = ActorsViewFactory.getInstance().getWelcomeActorView();
+        WelcomeActorView view = (WelcomeActorView) ActorsViewFactory.getInstance().getWelcomeActorView();
         assertNotNull(view.getActorRef());
-        assertEquals(AkkaMessages.getWelcomeActorMessages(), view.getMessages());
+        assertNotNull(view.getMailboxes());
+
     }
 }

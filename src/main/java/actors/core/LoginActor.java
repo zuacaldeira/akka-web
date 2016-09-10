@@ -57,21 +57,23 @@ public class LoginActor extends MVCUntypedActor {
 
     private Registration getRegistration(Session session, LoginMessage message) {
         // Tries to find a unique registration for this user
+        IllegalLoginException ex = null;
         try {
             Registration registration =  session.queryForObject(Registration.class, getCypherQuery(message.getUsername()), Collections.emptyMap());
             if(registration != null) {
                 return registration;
+            } else {
+                ex = new NoSuchRegistrationException(message.getUsername());
+                getSender().tell(ex, getSelf());
+                throw ex;
             }
-            throw new NoSuchRegistrationException(message.getUsername());
-        } catch (RuntimeException ex) { // duplications detected
-            throw new MultipleRegistrationException(message.getUsername());
+        } catch (RuntimeException rex) { // duplications detected
+            ex = new MultipleRegistrationException(message.getUsername());
+            getSender().tell(ex, getSelf());
+            throw ex;
         }
     }
 
-    private void logException(IllegalLoginException e) {
-        log.error("Illegal login attempt: ", e.getMessage());
-        throw e;
-    }
 
     private Session getNeo4jSession() {
         try {

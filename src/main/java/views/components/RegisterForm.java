@@ -1,9 +1,12 @@
 package views.components;
 
+import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
+import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import views.actors.RegisterActorView;
 import views.actors.StyleClassNames;
 import views.components.validators.FullNameValidator;
 import views.components.validators.PasswordConfirmationValidator;
@@ -15,7 +18,7 @@ import java.util.Objects;
 /**
  * Created by zua on 29.08.16.
  */
-public class RegisterForm extends ActorForm {
+public class RegisterForm extends ActorForm implements Property.ValueChangeListener {
     private final PasswordField passwordField;
     private final TextField emailField;
     private final TextField fullnameField;
@@ -34,24 +37,28 @@ public class RegisterForm extends ActorForm {
         emailField.setRequired(true);
         emailField.setValidationVisible(true);
         emailField.setStyleName(StyleClassNames.EMAIL);
+        emailField.addValueChangeListener(this);
 
         fullnameField = new TextField("Fullname");
         fullnameField.addValidator(new FullNameValidator("Invalid full name"));
         fullnameField.setRequired(true);
         fullnameField.setValidationVisible(true);
         fullnameField.setStyleName(StyleClassNames.FULLNAME);
+        fullnameField.addValueChangeListener(this);
 
         passwordField = new PasswordField("Password");
         passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setRequired(true);
         passwordField.setValidationVisible(true);
         passwordField.setStyleName(StyleClassNames.PASSWORD);
+        passwordField.addValueChangeListener(this);
 
         passwordConfirmationField = new PasswordField("Confirmation");
         passwordConfirmationField.addValidator(new PasswordConfirmationValidator("Invalid password confirmation", passwordField));
         passwordConfirmationField.setRequired(true);
         passwordConfirmationField.setValidationVisible(true);
         passwordConfirmationField.setStyleName(StyleClassNames.PASSWORD_CONFIRMATION);
+        passwordConfirmationField.addValueChangeListener(this);
 
         addComponents(
                 fullnameField,
@@ -83,7 +90,7 @@ public class RegisterForm extends ActorForm {
 
     @Override
     public int hashCode() {
-        return Objects.hash(passwordField.getValue(), emailField.getValue(), fullnameField.getValue());
+        return Objects.hash(super.hashCode(), passwordField, emailField, fullnameField, passwordConfirmationField);
     }
 
     public TextField getEmailField() {
@@ -102,10 +109,29 @@ public class RegisterForm extends ActorForm {
     public void validate(Object value) throws InvalidValueException {
         emailField.validate();
         passwordField.validate();
+        passwordConfirmationField.validate();
         fullnameField.validate();
     }
 
     public void validate() {
         validate(null);
+    }
+
+    @Override
+    public void valueChange(Property.ValueChangeEvent event) {
+        try {
+            validate();
+            if(getParent() instanceof RegisterActorView) {
+                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).setEnabled(true);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).addStyleName(StyleClassNames.ENABLED);
+            }
+        }
+        catch (Exception e) {
+            if(getParent() instanceof RegisterActorView) {
+                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).setEnabled(false);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).removeStyleName(StyleClassNames.ENABLED);
+
+            }
+        }
     }
 }

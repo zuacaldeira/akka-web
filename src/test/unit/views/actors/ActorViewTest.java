@@ -2,10 +2,9 @@ package views.actors;
 
 import actors.core.WelcomeActor;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.LinkedList;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -26,18 +25,22 @@ public class ActorViewTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorView av1 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
+        ActorView av1 = new ActorView(WelcomeActor.class) {
             @Override
-            protected void addContent() {}
+            protected Component createActorContent() {
+                return null;
+            }
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
             }
         };
-        ActorView av2 = new ActorView(WelcomeActor.class, new LinkedList<>()) {
+        ActorView av2 = new ActorView(WelcomeActor.class) {
             @Override
-            protected void addContent() {}
+            protected Component createActorContent() {
+                return null;
+            }
 
             @Override
             public void buttonClick(Button.ClickEvent event) {

@@ -1,5 +1,6 @@
 package views.components;
 
+import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -7,13 +8,16 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public abstract class TopLayout extends HorizontalLayout {
 
+    private Navigator navigator;
+
     /**
      * Initializes the common layout features of the main layouts
      */
     public TopLayout() {
         setSizeFull();
-        initActors();
     }
 
-    protected abstract void initActors();
+    public Navigator getNavigator() {
+        return navigator;
+    }
 }
