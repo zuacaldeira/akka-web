@@ -36,7 +36,9 @@ public abstract class AbstractActorTest {
 
     private void deleteDatabase() {
         Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-        session.query("MATCH (n) DETACH DELETE n", Collections.EMPTY_MAP);
+        if(session != null) {
+            session.query("MATCH (n) DETACH DELETE n", Collections.EMPTY_MAP);
+        }
     }
 
 

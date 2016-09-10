@@ -3,6 +3,7 @@ package views.actors;
 import akka.actor.ActorRef;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.Objects;
 
@@ -12,6 +13,7 @@ import java.util.Objects;
 public class MessageView extends Button {
     private String message;
     private final ActorRef actor;
+    private String name;
 
     /**
      * Creates a message view, for a specific actor and message.
@@ -24,16 +26,16 @@ public class MessageView extends Button {
         this.actor = actor;
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
-        setStyleName("message");
+        setStyleName(ValoTheme.BUTTON_SMALL);
         setId(message);
-        setSizeUndefined();
+        setSizeFull();
     }
 
     public ActorRef getActor() {
         return actor;
     }
 
-    public Object getMessage() {
+    public String getMessage() {
         return message;
     }
 
