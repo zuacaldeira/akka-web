@@ -24,3 +24,10 @@ hs_err_pid*
 **/*.out
 **/*.toc
 **/*.gz
+
+# latex
+**/*.aux
+**/*.log
+**/*.out
+**/*.gz
+**/*.toc
