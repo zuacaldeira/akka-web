@@ -6,6 +6,7 @@ import actors.core.exceptions.NoSuchRegistrationException;
 import actors.core.exceptions.UnexpectedException;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
+import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
@@ -59,7 +60,7 @@ public class LoginActor extends MVCUntypedActor {
         // Tries to find a unique registration for this user
         IllegalLoginException ex = null;
         try {
-            Registration registration =  session.queryForObject(Registration.class, getCypherQuery(message.getUsername()), Collections.emptyMap());
+            Registration registration =  session.queryForObject(Registration.class, Neo4jQueryFactory.getInstance().findRegisterByEmailQuery(message.getUsername()), Collections.emptyMap());
             if(registration != null) {
                 return registration;
             } else {
@@ -82,11 +83,4 @@ public class LoginActor extends MVCUntypedActor {
             throw new UnexpectedException("Problems creating a Neo4j Session", e);
         }
     }
-
-    private String getCypherQuery(String username) {
-        String match = "MATCH (u : User) -[r : register]-> (a : Account)";
-        String where = " WHERE u.email=" + "'" + username + "'";
-        return match + where + " RETURN r";
-    }
-
 }

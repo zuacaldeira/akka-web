@@ -37,27 +37,28 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         emailField.setRequired(true);
         emailField.setValidationVisible(true);
         emailField.setStyleName(StyleClassNames.EMAIL);
-        emailField.addValueChangeListener(this);
 
         fullnameField = new TextField("Fullname");
         fullnameField.addValidator(new FullNameValidator("Invalid full name"));
         fullnameField.setRequired(true);
         fullnameField.setValidationVisible(true);
         fullnameField.setStyleName(StyleClassNames.FULLNAME);
-        fullnameField.addValueChangeListener(this);
 
         passwordField = new PasswordField("Password");
         passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setRequired(true);
         passwordField.setValidationVisible(true);
         passwordField.setStyleName(StyleClassNames.PASSWORD);
-        passwordField.addValueChangeListener(this);
 
         passwordConfirmationField = new PasswordField("Confirmation");
         passwordConfirmationField.addValidator(new PasswordConfirmationValidator("Invalid password confirmation", passwordField));
         passwordConfirmationField.setRequired(true);
         passwordConfirmationField.setValidationVisible(true);
         passwordConfirmationField.setStyleName(StyleClassNames.PASSWORD_CONFIRMATION);
+
+        emailField.addValueChangeListener(this);
+        fullnameField.addValueChangeListener(this);
+        passwordField.addValueChangeListener(this);
         passwordConfirmationField.addValueChangeListener(this);
 
         addComponents(
@@ -79,9 +80,6 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         if (!(o instanceof RegisterForm)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
         RegisterForm that = (RegisterForm) o;
         return Objects.equals(passwordField.getValue(), that.passwordField.getValue()) &&
                 Objects.equals(emailField.getValue(), that.emailField.getValue()) &&
@@ -90,7 +88,12 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), passwordField, emailField, fullnameField, passwordConfirmationField);
+        return Objects.hash(super.hashCode(),
+                            passwordField.getValue(),
+                            emailField.getValue(),
+                            fullnameField.getValue(),
+                            passwordConfirmationField.getValue()
+        );
     }
 
     public TextField getEmailField() {

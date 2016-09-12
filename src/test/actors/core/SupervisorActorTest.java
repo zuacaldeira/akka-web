@@ -11,7 +11,7 @@ import static org.testng.Assert.assertNotNull;
 /**
  * Created by zua on 01.09.16.
  */
-public class SupervisorTest extends AbstractActorTest {
+public class SupervisorActorTest extends AbstractActorTest {
 
     //@Test(dataProvider = "dataProviderOnReceive")
     public void testSupervisorStrategy(Object message) throws Exception {

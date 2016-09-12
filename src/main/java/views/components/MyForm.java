@@ -11,24 +11,9 @@ import java.util.Objects;
  */
 public abstract class MyForm extends FormLayout implements Validator {
 
-    private State formState;
-
-
 
     public MyForm() {
-        this.formState = State.EMPTY;
         setStyleName(ValoTheme.FORMLAYOUT_LIGHT);
-    }
-
-    public enum State {COMPLETE, INCOMPLETE, EMPTY}
-
-
-    public State getFormState() {
-        return formState;
-    }
-
-    public void setFormState(State formState) {
-        this.formState = formState;
     }
 
     @Override
@@ -40,11 +25,11 @@ public abstract class MyForm extends FormLayout implements Validator {
             return false;
         }
         MyForm that = (MyForm) o;
-        return formState == that.formState;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), formState);
+        return Objects.hash(31);
     }
 }
