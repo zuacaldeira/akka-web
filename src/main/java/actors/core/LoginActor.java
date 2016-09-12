@@ -1,30 +1,34 @@
 package actors.core;
 
-import actors.core.exceptions.*;
+import actors.core.exceptions.IllegalLoginException;
+import actors.core.exceptions.MultipleRegistrationException;
+import actors.core.exceptions.UnexpectedException;
+import actors.core.exceptions.UnregisteredUserException;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
 import graphs.Neo4jQueryFactory;
-import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
 import org.neo4j.ogm.session.Session;
 import views.actors.LoginActorView;
+import views.factories.ActorsViewFactory;
 
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by zua on 28.08.16.
  */
 public class LoginActor extends MVCUntypedActor {
 
-    private LoginActorView view;
-
     @Override
     public void onReceive(Object message) throws Throwable {
         if(message instanceof LoginActorView) {
-            this.view = (LoginActorView) message;
+            super.setView((LoginActorView) message);
+            log.info("Recieved a view...");
         }
-        if( message instanceof LoginMessage) {
+        else if( message instanceof LoginMessage) {
             login((LoginMessage) message);
         }
         else {
@@ -41,15 +45,28 @@ public class LoginActor extends MVCUntypedActor {
      * @throws IllegalLoginException If can't find a registration for the user
      */
     private void login(LoginMessage message) {
-        // Create session
-        Session session = getNeo4jSession();
-        // Retrieve a registration relationship with this user
-        Registration registration = getRegistration(session, message);
-        // Save the user
-        createUser(session, registration);
-        // Notifies the user
-        acknowledgeSender(AkkaMessages.DONE);
-        view.getUI().getPage().setLocation("/user");
+        try {
+            // Create session
+            Session session = getNeo4jSession();
+            // Retrieve a registration relationship with this user
+            Registration registration = getRegistration(session, message);
+            // Save the user
+            createUser(session, registration);
+            // Notifies the user
+            acknowledgeSender(AkkaMessages.DONE);
+            if(super.getView() != null) {
+                log.info("View == null? {}", getView() == null);
+                getView().getUI().getPage().setLocation("/user");
+            }
+        } catch (RuntimeException e) {
+            log.info("Login failed ");
+            acknowledgeSender("Login failed: " + e.getMessage());
+            if(getView() != null) {
+                log.info("View == null? {}", getView() == null);
+                getView().getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+            }
+            throw e;
+        }
     }
 
     private void acknowledgeSender(String status) {
@@ -62,29 +79,33 @@ public class LoginActor extends MVCUntypedActor {
 
     private Registration getRegistration(Session session, LoginMessage message) {
         // Tries to find a unique registration for this user
-        IllegalLoginException ex = null;
-        try {
-            Registration registration =  session.queryForObject(Registration.class, Neo4jQueryFactory.getInstance().findRegisterByEmailQuery(message.getUsername()), Collections.emptyMap());
-            if(registration != null) {
-                return registration;
-            } else {
-                ex = new UnregisteredUserException(message.getUsername());
-                getSender().tell(ex, getSelf());
-                throw ex;
-            }
-        } catch (RuntimeException rex) { // duplications detected
-            ex = new MultipleRegistrationException(message.getUsername());
-            getSender().tell(ex, getSelf());
-            throw ex;
-        }
+        Iterable<Registration> registrations = findAllRegistrationsByEmail(message.getUsername());
+        return getTheOneAndOnly(registrations, message.getUsername());
     }
 
-
-    private Session getNeo4jSession() {
-        try {
-            return Neo4jSessionFactory.getInstance().getNeo4jSession();
-        } catch (Exception e) {
-            throw new UnexpectedException("Problems creating a Neo4j Session", e);
+    private Registration getTheOneAndOnly(Iterable<Registration> registrations, String username) {
+        List<Registration> list = new LinkedList<>();
+        registrations.forEach(r -> {
+            list.add(r);
+        });
+        // There is one
+        if(list.isEmpty()) {
+            throw new UnregisteredUserException(username);
         }
+        // Move over this first element, and if there is at least another
+        if(list.size() > 1) {
+            throw new MultipleRegistrationException(username);
+        }
+        // This is the one and only one
+        return list.get(0);
     }
+
+    private Iterable<Registration> findAllRegistrationsByEmail(String username) {
+        return getNeo4jSession().query(
+            Registration.class,
+            Neo4jQueryFactory.getInstance().findRegisterByEmailQuery(username),
+            new HashMap<>()
+        );
+    }
+
 }
