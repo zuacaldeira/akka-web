@@ -12,8 +12,10 @@ public class LoginPageSeleniumTest extends SeleniumTest {
     public synchronized void login() {
         start();
         clickLogin();
+        clickLogin();
         fillUsername("username@gmail.com");
         fillPassword("password");
+        clickLogin();
         clickLogin();
         stop();
     }

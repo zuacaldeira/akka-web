@@ -1,9 +1,9 @@
 package views.actors;
 
 import actors.core.LoginActor;
-import actors.core.exceptions.IllegalLoginException;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
+import akka.actor.ActorRef;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import com.vaadin.ui.Button;
@@ -30,6 +30,7 @@ public class LoginActorView extends ActorView {
         super(LoginActor.class);
         addCancelButton();
         addMessage(AkkaMessages.LOGIN, false);
+        getActorRef().tell(this, ActorRef.noSender());
     }
 
     @Override
@@ -72,16 +73,15 @@ public class LoginActorView extends ActorView {
         Object result = null;
         try {
             loginForm.validate();
-            result = askToLogin();
-            getLog().info((result != null) ? result.toString(): "NO MESSAGE");
+            tellToLogin();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
 
-        if(result instanceof IllegalLoginException){
-            throw (IllegalLoginException) result;
-        }
-
+    private void tellToLogin() {
+        LoginMessage message = new LoginMessage(loginForm.getEmailField().getValue(), loginForm.getPasswordField().getValue());
+        getActorRef().tell(message, ActorRef.noSender());
     }
 
     private boolean isFormEdited() {
