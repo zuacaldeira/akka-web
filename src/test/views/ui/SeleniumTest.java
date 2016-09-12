@@ -1,13 +1,16 @@
 package views.ui;
 
 import actors.messages.AkkaMessages;
+import graphs.Neo4jSessionFactory;
+import org.neo4j.ogm.session.Session;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeTest;
 import views.actors.StyleClassNames;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by zua on 04.09.16.
@@ -22,22 +25,20 @@ public abstract class SeleniumTest {
         selenium.get(PAGE);
     }
 
-    public synchronized void  start() {
-        System.setProperty("webdriver.gecko.driver", "src/test/tools/geckodriver");
-        selenium = new FirefoxDriver();
-        selenium.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        getWelcomePage();
-        wait5Seconds();
-    }
-
-    private void wait5Seconds() {
-        try {
-            wait(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    @BeforeTest
+    public void deleteDatabase() {
+        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+        if(session != null) {
+            session.query("MATCH (n) DETACH DELETE n", Collections.EMPTY_MAP);
         }
     }
 
+
+    public synchronized void  start() {
+        System.setProperty("webdriver.gecko.driver", "src/test/tools/geckodriver");
+        selenium = new FirefoxDriver();
+        getWelcomePage();
+    }
 
     public void stop(){
         selenium.quit();
@@ -48,7 +49,6 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.LOGIN
         ).click();
-        wait5Seconds();
     }
 
     protected void clickCancel() {
@@ -56,7 +56,6 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.CANCEL
         ).click();
-        wait5Seconds();
     }
 
     protected void clickRegister() {
@@ -64,7 +63,6 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.REGISTER
         ).click();
-        wait5Seconds();
     }
 
     protected void clickSend() {
@@ -72,7 +70,6 @@ public abstract class SeleniumTest {
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.SEND
         ).click();
-        wait5Seconds();
     }
 
     protected WebElement getButton(final List<WebElement> elementsByClassName, final String name) {

@@ -52,23 +52,12 @@ public class ActorFormTest {
     public Object[][] inequals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
         ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        ActorForm form1 = new ActorForm(actor) {@Override public void validate(Object value) throws InvalidValueException {}};
+        ActorForm form2 = new ActorForm(actor2) {@Override public void validate(Object value) throws InvalidValueException {}};
+
         return new Object[][]{
-                {new ActorForm(actor) {
-                    @Override
-                    public void validate(Object value) throws InvalidValueException {
-
-                    }
-                }, new ActorForm(actor2) {
-                    @Override
-                    public void validate(Object value) throws InvalidValueException {
-
-                    }
-                }}, {new ActorForm(actor) {
-            @Override
-            public void validate(Object value) throws InvalidValueException {
-
-            }
-        }, null}
+                {form1, form2},
+                {form1, null}
         };
     }
 }

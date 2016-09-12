@@ -11,8 +11,6 @@ import java.util.Objects;
  */
 public abstract class ActorForm extends MyForm {
     private final ActorRef actor;
-    private boolean edited = false;
-
     /**
      * A form that as an underlying actor acting as a controller.
      *
@@ -37,11 +35,11 @@ public abstract class ActorForm extends MyForm {
         }
 
         ActorForm that = (ActorForm) o;
-        return Objects.equals(actor.path().name(), that.actor.path().name());
+        return this.actor == that.actor;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actor.path().name());
+        return Objects.hash(super.hashCode(), actor.path().name());
     }
 }

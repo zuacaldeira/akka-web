@@ -52,7 +52,7 @@ public abstract class AbstractActorTest {
 
     public ActorRef createActor(Class<?> aClass, ActorRef supervisor) throws Exception {
         return (ActorRef) Await.result(ask(supervisor,
-                Props.create(aClass), 5000), Duration.create("1 minute"));
+                Props.create(aClass), 5000), Duration.create("10 seconds"));
     }
 
 

@@ -13,8 +13,8 @@ public class WelcomeLayoutTest {
     @Test
     public void testInitActors() throws Exception {
         WelcomeLayout layout = new WelcomeLayout();
+        assertEquals(layout.getComponentCount(), 2); // Mailboxes and actorLabelRef
         assertTrue(layout.getComponent(0) instanceof WelcomeActorView);
-        assertEquals(1, layout.getComponentCount());
     }
 
 

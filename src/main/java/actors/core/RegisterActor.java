@@ -3,6 +3,7 @@ package actors.core;
 import actors.core.exceptions.IllegalRegistrationException;
 import actors.messages.AkkaMessages;
 import actors.messages.RegisterMessage;
+import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Account;
 import graphs.entities.Registration;
@@ -31,7 +32,7 @@ public class RegisterActor extends MVCUntypedActor {
             //  Create session
             Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
             // query the graph for a matching user
-            User u = session.queryForObject(User.class, "MATCH (u:User) WHERE u.email=" + message.getEmail(), Collections.EMPTY_MAP);
+            User u = session.queryForObject(User.class, Neo4jQueryFactory.getInstance().findUserByEmailQuery(message.getEmail()), Collections.EMPTY_MAP);
             // If we found one, then this registration is invalid because it will lead to duplicated regustrations
             if(u != null) {
                 throw new IllegalRegistrationException("User already exists: " + message.getEmail());
