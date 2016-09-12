@@ -33,7 +33,7 @@ public class RegisterActor extends MVCUntypedActor {
             Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
             // query the graph for a matching user
             User u = session.queryForObject(User.class, Neo4jQueryFactory.getInstance().findUserByEmailQuery(message.getEmail()), Collections.EMPTY_MAP);
-            // If we found one, then this registration is invalid because it will lead to duplicated regustrations
+            // If we found one, then this registration is invalid because it will lead to duplicated registrations
             if(u != null) {
                 throw new IllegalRegistrationException("User already exists: " + message.getEmail());
             }
