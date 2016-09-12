@@ -11,6 +11,7 @@ import views.actors.StyleClassNames;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by zua on 04.09.16.
@@ -23,6 +24,7 @@ public abstract class SeleniumTest {
 
     private void getWelcomePage() {
         selenium.get(PAGE);
+        selenium.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     @BeforeTest
@@ -59,6 +61,7 @@ public abstract class SeleniumTest {
     }
 
     protected void clickRegister() {
+
         getButton(
                 selenium.findElements(By.className(StyleClassNames.MESSAGE)),
                 AkkaMessages.REGISTER
@@ -74,8 +77,9 @@ public abstract class SeleniumTest {
 
     protected WebElement getButton(final List<WebElement> elementsByClassName, final String name) {
         for(WebElement e: elementsByClassName) {
-            if(e.getText().contains(name) || name.contains(e.getText())) {
-                System.out.println("Found mailbox: " + e.getText());
+            System.out.println("1 - Found mailbox: " + e.getText());
+            if(e.getText().toLowerCase().contains(name.toLowerCase()) || name.toLowerCase().contains(e.getText().toLowerCase())) {
+                System.out.println("2 - Found mailbox: " + e.getText());
                 return e;
             }
         }
@@ -99,7 +103,8 @@ public abstract class SeleniumTest {
     }
 
     private void fill(String style, String username) {
-        selenium.findElement(By.className(style)).sendKeys(username);
+        WebElement we = selenium.findElement(By.className(style));
+        we.sendKeys(username);
     }
 
 

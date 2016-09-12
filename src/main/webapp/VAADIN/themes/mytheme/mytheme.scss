@@ -31,6 +31,7 @@
 $main-color: white;
 $secondary-color: black;
 
+//noinspection CssUnknownTarget
 @import "../valo/valo.scss";
 
 @mixin mytheme {
@@ -77,7 +78,24 @@ $secondary-color: black;
   .enabled {
     color: darkseagreen;
   }
-/*
+
+  .enabled {
+    color: darkseagreen;
+  }
+  .email {
+    color: darkseagreen;
+  }
+  .password {
+    color: darkseagreen;
+  }
+  .password-confirmation {
+    color: darkseagreen;
+  }
+  .fullname {
+    color: darkseagreen;
+  }
+
+  /*
   .button-small {
     background: transparent;
     color: tomato;

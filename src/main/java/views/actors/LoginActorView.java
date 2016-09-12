@@ -56,7 +56,7 @@ public class LoginActorView extends ActorView {
             try {
                 login();
                 getLog().info("Login successful: moving to user area");
-                getUI().getPage().setLocation("/user");
+                //getUI().getPage().setLocation("/user");
             } catch (Exception e) {
                 getLog().info("Login failed: " + e.getMessage());
                 navigateToWelcomePage();

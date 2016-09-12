@@ -13009,6 +13009,26 @@ div.v-layout.v-horizontal.v-widget {
 	color: darkseagreen;
 }
 
+.mytheme .enabled {
+	color: darkseagreen;
+}
+
+.mytheme .email {
+	color: darkseagreen;
+}
+
+.mytheme .password {
+	color: darkseagreen;
+}
+
+.mytheme .password-confirmation {
+	color: darkseagreen;
+}
+
+.mytheme .fullname {
+	color: darkseagreen;
+}
+
 .mytheme .email {
 	background-color: transparent;
 	color: white;
