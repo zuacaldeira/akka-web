@@ -1,6 +1,6 @@
 package views.actors;
 
-import actors.core.ActorSystemsNames;
+import actors.core.ActorSystems;
 import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -66,7 +66,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     protected abstract Component createActorContent();
 
     protected ActorRef createActorRef(Class<?> actor) {
-        return ActorSystem.create(ActorSystemsNames.ACTOR_SYSTEM_VIEW.getAlias())
+        return ActorSystem.create(ActorSystems.ACTOR_SYSTEM.getAlias())
                 .actorOf(Props.create(actor), actor.getSimpleName());
     }
 

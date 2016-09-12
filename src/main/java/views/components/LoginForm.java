@@ -27,7 +27,6 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
         initEmailField();
         initPasswordField();
         addComponents(emailField, passwordField);
-        setFormState(MyForm.State.EMPTY);
     }
 
     private void initEmailField() {
@@ -87,9 +86,7 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
     public void valueChange(Property.ValueChangeEvent event) {
         try {
             validate();
-            setFormState(State.COMPLETE);
         } catch (InvalidValueException ivx) {
-            setFormState(State.INCOMPLETE);
         }
     }
 }

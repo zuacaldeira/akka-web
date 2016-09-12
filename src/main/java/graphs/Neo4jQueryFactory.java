@@ -15,6 +15,18 @@ public class Neo4jQueryFactory {
         return instance;
     }
 
+    public String findUserByEmailQuery(String email) {
+        String match = "MATCH (u : User) ";
+        String where = "WHERE u.email=" + "'" + email + "' ";
+        return match + where + "RETURN u";
+    }
+
+    public String findRegisterByEmailQuery(String username) {
+            String match = "MATCH (u : User) -[r : register]-> (a : Account) ";
+            String where = "WHERE u.email=" + "'" + username + "' ";
+            return match + where + "RETURN r";
+    }
+
     // FACTORY METHODS
 
 }
