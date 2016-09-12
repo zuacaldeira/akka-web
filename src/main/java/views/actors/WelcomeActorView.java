@@ -2,6 +2,7 @@ package views.actors;
 
 import actors.core.WelcomeActor;
 import actors.messages.AkkaMessages;
+import akka.actor.ActorRef;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
@@ -30,10 +31,14 @@ public class WelcomeActorView extends ActorView {
     @Override
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessages.REGISTER)) {
-            getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
+            getLog().info("REGISTER button clicked");
+            getActorRef().tell(new MVCMessage(this, AkkaMessages.REGISTER), ActorRef.noSender());
+            //getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
         }
         if (event.getButton().getCaption().equals(AkkaMessages.LOGIN)) {
-            getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            getLog().info("LOGIN button clicked");
+            getActorRef().tell(new MVCMessage(this, AkkaMessages.LOGIN), ActorRef.noSender());
+            //getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
         }
     }
 
@@ -42,4 +47,11 @@ public class WelcomeActorView extends ActorView {
         return new HorizontalLayout();
     }
 
+    public void setUIContentToRegisterActorView() {
+        getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
+    }
+
+    public void setUIContentToLoginActorView() {
+        getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+    }
 }

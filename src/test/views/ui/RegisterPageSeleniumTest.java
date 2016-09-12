@@ -12,10 +12,12 @@ public class RegisterPageSeleniumTest extends SeleniumTest {
     public void testRegister(String username, String password, String fullname) throws Exception {
         start();
         clickRegister();
+        clickRegister();
         fillUsername(username);
         fillPassword(password);
         fillPasswordConfirmation(password);
         fillFullname(fullname);
+        clickRegister();
         clickRegister();
         stop();
     }
@@ -24,10 +26,12 @@ public class RegisterPageSeleniumTest extends SeleniumTest {
     public void testInvalidRegister(String username, String password, String fullname) throws Exception {
         start();
         clickRegister();
+        clickRegister();
         fillUsername(username);
         fillPassword(password);
         fillPasswordConfirmation(password);
         fillFullname(fullname);
+        clickRegister();
         clickRegister();
         stop();
     }

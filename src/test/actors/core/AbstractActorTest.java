@@ -24,7 +24,7 @@ public abstract class AbstractActorTest {
 
     @BeforeMethod
     public void setUp() {
-        actorSystem = ActorSystem.create("TestActorSystem");
+        actorSystem = ActorSystem.create(ActorSystems.ACTOR_SYSTEM.getAlias());
         deleteDatabase();
     }
 

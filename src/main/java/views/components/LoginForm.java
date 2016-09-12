@@ -1,10 +1,12 @@
 package views.components;
 
+import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import views.actors.LoginActorView;
 import views.actors.StyleClassNames;
 import views.components.validators.PasswordValidator;
 
@@ -26,6 +28,8 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
         super(actor);
         initEmailField();
         initPasswordField();
+        emailField.addValueChangeListener(this);
+        passwordField.addValueChangeListener(this);
         addComponents(emailField, passwordField);
     }
 
@@ -86,7 +90,15 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
     public void valueChange(Property.ValueChangeEvent event) {
         try {
             validate();
+            if(getParent() instanceof LoginActorView) {
+                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).setEnabled(true);
+                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).addStyleName(StyleClassNames.ENABLED);
+            }
         } catch (InvalidValueException ivx) {
+            if(getParent() instanceof LoginActorView) {
+                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).setEnabled(false);
+                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).removeStyleName(StyleClassNames.ENABLED);
+            }
         }
     }
 }
