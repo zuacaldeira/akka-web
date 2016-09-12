@@ -1,9 +1,6 @@
 package actors.core;
 
-import actors.core.exceptions.IllegalLoginException;
-import actors.core.exceptions.MultipleRegistrationException;
-import actors.core.exceptions.NoSuchRegistrationException;
-import actors.core.exceptions.UnexpectedException;
+import actors.core.exceptions.*;
 import actors.messages.AkkaMessages;
 import actors.messages.LoginMessage;
 import graphs.Neo4jQueryFactory;
@@ -11,6 +8,7 @@ import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
 import org.neo4j.ogm.session.Session;
+import views.actors.LoginActorView;
 
 import java.util.Collections;
 
@@ -19,8 +17,13 @@ import java.util.Collections;
  */
 public class LoginActor extends MVCUntypedActor {
 
+    private LoginActorView view;
+
     @Override
     public void onReceive(Object message) throws Throwable {
+        if(message instanceof LoginActorView) {
+            this.view = (LoginActorView) message;
+        }
         if( message instanceof LoginMessage) {
             login((LoginMessage) message);
         }
@@ -46,10 +49,11 @@ public class LoginActor extends MVCUntypedActor {
         createUser(session, registration);
         // Notifies the user
         acknowledgeSender(AkkaMessages.DONE);
+        view.getUI().getPage().setLocation("/user");
     }
 
-    private void acknowledgeSender(String done) {
-        getSender().tell(done, getSelf());
+    private void acknowledgeSender(String status) {
+        getSender().tell(status, getSelf());
     }
 
     private void createUser(Session session, Registration registration) {
@@ -64,7 +68,7 @@ public class LoginActor extends MVCUntypedActor {
             if(registration != null) {
                 return registration;
             } else {
-                ex = new NoSuchRegistrationException(message.getUsername());
+                ex = new UnregisteredUserException(message.getUsername());
                 getSender().tell(ex, getSelf());
                 throw ex;
             }
