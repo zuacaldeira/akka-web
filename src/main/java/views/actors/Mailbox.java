@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Created by zua on 29.08.16.
  */
-public class MessageView extends Button {
+public class Mailbox extends Button {
     private String message;
     private final ActorRef actor;
     private String name;
@@ -21,7 +21,7 @@ public class MessageView extends Button {
      * @param actor The actor able to receive the message
      * @param message The message
      */
-    public MessageView(ActorRef actor, String message) {
+    public Mailbox(ActorRef actor, String message) {
         this.message = message;
         this.actor = actor;
         setCaption(message);
@@ -44,11 +44,11 @@ public class MessageView extends Button {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof MessageView)) {
+        if (!(o instanceof Mailbox)) {
             return false;
         }
 
-        MessageView that = (MessageView) o;
+        Mailbox that = (Mailbox) o;
         return Objects.equals(message, that.message) &&
                 Objects.equals(actor, that.actor);
     }

@@ -88,19 +88,19 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         getMailboxes().addComponent(createMessage(message, enabled));
     }
 
-    public MessageView getMessage(String message) {
+    public Mailbox getMessage(String message) {
         int n = getMailboxes().getComponentCount();
         for(int i = 0; i < n; i++) {
-            MessageView messageView = (MessageView) getMailboxes().getComponent(i);
+            Mailbox messageView = (Mailbox) getMailboxes().getComponent(i);
             if(messageView.getMessage().equals(message)) {
-                return (MessageView) getMailboxes().getComponent(i);
+                return (Mailbox) getMailboxes().getComponent(i);
             }
         }
         return null;
     }
 
-    protected MessageView createMessage(String message, boolean enabled) {
-        MessageView mv = new MessageView(actorRef, message);
+    protected Mailbox createMessage(String message, boolean enabled) {
+        Mailbox mv = new Mailbox(actorRef, message);
         mv.addClickListener(this);
         mv.addStyleName(StyleClassNames.MESSAGE);
         mv.setId(message);
@@ -112,7 +112,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     }
 
     protected void addCancelButton() {
-        MessageView cancel = createMessage(AkkaMessages.CANCEL, true);
+        Mailbox cancel = createMessage(AkkaMessages.CANCEL, true);
         cancel.addStyleName(StyleClassNames.CANCEL);
         getMailboxes().addComponent(cancel, 0);
 

@@ -25,6 +25,17 @@ public abstract class MVCUntypedActor extends UntypedActor {
         log = Logging.getLogger(this);
     }
 
+    @Override
+    public void onReceive(Object message) {
+        log.info("Received message " + message);
+        if (message instanceof ActorView) {
+            view = (ActorView) message;
+        }
+        else {
+            unhandled(message);
+        }
+    }
+
     protected ActorRef createChildActor(Class<?> actorClass) {
         return getContext().actorOf(Props.create(actorClass), actorClass.getSimpleName());
     }
@@ -35,10 +46,6 @@ public abstract class MVCUntypedActor extends UntypedActor {
         } catch (Exception e) {
             throw new UnexpectedException("Problems creating a Neo4j Session", e);
         }
-    }
-
-    public void setView(ActorView view) {
-        this.view = view;
     }
 
     public ActorView getView() {

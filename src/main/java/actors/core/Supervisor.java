@@ -28,11 +28,13 @@ public class Supervisor extends MVCUntypedActor {
     }
 
     @Override
-    public void onReceive(Object o) {
-        if (o instanceof Props) {
-            getSender().tell(getContext().actorOf((Props) o), getSelf());
-        } else {
-            unhandled(o);
+    public void onReceive(Object message) {
+        log.info("Received message " + message);
+        if (message instanceof Props) {
+            getSender().tell(getContext().actorOf((Props) message), getSelf());
+        }
+        else {
+            super.onReceive(message);
         }
     }
 }
