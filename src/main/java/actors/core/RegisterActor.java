@@ -18,12 +18,12 @@ import java.util.Collections;
 public class RegisterActor extends MVCUntypedActor {
 
     @Override
-    public void onReceive(Object message) throws Throwable {
+    public void onReceive(Object message) {
         if( message instanceof RegisterMessage) {
             register((RegisterMessage) message);
         }
         else {
-            unhandled(message);
+            super.onReceive(message);
         }
     }
 
