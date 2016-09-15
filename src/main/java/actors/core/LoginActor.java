@@ -10,8 +10,6 @@ import graphs.Neo4jQueryFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
 import org.neo4j.ogm.session.Session;
-import views.actors.LoginActorView;
-import views.factories.ActorsViewFactory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,16 +21,12 @@ import java.util.List;
 public class LoginActor extends MVCUntypedActor {
 
     @Override
-    public void onReceive(Object message) throws Throwable {
-        if(message instanceof LoginActorView) {
-            super.setView((LoginActorView) message);
-            log.info("Recieved a view...");
-        }
-        else if( message instanceof LoginMessage) {
+    public void onReceive(Object message) {
+        if( message instanceof LoginMessage) {
             login((LoginMessage) message);
         }
         else {
-            unhandled(message);
+            super.onReceive(message);
         }
     }
 
@@ -54,17 +48,8 @@ public class LoginActor extends MVCUntypedActor {
             createUser(session, registration);
             // Notifies the user
             acknowledgeSender(AkkaMessages.DONE);
-            if(super.getView() != null) {
-                log.info("View == null? {}", getView() == null);
-                getView().getUI().getPage().setLocation("/user");
-            }
         } catch (RuntimeException e) {
-            log.info("Login failed ");
             acknowledgeSender("Login failed: " + e.getMessage());
-            if(getView() != null) {
-                log.info("View == null? {}", getView() == null);
-                getView().getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
-            }
             throw e;
         }
     }

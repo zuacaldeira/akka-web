@@ -71,19 +71,16 @@ public class RegisterActorView extends ActorView {
     }
 
     private Object registerNewAccount() throws Exception {
-            Timeout timeout = new Timeout(Duration.create(1, "minute"));
-            RegisterMessage message = createRegisterMessage();
-            Future<Object> future = Patterns.ask(
-                    getActorRef(),
-                    message,
-                    timeout);
-            return Await.result(future, timeout.duration());
+        Timeout timeout = new Timeout(Duration.create(1, "minute"));
+        RegisterMessage message = createRegisterMessage();
+        Future<Object> future = Patterns.ask(getActorRef(), message, timeout);
+        return Await.result(future, timeout.duration());
     }
 
     private boolean isFormEdited() {
         return !registerForm.getEmailField().getValue().isEmpty()
-                || !registerForm.getPasswordField().getValue().isEmpty()
-                || !registerForm.getFullName().getValue().isEmpty();
+            || !registerForm.getPasswordField().getValue().isEmpty()
+            || !registerForm.getFullName().getValue().isEmpty();
     }
 
     private RegisterMessage createRegisterMessage() {

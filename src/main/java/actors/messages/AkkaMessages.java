@@ -16,6 +16,10 @@ public class AkkaMessages {
     public static final String DO_NOT_HANDLE = "Do not handle";
     public static final String SEND = "Send";
     public static final String ERROR = "Error";
+    public static final String RECEIVED = "Received";
+    public static final String PROCESSING = "Processing";
+    public static final String PROCESSED = "Processed";
+
 
     private AkkaMessages() {}
 

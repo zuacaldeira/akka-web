@@ -3,11 +3,11 @@ package views.actors;
 /**
  * Created by zua on 12.09.16.
  */
-public class MVCMessage {
+public class MVCMessage<T> {
     private final ActorView actorView;
-    private final Object message;
+    private final T message;
 
-    public MVCMessage(ActorView actorView, Object message) {
+    public MVCMessage(ActorView actorView, T message) {
         this.actorView = actorView;
         this.message = message;
     }
@@ -16,7 +16,7 @@ public class MVCMessage {
         return actorView;
     }
 
-    public Object getMessage() {
+    public T getMessage() {
         return message;
     }
 }

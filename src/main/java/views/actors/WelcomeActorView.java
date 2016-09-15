@@ -32,13 +32,13 @@ public class WelcomeActorView extends ActorView {
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessages.REGISTER)) {
             getLog().info("REGISTER button clicked");
-            getActorRef().tell(new MVCMessage(this, AkkaMessages.REGISTER), ActorRef.noSender());
-            //getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
+            getActorRef().tell(AkkaMessages.REGISTER, ActorRef.noSender());
+            getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
         }
         if (event.getButton().getCaption().equals(AkkaMessages.LOGIN)) {
             getLog().info("LOGIN button clicked");
-            getActorRef().tell(new MVCMessage(this, AkkaMessages.LOGIN), ActorRef.noSender());
-            //getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            getActorRef().tell(AkkaMessages.LOGIN, ActorRef.noSender());
+            getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
         }
     }
 
