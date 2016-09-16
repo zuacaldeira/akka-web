@@ -23,7 +23,7 @@ import javax.servlet.annotation.WebServlet;
  */
 @Theme("mytheme")
 @PreserveOnRefresh
-public class MyUI extends AkkaUI {
+public class WelcomeUI extends AkkaUI {
 
 
 
@@ -48,7 +48,7 @@ public class MyUI extends AkkaUI {
      * A servlet to process the application requests.
      */
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = WelcomeUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 
@@ -57,9 +57,9 @@ public class MyUI extends AkkaUI {
      */
     public static class MyUIActor extends MVCUntypedActor {
 
-        private final MyUI ui;
+        private final WelcomeUI ui;
 
-        public MyUIActor(MyUI ui) {
+        public MyUIActor(WelcomeUI ui) {
             this.ui = ui;
         }
 
