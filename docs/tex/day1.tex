@@ -1,0 +1,77 @@
+
+\subsection{Day 1:  \today}
+\label{sec:day-1}
+
+
+\paragraph{Problem summary.}
+The architecture on Section~\ref{sec:akkaria} describes a system with
+\akka actors integrated in a \vaadin web application.
+%
+Today's story shows a possible implementation of such
+integration. It's tasks are:
+
+\begin{enumerate}
+  % Preparation
+\item Preparation
+  \begin{enumerate}
+  \item Crate abstract class AkkaUI
+  \item Rename MyUI to WelcomeUI
+  \item Make WelcomeUI extend AkkaUI
+  \end{enumerate}
+  % Specification
+\item Specification
+  \begin{enumerate}
+  \item Determine the communication protocol in form of a session type
+    specification
+  \item Determine the client-side projection of the communication
+    protocol
+  \item Determine the server-side projection of the communication
+    protocol
+  \end{enumerate}
+  % Test and Implementation
+\item Test and Implementation
+  \begin{enumerate}
+  \item Create tests that asserts about the behaviour expected by the
+    specification, both on client and server sides. This tests should
+    verify that:
+    \begin{enumerate}
+    \item All expected messages are received
+    \item All messages are processed in the order predefined by the
+      session type
+    \item If termination is mandatory, assert about termination status
+    \end{enumerate}
+  \item Create WelcomeMVCActor, a subclass of MVCActor, as a
+    static\footnote{Why \code{static}} inner class of WelcomeUI. This
+    actor will implement the MVC pattern of this architecture:
+    \begin{enumerate}
+    \item Implement the communication protocol inside the
+      \code{onReceive()}, as asynchronously as possible.\footnote{Use
+        \code{tell} and \code{forward} actor communication patterns
+        and reserve the \code{ask} communication pattern for special
+        cases.}
+    \item Use a \emph{session type based finite state machine} to
+      guide communication dealing with message processing order.
+    \item Store incoming messages locally to decide how to proceed and
+      react to them when; messages make the fsm to advance in the
+      session type performing a state transition
+    \item Define server-side business actors as BusinessActors
+    \item Implement the server-side projection of the asynchronous
+      communication protocol in the \code{onReceive()} method.
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+\paragraph{Goals.}
+
+
+\paragraph{Tasks.}
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

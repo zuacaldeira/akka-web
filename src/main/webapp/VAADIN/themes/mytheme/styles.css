@@ -12980,12 +12980,16 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .actorName {
 	font-size: 200%;
-	color: white;
+	font-family: "Helvetica Neue", sans-serif;
 	text-align: center;
+	background-color: transparent;
+	opacity: 0.5;
 }
 
 .mytheme .welcomeActor {
 	margin-border: 50%;
+	background-color: white;
+	color: black;
 	font-weight: bold;
 }
 
@@ -13000,16 +13004,19 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .message {
-	background: transparent;
-	color: tomato;
+	background: darkseagreen;
+	color: dimgrey;
 	border: none;
 }
 
 .mytheme .enabled {
-	color: darkseagreen;
+	background: darkseagreen;
+	color: white;
+	border: none;
 }
 
-.mytheme .enabled {
+.mytheme .enabled .hover {
+	background-color: white;
 	color: darkseagreen;
 }
 

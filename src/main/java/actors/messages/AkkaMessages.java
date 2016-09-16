@@ -19,6 +19,7 @@ public class AkkaMessages {
     public static final String RECEIVED = "Received";
     public static final String PROCESSING = "Processing";
     public static final String PROCESSED = "Processed";
+    public static final String WELCOME = "Welcome";
 
 
     private AkkaMessages() {}

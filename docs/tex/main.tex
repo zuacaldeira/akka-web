@@ -1,18 +1,47 @@
 \documentclass{book}
 
-\title{MCV Actors\\An Akka Experiment}
-\author{Alexandre Zua Caldeira\\zuacaldeira@gmail.com}
-
+\input{macros}
+\input{frontend}
 
 \begin{document}
 
 
 \maketitle{}
 \tableofcontents{}
+% ------------------------------------------------------
+\chapter{Overview}
+\label{cha:overview}
+% ------------------------------------------------------
+\input{introduction}
+\input{java-tool-not-target}
+\input{finally-just-java}
+\input{mvc-actors}
+\input{actors-need-a-world}
 
 
 
+% ------------------------------------------------------
+\chapter{The Akka Experiment}
+\label{cha:akka-experiment}
+% ------------------------------------------------------
+\input{experiment}
+
+
+
+% ------------------------------------------------------
+% Bibliography
+\bibliography{main.bib}
+\bibliographystyle{plain}
+% ------------------------------------------------------
 \end{document}
 
 
 
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

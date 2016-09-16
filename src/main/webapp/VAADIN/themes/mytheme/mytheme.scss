@@ -28,8 +28,11 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
-$main-color: white;
-$secondary-color: black;
+$color-main: white;
+$color-secondary: black;
+$color-button: darkseagreen;
+$color-buttontext: $color-main;
+$font-actorname: "Helvetica Neue", sans-serif;
 
 //noinspection CssUnknownTarget
 @import "../valo/valo.scss";
@@ -47,17 +50,22 @@ $secondary-color: black;
     background-color: white;
     font-weight: bold;
   }
-
   .actorName {
     font-size: 200%;
-    color: $main-color;
+    font-family: $font-actorname;
     text-align: center;
+    background-color: transparent;
+    opacity: .5;
   }
+
 
   .welcomeActor {
     margin-border: 50%;
+    background-color: $color-main;
+    color: $color-secondary;
     font-weight: bold;
   }
+
 
   .loginActor {
     margin-border: 50%;
@@ -70,21 +78,26 @@ $secondary-color: black;
   }
 
   .message {
-    background: transparent;
-    color: tomato;
+    background: $color-button;
+    color: dimgrey;
     border: none;
   }
 
   .enabled {
+    background: $color-button;
+    color: $color-buttontext;
+    border: none;
+  }
+
+  .enabled .hover{
+    background-color: $color-main;
     color: darkseagreen;
   }
 
-  .enabled {
-    color: darkseagreen;
-  }
   .email {
     color: darkseagreen;
   }
+
   .password {
     color: darkseagreen;
   }
@@ -103,22 +116,22 @@ $secondary-color: black;
 */
   .email {
     background-color: transparent;
-    color: $main-color;
+    color: $color-main;
   }
 
   .password {
     background-color: transparent;;
-    color: $main-color;
+    color: $color-main;
   }
 
   .passwordConfirmation {
     background-color: transparent;
-    color: $main-color;
+    color: $color-main;
   }
 
   .fullname {
     background-color: transparent;
-    color: $main-color;
+    color: $color-main;
   }
 
   .cancel {
