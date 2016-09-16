@@ -8,10 +8,10 @@ import static org.testng.Assert.*;
 /**
  * Created by zua on 02.09.16.
  */
-public class MyUITest {
+public class WelcomeUITest {
     @Test
     public void testInit() throws Exception {
-        MyUI ui = new MyUI();
+        WelcomeUI ui = new WelcomeUI();
         assertNull(ui.getContent());
 
         ui.init(null);

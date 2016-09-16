@@ -7,11 +7,11 @@ import static org.testng.Assert.assertNotNull;
 /**
  * Created by zua on 02.09.16.
  */
-public class MyUIServletTest {
+public class WelcomeUIServletTest {
 
     @Test
     public void testServlet() {
-        MyUI.MyUIServlet servlet = new MyUI.MyUIServlet();
+        WelcomeUI.MyUIServlet servlet = new WelcomeUI.MyUIServlet();
         assertNotNull(servlet);
     }
 }
