@@ -11,9 +11,7 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     public void testWelcomePage() throws Exception {
         start();
         clickRegister();
-        clickRegister();
         clickCancel();
-        clickLogin();
         clickLogin();
         clickCancel();
         stop();
@@ -24,12 +22,10 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     public void testRegister() throws Exception {
         start();
         clickRegister();
-        clickRegister();
         fillUsername("username");
         fillPassword("password");
         fillPasswordConfirmation("password");
         fillFullname("fullname");
-        clickRegister();
         clickRegister();
         stop();
     }
@@ -40,10 +36,8 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
         testRegister();
         start();
         clickLogin();
-        clickLogin();
         fillUsername("username");
         fillPassword("password");
-        clickLogin();
         clickLogin();
         stop();
     }

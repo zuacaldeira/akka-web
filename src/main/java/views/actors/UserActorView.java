@@ -1,5 +1,6 @@
 package views.actors;
 
+import actors.core.UserActor;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 
@@ -13,12 +14,9 @@ public class UserActorView extends ActorView {
 
     /**
      * Basic actor view.
-     *
-     * @param actor    The underlying actor
-     * @param messages The messages the actor is supposed to process
      */
-    public UserActorView(Class<?> actor, List<String> messages) {
-        super(actor);
+    public UserActorView() {
+        super(UserActor.class);
     }
 
     @Override

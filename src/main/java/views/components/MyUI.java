@@ -1,13 +1,16 @@
 package views.components;
 
+import actors.core.MVCUntypedActor;
+import actors.messages.AkkaMessages;
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.UI;
-import views.actors.ActorView;
-import views.actors.WelcomeActorView;
+import views.factories.ActorsViewFactory;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -19,25 +22,26 @@ import javax.servlet.annotation.WebServlet;
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
-public class MyUI extends UI {
+@PreserveOnRefresh
+public class MyUI extends AkkaUI {
+
 
 
     private ActorRef actor;
+    private ActorRef mvcActor;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         checkCredentials(vaadinRequest);
-        setContent(new WelcomeActorView());
+        mvcActor = ActorSystem.create("WelcomeActorSystem").actorOf(Props.create(MyUIActor.class, this));
+        mvcActor.tell(AkkaMessages.WELCOME, mvcActor);
+        //setContent(new WelcomeActorView());
     }
 
     private void checkCredentials(VaadinRequest request) {
     }
 
-    public void updateUIContent(ActorView view) {
-        access( () -> {
-            setContent(view);
-        });
-    }
+
 
 
     /**
@@ -46,5 +50,41 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+    }
+
+    /**
+     * An actor to communicate with the actor system
+     */
+    public static class MyUIActor extends MVCUntypedActor {
+
+        private final MyUI ui;
+
+        public MyUIActor(MyUI ui) {
+            this.ui = ui;
+        }
+
+        @Override
+        public void onReceive(Object message) {
+            log.info("[{}] Enter actor", MyUIActor.class.getSimpleName());
+            System.out.println();
+            if(message instanceof String) {
+                String m = (String) message;
+                processMessage(m);
+            }
+        }
+
+        private void processMessage(String m) {
+            switch (m) {
+                case AkkaMessages.WELCOME:
+                    System.out.println("Received WELCOME");
+                    ui.access(() -> {
+                        ui.getSession().getLockInstance().lock();
+                        ui.setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+                        System.out.println("MyUIActor sets WelcomeActorView as UI content");
+                        ui.getSession().getLockInstance().unlock();
+                    });
+                    break;
+            }
+        }
     }
 }
