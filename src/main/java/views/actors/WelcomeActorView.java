@@ -26,6 +26,7 @@ public class WelcomeActorView extends ActorView {
         addMessage(AkkaMessages.LOGIN, true);
         setStyleName(StyleClassNames.WELCOME_ACTOR);
         setId(StyleClassNames.WELCOME_ACTOR);
+        setDebugId(StyleClassNames.WELCOME_ACTOR);
     }
 
     @Override
