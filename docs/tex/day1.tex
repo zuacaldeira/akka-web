@@ -1,80 +1,111 @@
 
-\subsection{Day 1:  \today}
+\section{Day 1:  \today}
 \label{sec:day-1}
 
 
-\paragraph{Problem summary.}
-The architecture on Section~\ref{sec:akkaria} describes a system with
+\subsection{Summary}
+\label{sec:overview1}
+ The architecture on Section~\ref{sec:akkaria} describes a system with
 \akka actors integrated in a \vaadin web application.
 %
 Today's story shows a possible implementation of such
-integration. It's tasks are:
+integration.
+  
+\subsection{Preparation}
+\label{sec:preparation}
 
-\begin{enumerate}
-  % Preparation
-\item Preparation
-  \begin{enumerate}
-  \item Create abstract class AkkaUI\\
-    \feature{feature/userUI/akkaUI}{done}
-  \item Rename MyUI to WelcomeUI\\
-    \feature{feature/userUI/akkaUI}{done}
-  \item Make WelcomeUI extend AkkaUI\\
-    \feature{feature/userUI/akkaUI}{done}
-  \item Create class UserUI extends AkkaUI\\
-    \feature{feature/userUI/akkaUI}{done}
-  \item Merge akkaUI with userUI\\
-    \feature{feature/userUI/akkaUI}{todo}
-  \end{enumerate}
-  % Specification
-\item Specification
-  \begin{enumerate}
-  \item Determine the communication protocol in form of a session type
-    specification\\
-    \feature{feature/userUI/specification}{todo}
-  \item Determine the client-side projection of the communication
-    protocol\\
-    \feature{feature/userUI/specification/client}{todo}
-  \item Determine the server-side projection of the communication
-    protocol\\
-    \feature{feature/userUI/specification/server}{todo}
-  \end{enumerate}
-  % Test and Implementation
-\item Test and Implementation
-  \begin{enumerate}
-  \item Create tests that asserts about the behaviour expected by the
-    specification, both on client and server sides. This tests should
-    verify that:
-    \begin{enumerate}
-    \item All expected messages are received
-    \item All messages are processed in the order predefined by the
-      session type
-    \item If termination is mandatory, assert about termination status
-    \end{enumerate}
-  \item Create WelcomeMVCActor, a subclass of MVCActor, as a
-    static\footnote{Why \code{static}} inner class of WelcomeUI. This
-    actor will implement the MVC pattern of this architecture:
-    \begin{enumerate}
-    \item Implement the communication protocol inside the
-      \code{onReceive()}, as asynchronously as possible.\footnote{Use
-        \code{tell} and \code{forward} actor communication patterns
-        and reserve the \code{ask} communication pattern for special
-        cases.}
-    \item Use a \emph{session type based finite state machine} to
-      guide communication dealing with message processing order.
-    \item Store incoming messages locally to decide how to proceed and
-      react to them when; messages make the fsm to advance in the
-      session type performing a state transition
-    \item Define server-side business actors as BusinessActors
-    \item Implement the server-side projection of the asynchronous
-      communication protocol in the \code{onReceive()} method.
-    \end{enumerate}
-  \end{enumerate}
-\end{enumerate}
+\begin{task}
+Create abstract class AkkaUI\\
+  \feature{feature/userUI/akkaUI}{done}
+\end{task}
+\begin{task}
+  Rename MyUI to WelcomeUI\\
+  \feature{feature/userUI/akkaUI}{done}
+\end{task}
+\begin{task}
+  Make WelcomeUI extend AkkaUI\\
+  \feature{feature/userUI/akkaUI}{done}
+\end{task}
+\begin{task}
+  Create class UserUI extends AkkaUI\\
+  \feature{feature/userUI/akkaUI}{done}
+\end{task}
+\begin{task}
+  Merge akkaUI with userUI\\
+  \feature{feature/userUI/akkaUI}{todo}
+\end{task}
+%
 
-\paragraph{Goals.}
+\subsection{Specification}
+\label{sec:specification}
 
+\begin{task}
+  Determine the communication protocol in form of a session type
+  specification\\
+  \feature{feature/task/specification}{todo}
+\end{task}
+\begin{task}
+  Determine the client-side projection of the communication
+  protocol\\
+  \feature{feature/task/specification/client}{todo}
+\end{task}
+\begin{task}
+  Determine the server-side projection of the communication
+  protocol\\
+  \feature{feature/task/specification/server}{todo}
+\end{task}
+%
 
-\paragraph{Tasks.}
+\subsection{Test}
+\label{sec:test}
+Create tests that asserts about the behaviour expected by the
+specification, both on client and server sides. This tests should
+verify that:
+\begin{task}
+  All expected messages are received\\
+  \feature{feature/task/test/}{todo}
+\end{task}
+\begin{task}
+  All messages are processed in the order predefined by the session
+  type
+\end{task}
+\begin{task}
+  If termination is mandatory, assert about termination status
+\end{task}
+
+\subsection{Implementation}
+\label{sec:implementation}
+\begin{task}
+  Create WelcomeMVCActor, a subclass of MVCActor, as a
+  static\footnote{Why \code{static}} inner class of WelcomeUI. This
+  actor will implement the MVC pattern of this architecture:
+  \begin{task}
+    Implement the communication protocol inside the
+    \code{onReceive()}, as asynchronously as possible.\footnote{Use
+      \code{tell} and \code{forward} actor communication patterns and
+      reserve the \code{ask} communication pattern for special cases.}
+  \end{task}
+  \begin{task}
+    Use a \emph{session type based finite state machine} to guide
+    communication dealing with message processing order.
+  \end{task}
+  \begin{task}
+    Store incoming messages locally to decide how to proceed and react
+    to them when; messages make the fsm to advance in the session type
+    performing a state transition
+  \end{task}
+  \begin{task}
+    Define server-side business actors as BusinessActors
+  \end{task}
+  \begin{task}
+    Implement the server-side projection of the asynchronous
+    communication protocol in the \code{onReceive()} method.
+  \end{task}
+\end{task}
+%
+
+\subsection{Evolution}
+\label{sec:evolution}
 
 
 
