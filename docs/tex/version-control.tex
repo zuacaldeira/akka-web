@@ -1,0 +1,51 @@
+
+\section{Version Control}
+\label{sec:version-control}
+
+
+\subsection{Branches}
+\label{sec:branches}
+
+Our repository contains the branches described in Table.
+%
+
+%
+% https://en.wikibooks.org/wiki/LaTeX/Tables#Basic_examples
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l|r}
+    \hline\hline
+    Branch & Description & Grants\\\hline\hline
+    \gitbranchOne{master} & Master branch of the akka-web
+                            repository & \gituser{admins}\\
+    \gitbranch{master}{development} & Development branch & \gituser{developers}\\
+    \gitbranch{master}{release} & Release branch & \gituser{ci}\\
+    \gitbranch{master}{production} & Production branch & \gituser{users}\\\hline
+  \end{tabular}  
+  \caption{Github repositories in the \akkaweb project.}
+\end{table}
+\label{table:branches}
+
+
+\subsubsection{Branch Naming Convention}
+\label{sec:branch-naming-convention}
+
+Let f be a named feature, and t a named task. Every feature and task
+is maintained in \github branches of the \akkaweb repository.
+%
+Branching follows a naming convention:
+\begin{itemize}
+\item A new feature f will be maintained in branch
+  \gitbranch{\gitbranch{development}{feature}}{f}
+\item A new task t will be maintained in
+  \gitbranch{development}{\gitbranch{feature}{\gitbranch{f}{t}}}
+\end{itemize}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
