@@ -2,13 +2,16 @@
 % MACROS.TEX
 % Macros used in "The Akka Experiment"
 % ------------------------------------------------------
+\input{macros-math}
+\input{macros-listings}
 \usepackage{xspace}
+\usepackage{graphics}
 
 % CODE
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\gitbranch}[1]{\texttt{branch: #1}}
 \newcommand{\status}[1]{\texttt{status: #1}}
-\newcommand{\feature}[2]{\gitbranch{#1}, \status{#2}}
+\newcommand{\feature}[2]{\gitbranch{#1}\\\status{#2}}
 
 % Registered marks and labels
 \newcommand{\java}[0]{\textit{Java}\xspace}
