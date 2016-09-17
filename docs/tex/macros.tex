@@ -5,18 +5,40 @@
 \input{macros-math}
 \input{macros-listings}
 \usepackage{xspace}
-\usepackage{graphics}
+\usepackage{hyperref}
+
+% From: http://tex.stackexchange.com/questions/173102/table-of-equations-like-list-of-figures
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tocloft}
+\usepackage[pdftex]{graphicx}
+\usepackage[english]{babel}
+%%gmedina solution
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+\setlength{\cftmyequationsnumwidth}{2.5em}% Width of equation number
+                                % in List of Equations
+
+
 
 % CODE
 \newcommand{\code}[1]{\texttt{#1}}
-\newcommand{\gitbranch}[1]{\texttt{branch: #1}}
+\newcommand{\gitbranchOne}[1]{\code{#1}}
+\newcommand{\gitbranch}[2]{\texttt{{#1}/{#2}}}
 \newcommand{\status}[1]{\texttt{status: #1}}
-\newcommand{\feature}[2]{\gitbranch{#1}\\\status{#2}}
+\newcommand{\gitbranchStatus}[2]{\gitbranch{#1}\\\status{#2}}
+\newcommand{\gituser}[1]{\texttt{#1}}
+\newcommand{\gitaccess}[2]{#1 (\gituser{#2})}
 
 % Registered marks and labels
 \newcommand{\java}[0]{\textit{Java}\xspace}
 \newcommand{\vaadin}[0]{\textit{Vaadin}\xspace}
 \newcommand{\akka}[0]{\textit{Akka}\xspace}
+\newcommand{\akkaweb}[0]{\textit{akka-web}\xspace}
+\newcommand{\github}[0]{\textit{github}\xspace}
 
 
 
