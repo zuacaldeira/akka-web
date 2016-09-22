@@ -33,6 +33,13 @@ public class ActorFormTest {
     @DataProvider(name = "equals")
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
+        ActorForm af1 = new ActorForm(actor) {
+            @Override
+            public void validate(Object value) throws InvalidValueException {
+
+            }
+        };
+
         return new Object[][]{
                 {new ActorForm(actor) {
                     @Override
@@ -44,7 +51,8 @@ public class ActorFormTest {
                     public void validate(Object value) throws InvalidValueException {
 
                     }
-                }}
+                }},
+                {af1, af1}
         };
     }
 

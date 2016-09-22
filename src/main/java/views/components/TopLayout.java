@@ -16,8 +16,4 @@ public abstract class TopLayout extends HorizontalLayout {
     public TopLayout() {
         setSizeFull();
     }
-
-    public Navigator getNavigator() {
-        return navigator;
-    }
 }

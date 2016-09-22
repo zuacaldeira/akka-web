@@ -25,4 +25,12 @@ public class LoginMessage {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        return "LoginMessage{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

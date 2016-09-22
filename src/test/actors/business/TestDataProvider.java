@@ -35,6 +35,23 @@ public class TestDataProvider {
         };
     }
 
+    @DataProvider(name = "validPasswords")
+    public static Object[][] getValidPasswords() {
+        return new Object[][] {
+                {"Pass1word"}
+        };
+    }
+
+    @DataProvider(name = "invalidPasswords")
+    public static Object[][] getInvalidPasswords() {
+        return new Object[][] {
+                {"pass1word"},
+                {"pAssword"},
+                {"PASS1WORD"},
+                {null}
+        };
+    }
+
     @DataProvider(name = "validLoginMessages")
     public static Object[][] validLoginMessages() {
         return new Object[][] {
