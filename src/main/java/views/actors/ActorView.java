@@ -1,11 +1,12 @@
 package views.actors;
 
-import actors.core.ActorSystems;
-import actors.messages.AkkaMessages;
+import actors.business.ActorSystems;
+import actors.messages.AkkaMessage;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.vaadin.ui.*;
+import views.components.AkkaUI;
 
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -73,7 +74,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     private Label getActorName(String name) {
         actorNameLabel = new Label(name);
         actorNameLabel.setSizeUndefined();
-        actorNameLabel.setStyleName(StyleClassNames.ACTOR_NAME);
+        actorNameLabel.setStyleName(StyleClassNames.ACTOR_NAME.getStyle());
         return  actorNameLabel;
     }
 
@@ -102,20 +103,19 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     protected Mailbox createMessage(String message, boolean enabled) {
         Mailbox mv = new Mailbox(actorRef, message);
         mv.addClickListener(this);
-        mv.addStyleName(StyleClassNames.MESSAGE);
+        mv.addStyleName(StyleClassNames.MESSAGE.getStyle());
         mv.setId(message);
         mv.setEnabled(enabled);
         if(enabled) {
-            mv.addStyleName(StyleClassNames.ENABLED);
+            mv.addStyleName(StyleClassNames.ENABLED.getStyle());
         }
         return mv;
     }
 
     protected void addCancelButton() {
-        Mailbox cancel = createMessage(AkkaMessages.CANCEL, true);
-        cancel.addStyleName(StyleClassNames.CANCEL);
+        Mailbox cancel = createMessage(AkkaMessage.CANCEL.name(), true);
         getMailboxes().addComponent(cancel, 0);
-
+        cancel.addClickListener(this);
     }
 
     public ActorRef getActorRef() {
@@ -130,6 +130,9 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         return log;
     }
 
+    public Component getActorContent() {
+        return actorContent;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -149,4 +152,8 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         return Objects.hash(actorRef.path());
     }
 
+
+    public AkkaUI getUI() {
+        return (AkkaUI) super.getUI();
+    }
 }

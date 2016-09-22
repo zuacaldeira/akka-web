@@ -40,6 +40,8 @@ public abstract class ActorForm extends MyForm {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), actor.path().name());
+        if(actor != null)
+            return Objects.hash(actor.path().name());
+        else return 0;
     }
 }

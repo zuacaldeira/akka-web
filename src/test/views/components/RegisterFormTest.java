@@ -1,7 +1,9 @@
 package views.components;
 
-import actors.core.LoginActor;
-import actors.core.RegisterActor;
+import actors.business.LoginActor;
+import actors.business.RegisterActor;
+import actors.business.TestDataProvider;
+import actors.messages.RegisterMessage;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -15,6 +17,16 @@ import static org.testng.Assert.*;
  * Created by zua on 01.09.16.
  */
 public class RegisterFormTest {
+
+    @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
+    public void testValidate(RegisterMessage message) {
+        RegisterForm form = new RegisterForm(null);
+        form.getEmailField().setValue(message.getEmail());
+        form.getPasswordField().setValue(message.getPassword());
+        form.getPasswordConfirmationField().setValue(message.getPassword());
+        form.getFullName().setValue(message.getFullname());
+        form.validate();
+    }
 
     @Test(dataProvider = "equals")
     public void testEquals(RegisterForm a, RegisterForm b) throws Exception {

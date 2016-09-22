@@ -17,7 +17,7 @@ public class WelcomeLayout extends TopLayout {
     public WelcomeLayout() {
         mvc = new WelcomeActorView();
         details = new Label("Welcome!");
-        details.setStyleName(StyleClassNames.ACTOR_NAME);
+        details.setStyleName(StyleClassNames.ACTOR_NAME.getStyle());
         addComponents(mvc, details);
         setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
     }

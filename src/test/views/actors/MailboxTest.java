@@ -1,8 +1,8 @@
 package views.actors;
 
-import actors.core.LoginActor;
-import actors.core.WelcomeActor;
-import actors.messages.AkkaMessages;
+import actors.business.LoginActor;
+import actors.messages.AkkaMessage;
+import actors.mvc.WelcomeMVCActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -18,8 +18,8 @@ import static org.testng.Assert.*;
 public class MailboxTest {
     @Test
     public void testStructure() throws Exception {
-        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
-        String content = AkkaMessages.REGISTER;
+        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeMVCActor.class), "MessageViewTestActor");
+        String content = AkkaMessage.REGISTER.name();
         Mailbox mv = new Mailbox(ref, content);
         assertEquals(ref, mv.getActor());
         assertEquals(content, mv.getMessage());
@@ -44,20 +44,20 @@ public class MailboxTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
         return new Object[][]{
-                {new Mailbox(actor, AkkaMessages.LOGIN), new Mailbox(actor, AkkaMessages.LOGIN)}
+                {new Mailbox(actor, AkkaMessage.LOGIN.name()), new Mailbox(actor, AkkaMessage.LOGIN.name())}
         };
     }
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
         ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
         return new Object[][]{
-                {new Mailbox(actor, AkkaMessages.LOGIN), new Mailbox(actor2, AkkaMessages.LOGIN)},
-                {new Mailbox(actor2, AkkaMessages.REGISTER), new Mailbox(actor, AkkaMessages.UNKNOWN)},
-                {new Mailbox(actor2, AkkaMessages.REGISTER), new User()}
+                {new Mailbox(actor, AkkaMessage.LOGIN.name()), new Mailbox(actor2, AkkaMessage.LOGIN.name())},
+                {new Mailbox(actor2, AkkaMessage.REGISTER.name()), new Mailbox(actor, AkkaMessage.UNKNOWN.name())},
+                {new Mailbox(actor2, AkkaMessage.REGISTER.name()), new User()}
         };
     }
 

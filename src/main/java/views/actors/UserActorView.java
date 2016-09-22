@@ -1,10 +1,9 @@
 package views.actors;
 
-import actors.core.UserActor;
+import actors.business.UserActor;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
-
-import java.util.List;
+import com.vaadin.ui.Label;
 
 /**
  * Created by zua on 08.09.16.
@@ -21,8 +20,10 @@ public class UserActorView extends ActorView {
 
     @Override
     protected Component createActorContent() {
-        return null;
+        return new Label("Welcome to Akkaria!");
     }
+
+
 
     @Override
     public void buttonClick(Button.ClickEvent event) {

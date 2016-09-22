@@ -1,7 +1,7 @@
 package views.components;
 
-import actors.core.LoginActor;
-import actors.core.WelcomeActor;
+import actors.business.LoginActor;
+import actors.mvc.WelcomeMVCActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -32,7 +32,7 @@ public class ActorFormTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
         return new Object[][]{
                 {new ActorForm(actor) {
                     @Override
@@ -50,7 +50,7 @@ public class ActorFormTest {
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
         ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
         ActorForm form1 = new ActorForm(actor) {@Override public void validate(Object value) throws InvalidValueException {}};
         ActorForm form2 = new ActorForm(actor2) {@Override public void validate(Object value) throws InvalidValueException {}};

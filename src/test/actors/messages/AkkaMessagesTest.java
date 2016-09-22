@@ -2,8 +2,7 @@ package actors.messages;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Created by zua on 31.08.16.
@@ -11,21 +10,13 @@ import static org.testng.Assert.assertTrue;
 public class AkkaMessagesTest {
 
     @Test
-    public void testWelcomeActorMessages() {
-        assertTrue(AkkaMessages.getWelcomeActorMessages().contains(AkkaMessages.REGISTER));
-        assertTrue(AkkaMessages.getWelcomeActorMessages().contains(AkkaMessages.LOGIN));
-    }
-
-    @Test
-    public void testRegisterActorMessages() {
-        assertTrue(AkkaMessages.getRegisterActorMessages().contains(AkkaMessages.REGISTER));
-        assertFalse(AkkaMessages.getRegisterActorMessages().contains(AkkaMessages.LOGIN));
-    }
-
-    @Test
-    public void testLoginActorMessages() {
-        assertFalse(AkkaMessages.getLoginActorMessages().contains(AkkaMessages.REGISTER));
-        assertTrue(AkkaMessages.getLoginActorMessages().contains(AkkaMessages.LOGIN));
+    public void testMessageDefined() {
+        assertNotNull(AkkaMessage.REGISTER);
+        assertNotNull(AkkaMessage.REGISTER_FAILED);
+        assertNotNull(AkkaMessage.REGISTER_INVALID);
+        assertNotNull(AkkaMessage.LOGIN);
+        assertNotNull(AkkaMessage.LOGIN_FAILED);
+        assertNotNull(AkkaMessage.LOGIN_INVALID);
     }
 
 }

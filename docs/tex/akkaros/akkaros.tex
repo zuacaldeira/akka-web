@@ -1,0 +1,224 @@
+
+\chapter{\emph{Akka}ros}
+\label{sec:akkaros}
+
+\section{\emph{Bakkaros}}
+\label{sec:bakkaros}
+
+\section{\emph{Vakkaros}}
+\label{sec:vaakkaros}
+
+The main entrance is controlled by a doorman, the
+\code{WelcomeMVCActor}. No one enters in the system without his
+acknowledgement. The behavior of this mvc actor is to redirect users
+to the registration hall or to the main access control zone that leads
+into Akkaria, where other actors will navigate and interact with the
+user through the system. These actors are the \code{RegisterMVCActor}
+and \code{LoginMVCActor}.
+%
+The session type $w$ is governed by the \code{WelcomeMVCActor}, and is
+a typical session type for a delegator, where upon message reception,
+possibly after some internal tasks, the delegator transfers user
+interaction to other actors, in this case, to the registration or
+login mvc actors, with session types $R$ and $S$, respectively.
+%
+\begin{align}
+  W = \branchST{register: R, login: L}
+\end{align}
+%
+\par
+%
+The finite automata representing this session type is depicted in
+Figure~\ref{fig:wmvca-finite-automata}.
+%
+\input{akkaros/fig-wmvca-finite-automata}
+%
+\par
+%
+The \code{RegisterMVCActor} governs things from state $r$. He is
+responsible to present the user a register form, collect it and try so
+persist it internally in the database.
+%
+Many things can go wrong during the registration process. The input
+data provided by the client, \emph{username, password, fullname} is
+bound to business rules they must observe. Also, there can be system
+failures or any other abnormal situations that may prevent the
+registration process to be completed. This means that we need a fault
+tolerance mechanism to react adequately to the circumstances.
+%
+A session type $r$ that includes fault tolerance is given below in
+equation \ref{eq:rmvca-register-validate}. Parameters are data that
+the user must provide. When receiving such a message, the register
+actor enters in a state $v_r$ where the operation is validated.
+\begin{align}
+  \begin{cases}
+    r &= \branchST{register(email, password, fullname): v_r}\\
+    v_r &= \selectST{SUCCESSFUL: l, INVALID: r, FAILED: w}
+  \end{cases}
+          \label{eq:rmvca-register-validate}
+\end{align}
+%
+Validation can result in three possible results: \code{SUCCESSFUL,
+  INVALID, FAILED}.
+%
+If the data provided from client violates any business rule, the
+registration will be denied. The actor sends an invalid message to the
+caller and resumes to it's initial state $r$.
+%
+If the data is valid, but a system error or exception occurs during
+data persistence in the database, failure will be reported to the
+caller and state resumed to $w$.
+%
+If successful, user interaction will progress to the login state,
+under supervision of the \code{LoginMVCActor}.
+%
+The finite automata representing this interaction is shown in
+Figure~\ref{fig:rmvca-finite-automata}.
+%
+\input{akkaros/fig-rmvca-finite-automata} This last automata
+introduces two new features: $v_r$, a select state marked by a
+diamond, and cycles introduced by the interaction of the verification
+state $v_r$ and other system states.
+%
+In circle states, actors waits for client messages, and on diamond
+states the actor communicates it's internal states to clients. Clients
+will then synchronize with the actor, providing data until the data is
+valid leading the actor to state $l$, or an error occurs bringing the
+actor into state $w$. States $l$ and $w$ are governed by other actors,
+so we change both state and host actor.
+%
+State $v_r$ is the state that implements fault tolerance: instead of
+terminating the interaction, client and actors behave safely even in
+the presence of failures, error or invalid data input.
+%
+\par
+%
+The \code{LoginMVCActor} behaves in a similar way
+(Figure~\ref{fig:lmvca-finite-automata}). In state $l$, the actor is
+expecting a $login$ message with the input data. When the client sends
+such message, the actor performs a state transition to $v_l$ where the
+result of the operation will be communicated back to the client for
+state synchronization. This happen in $v_l$, where fault tolerance
+mechanisms are implemented in cases of system failure or violation of
+business requirements. If no violation nor failure is detected, and
+user redirected to state $u$, the user area under the control of a new
+mvc actor: \code{UserMVCActor}, an \emph{avatar} in Akkaria.
+%
+\input{akkaros/fig-lmvca-finite-automata}
+%
+
+
+
+\subsection{WelcomeMVCActor}
+\label{sec:welcomemvcactor}
+
+
+
+
+\subsection{RegisterMVCActor}
+\label{sec:registermvcactor}
+
+
+
+
+\subsubsection{Creating the RegisterMVCActor}
+\label{sec:creat-regist}
+
+MVC actor live in the ui and provides a bridge to the backend actors,
+forming together a sort of bidirectional communication channel. Users
+and views only have direct access to MVC actors, not to business
+actors. MVC actors acts as controllers that will internally coordinate
+processes and resources, including business actors, to accomplish the
+requested task. The source code of \code{RegisterMVCActor} is listed
+in Listing~\ref{listing:register-mvc-actor}
+%
+To create a reference to this actor:
+% \lstinputlisting{akkaros/RegisterMVCActor.java}
+% \caption{A listing}
+\label{listing:register-mvc-actor}
+%
+
+
+
+
+
+
+
+The business rules or requirements for the registration process exist.
+\begin{itemize}
+\item Usernames are email valid addresses; users can register only
+  once. The existence of a registration is determined by the existence
+  of one and one only \code{Registration} relationship for an account
+  whose username matches the input \emph{username}. A username is
+  valid if respects:
+  \begin{align}
+    \forall r = (u, a) \in R,\ u \in U,\ a \in A: a.username \neq
+    username
+  \end{align}
+\item Passwords have to be strong and will be stored encrypted
+\item Full names are made of at least two names
+\end{itemize}
+%
+
+%
+After registration there will be new data units in the database. In
+particular:
+\begin{align}
+  \begin{cases}
+    \exists^1 u \in U:& u.fullname = fullname\\
+    \exists^1 a \in A:& a.username = username\\
+    \exists^1 r=(u',a') \in R:& a' = a, u' = u
+  \end{cases}
+\end{align}
+%
+\par
+%
+The behaviour of \code{WelcomeActor} is to coordinate the registration
+and login processes. This behaviour is represented by session type
+\begin{align}
+  \begin{cases}
+    W &=\ \branchST{register: R, login: L}\\
+    R &=\ \branchST{register(username,password,fullname): V_r}\\
+    V_r &=\ \selectST{true: L, false: R, error: W}\\
+    L &=\ \branchST{login(username, password): V_l}\\
+    V_l &=\ \selectST{true: U, false: L, error: W}
+  \end{cases}
+          \label{eq:session-type-wa}
+\end{align}
+%
+
+%
+In this example, in $Welcome$ state the actor offers two services,
+$register$ and $login$. To access the service clients must send one of
+these messages. Exchanging this message will bring the communication
+into a new state, either $Register$ or $Login$.
+%
+In state $Register$ the actor expects a message wrapping user
+input. Input validation, business rule validation and error handling
+are reported back to the client for state synchronization
+($Validate Registration$).
+%
+If validation and operation were successful, we can go to the login
+state $Login$. Registered users can go directly to $Login$.
+%
+In the login state the actor expects a message wrapping the user
+username and password. Input validation, storage, and error are
+reported in state $Validate Login$. Upon successful login, the user
+can enter the gates of Akkaria in state $U$.
+%
+\input{akkaros/fig-sessiontype-wa}
+%
+\input{akkaros/fig-sessiontype-wa-norm}
+%
+\input{akkaros/fig-sessiontype-wa-norm-communication}
+%
+\input{akkaros/fig-sessiontype-wa-norm-dual}
+%
+% \input{akkaros/fig-sessiontype-wa-comm}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

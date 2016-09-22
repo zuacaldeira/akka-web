@@ -1,0 +1,79 @@
+\begin{figure}[h]
+  \centering
+\begin{tikzpicture}[node distance=1.3cm,>=stealth',bend angle=45,auto]
+
+  \tikzstyle{every node}=[circle]
+  \tikzstyle{branch}=[circle, draw, minimum size=8mm]
+  \tikzstyle{select}=[diamond, draw]
+  \tikzstyle{transition}=[->,shorten <=1pt,>=stealth’,semithick]
+  \tikzstyle{pre}=[<-,shorten <=1pt,semithick]
+  \tikzstyle{post}=[->,shorten >=1pt,>=stealth,semithick]
+  \tikzstyle{every label}=[red]
+
+  \begin{scope}
+    % First net
+\node (i)  at (0,0) [branch] {$\&$};
+\node (r)  [branch, right of=i] {$\&$};
+\node (vr) [select,right of=r] {$+$};
+\node (l)  [branch,right of=vr] {$\&$};
+\node (vl) [select,right of=l] {$+$};
+\node (u)  [branch,right of=vl] {$\&$};
+
+\path (i) edge[->, blue] (r);
+\path (r) edge[->, blue] (vr);
+\path (vr) edge[->, blue] (l);
+\path (l) edge[->, blue] (vl);
+\path (vl) edge[->, blue] (u);
+
+\draw[blue,    post] (i) .. controls (2.2,-1) .. (l);
+\draw[red,    post, dashed] (vr) .. controls (1.75,1) .. (i);
+\draw[yellow, post, dashed] (vr) .. controls (1.75,0.75) .. (r);
+\draw[red,    post, dashed] (vl) .. controls (3,2.2) and (2,2) .. (i);
+\draw[yellow, post, dashed] (vl) .. controls (4.25,.75) .. (l);
+
+  \end{scope}
+
+  \begin{scope}[yshift=6cm]
+    % Second net
+\node (i)  at (0,0) [select] {$+$};
+\node (r)  [select, right of=i] {$+$};
+\node (vr) [branch,right of=r] {$\&$};
+\node (l)  [select,right of=vr] {$+$};
+\node (vl) [branch,right of=l] {$\&$};
+\node (u)  [select,right of=vl] {$+$};
+
+\path (i) edge[->, blue] (r);
+\path (r) edge[->, blue] (vr);
+\path (vr) edge[->, blue] (l);
+\path (l) edge[->, blue] (vl);
+\path (vl) edge[->, blue] (u);
+
+\draw[blue,    post] (i) .. controls (2.2,-1) .. (l);
+\draw[red,    post, dashed] (vr) .. controls (1.75,1) .. (i);
+\draw[yellow, post, dashed] (vr) .. controls (1.75,0.75) .. (r);
+\draw[red,    post, dashed] (vl) .. controls (3,2.2) and (2,2) .. (i);
+\draw[yellow, post, dashed] (vl) .. controls (4.25,.75) .. (l);
+  \end{scope}
+
+  \begin{pgfonlayer}{background}
+    \filldraw [line width=4mm,join=round,black!10]
+;
+%      (I.north  -| R.east)  rectangle (w2.south  -| e1.west)
+%      (I'.north -| l1'.east) rectangle (w2'.south -| e1'.west);
+  \end{pgfonlayer}
+\end{tikzpicture}
+  \caption{\code{WelcomeActor} behavior described by a \emph{session type}.}
+  \label{fig:sessiontype-wa-norm}
+\end{figure}
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

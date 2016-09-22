@@ -1,0 +1,17 @@
+C: Client
+WA: WelcomeActorMVC, state: I
+RA: RegistrationActor
+LA: LoginActor
+
+C->WA: "register_init"
+WA->C: "register_init_done"
+C->RA: "RegisterMessage(username, password, fullname)"
+RA->C: "register_processing"
+RA->C: "register_done" | BusinessRuleViolation(m) | error(m)
+
+
+C->WA: "login_init"
+WA->C: "login_init_done"
+C->RA: "LoginMessage(username, password)"
+RA->C: "login_processing"
+RA->C: "login_done" | BusinessRuleViolation(m) | Error(m)

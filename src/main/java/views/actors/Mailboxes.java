@@ -13,8 +13,7 @@ public class Mailboxes extends HorizontalLayout {
         setSpacing(true);
     }
 
-    public void addMailbox(Mailbox mailbox) {
-        addComponent(mailbox);
-        mailbox.setSizeFull();
+    public Mailbox getMailbox(int i) {
+        return (Mailbox) getComponent(i);
     }
 }

@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.core.LoginActor;
+import actors.business.LoginActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;

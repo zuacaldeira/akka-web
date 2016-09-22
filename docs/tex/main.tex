@@ -1,36 +1,27 @@
 \documentclass[a4paper]{book}
 
-\input{macros}
-\input{frontend}
+\input{macros/macros}
+\input{frontend/frontend}
+
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.0em}
+%\renewcommand{\baselinestretch}{1.5}
 
 \begin{document}
-
-
 \maketitle{}
 \tableofcontents{}
 \listoffigures
 \listoftables
-\listequationsname{}
 % ------------------------------------------------------
-\part{Overview}
-\label{part:overview}
+%\part{The Akka Experiment}
+%\label{part:akka-experiment}
 % ------------------------------------------------------
-\input{introduction}
-\input{java-tool-not-target}
-\input{finally-just-java}
-\input{mvc-actors}
-\input{actors-need-a-world}
-
-
-
-% ------------------------------------------------------
-\part{The Akka Experiment}
-\label{part:akka-experiment}
-% ------------------------------------------------------
-\input{methodology}
-\input{devlog}
-
-
+\input{overview/introduction}
+\input{javices/javices}
+\input{akkaros/akkaros}
+%\input{akkaria/akkaria}
+%\input{method/methodology}
 
 % ------------------------------------------------------
 % Bibliography
