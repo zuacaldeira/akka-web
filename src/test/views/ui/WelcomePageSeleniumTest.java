@@ -1,5 +1,8 @@
 package views.ui;
 
+import actors.business.TestDataProvider;
+import actors.messages.LoginMessage;
+import actors.messages.RegisterMessage;
 import org.testng.annotations.Test;
 
 /**
@@ -18,26 +21,26 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     }
 
 
-    @Test
-    public void testRegister() throws Exception {
+    @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
+    public void testRegister(RegisterMessage message) throws Exception {
         start();
         clickRegister();
-        fillUsername("username");
-        fillPassword("password");
-        fillPasswordConfirmation("password");
-        fillFullname("fullname");
+        fillUsername(message.getEmail());
+        fillPassword(message.getPassword());
+        fillPasswordConfirmation(message.getPassword());
+        fillFullname(message.getFullname());
         clickRegister();
         stop();
     }
 
 
-    @Test
-    public void testLogin() throws Exception {
-        testRegister();
+    @Test(dataProvider = "validLoginMessages", dataProviderClass = TestDataProvider.class)
+    public void testLogin(LoginMessage message) throws Exception {
+        seed(message.getUsername(), message.getPassword());
         start();
         clickLogin();
-        fillUsername("username");
-        fillPassword("password");
+        fillUsername(message.getUsername());
+        fillPassword(message.getPassword());
         clickLogin();
         stop();
     }

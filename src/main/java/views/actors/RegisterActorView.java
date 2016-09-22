@@ -38,7 +38,9 @@ public class RegisterActorView extends ActorView {
     @Override
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(AkkaMessage.CANCEL.name())){
-            getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+            if(getUI() != null) {
+                getUI().setContent(ActorsViewFactory.getInstance().getWelcomeActorView());
+            }
             cleanRegisterForm();
         }
 
@@ -49,7 +51,9 @@ public class RegisterActorView extends ActorView {
 
         else if (event.getButton().getCaption().equals(AkkaMessage.REGISTER.name())) {
             registerNewAccount();
-            getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            if(getUI() != null) {
+                getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            }
         }
     }
 

@@ -33,6 +33,7 @@ public class WelcomeMVCActor extends MVCActor {
 
     private void login(LoginMessage message) {
         loginActor.forward(message, getContext());
+        loginActor.tell(message, getSelf());
     }
 
     private void register(RegisterMessage message) {

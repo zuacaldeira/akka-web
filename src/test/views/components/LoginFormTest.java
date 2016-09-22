@@ -45,8 +45,10 @@ public class LoginFormTest {
     @DataProvider(name = "equals")
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        LoginForm lf1 = new LoginForm(actor);
         return new Object[][]{
-            {new LoginForm(actor), new LoginForm(actor)}
+            {new LoginForm(actor), new LoginForm(actor)},
+                {lf1, lf1}
         };
     }
 }

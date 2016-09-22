@@ -11,7 +11,7 @@ public class PasswordValidator {
     private static final String containsDigit = "^.*\\d.*$";
 
     public boolean isValid(String username) {
-        return Pattern.compile(containsUpperCasePattern).matcher(username).matches()
+        return username != null && Pattern.compile(containsUpperCasePattern).matcher(username).matches()
                 && Pattern.compile(containsLowerCasePattern).matcher(username).matches()
                 && Pattern.compile(containsDigit).matcher(username).matches();
     }

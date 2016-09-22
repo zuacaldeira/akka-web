@@ -15,15 +15,8 @@ public class PasswordValidator implements Validator {
 
     @Override
     public void validate(Object value) throws InvalidValueException {
-        String prefix = message;
-        if(value == null) {
-            throw new InvalidValueException(prefix + "null");
-        }
-        else if(value.toString().isEmpty()) {
-            throw new InvalidValueException(prefix + "Password is empty");
-        }
-        else if(value.toString().length() < MIN_SIZE) {
-            throw new InvalidValueException(prefix + "Passwords must have at least " + MIN_SIZE);
+        if(!new actors.business.PasswordValidator().isValid((String) value)) {
+            throw new InvalidValueException((String)value);
         }
     }
 }
