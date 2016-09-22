@@ -1,6 +1,5 @@
 package views.components;
 
-import akka.actor.ActorRef;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -20,17 +19,16 @@ import javax.servlet.annotation.WebServlet;
 public class UserUI extends AkkaUI {
 
 
-    private ActorRef actor;
-
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         checkCredentials(vaadinRequest);
-        setContent(new UserActorView());
+        UserActorView userActorView = new UserActorView();
+        setMvcActor(userActorView.getActorRef());
+        setContent(userActorView);
     }
 
     private void checkCredentials(VaadinRequest request) {
     }
-
 
     /**
      * A servlet to process the application requests.

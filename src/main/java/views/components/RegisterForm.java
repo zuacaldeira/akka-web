@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.messages.AkkaMessages;
+import actors.messages.AkkaMessage;
 import akka.actor.ActorRef;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
@@ -36,25 +36,25 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         emailField.addValidator(new EmailValidator("Invalid email"));
         emailField.setRequired(true);
         emailField.setValidationVisible(true);
-        emailField.addStyleName(StyleClassNames.EMAIL);
+        emailField.addStyleName(StyleClassNames.EMAIL.getStyle());
 
         fullnameField = new TextField("Fullname");
         fullnameField.addValidator(new FullNameValidator("Invalid full name"));
         fullnameField.setRequired(true);
         fullnameField.setValidationVisible(true);
-        fullnameField.addStyleName(StyleClassNames.FULLNAME);
+        fullnameField.addStyleName(StyleClassNames.FULLNAME.getStyle());
 
         passwordField = new PasswordField("Password");
         passwordField.addValidator(new PasswordValidator("Invalid password"));
         passwordField.setRequired(true);
         passwordField.setValidationVisible(true);
-        passwordField.addStyleName(StyleClassNames.PASSWORD);
+        passwordField.addStyleName(StyleClassNames.PASSWORD.getStyle());
 
         passwordConfirmationField = new PasswordField("Confirmation");
         passwordConfirmationField.addValidator(new PasswordConfirmationValidator("Invalid password confirmation", passwordField));
         passwordConfirmationField.setRequired(true);
         passwordConfirmationField.setValidationVisible(true);
-        passwordConfirmationField.addStyleName(StyleClassNames.PASSWORD_CONFIRMATION);
+        passwordConfirmationField.addStyleName(StyleClassNames.PASSWORD_CONFIRMATION.getStyle());
 
         emailField.addValueChangeListener(this);
         fullnameField.addValueChangeListener(this);
@@ -126,16 +126,20 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         try {
             validate();
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).setEnabled(true);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).addStyleName(StyleClassNames.ENABLED);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).setEnabled(true);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
         catch (Exception e) {
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).setEnabled(false);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessages.REGISTER).removeStyleName(StyleClassNames.ENABLED);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).setEnabled(false);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).removeStyleName(StyleClassNames.ENABLED.getStyle());
 
             }
         }
+    }
+
+    public PasswordField getPasswordConfirmationField() {
+        return passwordConfirmationField;
     }
 }

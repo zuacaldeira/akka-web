@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.messages.AkkaMessages;
+import actors.messages.AkkaMessage;
 import akka.actor.ActorRef;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
@@ -37,14 +37,14 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
         emailField = new TextField("email");
         emailField.setRequired(true);
         emailField.addValidator(new EmailValidator("Invalid Email"));
-        emailField.setStyleName(StyleClassNames.EMAIL);
+        emailField.setStyleName(StyleClassNames.EMAIL.getStyle());
     }
 
     private void initPasswordField() {
         passwordField = new PasswordField("Password");
         passwordField.setRequired(true);
         passwordField.addValidator(new PasswordValidator("Invalid password"));
-        passwordField.setStyleName(StyleClassNames.PASSWORD);
+        passwordField.setStyleName(StyleClassNames.PASSWORD.getStyle());
     }
 
 
@@ -91,13 +91,13 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
         try {
             validate();
             if(getParent() instanceof LoginActorView) {
-                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).setEnabled(true);
-                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).addStyleName(StyleClassNames.ENABLED);
+                ((LoginActorView) getParent()).getMessage(AkkaMessage.LOGIN.name()).setEnabled(true);
+                ((LoginActorView) getParent()).getMessage(AkkaMessage.LOGIN.name()).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         } catch (InvalidValueException ivx) {
             if(getParent() instanceof LoginActorView) {
-                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).setEnabled(false);
-                ((LoginActorView) getParent()).getMessage(AkkaMessages.LOGIN).removeStyleName(StyleClassNames.ENABLED);
+                ((LoginActorView) getParent()).getMessage(AkkaMessage.LOGIN.name()).setEnabled(false);
+                ((LoginActorView) getParent()).getMessage(AkkaMessage.LOGIN.name()).removeStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
     }

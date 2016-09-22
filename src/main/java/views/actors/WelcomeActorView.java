@@ -1,7 +1,7 @@
 package views.actors;
 
-import actors.core.WelcomeActor;
-import actors.messages.AkkaMessages;
+import actors.messages.AkkaMessage;
+import actors.mvc.WelcomeMVCActor;
 import akka.actor.ActorRef;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -16,30 +16,34 @@ public class WelcomeActorView extends ActorView {
     public static final String NAME = "WelcomeActorView";
 
     /**
-     * Creates a view for the {@link WelcomeActor}.
+     * Creates a view for the {@link WelcomeMVCActor}.
      *
-     * @see {@link WelcomeActor}, {@link ActorView}.
+     * @see {@link WelcomeMVCActor}, {@link ActorView}.
      */
     public WelcomeActorView() {
-        super(WelcomeActor.class);
-        addMessage(AkkaMessages.REGISTER, true);
-        addMessage(AkkaMessages.LOGIN, true);
-        setStyleName(StyleClassNames.WELCOME_ACTOR);
-        setId(StyleClassNames.WELCOME_ACTOR);
-        setDebugId(StyleClassNames.WELCOME_ACTOR);
+        super(WelcomeMVCActor.class);
+        addMessage(AkkaMessage.REGISTER.name(), true);
+        addMessage(AkkaMessage.LOGIN.name(), true);
+        setStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
+        setId(StyleClassNames.WELCOME_ACTOR.getStyle());
+        setDebugId(StyleClassNames.WELCOME_ACTOR.getStyle());
     }
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessages.REGISTER)) {
+        if (event.getButton().getCaption().equals(AkkaMessage.REGISTER.name())) {
             getLog().info("REGISTER button clicked");
-            getActorRef().tell(AkkaMessages.REGISTER, ActorRef.noSender());
-            getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
+            if(getUI() != null) {
+                getActorRef().tell(AkkaMessage.REGISTER, ActorRef.noSender());
+                getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
+            }
         }
-        if (event.getButton().getCaption().equals(AkkaMessages.LOGIN)) {
+        if (event.getButton().getCaption().equals(AkkaMessage.LOGIN.name())) {
             getLog().info("LOGIN button clicked");
-            getActorRef().tell(AkkaMessages.LOGIN, ActorRef.noSender());
-            getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            if(getUI() != null) {
+                getActorRef().tell(AkkaMessage.LOGIN, ActorRef.noSender());
+                getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
+            }
         }
     }
 
@@ -48,11 +52,4 @@ public class WelcomeActorView extends ActorView {
         return new HorizontalLayout();
     }
 
-    public void setUIContentToRegisterActorView() {
-        getUI().setContent(ActorsViewFactory.getInstance().getRegisterActorView());
-    }
-
-    public void setUIContentToLoginActorView() {
-        getUI().setContent(ActorsViewFactory.getInstance().getLoginActorView());
-    }
 }

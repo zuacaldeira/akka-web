@@ -1,6 +1,6 @@
 package views.actors;
 
-import actors.core.WelcomeActor;
+import actors.mvc.WelcomeMVCActor;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import org.testng.annotations.DataProvider;
@@ -24,8 +24,8 @@ public class ActorViewTest {
     }
 
     @DataProvider(name = "equals")
-    public Object[][] equals() {
-        ActorView av1 = new ActorView(WelcomeActor.class) {
+    public Object[][] equalsView() {
+        ActorView av1 = new ActorView(WelcomeMVCActor.class) {
             @Override
             protected Component createActorContent() {
                 return null;
@@ -36,7 +36,7 @@ public class ActorViewTest {
 
             }
         };
-        ActorView av2 = new ActorView(WelcomeActor.class) {
+        ActorView av2 = new ActorView(WelcomeMVCActor.class) {
             @Override
             protected Component createActorContent() {
                 return null;

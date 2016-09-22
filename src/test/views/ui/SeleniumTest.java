@@ -1,6 +1,6 @@
 package views.ui;
 
-import actors.messages.AkkaMessages;
+import actors.messages.AkkaMessage;
 import graphs.Neo4jSessionFactory;
 import org.neo4j.ogm.session.Session;
 import org.openqa.selenium.By;
@@ -48,30 +48,23 @@ public abstract class SeleniumTest {
 
     protected void clickLogin() {
         getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE)),
-                AkkaMessages.LOGIN
+                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
+                AkkaMessage.LOGIN.name()
         ).click();
     }
 
     protected void clickCancel() {
         getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE)),
-                AkkaMessages.CANCEL
+                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
+                AkkaMessage.CANCEL.name()
         ).click();
     }
 
     protected void clickRegister() {
 
         getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE)),
-                AkkaMessages.REGISTER
-        ).click();
-    }
-
-    protected void clickSend() {
-        getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE)),
-                AkkaMessages.SEND
+                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
+                AkkaMessage.REGISTER.name()
         ).click();
     }
 
@@ -87,19 +80,19 @@ public abstract class SeleniumTest {
     }
 
     protected void fillUsername(String username) {
-        fill(StyleClassNames.EMAIL, username);
+        fill(StyleClassNames.EMAIL.getStyle(), username);
     }
 
     protected void fillPassword(String password) {
-        fill(StyleClassNames.PASSWORD, password);
+        fill(StyleClassNames.PASSWORD.getStyle(), password);
     }
 
     protected void fillPasswordConfirmation(String password) {
-        fill(StyleClassNames.PASSWORD_CONFIRMATION, password);
+        fill(StyleClassNames.PASSWORD_CONFIRMATION.getStyle(), password);
     }
 
     protected void fillFullname(String fullname) {
-        fill(StyleClassNames.FULLNAME, fullname);
+        fill(StyleClassNames.FULLNAME.getStyle(), fullname);
     }
 
     private void fill(String style, String username) {

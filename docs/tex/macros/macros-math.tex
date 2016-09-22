@@ -1,0 +1,35 @@
+% ------------------------------------------------------
+% MACROS-MATH.TEX
+% Macros for mathematical entities like theorems environment,
+% greek symbols and others, used in "The Akka Experiment"
+% ------------------------------------------------------
+
+\usepackage{amsmath, amssymb, amsthm}
+
+
+% Theorem styles
+
+\theoremstyle{definition}
+\newtheorem{feature}{Feature}[chapter]
+\newtheorem{task}{Task}[feature]
+
+
+\newcommand{\pair}[2]{$(${#1}, {#2}$)$}
+\newcommand{\intervalOpen}[0]{$[$}
+\newcommand{\intervalClose}[0]{$]$}
+\newcommand{\interval}[2]{\intervalOpen{#1}, {#2}\intervalClose}
+%
+\newcommand{\setOpen}[0]{$\{$}
+\newcommand{\setClose}[0]{$\}$}
+\newcommand{\set}[2]{\setOpen{#1}, {#2}\setClose}
+%
+\newcommand{\branchST}[1]{\& \{#1\}}
+\newcommand{\selectST}[1]{+ \langle #1 \rangle}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

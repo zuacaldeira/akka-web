@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Created by zua on 29.08.16.
  */
-public class Mailbox extends Button {
+public class Mailbox extends Button implements Button.ClickListener {
     private String message;
     private final ActorRef actor;
     private String name;
@@ -56,5 +56,10 @@ public class Mailbox extends Button {
     @Override
     public int hashCode() {
         return Objects.hash(message, actor);
+    }
+
+    @Override
+    public void buttonClick(ClickEvent event) {
+
     }
 }

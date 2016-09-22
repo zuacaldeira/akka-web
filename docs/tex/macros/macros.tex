@@ -1,0 +1,60 @@
+% ------------------------------------------------------
+% MACROS.TEX
+% Macros used in "The Akka Experiment"
+% ------------------------------------------------------
+
+\usepackage{subfigure}
+\usepackage{xspace}
+\usepackage{hyperref}
+% From: http://tex.stackexchange.com/questions/173102/table-of-equations-like-list-of-figures
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{tocloft}
+\usepackage[pdftex]{graphicx}
+\usepackage[english]{babel}
+
+\usepackage[version=0.96]{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
+
+
+
+
+
+\input{macros/macros-math}
+\input{macros/macros-listings}
+
+
+
+
+% CODE
+\newcommand{\code}[1]{\texttt{#1}\xspace}
+\newcommand{\gitbranchOne}[1]{\code{#1}}
+\newcommand{\gitbranch}[2]{\texttt{{#1}/{#2}}}
+\newcommand{\status}[1]{\texttt{status: #1}}
+\newcommand{\gitbranchStatus}[2]{\gitbranch{#1}\\\status{#2}}
+\newcommand{\gituser}[1]{\texttt{#1}}
+\newcommand{\gitaccess}[2]{#1 (\gituser{#2})}
+
+% Registered marks and labels
+\newcommand{\tech}[1]{\textbf{#1}\xspace}
+\newcommand{\java}[0]{\tech{Java}\xspace}
+\newcommand{\vaadin}[0]{\tech{Vaadin}\xspace}
+\newcommand{\akka}[0]{\tech{Akka}\xspace}
+\newcommand{\akkaweb}[0]{\tech{akka-web}\xspace}
+\newcommand{\github}[0]{\tech{github}\xspace}
+\newcommand{\javice}[0]{\tech{javice}}
+
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

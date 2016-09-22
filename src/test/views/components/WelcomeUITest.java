@@ -13,9 +13,11 @@ public class WelcomeUITest {
     public void testInit() throws Exception {
         WelcomeUI ui = new WelcomeUI();
         assertNull(ui.getContent());
+        assertNull(ui.getMVCActor());
 
         ui.init(null);
         assertNotNull(ui.getContent());
+        assertNotNull(ui.getMVCActor());
 
         Component content = new WelcomeLayout();
         assertNotEquals(content, ui.getContent());
@@ -24,6 +26,11 @@ public class WelcomeUITest {
         assertEquals(content, ui.getContent());
     }
 
+    @Test
+    public void testCreateServlet() throws Exception {
+        WelcomeUI.MyUIServlet servlet = new WelcomeUI.MyUIServlet();
+        assertNotNull(servlet);
+    }
 
 
 }

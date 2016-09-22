@@ -1,0 +1,92 @@
+%
+\begin{figure}[h]
+  \centering
+  % Subfigure 1
+  \begin{subfigure}
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend
+      angle=45,auto]
+
+      \tikzstyle{every node}=[circle]%
+      \tikzstyle{every label}=[red]%
+
+      \tikzstyle{branch}=[circle, draw]%
+      \tikzstyle{select}=[diamond, draw]%
+      \tikzstyle{pre}=[<-,shorten <=1pt,semithick]%
+      \tikzstyle{post}=[->,shorten >=1pt,>=stealth,semithick]%
+
+      \begin{scope}
+        % First net
+
+        \node (welcome) at (1,2) [branch, gray] {\small{$w$}};%
+        \node (register) at (0,0) [branch] {$r$};%
+        \node (login) at (2,0) [branch, gray] {$l$};%
+
+        \path (welcome) edge[post] (register);%
+        \path (welcome) edge[post] (login);%
+
+        \node (register) at (0,0) [branch] {\small{$r$}};%
+        \node (validate) at (0,-2) [select] {$v_r$};%
+        \node (login) at (-1,-4) [branch, gray] {$l$};%
+        \node (welcome) at (1,-4) [branch, gray] {$w$};%
+
+        \path (register) edge[post, bend right] (validate);%
+        \path (validate) edge[post] (login);%
+        \path (validate) edge[post, bend right] (register);%
+        \path (validate) edge[post] (welcome);%
+        \path (-1, 0) edge[post] (register);%
+      \end{scope}
+
+    \end{tikzpicture}
+    % \caption{\code{RegisterMVCActor} finite automata}
+    \label{fig:rmvca-finite-automata-normal}
+  \end{subfigure}
+  % Subfigure 2
+  \begin{subfigure}
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm,>=stealth',bend
+      angle=45,auto]
+
+      \tikzstyle{every node}=[circle]%
+      \tikzstyle{every label}=[red]%
+
+      \tikzstyle{branch}=[circle, draw]%
+      \tikzstyle{select}=[diamond, draw]%
+      \tikzstyle{pre}=[<-,shorten <=1pt,semithick]%
+      \tikzstyle{post}=[->,shorten >=1pt,>=stealth,semithick]%
+
+      \begin{scope}
+        % First net
+
+        \node (welcome) at (1,2) [branch, gray] {\small{$w$}};%
+        \node (register) at (0,0) [branch] {$r$};%
+        \node (login) at (2,0) [branch, gray] {$l$};%
+
+        \path (welcome) edge[post] (register);%
+        \path (welcome) edge[post] (login);%
+
+        \node (register) at (0,0) [branch] {\small{$r$}};%
+        \node (validate) at (1,-2) [select] {$v_r$};%
+
+        \path (register) edge[post, bend right] (validate);%
+        \path (validate) edge[post] (login);%
+        \path (validate) edge[post] (register);%
+        \path (validate) edge[post] (welcome);%
+        \path (-1, 0) edge[post] (register);%
+      \end{scope}
+
+    \end{tikzpicture}
+    \caption{\code{RegisterMVCActor} normalized finite automata}
+    \label{fig:rmvca-finite-automata-normal}
+  \end{subfigure}
+
+  \label{fig:rmvca-finite-automata}
+  \caption{\code{RegisterMVCActor} session type.}
+\end{figure}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

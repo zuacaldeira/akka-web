@@ -3,19 +3,28 @@ package views.actors;
 /**
  * Created by zua on 05.09.16.
  */
-public class StyleClassNames {
-    public static final String WELCOME_ACTOR = "welcomeActor";
-    public static final String REGISTER_ACTOR = "registerActor";
-    public static final String LOGIN_ACTOR = "loginActor";
-    public static final String MESSAGE = "message";
-    public static final String REGISTER_MESSAGE = "registerMessage";
+public enum StyleClassNames {
+    WELCOME_ACTOR("welcomeActor"),
+    REGISTER_ACTOR("registerActor"),
+    LOGIN_ACTOR("loginActor"),
+    MESSAGE("message"),
+    REGISTER_MESSAGE("registerMessage"),
+    EMAIL("email"),
+    FULLNAME("fullname"),
+    PASSWORD("password"),
+    PASSWORD_CONFIRMATION("passwordConfirmation"),
+    ACTOR_NAME("actorName"),
+    REGISTER_FORM("registerForm"),
+    ENABLED("enabled"),
+    CANCEL("Camcel");
 
-    public static final String EMAIL = "email";
-    public static final String FULLNAME = "fullname";
-    public static final String PASSWORD = "password";
-    public static final String PASSWORD_CONFIRMATION = "passwordConfirmation";
-    public static final String ACTOR_NAME = "actorName";
-    public static final String REGISTER_FORM = "registerForm";
-    public static final String ENABLED = "enabled";
-    public static final String CANCEL = "Camcel";
+    private final String style;
+
+    private StyleClassNames(String style) {
+        this.style = style;
+    }
+
+    public String getStyle() {
+        return style;
+    }
 }
