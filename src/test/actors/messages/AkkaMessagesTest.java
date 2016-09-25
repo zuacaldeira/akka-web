@@ -15,8 +15,8 @@ public class AkkaMessagesTest {
         assertNotNull(AkkaMessage.REGISTER_FAILED);
         assertNotNull(AkkaMessage.REGISTER_INVALID);
         assertNotNull(AkkaMessage.LOGIN);
-        assertNotNull(AkkaMessage.LOGIN_FAILED);
-        assertNotNull(AkkaMessage.LOGIN_INVALID);
+        assertNotNull(AkkaMessage.FAILED);
+        assertNotNull(AkkaMessage.INVALID);
     }
 
 }

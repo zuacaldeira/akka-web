@@ -1,6 +1,7 @@
 package views.components;
 
 import org.testng.annotations.Test;
+import views.ui.WelcomeUI;
 
 import static org.testng.Assert.assertNotNull;
 

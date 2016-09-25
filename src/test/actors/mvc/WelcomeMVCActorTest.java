@@ -24,7 +24,7 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
     public void testUnhandled() {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef subject = createActor(WelcomeMVCActor.class);
+                ActorRef subject = createActor(WelcomeActor.class);
                 subject.tell("okidoki", getRef());
                 expectNoMsg();
             }
@@ -35,7 +35,7 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
     public void testControlMessages(AkkaMessage message) {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef subject = createActor(WelcomeMVCActor.class);
+                ActorRef subject = createActor(WelcomeActor.class);
                 subject.tell(message, getRef());
                 expectNoMsg();
             }
@@ -46,22 +46,22 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
     public void testRegisterMessages(RegisterMessage message) {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef subject = createActor(WelcomeMVCActor.class);
+                ActorRef subject = createActor(WelcomeActor.class);
                 Patterns.ask(subject, REGISTER, new Timeout(5, TimeUnit.SECONDS));
                 subject.tell(message, getRef());
-                expectMsgAnyOf(REGISTER_SUCCESSFUL);
+                expectNoMsg();
             }
         };
     }
 
     @Test(dataProvider = "validLoginMessages", dataProviderClass = TestDataProvider.class)
     public void testLoginMessages(LoginMessage message) {
-        final ActorRef subject = createActor(WelcomeMVCActor.class);
+        final ActorRef subject = createActor(WelcomeActor.class);
         new JavaTestKit(getActorSystem()) {
             {
                 subject.tell(REGISTER, getRef());
                 subject.tell(new RegisterMessage(message.getUsername(), message.getPassword(), "Full Name"), getRef());
-                expectMsgAnyOf(REGISTER_SUCCESSFUL);
+                expectNoMsg();
             }
         };
 
@@ -69,7 +69,7 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
             {
                 Patterns.ask(subject, LOGIN, new Timeout(5, TimeUnit.SECONDS));
                 subject.tell(message, getRef());
-                expectMsgAnyOf(LOGIN_SUCCESSFUL);
+                expectNoMsg();
             }
         };
     }
@@ -78,12 +78,12 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
     public void testInvalidLoginMessages(LoginMessage message) {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef subject = createActor(WelcomeMVCActor.class);
+                ActorRef subject = createActor(WelcomeActor.class);
                 Patterns.ask(subject, REGISTER, new Timeout(5, TimeUnit.SECONDS));
                 Patterns.ask(subject, new RegisterMessage(message.getUsername(), message.getPassword(), "Full Name"), new Timeout(5, TimeUnit.SECONDS));
                 Patterns.ask(subject, LOGIN, new Timeout(5, TimeUnit.SECONDS));
                 subject.tell(message, getRef());
-                expectMsgAnyOf(LOGIN_INVALID);
+                expectNoMsg();
             }
         };
     }

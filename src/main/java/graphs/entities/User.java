@@ -51,9 +51,6 @@ public class User extends Entity {
         if (!(o instanceof User)) {
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
         User user = (User) o;
         return Objects.equals(email, user.email) &&
                 Objects.equals(fullname, user.fullname);

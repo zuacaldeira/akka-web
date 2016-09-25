@@ -33,7 +33,11 @@ $color-secondary: black;
 $color-button: darkseagreen;
 $color-buttontext: $color-main;
 $font-actorname: "Helvetica Neue", sans-serif;
-
+$opacity-main: .85;
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 //noinspection CssUnknownTarget
 @import "../valo/valo.scss";
 
@@ -42,37 +46,45 @@ $font-actorname: "Helvetica Neue", sans-serif;
 
   // Insert your own theme rules here
   .v-ui {
+    // http://wmad.cs.vt.edu/images/code_background.png
     background-color: black;
+    background: url("akkaria.png") no-repeat;
   }
 
   .actor {
-    margin-border: 50%;
-    background-color: white;
+    border-radius: 50%;
+    color: $color-main;
     font-weight: bold;
   }
+
   .actorName {
     font-size: 200%;
     font-family: $font-actorname;
     text-align: center;
     background-color: transparent;
-    opacity: .5;
   }
 
 
   .welcomeActor {
-    margin-border: 50%;
-    background-color: $color-main;
-    color: $color-secondary;
+    // http://images.google.de/imgres?imgurl=http://wallpaper-hd.net/wp-content/uploads/2016/02/applying-wallpaper2.jpg&imgrefurl=http://wallpaper-hd.net/applying-wallpaper/&h=1080&w=1920&tbnid=3qxQCZ_oIb0x8M:&tbnh=90&tbnw=160&docid=vqmG2gYBaldVJM&client=firefox-b-ab&usg=__6Ag2Yx-SfagEnQCar5cl7z84i9U=&sa=X&ved=0ahUKEwit1qemkanPAhXKiCwKHZmHDpsQ9QEILDAB
+    //background: url("welcome.jpg");
+    border-radius: 50%;
+    background: transparent;
+    color: $color-main;
     font-weight: bold;
   }
 
 
   .loginActor {
+    // http://images.google.de/imgres?imgurl=http%3A%2F%2Fwww.bstlhj6.com%2Fdata%2Fout%2F109%2F4581177-keys-wallpapers.jpg&imgrefurl=http%3A%2F%2Fwww.bstlhj6.com%2Fkeys-wallpapers.html&h=1600&w=2560&tbnid=wjU70VmaAOOhnM%3A&docid=rcygo2_o7WWO4M&ei=zw3nV9SsLYybgAap_qLQAg&tbm=isch&client=firefox-b-ab&iact=rc&uact=3&dur=1566&page=0&start=0&ndsp=20&ved=0ahUKEwiU0PzTlanPAhWMDcAKHSm_CCoQMwgfKAMwAw&bih=694&biw=1280
+    //background: url("login.jpg");
     margin-border: 50%;
     font-weight: bold;
   }
 
   .registerActor {
+    // http://images.google.de/imgres?imgurl=http%3A%2F%2Fleadership-berlin.de%2Fwordpress%2Fwp-content%2Fuploads%2F2015%2F09%2FRotesRathaus_JanoszBalasz_horizontal.jpg&imgrefurl=http%3A%2F%2Fleadership-berlin.de%2Fbegegnungschor%2F&h=1490&w=2952&tbnid=VJVN72YcFk9oKM%3A&docid=4vpXw2lvRuKbtM&ei=ngznV6z5AYrGgAaJmIQI&tbm=isch&client=firefox-b-ab&iact=rc&uact=3&dur=2863&page=9&start=191&ndsp=16&ved=0ahUKEwiswJnClKnPAhUKI8AKHQkMAQE4yAEQMwgGKAQwBA&bih=694&biw=1280
+    //background: url("register.jpg");
     margin-border: 50%;
     font-weight: bold;
   }

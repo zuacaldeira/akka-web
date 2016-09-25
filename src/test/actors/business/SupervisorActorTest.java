@@ -1,6 +1,8 @@
 package actors.business;
 
-import actors.mvc.WelcomeMVCActor;
+import actors.mvc.LoginActor;
+import actors.mvc.RegisterActor;
+import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
@@ -52,7 +54,7 @@ public class SupervisorActorTest extends AbstractActorTest {
     @DataProvider(name = "dataProvider")
     public Object[][] dataProviderOnReceive() {
         return new Object[][]{
-                {Props.create(WelcomeMVCActor.class)},
+                {Props.create(WelcomeActor.class)},
                 {Props.create(RegisterActor.class)},
                 {Props.create(LoginActor.class)}
         };

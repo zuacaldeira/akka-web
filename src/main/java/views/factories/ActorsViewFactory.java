@@ -1,8 +1,9 @@
 package views.factories;
 
-import views.actors.LoginActorView;
-import views.actors.RegisterActorView;
-import views.actors.WelcomeActorView;
+import actors.mvc.MVCActor;
+import actors.mvc.UserActor;
+import actors.mvc.WelcomeActor;
+import actors.mvc.views.*;
 
 /**
  * Created by zua on 28.08.16.
@@ -29,4 +30,17 @@ public class ActorsViewFactory {
         return new WelcomeActorView();
     }
 
+    public ActorView getActorView(Class<? extends MVCActor> actorClass) {
+        if(WelcomeActor.class == actorClass) {
+            return getWelcomeActorView();
+        }
+        else if(UserActor.class == actorClass) {
+            return getUserActorView();
+        }
+        return null;
+    }
+
+    private UserActorView getUserActorView() {
+        return new UserActorView();
+    }
 }
