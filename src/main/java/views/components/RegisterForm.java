@@ -1,13 +1,12 @@
 package views.components;
 
 import actors.messages.AkkaMessage;
-import akka.actor.ActorRef;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
-import views.actors.RegisterActorView;
-import views.actors.StyleClassNames;
+import actors.mvc.views.RegisterActorView;
+import actors.mvc.views.StyleClassNames;
 import views.components.validators.FullNameValidator;
 import views.components.validators.PasswordConfirmationValidator;
 import views.components.validators.PasswordValidator;
@@ -27,10 +26,9 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
     /**
      * Registration process form.
      *
-     * @param actor The actor responsible to start the execution process
      */
-    public RegisterForm(ActorRef actor) {
-        super(actor);
+    public RegisterForm() {
+        super();
 
         emailField = new TextField("Email");
         emailField.addValidator(new EmailValidator("Invalid email"));
@@ -81,8 +79,7 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
             return false;
         }
         RegisterForm that = (RegisterForm) o;
-        return  Objects.equals(getActor(), that.getActor()) &&
-                Objects.equals(passwordField.getValue(), that.passwordField.getValue()) &&
+        return  Objects.equals(passwordField.getValue(), that.passwordField.getValue()) &&
                 Objects.equals(emailField.getValue(), that.emailField.getValue()) &&
                 Objects.equals(fullnameField.getValue(), that.fullnameField.getValue());
     }
@@ -126,14 +123,14 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         try {
             validate();
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).setEnabled(true);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).addStyleName(StyleClassNames.ENABLED.getStyle());
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).setEnabled(true);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
         catch (Exception e) {
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).setEnabled(false);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER.name()).removeStyleName(StyleClassNames.ENABLED.getStyle());
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).setEnabled(false);
+                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).removeStyleName(StyleClassNames.ENABLED.getStyle());
 
             }
         }

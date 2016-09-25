@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.business.LoginActor;
+import actors.mvc.LoginActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -17,7 +17,7 @@ public class LoginFormTest {
     @Test
     public void testClickCancel() throws Exception {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        LoginForm form = new LoginForm(actor);
+        LoginForm form = new LoginForm();
         form.getEmailField().setValue("email");
         assertEquals("email", form.getEmailField().getValue());
     }
@@ -25,7 +25,7 @@ public class LoginFormTest {
     @Test
     public void testClickSend() throws Exception {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        LoginForm form = new LoginForm(actor);
+        LoginForm form = new LoginForm();
         form.getEmailField().setValue("email");
         form.getPasswordField().setValue("password");
         assertEquals("email", form.getEmailField().getValue());
@@ -45,9 +45,9 @@ public class LoginFormTest {
     @DataProvider(name = "equals")
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        LoginForm lf1 = new LoginForm(actor);
+        LoginForm lf1 = new LoginForm();
         return new Object[][]{
-            {new LoginForm(actor), new LoginForm(actor)},
+            {new LoginForm(), new LoginForm()},
                 {lf1, lf1}
         };
     }

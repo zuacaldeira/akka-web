@@ -10,9 +10,11 @@ public enum AkkaMessage {
     REGISTER_FAILED,
     REGISTER_INVALID,
     LOGIN,
-    LOGIN_SUCCESSFUL,
-    LOGIN_FAILED,
-    LOGIN_INVALID,
+    SUCCESSFUL,
+    FAILED,
+    INVALID,
     CANCEL,
-    UNKNOWN
+    UNKNOWN,
+    ENTERING,
+    LEAVING
 }

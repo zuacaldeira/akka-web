@@ -1,8 +1,8 @@
 package actors.business;
 
 
-import actors.messages.AkkaMessage;
 import actors.messages.RegisterMessage;
+import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
 import org.testng.annotations.Test;
@@ -19,7 +19,7 @@ public class RegisterActorTest extends AbstractActorTest {
             {
                 ActorRef registerActor = createActor(RegisterActor.class);
                 registerActor.tell(message, getRef());
-                expectMsgAnyOf(AkkaMessage.REGISTER_SUCCESSFUL);
+                expectNoMsg();
             }
         };
     }
@@ -30,7 +30,7 @@ public class RegisterActorTest extends AbstractActorTest {
             {
                 ActorRef registerActor = createActor(RegisterActor.class);
                 registerActor.tell(message, getRef());
-                expectMsgAnyOf(AkkaMessage.REGISTER_INVALID);
+                expectNoMsg();
             }
         };
     }

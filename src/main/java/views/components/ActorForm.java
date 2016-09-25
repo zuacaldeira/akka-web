@@ -1,30 +1,18 @@
 package views.components;
 
-import akka.actor.ActorRef;
-
-import java.util.Objects;
-
 /**
  * Creates a form that has a relationship with an actor.
  *
  * Created by zua on 29.08.16.
  */
 public abstract class ActorForm extends MyForm {
-    private final ActorRef actor;
     /**
      * A form that as an underlying actor acting as a controller.
      *
-     * @param actor The controller actor.
      */
-    public ActorForm(ActorRef actor) {
-        this.actor = actor;
+    public ActorForm() {
         setSizeUndefined();
     }
-
-    public ActorRef getActor() {
-        return actor;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -33,15 +21,11 @@ public abstract class ActorForm extends MyForm {
         if (!(o instanceof ActorForm)) {
             return false;
         }
-
-        ActorForm that = (ActorForm) o;
-        return this.actor == that.actor;
+        return false;
     }
 
     @Override
     public int hashCode() {
-        if(actor != null)
-            return Objects.hash(actor.path().name());
-        else return 0;
+        return 37;
     }
 }

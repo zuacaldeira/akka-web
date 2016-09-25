@@ -1,9 +1,8 @@
 package views.components;
 
-import actors.business.LoginActor;
-import actors.business.RegisterActor;
 import actors.business.TestDataProvider;
 import actors.messages.RegisterMessage;
+import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
@@ -20,7 +19,7 @@ public class RegisterFormTest {
 
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testValidate(RegisterMessage message) {
-        RegisterForm form = new RegisterForm(null);
+        RegisterForm form = new RegisterForm();
         form.getEmailField().setValue(message.getEmail());
         form.getPasswordField().setValue(message.getPassword());
         form.getPasswordConfirmationField().setValue(message.getPassword());
@@ -46,20 +45,20 @@ public class RegisterFormTest {
     @DataProvider(name = "equals")
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(RegisterActor.class));
-        RegisterForm r1 = new RegisterForm(actor);
+        RegisterForm r1 = new RegisterForm();
         return new Object[][]{
-                {r1, new RegisterForm(actor)}, {r1, r1}
+                {r1, new RegisterForm()}, {r1, r1}
         };
     }
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(RegisterActor.class));
-        ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        RegisterForm r1 = new RegisterForm();
+        r1.getFullName().setValue("full");
         return new Object[][]{
-                {new RegisterForm(actor), new RegisterForm(actor2)},
-                {new RegisterForm(actor), null},
-                {new RegisterForm(actor), new User()}
+                {new RegisterForm(), r1},
+                {new RegisterForm(), null},
+                {new RegisterForm(), new User()}
         };
     }
 }

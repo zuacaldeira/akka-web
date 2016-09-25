@@ -1,7 +1,7 @@
 package actors.business;
 
 import actors.messages.AkkaMessage;
-import actors.mvc.WelcomeMVCActor;
+import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
 import org.testng.annotations.Test;
@@ -16,7 +16,7 @@ public class WelcomeActorTest extends AbstractActorTest {
     public void testRegister() {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef welcomeActor = createActor(WelcomeMVCActor.class);
+                ActorRef welcomeActor = createActor(WelcomeActor.class);
                 welcomeActor.tell(AkkaMessage.REGISTER, getRef());
                 expectNoMsg();
             }
@@ -27,7 +27,7 @@ public class WelcomeActorTest extends AbstractActorTest {
     public void testLogin() {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef welcomeActor = createActor(WelcomeMVCActor.class);
+                ActorRef welcomeActor = createActor(WelcomeActor.class);
                 welcomeActor.tell(AkkaMessage.LOGIN, getRef());
                 expectNoMsg();
             }
@@ -38,7 +38,7 @@ public class WelcomeActorTest extends AbstractActorTest {
     public void testUnhandled() {
         new JavaTestKit(getActorSystem()) {
             {
-                ActorRef welcomeActor = createActor(WelcomeMVCActor.class);
+                ActorRef welcomeActor = createActor(WelcomeActor.class);
                 welcomeActor.tell("DO_NOT_HANDLE", getRef());
                 expectNoMsg();
             }

@@ -1,7 +1,11 @@
 package views.components;
 
+import actors.mvc.WelcomeActor;
 import com.vaadin.server.VaadinRequest;
 import org.testng.annotations.Test;
+import views.ui.AkkaUI;
+import views.ui.UserUI;
+import views.ui.WelcomeUI;
 
 import static org.testng.Assert.assertTrue;
 
@@ -16,7 +20,7 @@ public class AkkaUITest {
      */
     @Test
     public void testKnownSubclasses() {
-        assertTrue((new AkkaUI() {
+        assertTrue((new AkkaUI(WelcomeActor.class, "TestWelcomeMVCActor") {
             @Override
             protected void init(VaadinRequest request) {
 

@@ -3,9 +3,10 @@ package views.ui;
 import actors.Neo4JDatabaseTest;
 import actors.messages.AkkaMessage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import views.actors.StyleClassNames;
+import actors.mvc.views.StyleClassNames;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -88,7 +89,7 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
 
     private void fill(String style, String username) {
         WebElement we = selenium.findElement(By.className(style));
-        we.sendKeys(username);
+        we.sendKeys(username, Keys.TAB);
     }
 
 

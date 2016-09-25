@@ -2,7 +2,7 @@ package views.factories;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import views.actors.ActorView;
+import actors.mvc.views.ActorView;
 
 import static org.testng.Assert.assertNotNull;
 
@@ -12,7 +12,7 @@ import static org.testng.Assert.assertNotNull;
 public class ActorsViewFactoryTest {
     @Test(dataProvider = "views")
     public void testFactoryMethods(ActorView view) throws Exception {
-        assertNotNull(view.getActorRef());
+        assertNotNull(view.getActorContent());
         assertNotNull(view.getMailboxes());
     }
 

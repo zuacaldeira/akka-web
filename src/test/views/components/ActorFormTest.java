@@ -1,10 +1,5 @@
 package views.components;
 
-import actors.business.LoginActor;
-import actors.mvc.WelcomeMVCActor;
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.actor.Props;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -32,8 +27,7 @@ public class ActorFormTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
-        ActorForm af1 = new ActorForm(actor) {
+        ActorForm af1 = new ActorForm() {
             @Override
             public void validate(Object value) throws InvalidValueException {
 
@@ -41,27 +35,14 @@ public class ActorFormTest {
         };
 
         return new Object[][]{
-                {new ActorForm(actor) {
-                    @Override
-                    public void validate(Object value) throws InvalidValueException {
-
-                    }
-                }, new ActorForm(actor) {
-                    @Override
-                    public void validate(Object value) throws InvalidValueException {
-
-                    }
-                }},
                 {af1, af1}
         };
     }
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeMVCActor.class));
-        ActorRef actor2 = ActorSystem.create().actorOf(Props.create(LoginActor.class));
-        ActorForm form1 = new ActorForm(actor) {@Override public void validate(Object value) throws InvalidValueException {}};
-        ActorForm form2 = new ActorForm(actor2) {@Override public void validate(Object value) throws InvalidValueException {}};
+        ActorForm form1 = new ActorForm() {@Override public void validate(Object value) throws InvalidValueException {}};
+        ActorForm form2 = new ActorForm() {@Override public void validate(Object value) throws InvalidValueException {}};
 
         return new Object[][]{
                 {form1, form2},

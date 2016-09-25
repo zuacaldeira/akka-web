@@ -13,7 +13,7 @@ public class LoginPageSeleniumTest extends SeleniumTest {
         start();
         clickLogin();
         fillUsername("username@gmail.com");
-        fillPassword("password");
+        fillPassword("Pas1sword");
         clickLogin();
         stop();
     }

@@ -1,5 +1,6 @@
 package actors.business;
 
+import actors.mvc.UserActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
