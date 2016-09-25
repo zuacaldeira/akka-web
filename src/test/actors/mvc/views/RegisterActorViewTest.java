@@ -26,7 +26,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
         assertNotNull(actorView.getMailbox(AkkaMessage.REGISTER));
-        assertNotNull(actorView.getMailbox(AkkaMessage.CANCEL));
+        assertNotNull(actorView.getMailbox(AkkaMessage.CANCELLED));
         assertEquals(2, actorView.getMailboxes().getComponentCount());
 
     }
@@ -86,7 +86,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(0));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.CANCEL.name());
+        assertEquals( mailbox.getMessage(), AkkaMessage.CANCELLED.name());
 
         mailbox.click();
 //        assertTrue((ui.getContent() instanceof WelcomeActorView));

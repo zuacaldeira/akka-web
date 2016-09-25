@@ -22,7 +22,8 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
 
     private void getWelcomePage() {
         selenium.get(PAGE);
-        selenium.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        selenium.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        selenium.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     }
 
     public synchronized void  start() {
@@ -36,7 +37,6 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
     }
 
     protected void clickLogin() {
-        getWelcomePage();
         getButton(
                 selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
                 AkkaMessage.LOGIN.name()
@@ -44,15 +44,13 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
     }
 
     protected void clickCancel() {
-        getWelcomePage();
         getButton(
                 selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
-                AkkaMessage.CANCEL.name()
+                AkkaMessage.CANCELLED.name()
         ).click();
     }
 
     protected void clickRegister() {
-        getWelcomePage();
         getButton(
                 selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
                 AkkaMessage.REGISTER.name()

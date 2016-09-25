@@ -4,13 +4,14 @@ import actors.business.AbstractActorTest;
 import actors.messages.AkkaMessage;
 import actors.messages.EnterAkkaria;
 import actors.messages.LeaveAkkaria;
-import akka.actor.ActorRef;
-import akka.testkit.JavaTestKit;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 import actors.mvc.views.ActorView;
 import actors.mvc.views.UserActorView;
 import actors.mvc.views.WelcomeActorView;
+import akka.actor.ActorRef;
+import akka.testkit.JavaTestKit;
+import org.mockito.Mockito;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import views.ui.AkkaUI;
 import views.ui.UserUI;
 import views.ui.WelcomeUI;
@@ -31,10 +32,11 @@ public class EnterAkkariaTest extends AbstractActorTest {
 
                 assertNull(ui.getContent());
 
+
                 mvcActor.tell(new EnterAkkaria(ui), getRef());
                 expectNoMsg();
-                mvcActor.tell(new LeaveAkkaria(ui, AkkaMessage.CANCEL), getRef());
-                expectNoMsg();
+                mvcActor.tell(new LeaveAkkaria(ui, AkkaMessage.CANCELLED), getRef());
+                expectMsgEquals(AkkaMessage.CANCELLED);
             }
         };
     }
@@ -48,8 +50,21 @@ public class EnterAkkariaTest extends AbstractActorTest {
     @DataProvider(name = "mvcActors")
     public Object[][] mvcActors() {
         return new Object[][] {
-                {new WelcomeUI(), WelcomeActor.class, new WelcomeActorView()},
-                {new UserUI(), UserActor.class, new UserActorView()}
+                {getMockedWelcomeUI(), WelcomeActor.class, new WelcomeActorView()},
+                {getMockedUserUI(), UserActor.class, new UserActorView()}
         };
+    }
+
+    private static WelcomeUI getMockedWelcomeUI() {
+        WelcomeUI ui = Mockito.mock(WelcomeUI.class);
+        Mockito.doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
+        return ui;
+    }
+
+
+    private static UserUI getMockedUserUI() {
+        UserUI ui = Mockito.mock(UserUI.class);
+        Mockito.doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
+        return ui;
     }
 }

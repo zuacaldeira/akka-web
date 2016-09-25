@@ -48,14 +48,19 @@ public abstract class MVCActor extends Supervisor {
             getSender().tell(AkkaMessage.SUCCESSFUL, getSelf());
         }
         else if(message.getStatus().equals(AkkaMessage.INVALID)) {
-            log.info("Leaving Akkaria:" + AkkaMessage.SUCCESSFUL.name());
+            log.info("Leaving Akkaria:" + AkkaMessage.INVALID.name());
             leaveAkkariaUIOnBusinessViolation();
             getSender().tell(AkkaMessage.INVALID, getSelf());
         }
-        else if(message.getStatus().equals(AkkaMessage.INVALID) || message.getStatus().equals(AkkaMessage.CANCEL)) {
-            log.info("Leaving Akkaria:" + AkkaMessage.SUCCESSFUL.name());
+        else if(message.getStatus().equals(AkkaMessage.FAILED)) {
+            log.info("Leaving Akkaria:" + AkkaMessage.FAILED.name());
             leaveAkkariaOnFailure();
             getSender().tell(AkkaMessage.FAILED, getSelf());
+        }
+        else if(message.getStatus().equals(AkkaMessage.CANCELLED)) {
+            log.info("Leaving Akkaria:" + AkkaMessage.CANCELLED.name());
+            leaveAkkariaOnFailure();
+            getSender().tell(AkkaMessage.CANCELLED, getSelf());
         }
     }
 

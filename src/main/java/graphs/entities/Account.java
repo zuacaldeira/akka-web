@@ -59,9 +59,7 @@ public class Account extends Entity {
         if (!(o instanceof Account)){
             return false;
         }
-        if (!super.equals(o)) {
-            return false;
-        }
+
         Account account = (Account) o;
         return Objects.equals(email, account.email) &&
                 Objects.equals(password, account.password);

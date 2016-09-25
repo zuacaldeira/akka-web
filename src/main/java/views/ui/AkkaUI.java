@@ -74,5 +74,7 @@ public abstract class AkkaUI extends UI implements ActorListener {
     }
 
 
-
+    public void setMVCActor(ActorRef mvcActor) {
+        this.mvcActor = mvcActor;
+    }
 }
