@@ -100,8 +100,8 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     }
 
     protected void addCancelButton() {
-        addMailbox(AkkaMessage.CANCEL, true);
-        getMailbox(AkkaMessage.CANCEL).addClickListener(this);
+        addMailbox(AkkaMessage.CANCELLED, true);
+        getMailbox(AkkaMessage.CANCELLED).addClickListener(this);
     }
 
     public Mailboxes getMailboxes() {

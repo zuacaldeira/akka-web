@@ -13,7 +13,7 @@ public enum AkkaMessage {
     SUCCESSFUL,
     FAILED,
     INVALID,
-    CANCEL,
+    CANCELLED,
     UNKNOWN,
     ENTERING,
     LEAVING

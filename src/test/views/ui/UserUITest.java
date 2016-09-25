@@ -1,8 +1,7 @@
 package views.ui;
 
+import actors.Neo4JDatabaseTest;
 import actors.messages.EnterAkkaria;
-import actors.mvc.UserActor;
-import akka.actor.ActorRef;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertNotNull;
@@ -10,16 +9,13 @@ import static org.testng.Assert.assertNotNull;
 /**
  * Created by zua on 22.09.16.
  */
-public class UserUITest {
+public class UserUITest extends Neo4JDatabaseTest {
 
 
-    @Test
-    public void testExistenceMVCActor() {
-        UserUI ui = new UserUI();
-        ActorRef ref = ui.createActorRef(UserActor.class, "UserActor");
-        ref.tell(new EnterAkkaria(ui), ui.getMVCActor());
+    @Test(dataProvider = "uis", dataProviderClass = AkkaMocks.class)
+    public void testExistenceMVCActor(AkkaUI ui) {
         assertNotNull(ui.getMVCActor());
-        assertNotNull(ui.getContent());
+        ui.getMVCActor().tell(new EnterAkkaria(ui), ui.getMVCActor());
     }
 
     @Test

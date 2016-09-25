@@ -44,7 +44,9 @@ public class LoginActor extends MVCActor{
 
     @Override
     protected void leaveAkkariaOnSuccess() {
-        getUi().jump("/user");
+        if(getUi() != null) {
+            getUi().jump("/user");
+        }
     }
 
 

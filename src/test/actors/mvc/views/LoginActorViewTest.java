@@ -7,6 +7,7 @@ import actors.messages.EnterAkkaria;
 import actors.messages.LoginMessage;
 import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
+import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.components.LoginForm;
 import views.factories.ActorsViewFactory;
@@ -29,7 +30,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
         assertNotNull(actorView.getMailbox(AkkaMessage.LOGIN));
-        assertNotNull(actorView.getMailbox(AkkaMessage.CANCEL));
+        assertNotNull(actorView.getMailbox(AkkaMessage.CANCELLED));
         assertEquals(2, actorView.getMailboxes().getComponentCount());
 
     }
@@ -60,7 +61,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
     public void testLoginEmptyForm() {
         LoginActorView actorView = ActorsViewFactory.getInstance().getLoginActorView();
         WelcomeUI ui = new WelcomeUI();
-        ui.setContent(actorView);
+        ui.setContent(new HorizontalLayout(actorView));
 
         LoginForm registerForm = (LoginForm) actorView.getActorContent();
         assertNotNull(registerForm);
@@ -87,7 +88,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(0));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.CANCEL.name());
+        assertEquals( mailbox.getMessage(), AkkaMessage.CANCELLED.name());
 
         mailbox.click();
     }

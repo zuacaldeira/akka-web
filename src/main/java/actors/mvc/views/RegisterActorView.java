@@ -35,9 +35,9 @@ public class RegisterActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessage.CANCEL.name())){
+        if (event.getButton().getCaption().equals(AkkaMessage.CANCELLED.name())){
             cleanRegisterForm();
-            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), AkkaMessage.CANCEL), getUI().getMVCActor());
+            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), AkkaMessage.CANCELLED), getUI().getMVCActor());
         }
 
         else if(!isFormEdited()) {
