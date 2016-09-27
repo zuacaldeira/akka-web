@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Created by zua on 29.08.16.
  */
-public class Mailbox extends Button implements Button.ClickListener {
+public class Mailbox extends Button  {
     private String message;
     private String name;
 
@@ -23,6 +23,7 @@ public class Mailbox extends Button implements Button.ClickListener {
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
         setStyleName(ValoTheme.BUTTON_SMALL);
+        addStyleName("primary");
         setId(message);
         setSizeFull();
     }
@@ -50,8 +51,4 @@ public class Mailbox extends Button implements Button.ClickListener {
         return Objects.hash(message);
     }
 
-    @Override
-    public void buttonClick(ClickEvent event) {
-
-    }
 }

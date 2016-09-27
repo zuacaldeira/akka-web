@@ -30,7 +30,7 @@ public class LoginMessage {
     public String toString() {
         return "LoginMessage{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + "???????" + '\'' +
                 '}';
     }
 }

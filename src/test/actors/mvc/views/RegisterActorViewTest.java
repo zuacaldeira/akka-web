@@ -2,12 +2,11 @@ package actors.mvc.views;
 
 import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.messages.RegisterMessage;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.components.RegisterForm;
-import views.factories.ActorsViewFactory;
 import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
@@ -25,8 +24,8 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
-        assertNotNull(actorView.getMailbox(AkkaMessage.REGISTER));
-        assertNotNull(actorView.getMailbox(AkkaMessage.CANCELLED));
+        assertNotNull(actorView.getMailbox(ControlMessage.REGISTER));
+        assertNotNull(actorView.getMailbox(ControlMessage.CANCELLED));
         assertEquals(2, actorView.getMailboxes().getComponentCount());
 
     }
@@ -47,7 +46,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(1));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.REGISTER.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.REGISTER.name());
 
         mailbox.click();
         //assertTrue((ui.getContent() instanceof LoginActorView));
@@ -64,7 +63,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
         assertNotNull(registerForm);
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(1));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.REGISTER.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.REGISTER.name());
 
         assertFalse(actorView.isFormEdited());
         mailbox.click();
@@ -86,7 +85,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(0));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.CANCELLED.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.CANCELLED.name());
 
         mailbox.click();
 //        assertTrue((ui.getContent() instanceof WelcomeActorView));

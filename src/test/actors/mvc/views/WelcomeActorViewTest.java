@@ -1,9 +1,8 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
-import views.factories.ActorsViewFactory;
 import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
@@ -22,8 +21,8 @@ public class WelcomeActorViewTest {
 
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
-        assertNotNull(actorView.getMessage(AkkaMessage.REGISTER));
-        assertNotNull(actorView.getMessage(AkkaMessage.LOGIN));
+        assertNotNull(actorView.getMessage(ControlMessage.REGISTER));
+        assertNotNull(actorView.getMessage(ControlMessage.LOGIN));
         assertEquals(2, actorView.getMailboxes().getComponentCount());
 
     }
@@ -36,7 +35,7 @@ public class WelcomeActorViewTest {
 
         assertTrue(wav.getActorContent() instanceof HorizontalLayout);
         assertEquals(wav.getMailboxes().getComponentCount(), 2);
-        wav.getMailbox(AkkaMessage.REGISTER).click();
+        wav.getMailbox(ControlMessage.REGISTER).click();
     }
 
     @Test
@@ -47,7 +46,7 @@ public class WelcomeActorViewTest {
 
         assertTrue(wav.getActorContent() instanceof HorizontalLayout);
         assertEquals(wav.getMailboxes().getComponentCount(), 2);
-        wav.getMailbox(AkkaMessage.LOGIN).click();
+        wav.getMailbox(ControlMessage.LOGIN).click();
     }
 
 }

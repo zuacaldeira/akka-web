@@ -1,6 +1,6 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import com.vaadin.ui.*;
 import views.ui.AkkaUI;
 
@@ -19,7 +19,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     private Label actorNameLabel;
     private Component actorContent;
     private Mailboxes mailboxes;
-    private Map<AkkaMessage, Mailbox> mailboxMap;
+    private Map<ControlMessage, Mailbox> mailboxMap;
 
 
     /**
@@ -81,7 +81,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         return mailboxes;
     }
 
-    protected void addMailbox(AkkaMessage message, boolean enabled) {
+    protected void addMailbox(ControlMessage message, boolean enabled) {
         Mailbox mailbox = createMessage(message.name(), enabled);
         mailboxMap.put(message, mailbox);
         getMailboxes().addComponent(mailbox);
@@ -100,8 +100,8 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     }
 
     protected void addCancelButton() {
-        addMailbox(AkkaMessage.CANCELLED, true);
-        getMailbox(AkkaMessage.CANCELLED).addClickListener(this);
+        addMailbox(ControlMessage.CANCELLED, true);
+        getMailbox(ControlMessage.CANCELLED).addClickListener(this);
     }
 
     public Mailboxes getMailboxes() {
@@ -138,11 +138,11 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         return (AkkaUI) super.getUI();
     }
 
-    public Mailbox getMailbox(AkkaMessage message) {
+    public Mailbox getMailbox(ControlMessage message) {
         return mailboxMap.get(message);
     }
 
-    public Mailbox getMessage(AkkaMessage message) {
+    public Mailbox getMessage(ControlMessage message) {
         return getMailbox(message);
     }
 

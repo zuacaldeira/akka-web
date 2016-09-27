@@ -3,8 +3,8 @@ package actors.mvc;
 import actors.business.LoginValidator;
 import actors.exceptions.InvalidLoginException;
 import actors.exceptions.UnexpectedException;
-import actors.messages.AkkaMessage;
-import actors.messages.EnterAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.EnterAkkaria;
 import actors.messages.LoginMessage;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
@@ -73,7 +73,7 @@ public class LoginActor extends MVCActor{
         leaveAkkariaOnSuccess();
     }
 
-    private void acknowledgeSender(AkkaMessage message) {
+    private void acknowledgeSender(ControlMessage message) {
         getSender().tell(message, getSelf());
     }
 

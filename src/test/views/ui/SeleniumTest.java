@@ -1,7 +1,7 @@
 package views.ui;
 
 import actors.Neo4JDatabaseTest;
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -22,7 +22,7 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
 
     private void getWelcomePage() {
         selenium.get(PAGE);
-        selenium.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        selenium.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         selenium.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     }
 
@@ -37,28 +37,30 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
     }
 
     protected void clickLogin() {
-        getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
-                AkkaMessage.LOGIN.name()
-        ).click();
+        String name = ControlMessage.LOGIN.name();
+        WebElement button = getButton(name);
+        click(button, name);
     }
 
     protected void clickCancel() {
-        getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
-                AkkaMessage.CANCELLED.name()
-        ).click();
+        String name = ControlMessage.CANCELLED.name();
+        WebElement button = getButton(name);
+        click(button, name);
     }
 
     protected void clickRegister() {
-        getButton(
-                selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle())),
-                AkkaMessage.REGISTER.name()
-        ).click();
+        String name = ControlMessage.REGISTER.name();
+        WebElement button = getButton(name);
+        click(button, name);
     }
 
-    protected WebElement getButton(final List<WebElement> elementsByClassName, final String name) {
-        System.out.println("0 - Searching for style: " + name);
+    private void click(WebElement button, String name) {
+        button.click();
+        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbb Clicked button: " + name);
+    }
+
+    protected WebElement getButton(final String name) {
+        List<WebElement> elementsByClassName = selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle()));
         for(WebElement e: elementsByClassName) {
             System.out.println("\t1 - Looking at: " + e.getText());
             if(e.getText().toLowerCase().contains(name.toLowerCase()) || name.toLowerCase().contains(e.getText().toLowerCase())) {

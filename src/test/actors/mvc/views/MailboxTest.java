@@ -1,6 +1,6 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -18,7 +18,7 @@ public class MailboxTest {
     @Test
     public void testStructure() throws Exception {
         ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
-        String content = AkkaMessage.REGISTER.name();
+        String content = ControlMessage.REGISTER.name();
         Mailbox mv = new Mailbox(content);
         assertEquals(content, mv.getMessage());
     }
@@ -44,16 +44,16 @@ public class MailboxTest {
     public Object[][] equals() {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
         return new Object[][]{
-                {new Mailbox(AkkaMessage.LOGIN.name()), new Mailbox(AkkaMessage.LOGIN.name())}
+                {new Mailbox(ControlMessage.LOGIN.name()), new Mailbox(ControlMessage.LOGIN.name())}
         };
     }
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
         return new Object[][]{
-                {new Mailbox(AkkaMessage.LOGIN.name()), new Mailbox(AkkaMessage.REGISTER.name())},
-                {new Mailbox(AkkaMessage.REGISTER.name()), new Mailbox(AkkaMessage.UNKNOWN.name())},
-                {new Mailbox(AkkaMessage.REGISTER.name()), new User()}
+                {new Mailbox(ControlMessage.LOGIN.name()), new Mailbox(ControlMessage.REGISTER.name())},
+                {new Mailbox(ControlMessage.REGISTER.name()), new Mailbox(ControlMessage.UNKNOWN.name())},
+                {new Mailbox(ControlMessage.REGISTER.name()), new User()}
         };
     }
 

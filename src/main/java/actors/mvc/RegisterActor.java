@@ -1,8 +1,8 @@
 package actors.mvc;
 
 import actors.business.RegistrationValidator;
-import actors.messages.AkkaMessage;
-import actors.messages.EnterAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.EnterAkkaria;
 import actors.messages.RegisterMessage;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
@@ -63,7 +63,7 @@ public class RegisterActor extends MVCActor {
         if(getUi() != null) {
             getUi().leave(getSelf());
         }
-        getContext().actorFor(getSelf().path().parent()).tell(AkkaMessage.LOGIN, getSelf());
+        getContext().actorFor(getSelf().path().parent()).tell(ControlMessage.LOGIN, getSelf());
     }
 
 

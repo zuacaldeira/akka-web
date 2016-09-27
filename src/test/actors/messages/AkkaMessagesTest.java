@@ -11,12 +11,10 @@ public class AkkaMessagesTest {
 
     @Test
     public void testMessageDefined() {
-        assertNotNull(AkkaMessage.REGISTER);
-        assertNotNull(AkkaMessage.REGISTER_FAILED);
-        assertNotNull(AkkaMessage.REGISTER_INVALID);
-        assertNotNull(AkkaMessage.LOGIN);
-        assertNotNull(AkkaMessage.FAILED);
-        assertNotNull(AkkaMessage.INVALID);
+        assertNotNull(ControlMessage.REGISTER);
+        assertNotNull(ControlMessage.LOGIN);
+        assertNotNull(ControlMessage.FAILED);
+        assertNotNull(ControlMessage.INVALID);
     }
 
 }

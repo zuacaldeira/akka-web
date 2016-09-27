@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
@@ -89,13 +89,13 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
             validate();
             if(getParent() != null && getParent() instanceof LoginActorView) {
                 LoginActorView parent = ((LoginActorView) getParent());
-                parent.getMailbox(AkkaMessage.LOGIN).setEnabled(true);
-                parent.getMailbox(AkkaMessage.LOGIN).addStyleName(StyleClassNames.ENABLED.getStyle());
+                parent.getMailbox(ControlMessage.LOGIN).setEnabled(true);
+                parent.getMailbox(ControlMessage.LOGIN).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         } catch (InvalidValueException ivx) {
             if(getParent() != null && getParent() instanceof LoginActorView) {
-                ((LoginActorView) getParent()).getMailbox(AkkaMessage.LOGIN).setEnabled(false);
-                ((LoginActorView) getParent()).getMailbox(AkkaMessage.LOGIN).removeStyleName(StyleClassNames.ENABLED.getStyle());
+                ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).setEnabled(false);
+                ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).removeStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
     }

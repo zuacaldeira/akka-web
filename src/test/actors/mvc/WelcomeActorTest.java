@@ -2,7 +2,7 @@ package actors.mvc;
 
 import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
 import actors.messages.RegisterMessage;
 import akka.actor.ActorRef;
@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static actors.messages.AkkaMessage.*;
+import static actors.messages.ControlMessage.*;
 
 /**
  * Created by zua on 21.09.16.
  */
-public class WelcomeMVCActorTest extends AbstractActorTest {
+public class WelcomeActorTest extends AbstractActorTest {
 
     @Override
     public void testUnhandled() {
@@ -32,7 +32,7 @@ public class WelcomeMVCActorTest extends AbstractActorTest {
     }
 
     @Test(dataProvider = "controlMessages", dataProviderClass = TestDataProvider.class)
-    public void testControlMessages(AkkaMessage message) {
+    public void testControlMessages(ControlMessage message) {
         new JavaTestKit(getActorSystem()) {
             {
                 ActorRef subject = createActor(WelcomeActor.class);

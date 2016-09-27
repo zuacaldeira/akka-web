@@ -4,8 +4,8 @@ import actors.messages.LoginMessage;
 import actors.messages.RegisterMessage;
 import org.testng.annotations.DataProvider;
 
-import static actors.messages.AkkaMessage.LOGIN;
-import static actors.messages.AkkaMessage.REGISTER;
+import static actors.messages.ControlMessage.LOGIN;
+import static actors.messages.ControlMessage.REGISTER;
 
 /**
  * Created by zua on 22.09.16.

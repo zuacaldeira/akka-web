@@ -1,7 +1,7 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
-import actors.messages.LeaveAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.LeaveAkkaria;
 import actors.messages.RegisterMessage;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -21,7 +21,7 @@ public class RegisterActorView extends ActorView {
     public RegisterActorView() {
         super();
         addCancelButton();
-        addMailbox(AkkaMessage.REGISTER, false);
+        addMailbox(ControlMessage.REGISTER, false);
         addStyleName(StyleClassNames.REGISTER_ACTOR.getStyle());
         setId(StyleClassNames.REGISTER_ACTOR.getStyle());
     }
@@ -35,9 +35,9 @@ public class RegisterActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessage.CANCELLED.name())){
+        if (event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())){
             cleanRegisterForm();
-            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), AkkaMessage.CANCELLED), getUI().getMVCActor());
+            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
         }
 
         else if(!isFormEdited()) {
@@ -45,7 +45,7 @@ public class RegisterActorView extends ActorView {
             getLog().info("Empty form");
         }
 
-        else if (event.getButton().getCaption().equals(AkkaMessage.REGISTER.name())) {
+        else if (event.getButton().getCaption().equals(ControlMessage.REGISTER.name())) {
             getUI().getMVCActor().tell(createRegisterMessage(), getUI().getMVCActor());
         }
     }

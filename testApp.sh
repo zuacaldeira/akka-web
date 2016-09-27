@@ -1,3 +1,3 @@
 #!/bin/bash
-mvn clean compile test
+mvn clean compile test -DskipITs=true
 

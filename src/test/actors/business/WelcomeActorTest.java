@@ -1,6 +1,6 @@
 package actors.business;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
@@ -17,7 +17,7 @@ public class WelcomeActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()) {
             {
                 ActorRef welcomeActor = createActor(WelcomeActor.class);
-                welcomeActor.tell(AkkaMessage.REGISTER, getRef());
+                welcomeActor.tell(ControlMessage.REGISTER, getRef());
                 expectNoMsg();
             }
         };
@@ -28,7 +28,7 @@ public class WelcomeActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()) {
             {
                 ActorRef welcomeActor = createActor(WelcomeActor.class);
-                welcomeActor.tell(AkkaMessage.LOGIN, getRef());
+                welcomeActor.tell(ControlMessage.LOGIN, getRef());
                 expectNoMsg();
             }
         };

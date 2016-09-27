@@ -1,14 +1,23 @@
 package actors.messages;
 
-import actors.messages.RegisterMessage;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.AssertJUnit.assertNotNull;
 
 /**
  * Created by zua on 02.09.16.
  */
 public class RegisterMessageTest {
+
+    @Test
+    public void testToString() throws Exception {
+        RegisterMessage message = new RegisterMessage("username", "password", "fullname");
+        assertNotNull(message.toString());
+        assertFalse(message.toString().isEmpty());
+    }
+
     @Test
     public void testGetEmail() throws Exception {
         RegisterMessage message = new RegisterMessage("username", "password", "fullname");

@@ -1,7 +1,7 @@
 package actors.business;
 
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
 import actors.mvc.LoginActor;
 import akka.actor.ActorRef;
@@ -57,7 +57,7 @@ public class LoginActorTest extends AbstractActorTest {
                 TestProbe probe = new TestProbe(getActorSystem());
                 probe.watch(loginActor);
                 loginActor.tell(message, getRef());
-                expectMsgAnyOf(AkkaMessage.FAILED);
+                expectMsgAnyOf(ControlMessage.FAILED);
                 //probe.expectTerminated(loginActor, Duration.create("1 minute"));
             }
         };
@@ -68,7 +68,7 @@ public class LoginActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()) {
             {
                 ActorRef loginActor = createActor(LoginActor.class);
-                loginActor.tell(AkkaMessage.SUCCESSFUL, getRef());
+                loginActor.tell(ControlMessage.SUCCESSFUL, getRef());
                 expectNoMsg();
             }
         };

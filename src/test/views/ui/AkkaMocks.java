@@ -1,6 +1,7 @@
 package views.ui;
 
 import actors.mvc.UserActor;
+import actors.mvc.WelcomeActor;
 import actors.mvc.views.ActorView;
 import akka.actor.ActorRef;
 import com.vaadin.server.VaadinRequest;
@@ -24,14 +25,15 @@ public class AkkaMocks {
     @DataProvider(name = "mockUis")
     public static Object[][] mockUIs() {
         return new Object[][] {
-                {getWelcomeMockUI()},
-                {getUserMockUI()}
+                {getWelcomeMockUI(), AkkaUI.createActorRef(WelcomeActor.class, "MockUserActor")},
+                {getUserMockUI(), AkkaUI.createActorRef(UserActor.class, "MockUserActor")}
         };
     }
 
     private static UserUI getUserMockUI() {
         UserUI ui = Mockito.mock(UserUI.class);
-        Mockito.doCallRealMethod().when(ui).setMVCActor(AkkaUI.createActorRef(UserActor.class, "MockUserActor"));
+        Mockito.doCallRealMethod().when(ui).setMVCActor(Mockito.any(ActorRef.class));
+        Mockito.doCallRealMethod().when(ui).getMVCActor();
         Mockito.doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
         Mockito.doNothing().when(ui).init(Mockito.any(VaadinRequest.class));
         return ui;
@@ -39,7 +41,8 @@ public class AkkaMocks {
 
     private static WelcomeUI getWelcomeMockUI() {
         WelcomeUI ui = Mockito.mock(WelcomeUI.class);
-        Mockito.doCallRealMethod().when(ui).setMVCActor(AkkaUI.createActorRef(UserActor.class, "MockUserActor"));
+        Mockito.doCallRealMethod().when(ui).setMVCActor(Mockito.any(ActorRef.class));
+        Mockito.doCallRealMethod().when(ui).getMVCActor();
         Mockito.doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
         Mockito.doNothing().when(ui).init(Mockito.any(VaadinRequest.class));
         return ui;

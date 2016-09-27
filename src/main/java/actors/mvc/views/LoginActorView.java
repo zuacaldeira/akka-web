@@ -1,7 +1,7 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
-import actors.messages.LeaveAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.LeaveAkkaria;
 import actors.messages.LoginMessage;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -21,7 +21,7 @@ public class LoginActorView extends ActorView {
      */
     public LoginActorView() {
         addCancelButton();
-        addMailbox(AkkaMessage.LOGIN, false);
+        addMailbox(ControlMessage.LOGIN, false);
         addStyleName(StyleClassNames.LOGIN_ACTOR.getStyle());
     }
 
@@ -34,12 +34,12 @@ public class LoginActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessage.CANCELLED.name())){
+        if (event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())){
             cleanLoginForm();
-            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), AkkaMessage.CANCELLED), getUI().getMVCActor());
+            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
         }
 
-        else if (event.getButton().getCaption().equals(AkkaMessage.LOGIN.name())) {
+        else if (event.getButton().getCaption().equals(ControlMessage.LOGIN.name())) {
             /* Asks the login actor to login a user, and waits for the response */
             loginForm.validate();
             getUI().getMVCActor().tell(createLoginMessage(), getUI().getMVCActor());

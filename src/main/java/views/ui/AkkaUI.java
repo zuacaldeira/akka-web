@@ -6,6 +6,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.vaadin.annotations.Push;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import actors.mvc.views.ActorView;
@@ -27,6 +28,9 @@ public abstract class AkkaUI extends UI implements ActorListener {
         this.mvcActor = createActorRef(actor, name);
         this.actorName = name;
     }
+
+    @Override
+    protected abstract void init(VaadinRequest request);
 
     public ActorRef getMVCActor() {
         return mvcActor;

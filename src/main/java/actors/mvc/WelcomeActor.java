@@ -1,7 +1,7 @@
 package actors.mvc;
 
-import actors.messages.AkkaMessage;
-import actors.messages.EnterAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.EnterAkkaria;
 import akka.actor.ActorRef;
 import actors.mvc.views.WelcomeActorView;
 
@@ -15,10 +15,10 @@ public class WelcomeActor extends MVCActor {
 
     @Override
     public void onReceive(Object message) {
-        if(AkkaMessage.REGISTER.equals(message)) {
+        if(ControlMessage.REGISTER.equals(message)) {
             enterRegisterActor();
         }
-        else if (AkkaMessage.LOGIN.equals(message)) {
+        else if (ControlMessage.LOGIN.equals(message)) {
             enterLoginActor();
         }
         else {
@@ -28,7 +28,9 @@ public class WelcomeActor extends MVCActor {
 
     @Override
     protected void enterUI(EnterAkkaria message) {
-        message.getUi().enter(getSelf(), new WelcomeActorView());
+        if(message.getUi() != null) {
+            message.getUi().enter(getSelf(), new WelcomeActorView());
+        }
     }
 
     @Override

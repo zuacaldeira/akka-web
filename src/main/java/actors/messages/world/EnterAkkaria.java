@@ -1,4 +1,4 @@
-package actors.messages;
+package actors.messages.world;
 
 import views.ui.AkkaUI;
 

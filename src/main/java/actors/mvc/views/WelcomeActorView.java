@@ -1,6 +1,6 @@
 package actors.mvc.views;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import actors.mvc.WelcomeActor;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -21,8 +21,8 @@ public class WelcomeActorView extends ActorView {
      */
     public WelcomeActorView() {
         super();
-        addMailbox(AkkaMessage.REGISTER, true);
-        addMailbox(AkkaMessage.LOGIN, true);
+        addMailbox(ControlMessage.REGISTER, true);
+        addMailbox(ControlMessage.LOGIN, true);
         addStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
         setId(StyleClassNames.WELCOME_ACTOR.getStyle());
         setDebugId(StyleClassNames.WELCOME_ACTOR.getStyle());
@@ -30,13 +30,13 @@ public class WelcomeActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if (event.getButton().getCaption().equals(AkkaMessage.REGISTER.name())) {
+        if (event.getButton().getCaption().equals(ControlMessage.REGISTER.name())) {
             getLog().info("REGISTER button clicked");
-                getUI().getMVCActor().tell(AkkaMessage.REGISTER, getUI().getMVCActor());
+                getUI().getMVCActor().tell(ControlMessage.REGISTER, getUI().getMVCActor());
         }
-        else if (event.getButton().getCaption().equals(AkkaMessage.LOGIN.name())) {
+        else if (event.getButton().getCaption().equals(ControlMessage.LOGIN.name())) {
             getLog().info("LOGIN button clicked");
-                getUI().getMVCActor().tell(AkkaMessage.LOGIN, getUI().getMVCActor());
+                getUI().getMVCActor().tell(ControlMessage.LOGIN, getUI().getMVCActor());
         }
     }
 

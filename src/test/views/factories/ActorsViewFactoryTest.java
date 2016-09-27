@@ -1,5 +1,6 @@
 package views.factories;
 
+import actors.mvc.views.ActorsViewFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import actors.mvc.views.ActorView;

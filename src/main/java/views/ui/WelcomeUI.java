@@ -1,6 +1,6 @@
 package views.ui;
 
-import actors.messages.EnterAkkaria;
+import actors.messages.world.EnterAkkaria;
 import actors.mvc.WelcomeActor;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;

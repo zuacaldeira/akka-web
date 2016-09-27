@@ -2,15 +2,14 @@ package actors.mvc.views;
 
 import actors.Neo4JDatabaseTest;
 import actors.business.TestDataProvider;
-import actors.messages.AkkaMessage;
-import actors.messages.EnterAkkaria;
+import actors.messages.ControlMessage;
+import actors.messages.world.EnterAkkaria;
 import actors.messages.LoginMessage;
 import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.components.LoginForm;
-import views.factories.ActorsViewFactory;
 import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
@@ -29,8 +28,8 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
-        assertNotNull(actorView.getMailbox(AkkaMessage.LOGIN));
-        assertNotNull(actorView.getMailbox(AkkaMessage.CANCELLED));
+        assertNotNull(actorView.getMailbox(ControlMessage.LOGIN));
+        assertNotNull(actorView.getMailbox(ControlMessage.CANCELLED));
         assertEquals(2, actorView.getMailboxes().getComponentCount());
 
     }
@@ -51,7 +50,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(1));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.LOGIN.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.LOGIN.name());
 
         mailbox.click();
 
@@ -67,7 +66,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
         assertNotNull(registerForm);
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(1));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.LOGIN.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.LOGIN.name());
 
         assertFalse(actorView.isFormEdited());
         mailbox.click();
@@ -88,7 +87,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(0));
         assertNotNull( mailbox.getMessage() );
-        assertEquals( mailbox.getMessage(), AkkaMessage.CANCELLED.name());
+        assertEquals( mailbox.getMessage(), ControlMessage.CANCELLED.name());
 
         mailbox.click();
     }

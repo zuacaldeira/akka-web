@@ -1,11 +1,12 @@
 package views.ui;
 
-import actors.messages.AkkaMessage;
+import actors.messages.world.EnterAkkaria;
 import actors.mvc.UserActor;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.HorizontalLayout;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -27,7 +28,8 @@ public class UserUI extends AkkaUI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         checkCredentials(vaadinRequest);
-        getMVCActor().tell(AkkaMessage.ENTERING, getMVCActor());
+        setContent(new HorizontalLayout());
+        getMVCActor().tell(new EnterAkkaria(this), getMVCActor());
     }
 
     private void checkCredentials(VaadinRequest request) {

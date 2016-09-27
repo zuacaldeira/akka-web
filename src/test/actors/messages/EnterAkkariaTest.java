@@ -1,9 +1,11 @@
-package actors.mvc;
+package actors.messages;
 
 import actors.business.AbstractActorTest;
-import actors.messages.AkkaMessage;
-import actors.messages.EnterAkkaria;
-import actors.messages.LeaveAkkaria;
+import actors.messages.world.EnterAkkaria;
+import actors.messages.world.LeaveAkkaria;
+import actors.mvc.MVCActor;
+import actors.mvc.UserActor;
+import actors.mvc.WelcomeActor;
 import actors.mvc.views.ActorView;
 import actors.mvc.views.UserActorView;
 import actors.mvc.views.WelcomeActorView;
@@ -35,8 +37,8 @@ public class EnterAkkariaTest extends AbstractActorTest {
 
                 mvcActor.tell(new EnterAkkaria(ui), getRef());
                 expectNoMsg();
-                mvcActor.tell(new LeaveAkkaria(ui, AkkaMessage.CANCELLED), getRef());
-                expectMsgEquals(AkkaMessage.CANCELLED);
+                mvcActor.tell(new LeaveAkkaria(ui, ControlMessage.CANCELLED), getRef());
+                expectMsgEquals(ControlMessage.CANCELLED);
             }
         };
     }

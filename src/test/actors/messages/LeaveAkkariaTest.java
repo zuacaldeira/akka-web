@@ -1,5 +1,6 @@
 package actors.messages;
 
+import actors.messages.world.LeaveAkkaria;
 import actors.mvc.RegisterActor;
 import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
@@ -18,7 +19,7 @@ public class LeaveAkkariaTest {
 
 
     @Test(dataProvider = "actorAndStatus")
-    public void testLeaveAkkaria(ActorRef actor, AkkaMessage status) {
+    public void testLeaveAkkaria(ActorRef actor, ControlMessage status) {
         LeaveAkkaria leaveAkkaria = new LeaveAkkaria(new WelcomeUI(), status);
         assertTrue(leaveAkkaria.getUi() instanceof WelcomeUI);
         assertEquals(leaveAkkaria.getStatus(), status);
@@ -30,14 +31,14 @@ public class LeaveAkkariaTest {
     @DataProvider(name = "actorAndStatus")
     public static Object[][] actorAndStatus() {
         return new Object[][] {
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), AkkaMessage.INVALID},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), AkkaMessage.FAILED},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), AkkaMessage.SUCCESSFUL},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), AkkaMessage.CANCELLED},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), AkkaMessage.INVALID},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), AkkaMessage.FAILED},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), AkkaMessage.SUCCESSFUL},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), AkkaMessage.CANCELLED},
+                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.INVALID},
+                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.FAILED},
+                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.SUCCESSFUL},
+                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.CANCELLED},
+                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.INVALID},
+                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.FAILED},
+                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.SUCCESSFUL},
+                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.CANCELLED},
         };
     }
 

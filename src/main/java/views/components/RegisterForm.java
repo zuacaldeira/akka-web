@@ -1,6 +1,6 @@
 package views.components;
 
-import actors.messages.AkkaMessage;
+import actors.messages.ControlMessage;
 import com.vaadin.data.Property;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
@@ -123,14 +123,14 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         try {
             validate();
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).setEnabled(true);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).addStyleName(StyleClassNames.ENABLED.getStyle());
+                ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).setEnabled(true);
+                ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
         catch (Exception e) {
             if(getParent() instanceof RegisterActorView) {
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).setEnabled(false);
-                ((RegisterActorView) getParent()).getMessage(AkkaMessage.REGISTER).removeStyleName(StyleClassNames.ENABLED.getStyle());
+                ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).setEnabled(false);
+                ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).removeStyleName(StyleClassNames.ENABLED.getStyle());
 
             }
         }
