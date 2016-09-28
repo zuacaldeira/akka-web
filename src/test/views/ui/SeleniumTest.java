@@ -56,7 +56,7 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
 
     private void click(WebElement button, String name) {
         button.click();
-        System.out.println("bbbbbbbbbbbbbbbbbbbbbbbb Clicked button: " + name);
+        System.out.println("\t\t\t3 - Clicked button: " + name);
     }
 
     protected WebElement getButton(final String name) {

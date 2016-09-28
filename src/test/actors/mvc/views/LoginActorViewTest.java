@@ -3,8 +3,9 @@ package actors.mvc.views;
 import actors.Neo4JDatabaseTest;
 import actors.business.TestDataProvider;
 import actors.messages.ControlMessage;
-import actors.messages.world.EnterAkkaria;
 import actors.messages.LoginMessage;
+import actors.messages.world.EnterAkkaria;
+import actors.mvc.LoginActor;
 import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
 import com.vaadin.ui.HorizontalLayout;
@@ -21,7 +22,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
     @Test
     public void testLoginActorView() {
 
-        ActorView actorView = ActorsViewFactory.getInstance().getLoginActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(LoginActor.class);
         WelcomeUI ui = new WelcomeUI();
         ActorRef ref = ui.createActorRef(RegisterActor.class, "R");
         ref.tell(new EnterAkkaria(ui), ui.getMVCActor());
@@ -38,7 +39,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
     public void testLogin(LoginMessage message) {
         seed(message.getUsername(), message.getPassword());
 
-        ActorView actorView = ActorsViewFactory.getInstance().getLoginActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(LoginActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 
@@ -58,7 +59,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
     @Test
     public void testLoginEmptyForm() {
-        LoginActorView actorView = ActorsViewFactory.getInstance().getLoginActorView();
+        LoginActorView actorView = (LoginActorView) ActorsViewFactory.getInstance().getActorView(LoginActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(new HorizontalLayout(actorView));
 
@@ -75,7 +76,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
 
     @Test(dataProvider = "validLoginMessages", dataProviderClass = TestDataProvider.class)
     public void testCancel(LoginMessage message) throws InterruptedException {
-        ActorView actorView = ActorsViewFactory.getInstance().getLoginActorView();
+        LoginActorView actorView = (LoginActorView) ActorsViewFactory.getInstance().getActorView(LoginActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 

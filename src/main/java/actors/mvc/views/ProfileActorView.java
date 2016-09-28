@@ -30,7 +30,11 @@ public class ProfileActorView extends ActorView {
             getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
         }
         else if(event.getButton() == getMailbox(ControlMessage.SAVE)) {
-            getUI().getMVCActor().tell(new UpdateMessage<Account>(account), getUI().getMVCActor());
+            getUI().getMVCActor().tell(new UpdateMessage<Account>(getAccount()), getUI().getMVCActor());
         }
+    }
+
+    private Account getAccount() {
+        return new Account();
     }
 }

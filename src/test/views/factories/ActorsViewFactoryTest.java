@@ -1,9 +1,10 @@
 package views.factories;
 
+import actors.mvc.*;
+import actors.mvc.views.ActorView;
 import actors.mvc.views.ActorsViewFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import actors.mvc.views.ActorView;
 
 import static org.testng.Assert.assertNotNull;
 
@@ -20,9 +21,12 @@ public class ActorsViewFactoryTest {
     @DataProvider(name = "views")
     public Object[][] views() {
         return new Object[][] {
-                {ActorsViewFactory.getInstance().getWelcomeActorView()},
-                {ActorsViewFactory.getInstance().getRegisterActorView()},
-                {ActorsViewFactory.getInstance().getLoginActorView()}
+                {ActorsViewFactory.getInstance().getActorView(WelcomeActor.class)},
+                {ActorsViewFactory.getInstance().getActorView(RegisterActor.class)},
+                {ActorsViewFactory.getInstance().getActorView(LoginActor.class)},
+                {ActorsViewFactory.getInstance().getActorView(UserActor.class)},
+                {ActorsViewFactory.getInstance().getActorView(ProfileActor.class)},
+                {ActorsViewFactory.getInstance().getActorView(LoginActor.class)}
         };
     }
 

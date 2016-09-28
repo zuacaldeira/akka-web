@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 /**
  * Created by zua on 01.09.16.
  */
-public class ActorFormTest {
+public class ActorFormTest extends UITest {
     @Test(dataProvider = "equals")
     public void testEquals(ActorForm a, ActorForm b) throws Exception {
         assertTrue(a.equals(b));

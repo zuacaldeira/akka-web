@@ -22,8 +22,7 @@ public class Mailbox extends Button  {
         this.message = message;
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
-        setStyleName(ValoTheme.BUTTON_SMALL);
-        addStyleName("primary");
+        setStyleName(ValoTheme.BUTTON_PRIMARY);
         setId(message);
         setSizeFull();
     }

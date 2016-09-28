@@ -4,6 +4,7 @@ import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
 import actors.messages.ControlMessage;
 import actors.messages.RegisterMessage;
+import actors.mvc.RegisterActor;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.components.RegisterForm;
@@ -18,7 +19,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
     @Test
     public void testRegisterActorView() {
 
-        ActorView actorView = ActorsViewFactory.getInstance().getRegisterActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(RegisterActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 
@@ -32,7 +33,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testRegister(RegisterMessage message) throws InterruptedException {
-        ActorView actorView = ActorsViewFactory.getInstance().getRegisterActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(RegisterActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 
@@ -54,7 +55,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testRegisterEmptyForm(RegisterMessage message) {
-        RegisterActorView actorView = ActorsViewFactory.getInstance().getRegisterActorView();
+        RegisterActorView actorView = (RegisterActorView) ActorsViewFactory.getInstance().getActorView(RegisterActor.class);
         WelcomeUI ui = new WelcomeUI();
 
         ui.setContent(new HorizontalLayout(actorView));
@@ -71,7 +72,7 @@ public class RegisterActorViewTest extends AbstractActorTest {
 
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testCancel(RegisterMessage message) {
-        ActorView actorView = ActorsViewFactory.getInstance().getRegisterActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(RegisterActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 

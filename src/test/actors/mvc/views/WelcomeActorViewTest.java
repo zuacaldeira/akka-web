@@ -1,6 +1,7 @@
 package actors.mvc.views;
 
 import actors.messages.ControlMessage;
+import actors.mvc.WelcomeActor;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.ui.WelcomeUI;
@@ -15,7 +16,7 @@ public class WelcomeActorViewTest {
     @Test
     public void testWelcomeActorView() {
 
-        ActorView actorView = ActorsViewFactory.getInstance().getWelcomeActorView();
+        ActorView actorView = ActorsViewFactory.getInstance().getActorView(WelcomeActor.class);
         WelcomeUI ui = new WelcomeUI();
         ui.setContent(actorView);
 

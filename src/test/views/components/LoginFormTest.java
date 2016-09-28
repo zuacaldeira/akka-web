@@ -13,7 +13,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 01.09.16.
  */
-public class LoginFormTest {
+public class LoginFormTest extends UITest {
     @Test
     public void testClickCancel() throws Exception {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));

@@ -52,12 +52,20 @@ public class User extends Entity {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(email, user.email) &&
+        return super.equals(this) && Objects.equals(email, user.email) &&
                 Objects.equals(fullname, user.fullname);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), email, fullname);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", fullname='" + fullname + '\'' +
+                '}';
     }
 }

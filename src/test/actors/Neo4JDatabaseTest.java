@@ -14,7 +14,7 @@ import java.util.Collections;
 /**
  * Created by zua on 22.09.16.
  */
-public abstract class Neo4JDatabaseTest {
+public abstract class Neo4JDatabaseTest extends AbstractTest {
     @BeforeMethod
     public void setUp() {
         deleteDatabase();

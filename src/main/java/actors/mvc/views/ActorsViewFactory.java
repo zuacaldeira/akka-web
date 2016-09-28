@@ -40,24 +40,23 @@ public class ActorsViewFactory {
         return null;
     }
 
-    public ActorView getProjectActorView() {
+    private UserActorView getUserActorView() {
+        return new UserActorView();
+    }
+    private RegisterActorView getRegisterActorView() {
+        return new RegisterActorView();
+    }
+    private LoginActorView getLoginActorView() {
+        return new LoginActorView();
+    }
+    private WelcomeActorView getWelcomeActorView() {
+        return new WelcomeActorView();
+    }
+    private ProjectActorView getProjectActorView() {
         return new ProjectActorView();
     }
-
-    public ActorView getProfileActorView() {
+    private ProfileActorView getProfileActorView() {
         return new ProfileActorView();
     }
 
-    public UserActorView getUserActorView() {
-        return new UserActorView();
-    }
-    public RegisterActorView getRegisterActorView() {
-        return new RegisterActorView();
-    }
-    public LoginActorView getLoginActorView() {
-        return new LoginActorView();
-    }
-    public WelcomeActorView getWelcomeActorView() {
-        return new WelcomeActorView();
-    }
 }

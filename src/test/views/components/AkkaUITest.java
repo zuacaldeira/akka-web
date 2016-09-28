@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 16.09.16.
  */
-public class AkkaUITest {
+public class AkkaUITest extends UITest{
 
 
     /**
