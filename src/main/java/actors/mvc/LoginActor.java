@@ -2,16 +2,16 @@ package actors.mvc;
 
 import actors.business.LoginValidator;
 import actors.exceptions.InvalidLoginException;
+import actors.exceptions.MultipleRegistrationException;
 import actors.exceptions.UnexpectedException;
+import actors.exceptions.UnregisteredUserException;
 import actors.messages.ControlMessage;
-import actors.messages.world.EnterAkkaria;
 import actors.messages.LoginMessage;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
 import org.neo4j.ogm.session.Session;
-import actors.mvc.views.LoginActorView;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,14 +32,6 @@ public class LoginActor extends MVCActor{
             super.onReceive(message);
         }
 
-    }
-
-
-    @Override
-    protected void enterUI(EnterAkkaria message) {
-        if(message.getUi() != null) {
-            message.getUi().enter(getSelf(), new LoginActorView());
-        }
     }
 
     @Override
@@ -92,12 +84,18 @@ public class LoginActor extends MVCActor{
         registrations.forEach(r -> {
             list.add(r);
         });
-        // There is one
-        if(list.isEmpty() || list.size() > 1) {
-            leaveAkkariaOnFailure();
+        // If there is one and one registration entity only, then return it
+        if(list.size() == 1) {
+            return list.get(0);
         }
-        // This is the one and only one
-        return list.get(0);
+        // Handle business violation
+        if(list.isEmpty()) {
+            leaveAkkariaUIOnBusinessViolation(new UnregisteredUserException(username));
+        }
+        else if(list.size() > 1) {
+            leaveAkkariaUIOnBusinessViolation(new MultipleRegistrationException(username));
+        }
+        return null;
     }
 
     private Iterable<Registration> findAllRegistrationsByEmail(String username) {

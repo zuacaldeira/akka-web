@@ -2,13 +2,16 @@ package actors.mvc;
 
 import actors.messages.ControlMessage;
 import actors.messages.world.EnterAkkaria;
-import actors.mvc.views.UserActorView;
+import akka.actor.ActorRef;
 
 /**
  * Created by zua on 23.09.16.
  */
 public class UserActor extends MVCActor {
 
+
+    private ActorRef profileActor;
+    private ActorRef projectActor;
 
     @Override
     public void onReceive(Object message) {
@@ -24,22 +27,17 @@ public class UserActor extends MVCActor {
     }
 
     private void project() {
-        createChildActor(ProfileActor.class).tell(new EnterAkkaria(getUi()), getSelf());
+        if(projectActor == null) {
+            projectActor = createChildActor(ProjectActor.class);
+        }
+        projectActor.tell(new EnterAkkaria(getUi()), getSelf());
     }
 
     private void profile() {
-        createChildActor(ProjectActor.class).tell(new EnterAkkaria(getUi()), getSelf());
-    }
-
-    @Override
-    protected void enterUI(EnterAkkaria message) {
-        if(message.getUi() != null) {
-            message.getUi().enter(getSelf(), new UserActorView());
+        if(profileActor == null) {
+            profileActor = createChildActor(ProfileActor.class);
         }
+        profileActor.tell(new EnterAkkaria(getUi()), getSelf());
     }
 
-    @Override
-    protected void leaveAkkariaOnSuccess() {
-
-    }
 }

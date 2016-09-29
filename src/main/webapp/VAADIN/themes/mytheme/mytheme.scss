@@ -68,7 +68,6 @@ $opacity-main: .85;
   .welcomeActor {
     // http://images.google.de/imgres?imgurl=http://wallpaper-hd.net/wp-content/uploads/2016/02/applying-wallpaper2.jpg&imgrefurl=http://wallpaper-hd.net/applying-wallpaper/&h=1080&w=1920&tbnid=3qxQCZ_oIb0x8M:&tbnh=90&tbnw=160&docid=vqmG2gYBaldVJM&client=firefox-b-ab&usg=__6Ag2Yx-SfagEnQCar5cl7z84i9U=&sa=X&ved=0ahUKEwit1qemkanPAhXKiCwKHZmHDpsQ9QEILDAB
     //background: url("welcome.jpg");
-    border-radius: 50%;
     background: transparent;
     color: $color-main;
     font-weight: bold;
@@ -78,7 +77,6 @@ $opacity-main: .85;
   .loginActor {
     // http://images.google.de/imgres?imgurl=http%3A%2F%2Fwww.bstlhj6.com%2Fdata%2Fout%2F109%2F4581177-keys-wallpapers.jpg&imgrefurl=http%3A%2F%2Fwww.bstlhj6.com%2Fkeys-wallpapers.html&h=1600&w=2560&tbnid=wjU70VmaAOOhnM%3A&docid=rcygo2_o7WWO4M&ei=zw3nV9SsLYybgAap_qLQAg&tbm=isch&client=firefox-b-ab&iact=rc&uact=3&dur=1566&page=0&start=0&ndsp=20&ved=0ahUKEwiU0PzTlanPAhWMDcAKHSm_CCoQMwgfKAMwAw&bih=694&biw=1280
     //background: url("login.jpg");
-    margin-border: 50%;
     font-weight: bold;
   }
 
@@ -90,20 +88,17 @@ $opacity-main: .85;
   }
 
   .message {
-    background: $color-button;
-    color: dimgrey;
+    background: transparent;
     border: none;
   }
 
   .enabled {
-    background: $color-button;
-    color: $color-buttontext;
-    border: none;
+    color: $color-button;
   }
 
-  .enabled .hover{
+  .enabled:hover{
     background-color: $color-main;
-    color: darkseagreen;
+    color: $color-button;
   }
 
   .email {

@@ -12996,14 +12996,12 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .welcomeActor {
-	border-radius: 50%;
 	background: transparent;
 	color: white;
 	font-weight: bold;
 }
 
 .mytheme .loginActor {
-	margin-border: 50%;
 	font-weight: bold;
 }
 
@@ -13013,18 +13011,15 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .message {
-	background: darkseagreen;
-	color: dimgrey;
+	background: transparent;
 	border: none;
 }
 
 .mytheme .enabled {
-	background: darkseagreen;
-	color: white;
-	border: none;
+	color: darkseagreen;
 }
 
-.mytheme .enabled .hover {
+.mytheme .enabled:hover {
 	background-color: white;
 	color: darkseagreen;
 }

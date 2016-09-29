@@ -36,60 +36,83 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         selenium.quit();
     }
 
-    protected void clickLogin() {
+    protected boolean clickLogin() {
         String name = ControlMessage.LOGIN.name();
         WebElement button = getButton(name);
-        click(button, name);
+        if(button != null) {
+            return click(button, name);
+        }
+        return false;
     }
 
-    protected void clickCancel() {
+    protected boolean clickCancel() {
         String name = ControlMessage.CANCELLED.name();
         WebElement button = getButton(name);
-        click(button, name);
+        if(button != null) {
+            return click(button, name);
+        }
+        return false;
     }
 
-    protected void clickRegister() {
+    protected boolean clickRegister() {
         String name = ControlMessage.REGISTER.name();
         WebElement button = getButton(name);
-        click(button, name);
+        if(button != null) {
+            return click(button, name);
+        } else {
+            return false;
+        }
     }
 
-    private void click(WebElement button, String name) {
-        button.click();
-        System.out.println("\t\t\t3 - Clicked button: " + name);
+    private boolean click(WebElement button, String name) {
+        try {
+            button.click();
+            System.out.println("\t\t\t3 - Clicked mailbox: " + name);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     protected WebElement getButton(final String name) {
         List<WebElement> elementsByClassName = selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle()));
         for(WebElement e: elementsByClassName) {
-            System.out.println("\t1 - Looking at: " + e.getText());
+            System.out.println("\t1 - Looking at: " + name);
             if(e.getText().toLowerCase().contains(name.toLowerCase()) || name.toLowerCase().contains(e.getText().toLowerCase())) {
-                System.out.println("\t\t2 - Found mailbox: " + e.getText());
+                System.out.println("\t\t2 - Found mailbox: " + name);
                 return e;
             }
         }
         throw new RuntimeException("Maibox not found: " + name);
     }
 
-    protected void fillUsername(String username) {
-        fill(StyleClassNames.EMAIL.getStyle(), username);
+    protected boolean fillUsername(String username) {
+        return fill(StyleClassNames.EMAIL.getStyle(), username);
     }
 
-    protected void fillPassword(String password) {
-        fill(StyleClassNames.PASSWORD.getStyle(), password);
+    protected boolean fillPassword(String password) {
+        return fill(StyleClassNames.PASSWORD.getStyle(), password);
     }
 
-    protected void fillPasswordConfirmation(String password) {
-        fill(StyleClassNames.PASSWORD_CONFIRMATION.getStyle(), password);
+    protected boolean fillPasswordConfirmation(String password) {
+        return fill(StyleClassNames.PASSWORD_CONFIRMATION.getStyle(), password);
     }
 
-    protected void fillFullname(String fullname) {
-        fill(StyleClassNames.FULLNAME.getStyle(), fullname);
+    protected boolean fillFullname(String fullname) {
+        return fill(StyleClassNames.FULLNAME.getStyle(), fullname);
     }
 
-    private void fill(String style, String username) {
-        WebElement we = selenium.findElement(By.className(style));
-        we.sendKeys(username, Keys.TAB);
+    private boolean fill(String style, String data) {
+        try {
+            WebElement we = selenium.findElement(By.className(style));
+            if(we != null) {
+                we.sendKeys(data, Keys.ENTER);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
@@ -98,7 +121,20 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         form.sendKeys(data);
     }
 
-    public boolean isUserPage() {
+    /*public boolean isUserPage() {
         return selenium.getCurrentUrl().equalsIgnoreCase(PAGE + "/user");
+    }*/
+
+    public boolean inUserPage() {
+        try {
+            selenium.get(PAGE + "/user");
+            return true;
+        } catch(Exception ex) {
+            return false;
+        }
+    }
+
+    public boolean hasViewNamed(String name) {
+        return selenium.findElement(By.className(name)) != null;
     }
 }

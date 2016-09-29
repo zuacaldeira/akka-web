@@ -17,6 +17,7 @@ public class UserActorView extends ActorView {
     public UserActorView() {
         addMailbox(ControlMessage.PROFILE, true);
         addMailbox(ControlMessage.PROJECT, true);
+        addStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
     }
 
     @Override
@@ -28,10 +29,10 @@ public class UserActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        if(event.getButton() == getMailbox(ControlMessage.PROFILE)) {
+        if(event.getButton().getCaption().equals(ControlMessage.PROFILE.name())) {
             getUI().getMVCActor().tell(ControlMessage.PROFILE, getUI().getMVCActor());
         }
-        else if(event.getButton() == getMailbox(ControlMessage.PROJECT)) {
+        else if(event.getButton().getCaption().equals(ControlMessage.PROJECT.name())) {
             getUI().getMVCActor().tell(ControlMessage.PROJECT, getUI().getMVCActor());
         }
     }

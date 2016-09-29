@@ -1,6 +1,5 @@
 package actors.messages.world;
 
-import actors.messages.ControlMessage;
 import views.ui.AkkaUI;
 
 /**
@@ -8,19 +7,19 @@ import views.ui.AkkaUI;
  */
 public class LeaveAkkaria {
     private AkkaUI ui;
-    private final ControlMessage status;
+    private final Object cause;
 
-    public LeaveAkkaria(AkkaUI ui, ControlMessage status) {
+    public LeaveAkkaria(AkkaUI ui, Object cause) {
         this.ui = ui;
-        this.status = status;
+        this.cause = cause;
     }
 
     public AkkaUI getUi() {
         return ui;
     }
 
-    public ControlMessage getStatus() {
-        return status;
+    public Object getCause() {
+        return cause;
     }
 
 }

@@ -2,7 +2,6 @@ package actors.mvc;
 
 import actors.business.RegistrationValidator;
 import actors.messages.ControlMessage;
-import actors.messages.world.EnterAkkaria;
 import actors.messages.RegisterMessage;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
@@ -10,7 +9,6 @@ import graphs.entities.Account;
 import graphs.entities.Registration;
 import graphs.entities.User;
 import org.neo4j.ogm.session.Session;
-import actors.mvc.views.RegisterActorView;
 
 import java.util.Collections;
 
@@ -22,8 +20,9 @@ public class RegisterActor extends MVCActor {
     @Override
     public void onReceive(Object message) {
         if( message instanceof RegisterMessage) {
-            if(valid((RegisterMessage) message))
+            if(valid((RegisterMessage) message)) {
                 register((RegisterMessage) message);
+            }
         }
         else {
             super.onReceive(message);
@@ -41,7 +40,7 @@ public class RegisterActor extends MVCActor {
         User u = session.queryForObject(User.class, Neo4jQueryFactory.getInstance().findUserByEmailQuery(message.getEmail()), Collections.EMPTY_MAP);
         // If we found one, then this registration is invalid because it will lead to duplicated registrations
         if(u != null) {
-            leaveAkkariaOnFailure();
+            leaveAkkariaUIOnBusinessViolation(new UserUniquenessViolation(message.getEmail()));
         }
 
         // Otherwise, store a new registration in the graph
@@ -49,13 +48,6 @@ public class RegisterActor extends MVCActor {
         // Return a confirmation message to the caller
         log.info("Stored registration for user [{}]", message.getFullname());
         leaveAkkariaOnSuccess();
-    }
-
-    @Override
-    protected void enterUI(EnterAkkaria message) {
-        if(message.getUi() != null) {
-            message.getUi().enter(getSelf(), new RegisterActorView());
-        }
     }
 
     @Override

@@ -3,7 +3,7 @@ package actors.exceptions;
 /**
  * Created by zua on 03.09.16.
  */
-public class InvalidLoginException extends IllegalArgumentException {
+public class InvalidLoginException extends BusinessViolation {
     /**
      * Creates a new exception to report an illegal login attempt.
      *

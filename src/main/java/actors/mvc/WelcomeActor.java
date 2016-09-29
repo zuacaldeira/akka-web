@@ -3,7 +3,6 @@ package actors.mvc;
 import actors.messages.ControlMessage;
 import actors.messages.world.EnterAkkaria;
 import akka.actor.ActorRef;
-import actors.mvc.views.WelcomeActorView;
 
 /**
  * Created by zua on 20.09.16.
@@ -23,13 +22,6 @@ public class WelcomeActor extends MVCActor {
         }
         else {
             super.onReceive(message);
-        }
-    }
-
-    @Override
-    protected void enterUI(EnterAkkaria message) {
-        if(message.getUi() != null) {
-            message.getUi().enter(getSelf(), new WelcomeActorView());
         }
     }
 

@@ -1,5 +1,8 @@
 package actors.business;
 
+import actors.exceptions.BusinessViolation;
+import actors.exceptions.SystemFailure;
+import akka.actor.ActorRef;
 import akka.actor.OneForOneStrategy;
 import akka.actor.Props;
 import akka.actor.SupervisorStrategy;
@@ -12,14 +15,21 @@ import scala.concurrent.duration.Duration;
 public class Supervisor extends AkkaActor {
 
     private static SupervisorStrategy strategy =
-            new OneForOneStrategy(10, Duration.create("1 minute"),
-                    t -> {
-                        if (t instanceof IllegalArgumentException) {
-                            return SupervisorStrategy.stop();
-                        } else {
-                            return SupervisorStrategy.escalate();
-                        }
-                    });
+        new OneForOneStrategy(
+            10,
+            Duration.create("1 minute"),
+            t -> {
+                if (t instanceof BusinessViolation) {
+                    return SupervisorStrategy.restart();
+                }
+                if (t instanceof SystemFailure) {
+                    return SupervisorStrategy.stop();
+                }
+                else {
+                    return SupervisorStrategy.escalate();
+                }
+            }
+        );
 
 
     @Override
@@ -37,5 +47,14 @@ public class Supervisor extends AkkaActor {
             unhandled(message);
         }
     }
+
+
+    protected final ActorRef createChildActor(Class<?> actorClass) {
+        return getContext().actorOf(Props.create(actorClass), actorClass.getSimpleName());
+    }
+
+
+
+
 }
 

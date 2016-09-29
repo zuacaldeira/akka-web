@@ -1,6 +1,7 @@
 package actors.mvc.views;
 
 import actors.messages.ControlMessage;
+import actors.messages.world.LeaveAkkaria;
 import com.vaadin.ui.*;
 
 /**
@@ -10,6 +11,7 @@ public class ProjectActorView extends ActorView {
 
 
     public ProjectActorView() {
+        addMailbox(ControlMessage.CANCELLED, true);
         addMailbox(ControlMessage.CREATE, true);
         addMailbox(ControlMessage.READ, true);
         addMailbox(ControlMessage.UPDATE, true);
@@ -24,5 +26,11 @@ public class ProjectActorView extends ActorView {
     @Override
     public void buttonClick(Button.ClickEvent event) {
         Notification.show("Clicked " + event.getButton());
+        if(event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())) {
+            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
+        }
+        else if(event.getButton().getCaption().equals(ControlMessage.CREATE.name())) {
+            getUI().getMVCActor().tell(ControlMessage.CREATE, getUI().getMVCActor());
+        }
     }
 }

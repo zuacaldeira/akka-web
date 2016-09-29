@@ -3,7 +3,10 @@ package views.ui;
 import actors.business.TestDataProvider;
 import actors.messages.LoginMessage;
 import actors.messages.RegisterMessage;
+import actors.mvc.views.StyleClassNames;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by zua on 04.09.16.
@@ -13,10 +16,15 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     @Test
     public void testWelcomePage() throws Exception {
         start();
-        clickRegister();
-        clickCancel();
-        clickLogin();
-        clickCancel();
+        assertTrue(hasViewNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
+        assertTrue(clickRegister());
+        assertTrue(hasViewNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
+        assertTrue(clickCancel());
+        assertTrue(hasViewNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
+        assertTrue(clickLogin());
+        assertTrue(hasViewNamed(StyleClassNames.LOGIN_ACTOR.getStyle()));
+        assertTrue(clickCancel());
+        assertTrue(hasViewNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
         stop();
     }
 
@@ -24,12 +32,15 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testRegister(RegisterMessage message) throws Exception {
         start();
-        clickRegister();
-        fillUsername(message.getEmail());
-        fillPassword(message.getPassword());
-        fillPasswordConfirmation(message.getPassword());
-        fillFullname(message.getFullname());
-        clickRegister();
+        assertTrue(hasViewNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
+        assertTrue(clickRegister());
+        assertTrue(hasViewNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
+        assertTrue(fillUsername(message.getEmail()));
+        assertTrue(fillPassword(message.getPassword()));
+        assertTrue(fillPasswordConfirmation(message.getPassword()));
+        assertTrue(fillFullname(message.getFullname()));
+        assertTrue(clickRegister());
+        assertTrue(hasViewNamed(StyleClassNames.LOGIN_ACTOR.getStyle()));
         stop();
     }
 
@@ -38,10 +49,13 @@ public class WelcomePageSeleniumTest extends SeleniumTest {
     public void testLogin(LoginMessage message) throws Exception {
         seed(message.getUsername(), message.getPassword());
         start();
-        clickLogin();
-        fillUsername(message.getUsername());
-        fillPassword(message.getPassword());
-        clickLogin();
+        assertTrue(hasViewNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
+        assertTrue(clickLogin());
+        assertTrue(hasViewNamed(StyleClassNames.LOGIN_ACTOR.getStyle()));
+        assertTrue(fillUsername(message.getUsername()));
+        assertTrue(fillPassword(message.getPassword()));
+        assertTrue(clickLogin());
+        assertTrue(inUserPage());
         stop();
     }
 }

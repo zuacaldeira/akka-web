@@ -3,7 +3,7 @@ package actors.exceptions;
 /**
  * Created by zua on 04.09.16.
  */
-public class UnregisteredUserException extends InvalidLoginException {
+public class UnregisteredUserException extends BusinessViolation {
 
     /**
      * Creates a new exception reporting an unregistered user

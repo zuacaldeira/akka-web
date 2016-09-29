@@ -15,5 +15,19 @@ public enum ControlMessage {
     FAILED,
     INVALID,
     CANCELLED,
-    UNKNOWN, CREATE, READ, UPDATE, DELETE, SAVE,
+    UNKNOWN, CREATE, READ, UPDATE, DELETE, SAVE;
+
+    private final Object data;
+
+    private ControlMessage() {
+        this("");
+    }
+
+    private ControlMessage(Object data) {
+        this.data = data;
+    }
+
+    public Object getData() {
+        return data;
+    }
 }

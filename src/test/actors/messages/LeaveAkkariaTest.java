@@ -22,7 +22,7 @@ public class LeaveAkkariaTest {
     public void testLeaveAkkaria(ActorRef actor, ControlMessage status) {
         LeaveAkkaria leaveAkkaria = new LeaveAkkaria(new WelcomeUI(), status);
         assertTrue(leaveAkkaria.getUi() instanceof WelcomeUI);
-        assertEquals(leaveAkkaria.getStatus(), status);
+        assertEquals(leaveAkkaria.getCause(), status);
 
         actor = AkkaUI.createActorRef(WelcomeActor.class, "WA");
         actor.tell(leaveAkkaria, ActorRef.noSender());

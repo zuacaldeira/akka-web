@@ -3,7 +3,7 @@ package actors.exceptions;
 /**
  * Created by zua on 03.09.16.
  */
-public class InvalidRegistrationException extends IllegalArgumentException {
+public class InvalidRegistrationException extends BusinessViolation {
     /**
      * Creates a new exception to report an illegal registration attempt.
      *
