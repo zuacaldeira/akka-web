@@ -17,7 +17,7 @@ public class UserActorView extends ActorView {
     public UserActorView() {
         addMailbox(ControlMessage.PROFILE, true);
         addMailbox(ControlMessage.PROJECT, true);
-        addStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
+        addStyleName(StyleClassNames.USER_ACTOR.getStyle());
     }
 
     @Override

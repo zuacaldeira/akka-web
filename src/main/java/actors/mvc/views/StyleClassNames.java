@@ -8,16 +8,14 @@ public enum StyleClassNames {
     WELCOME_ACTOR("welcomeActor"),
     REGISTER_ACTOR("registerActor"),
     LOGIN_ACTOR("loginActor"),
+    USER_ACTOR("loginActor"),
     MESSAGE("message"),
-    REGISTER_MESSAGE("registerMessage"),
     EMAIL("email"),
     FULLNAME("fullname"),
     PASSWORD("password"),
     PASSWORD_CONFIRMATION("passwordConfirmation"),
     ACTOR_NAME("actorName"),
-    REGISTER_FORM("registerForm"),
-    ENABLED("enabled"),
-    CANCEL("Camcel");
+    ENABLED("enabled");
 
     private final String style;
 
