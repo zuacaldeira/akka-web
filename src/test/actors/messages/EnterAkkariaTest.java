@@ -43,11 +43,6 @@ public class EnterAkkariaTest extends AbstractActorTest {
         };
     }
 
-    @Override
-    public void testUnhandled() {
-
-    }
-
 
     @DataProvider(name = "mvcActors")
     public Object[][] mvcActors() {

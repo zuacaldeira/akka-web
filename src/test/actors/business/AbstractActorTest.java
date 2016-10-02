@@ -10,7 +10,6 @@ import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.session.Session;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import scala.concurrent.Await;
 import scala.concurrent.duration.Duration;
 
@@ -61,10 +60,4 @@ public abstract class AbstractActorTest  extends Neo4JDatabaseTest {
         return (ActorRef) Await.result(ask(supervisor,
                 Props.create(aClass), 5000), Duration.create("10 seconds"));
     }
-
-
-
-    @Test
-    public abstract void testUnhandled();
-
 }

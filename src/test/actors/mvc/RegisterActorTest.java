@@ -1,8 +1,9 @@
-package actors.business;
+package actors.mvc;
 
 
+import actors.business.AbstractActorTest;
+import actors.business.TestDataProvider;
 import actors.messages.RegisterMessage;
-import actors.mvc.RegisterActor;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
 import org.testng.annotations.Test;
@@ -30,17 +31,6 @@ public class RegisterActorTest extends AbstractActorTest {
             {
                 ActorRef registerActor = createActor(RegisterActor.class);
                 registerActor.tell(message, getRef());
-                expectNoMsg();
-            }
-        };
-    }
-
-    @Override
-    public void testUnhandled() {
-        new JavaTestKit(getActorSystem()) {
-            {
-                ActorRef registerActor = createActor(RegisterActor.class);
-                registerActor.tell("DO_NOT_HANDLE", getRef());
                 expectNoMsg();
             }
         };

@@ -1,20 +1,22 @@
-package actors.business;
+package actors.mvc;
 
 
+import actors.business.Supervisor;
+import actors.business.TestDataProvider;
 import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
-import actors.mvc.LoginActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
 import akka.testkit.TestProbe;
 import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.Test;
+import views.ui.WelcomeUI;
 
 /**
  * Created by zua on 30.08.16.
  */
-public class LoginActorTest extends AbstractActorTest {
+public class LoginActorTest extends MVCActorTest {
 
 
     @Test(dataProvider = "validLoginMessages", dataProviderClass = TestDataProvider.class)
@@ -73,4 +75,16 @@ public class LoginActorTest extends AbstractActorTest {
             }
         };
     }
+
+
+    @Override
+    public void testEnterAkkaria() {
+        super.testEnterAkkaria(WelcomeUI.class, LoginActor.class);
+    }
+
+    @Override
+    public void testLeaveAkkaria() {
+        super.testLeaveAkkaria(WelcomeUI.class, LoginActor.class, ControlMessage.SUCCESSFUL);
+    }
+
 }

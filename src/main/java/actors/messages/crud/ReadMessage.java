@@ -16,4 +16,21 @@ public class ReadMessage<T extends Entity> extends CrudMessage<T>{
     public Long getId() {
         return id;
     }
+
+    @Override
+    public T getValue() {
+        throw new IllegalStateException("Read message do not carry a value");
+    }
+
+    @Override
+    public void setValue(T value) {
+        throw new IllegalStateException("Read message do not set any value");
+    }
+
+    @Override
+    public String toString() {
+        return "ReadMessage{" +
+                "id=" + id +
+                '}';
+    }
 }

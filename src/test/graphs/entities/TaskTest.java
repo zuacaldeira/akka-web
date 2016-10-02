@@ -14,7 +14,7 @@ public class TaskTest {
     @Test(dataProvider = "titleAndDescriptions")
     public void testCreateTask(String title, String description) {
         Task t = new Task(title, description);
-        assertTrue(t instanceof Entity);
+        assertTrue(t instanceof AliveEntity);
         assertEquals(t.getTitle(), title);
         assertEquals(t.getDescription(), description);
     }

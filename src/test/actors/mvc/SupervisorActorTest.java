@@ -1,10 +1,9 @@
-package actors.business;
+package actors.mvc;
 
+import actors.business.AbstractActorTest;
+import actors.business.Supervisor;
 import actors.messages.ControlMessage;
 import actors.messages.world.LeaveAkkaria;
-import actors.mvc.LoginActor;
-import actors.mvc.RegisterActor;
-import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.pattern.Patterns;
@@ -57,7 +56,7 @@ public class SupervisorActorTest extends AbstractActorTest {
         };
     }
 
-    @Override
+    @Test
     public void testUnhandled() {
         new JavaTestKit(getActorSystem()) {
             {

@@ -39,8 +39,4 @@ public class CRUDActorTest extends AbstractActorTest {
         };
     }
 
-    @Override
-    public void testUnhandled() {
-
-    }
 }

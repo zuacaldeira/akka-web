@@ -1,6 +1,5 @@
 package actors.mvc;
 
-import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
 import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
@@ -10,15 +9,17 @@ import akka.pattern.Patterns;
 import akka.testkit.JavaTestKit;
 import akka.util.Timeout;
 import org.testng.annotations.Test;
+import views.ui.WelcomeUI;
 
 import java.util.concurrent.TimeUnit;
 
-import static actors.messages.ControlMessage.*;
+import static actors.messages.ControlMessage.LOGIN;
+import static actors.messages.ControlMessage.REGISTER;
 
 /**
  * Created by zua on 21.09.16.
  */
-public class WelcomeActorTest extends AbstractActorTest {
+public class WelcomeActorTest extends MVCActorTest {
 
     @Override
     public void testUnhandled() {
@@ -29,6 +30,16 @@ public class WelcomeActorTest extends AbstractActorTest {
                 expectNoMsg();
             }
         };
+    }
+
+    @Override
+    public void testEnterAkkaria() {
+        super.testEnterAkkaria(WelcomeUI.class, WelcomeActor.class);
+    }
+
+    @Override
+    public void testLeaveAkkaria() {
+        super.testLeaveAkkaria(WelcomeUI.class, WelcomeActor.class, ControlMessage.SUCCESSFUL);
     }
 
     @Test(dataProvider = "controlMessages", dataProviderClass = TestDataProvider.class)

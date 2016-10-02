@@ -1,6 +1,5 @@
 package actors.mvc.views;
 
-import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
 import actors.messages.ControlMessage;
 import actors.messages.RegisterMessage;
@@ -15,7 +14,7 @@ import static org.testng.Assert.*;
 /**
  * Created by zua on 22.09.16.
  */
-public class RegisterActorViewTest extends AbstractActorTest {
+public class RegisterActorViewTest {
     @Test
     public void testRegisterActorView() {
 
@@ -92,8 +91,4 @@ public class RegisterActorViewTest extends AbstractActorTest {
 //        assertTrue((ui.getContent() instanceof WelcomeActorView));
     }
 
-    @Override
-    public void testUnhandled() {
-
-    }
 }
