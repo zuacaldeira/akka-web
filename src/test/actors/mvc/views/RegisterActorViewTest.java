@@ -6,6 +6,7 @@ import actors.messages.RegisterMessage;
 import actors.mvc.RegisterActor;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
+import views.components.Mailbox;
 import views.components.RegisterForm;
 import views.ui.WelcomeUI;
 

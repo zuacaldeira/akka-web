@@ -28,7 +28,7 @@ public class WelcomeUI extends AkkaUI {
     protected void init(VaadinRequest vaadinRequest) {
         checkCredentials(vaadinRequest);
         super.setContent();
-        getMVCActor().tell(new EnterAkkaria(this), getMVCActor());
+        getMVCActor().tell(new EnterAkkaria(), getMVCActor());
     }
 
     private void checkCredentials(VaadinRequest request) {

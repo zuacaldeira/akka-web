@@ -9,7 +9,6 @@ import akka.pattern.Patterns;
 import akka.testkit.JavaTestKit;
 import akka.util.Timeout;
 import org.testng.annotations.Test;
-import views.ui.WelcomeUI;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,12 +33,12 @@ public class WelcomeActorTest extends MVCActorTest {
 
     @Override
     public void testEnterAkkaria() {
-        super.testEnterAkkaria(WelcomeUI.class, WelcomeActor.class);
+        super.testEnterAkkaria(createActor(WelcomeActor.class));
     }
 
     @Override
     public void testLeaveAkkaria() {
-        super.testLeaveAkkaria(WelcomeUI.class, WelcomeActor.class, ControlMessage.SUCCESSFUL);
+        super.testLeaveAkkaria(createActor(WelcomeActor.class), ControlMessage.SUCCESS);
     }
 
     @Test(dataProvider = "controlMessages", dataProviderClass = TestDataProvider.class)

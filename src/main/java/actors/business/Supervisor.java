@@ -20,7 +20,7 @@ public class Supervisor extends AkkaActor {
             Duration.create("1 minute"),
             t -> {
                 if (t instanceof BusinessViolation) {
-                    return SupervisorStrategy.restart();
+                    return SupervisorStrategy.resume();
                 }
                 if (t instanceof SystemFailure) {
                     return SupervisorStrategy.stop();
@@ -49,8 +49,8 @@ public class Supervisor extends AkkaActor {
     }
 
 
-    protected final ActorRef createChildActor(Class<?> actorClass) {
-        return getContext().actorOf(Props.create(actorClass), actorClass.getSimpleName());
+    protected final ActorRef createChildActor(Class<?> actorClass, Object... args) {
+        return getContext().actorOf(Props.create(actorClass, args), actorClass.getSimpleName());
     }
 
 

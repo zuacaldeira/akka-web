@@ -4,8 +4,10 @@ import actors.mvc.LoginActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import views.ui.WelcomeUI;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -16,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 public class LoginFormTest extends UITest {
     @Test
     public void testClickCancel() throws Exception {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class, new WelcomeUI(), new User()));
         LoginForm form = new LoginForm();
         form.getEmailField().setValue("email");
         assertEquals("email", form.getEmailField().getValue());
@@ -24,7 +26,7 @@ public class LoginFormTest extends UITest {
 
     @Test
     public void testClickSend() throws Exception {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class, new WelcomeUI(), new User()));
         LoginForm form = new LoginForm();
         form.getEmailField().setValue("email");
         form.getPasswordField().setValue("password");
@@ -44,7 +46,7 @@ public class LoginFormTest extends UITest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class, new WelcomeUI(), new User()));
         LoginForm lf1 = new LoginForm();
         return new Object[][]{
             {new LoginForm(), new LoginForm()},

@@ -7,11 +7,14 @@ import actors.exceptions.UnexpectedException;
 import actors.exceptions.UnregisteredUserException;
 import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
+import akka.actor.ActorRef;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Login;
 import graphs.entities.Registration;
+import graphs.entities.User;
 import org.neo4j.ogm.session.Session;
+import views.ui.AkkaUI;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,6 +24,10 @@ import java.util.List;
  * Created by zua on 28.08.16.
  */
 public class LoginActor extends MVCActor{
+
+    protected LoginActor(AkkaUI ui, User user) {
+        super(ui, user);
+    }
 
     @Override
     public void onReceive(Object message) {
@@ -33,14 +40,6 @@ public class LoginActor extends MVCActor{
         }
 
     }
-
-    @Override
-    protected void leaveAkkariaOnSuccess() {
-        if(getUi() != null) {
-            getUi().jump("/user");
-        }
-    }
-
 
     private boolean valid(LoginMessage message) {
         return new LoginValidator().isValid(message);
@@ -62,7 +61,7 @@ public class LoginActor extends MVCActor{
         // Save the user
         createUser(session, registration);
         // Notifies the user
-        leaveAkkariaOnSuccess();
+        leaveAkkariaOnSuccess(registration.getUser());
     }
 
     private void acknowledgeSender(ControlMessage message) {
@@ -106,4 +105,8 @@ public class LoginActor extends MVCActor{
         );
     }
 
+    @Override
+    protected ActorRef getNextActor(Object... args) {
+        return createChildActor(UserActor.class, getUi(), (User) args[0]);
+    }
 }

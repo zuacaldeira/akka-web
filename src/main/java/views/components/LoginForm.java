@@ -1,12 +1,13 @@
 package views.components;
 
 import actors.messages.ControlMessage;
+import actors.mvc.views.LoginActorView;
+import actors.mvc.views.StyleClassNames;
 import com.vaadin.data.Property;
+import com.vaadin.data.Validator;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
-import actors.mvc.views.LoginActorView;
-import actors.mvc.views.StyleClassNames;
 import views.components.validators.PasswordValidator;
 
 import java.util.Objects;
@@ -74,14 +75,11 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
     }
 
     @Override
-    public void validate(Object value) throws InvalidValueException {
+    public void validate() {
         emailField.validate();
         passwordField.validate();
     }
 
-    public void validate() {
-        validate(null);
-    }
 
     @Override
     public void valueChange(Property.ValueChangeEvent event) {
@@ -92,7 +90,7 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
                 parent.getMailbox(ControlMessage.LOGIN).setEnabled(true);
                 parent.getMailbox(ControlMessage.LOGIN).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
-        } catch (InvalidValueException ivx) {
+        } catch (Validator.InvalidValueException ivx) {
             if(getParent() != null && getParent() instanceof LoginActorView) {
                 ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).setEnabled(false);
                 ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).removeStyleName(StyleClassNames.ENABLED.getStyle());

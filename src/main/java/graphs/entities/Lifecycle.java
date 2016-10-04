@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by zua on 01.10.16.
  */
-public class Lifecycle {
+public class Lifecycle extends Entity {
     private List<Timed> lifecycle;
 
     public Lifecycle() {

@@ -1,7 +1,7 @@
 package actors.mvc;
 
 import actors.messages.ControlMessage;
-import views.ui.UserUI;
+import graphs.entities.User;
 
 /**
  * Created by zua on 02.10.16.
@@ -11,17 +11,17 @@ public class ProfileActorTest extends MVCActorTest {
 
     @Override
     public void testUnhandled() {
-        super.testControlMessage(UserUI.class, ProfileActor.class, ControlMessage.UNKNOWN);
+        super.testControlMessage(createActor(ProfileActor.class), ControlMessage.UNKNOWN);
     }
 
     @Override
     public void testEnterAkkaria() {
-        super.testEnterAkkaria(UserUI.class, ProfileActor.class);
+        super.testEnterAkkaria(createActor(ProjectActor.class));
     }
 
     @Override
     public void testLeaveAkkaria() {
-        super.testLeaveAkkaria(UserUI.class, ProfileActor.class, ControlMessage.SUCCESSFUL);
+        super.testLeaveAkkaria(createActor(UserActor.class, new User()), ControlMessage.SUCCESS);
     }
 
 }

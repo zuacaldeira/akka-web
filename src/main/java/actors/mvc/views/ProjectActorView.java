@@ -25,12 +25,21 @@ public class ProjectActorView extends ActorView {
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
-        Notification.show("Clicked " + event.getButton());
+        Notification.show("Clicked " + event.getButton().getCaption());
         if(event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())) {
             getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
         }
         else if(event.getButton().getCaption().equals(ControlMessage.CREATE.name())) {
             getUI().getMVCActor().tell(ControlMessage.CREATE, getUI().getMVCActor());
+        }
+        else if(event.getButton().getCaption().equals(ControlMessage.READ.name())) {
+            getUI().getMVCActor().tell(ControlMessage.READ, getUI().getMVCActor());
+        }
+        else if(event.getButton().getCaption().equals(ControlMessage.UPDATE.name())) {
+            getUI().getMVCActor().tell(ControlMessage.UPDATE, getUI().getMVCActor());
+        }
+        else if(event.getButton().getCaption().equals(ControlMessage.DELETE.name())) {
+            getUI().getMVCActor().tell(ControlMessage.DELETE, getUI().getMVCActor());
         }
     }
 }

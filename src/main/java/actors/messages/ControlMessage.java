@@ -11,8 +11,8 @@ public enum ControlMessage {
     PROFILE,
     PROJECT,
     // Status
-    SUCCESSFUL,
-    FAILED,
+    SUCCESS,
+    FAILURE,
     INVALID,
     CANCELLED,
     UNKNOWN, CREATE, READ, UPDATE, DELETE, SAVE;

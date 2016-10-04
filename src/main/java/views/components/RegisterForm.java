@@ -106,17 +106,13 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         return fullnameField;
     }
 
-    @Override
-    public void validate(Object value) throws InvalidValueException {
+    public void validate() {
         emailField.validate();
         passwordField.validate();
         passwordConfirmationField.validate();
         fullnameField.validate();
     }
 
-    public void validate() {
-        validate(null);
-    }
 
     @Override
     public void valueChange(Property.ValueChangeEvent event) {

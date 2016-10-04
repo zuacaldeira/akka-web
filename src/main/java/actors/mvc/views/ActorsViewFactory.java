@@ -37,6 +37,9 @@ public class ActorsViewFactory {
         else if(ProjectActor.class == actorClass) {
             return getProjectActorView();
         }
+        else if(ProjectCreatorActor.class == actorClass) {
+            return getProjectCreatorView();
+        }
         return null;
     }
 
@@ -58,5 +61,9 @@ public class ActorsViewFactory {
     private ProfileActorView getProfileActorView() {
         return new ProfileActorView();
     }
+    private ActorView getProjectCreatorView() {
+        return new ProjectCreatorActorView();
+    }
+
 
 }

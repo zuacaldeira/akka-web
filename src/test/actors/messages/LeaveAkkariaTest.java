@@ -6,7 +6,6 @@ import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import views.ui.AkkaUI;
 import views.ui.WelcomeUI;
 
 import static org.testng.Assert.assertEquals;
@@ -22,23 +21,23 @@ public class LeaveAkkariaTest {
     public void testLeaveAkkaria(ActorRef actor, ControlMessage status) {
         LeaveAkkaria leaveAkkaria = new LeaveAkkaria(new WelcomeUI(), status);
         assertTrue(leaveAkkaria.getUi() instanceof WelcomeUI);
-        assertEquals(leaveAkkaria.getCause(), status);
+        assertEquals(leaveAkkaria.getResult(), status);
 
-        actor = AkkaUI.createActorRef(WelcomeActor.class, "WA");
+        actor = new WelcomeUI().createActorRef(WelcomeActor.class, "WA");
         actor.tell(leaveAkkaria, ActorRef.noSender());
     }
 
     @DataProvider(name = "actorAndStatus")
     public static Object[][] actorAndStatus() {
         return new Object[][] {
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.INVALID},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.FAILED},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.SUCCESSFUL},
-                {AkkaUI.createActorRef(WelcomeActor.class, "wa"), ControlMessage.CANCELLED},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.INVALID},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.FAILED},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.SUCCESSFUL},
-                {AkkaUI.createActorRef(RegisterActor.class, "wa"), ControlMessage.CANCELLED},
+                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.INVALID},
+                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.FAILURE},
+                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.SUCCESS},
+                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.CANCELLED},
+                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.INVALID},
+                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.FAILURE},
+                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.SUCCESS},
+                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.CANCELLED},
         };
     }
 

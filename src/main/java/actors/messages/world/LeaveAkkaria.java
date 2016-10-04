@@ -7,19 +7,19 @@ import views.ui.AkkaUI;
  */
 public class LeaveAkkaria {
     private AkkaUI ui;
-    private final Object cause;
+    private final Object result;
 
-    public LeaveAkkaria(AkkaUI ui, Object cause) {
+    public LeaveAkkaria(AkkaUI ui, Object result) {
         this.ui = ui;
-        this.cause = cause;
+        this.result = result;
     }
 
     public AkkaUI getUi() {
         return ui;
     }
 
-    public Object getCause() {
-        return cause;
+    public Object getResult() {
+        return result;
     }
 
 }

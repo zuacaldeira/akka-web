@@ -4,16 +4,20 @@ package actors.mvc.views;
  * Created by zua on 05.09.16.
  */
 public enum StyleClassNames {
+    /* ACTORS */
     ACTOR("actor"),
     WELCOME_ACTOR("welcomeActor"),
     REGISTER_ACTOR("registerActor"),
     LOGIN_ACTOR("loginActor"),
     USER_ACTOR("loginActor"),
+    PROJECT_ACTOR("projectActor"),
     MESSAGE("message"),
     EMAIL("email"),
     FULLNAME("fullname"),
     PASSWORD("password"),
     PASSWORD_CONFIRMATION("passwordConfirmation"),
+    TITLE("title"),
+    DESCRIPTION("description"),
     ACTOR_NAME("actorName"),
     ENABLED("enabled");
 
@@ -26,4 +30,5 @@ public enum StyleClassNames {
     public String getStyle() {
         return style;
     }
+
 }

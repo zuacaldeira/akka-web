@@ -1,4 +1,4 @@
-package actors.mvc.views;
+package views.components;
 
 import com.vaadin.ui.HorizontalLayout;
 

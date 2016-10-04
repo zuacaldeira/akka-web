@@ -9,6 +9,7 @@ import actors.messages.world.LeaveAkkaria;
 import actors.mvc.views.ActorView;
 import actors.mvc.views.ActorsViewFactory;
 import akka.actor.ActorRef;
+import graphs.entities.User;
 import views.ui.AkkaUI;
 
 /**
@@ -16,10 +17,19 @@ import views.ui.AkkaUI;
  */
 
 public abstract class MVCActor extends Supervisor {
-
-
+    private final User user;
     private AkkaUI ui;
 
+
+    protected  MVCActor(AkkaUI ui, User user) {
+        this.ui = ui;
+        this.user = user;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
 
     public AkkaUI getUi() {
         return ui;
@@ -40,45 +50,37 @@ public abstract class MVCActor extends Supervisor {
 
     private void enterAkkaria(EnterAkkaria message) {
         log.info("Entering Akkaria");
-        this.ui = message.getUi();
         enterUI(message);
     }
 
 
     private void leaveAkkaria(LeaveAkkaria message) {
-        if(message.getCause().equals(ControlMessage.SUCCESSFUL)) {
-            log.info("Leaving Akkaria on Success:" + ControlMessage.SUCCESSFUL.name());
-            leaveAkkariaOnSuccess();
+        if(message.getResult().equals(ControlMessage.SUCCESS)) {
+            leaveAkkariaOnSuccess(message.getResult());
         }
-        else if(message.getCause() instanceof BusinessViolation) {
-            log.info("Leaving Akkaria on Violation:" + ControlMessage.INVALID.name());
-            leaveAkkariaUIOnBusinessViolation((BusinessViolation) message.getCause());
-            getSender().tell(ControlMessage.INVALID, getSelf());
+        else if(message.getResult() instanceof BusinessViolation) {
+            leaveAkkariaUIOnBusinessViolation((BusinessViolation) message.getResult());
         }
-        else if(message.getCause() instanceof SystemFailure) {
-            log.info("Leaving Akkaria on Failure:" + ControlMessage.FAILED.name());
-            leaveAkkariaOnFailure((SystemFailure) message.getCause());
-            getSender().tell(ControlMessage.FAILED, getSelf());
+        else if(message.getResult() instanceof SystemFailure) {
+            leaveAkkariaOnFailure((SystemFailure) message.getResult());
         }
-        else if(message.getCause().equals(ControlMessage.CANCELLED)) {
-            log.info("Leaving Akkaria onCancel");
+        else if(message.getResult().equals(ControlMessage.CANCELLED)) {
             leaveAkkariaUIOnCancel(message);
-            getSender().tell(ControlMessage.CANCELLED, getSelf());
         }
     }
 
     protected final void leaveAkkariaUIOnCancel(LeaveAkkaria message) {
+        log.info("Leaving Akkaria onCancel");
         if(message.getUi() != null) {
-            log.info("Leaving cause CANCELLED");
-            message.getUi().leave(getSelf());
-            getParentActor().tell(new EnterAkkaria(message.getUi()), getSender());
+            message.getUi().leave(getSelf(), ControlMessage.CANCELLED);
+            getParentActor().tell(new EnterAkkaria(), getSender());
         }
     }
 
     // TODO: ActorRef or .class?
     protected final void enterUI(EnterAkkaria message) {
-        if(message.getUi() != null) {
-            message.getUi().enter(getSelf(), getActorView());
+        if(getUi() != null) {
+            getUi().enter(getSelf(), getActorView());
         }
     }
 
@@ -88,22 +90,34 @@ public abstract class MVCActor extends Supervisor {
 
 
     protected final void leaveAkkariaUIOnBusinessViolation(BusinessViolation exception) {
+        log.info("Leaving Akkaria on Violation:" + ControlMessage.INVALID.name());
         if(getUi() != null) {
-            getUi().leave(getSelf());
+            getSender().tell(ControlMessage.INVALID, getSelf());
         }
         // Goes to supervision
         throw exception;
     }
     protected final void leaveAkkariaOnFailure(SystemFailure data) {
+        log.info("Leaving Akkaria on Failure:" + ControlMessage.FAILURE.name());
         if(getUi() != null) {
-            getUi().leave(getParentActor());
+            getUi().leave(getSelf(), ControlMessage.FAILURE);
+            getParentActor().tell(ControlMessage.FAILURE, getSelf());
         }
         // Goes to supervision
         throw  data;
     }
 
-    protected void leaveAkkariaOnSuccess() {
-        getSender().tell(ControlMessage.SUCCESSFUL, getSelf());
+    protected void leaveAkkariaOnSuccess(Object o) {
+        log.info("Leaving Akkaria on Success:" + ControlMessage.SUCCESS.name());
+        if(getUi() != null) {
+            //getUi().leave(getSelf(), ControlMessage.SUCCESS);
+            getSender().tell(ControlMessage.SUCCESS, getSelf());
+            getNextActor(o).tell(new EnterAkkaria(), getSelf());
+        }
+    }
+
+    protected ActorRef getNextActor(Object... args) {
+        return getParentActor();
     }
 
     public ActorRef getParentActor() {

@@ -1,4 +1,4 @@
-package actors.mvc.views;
+package views.components;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class Mailbox extends Button  {
     private String message;
-    private String name;
 
     /**
      * Creates a message view, for a specific actor and message.
@@ -22,7 +21,7 @@ public class Mailbox extends Button  {
         this.message = message;
         setCaption(message);
         setIcon(FontAwesome.ENVELOPE);
-        setStyleName(ValoTheme.BUTTON_PRIMARY);
+        setStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         setId(message);
         setSizeFull();
     }
@@ -37,12 +36,9 @@ public class Mailbox extends Button  {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Mailbox)) {
-            return false;
-        }
-
-        Mailbox that = (Mailbox) o;
-        return Objects.equals(message, that.message);
+        return false;
+        /*Mailbox that = (Mailbox) o;
+        return Objects.equals(message, that.message);*/
     }
 
     @Override
@@ -50,4 +46,10 @@ public class Mailbox extends Button  {
         return Objects.hash(message);
     }
 
+    @Override
+    public String toString() {
+        return "Mailbox{" +
+                "message='" + message + '\'' +
+                '}';
+    }
 }

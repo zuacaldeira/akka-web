@@ -1,20 +1,11 @@
 package actors.messages.world;
 
-import views.ui.AkkaUI;
-
 /**
  * Created by zua on 23.09.16.
  */
-public class EnterAkkaria {
+public class EnterAkkaria extends AkkaMessage {
 
-    private final AkkaUI ui;
-
-    public EnterAkkaria(AkkaUI ui) {
-        this.ui = ui;
-    }
-
-
-    public AkkaUI getUi() {
-        return ui;
+    public EnterAkkaria() {
+        super(null);
     }
 }

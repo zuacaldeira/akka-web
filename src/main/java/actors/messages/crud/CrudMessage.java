@@ -1,33 +1,16 @@
 package actors.messages.crud;
 
+import actors.messages.world.AkkaMessage;
 import graphs.entities.Entity;
 
 /**
  * Created by zua on 26.09.16.
  */
-public abstract class  CrudMessage<T extends Entity> {
-    private Entity value;
-
+public abstract class  CrudMessage<T extends Entity> extends AkkaMessage<T> {
     public CrudMessage(T value) {
-        this.value = value;
+        super(value);
     }
-
-    public T getValue() {
-        return (T) value;
-    }
-
-    public void setValue(T value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "value=" + value +
-                '}';
-    }
-
     public Class<T> getType() {
-        return (Class<T>) getValue().getClass();
+        return (Class<T>) super.getPayload().getClass();
     }
 }

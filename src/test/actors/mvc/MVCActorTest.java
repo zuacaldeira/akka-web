@@ -6,12 +6,12 @@ import actors.messages.world.EnterAkkaria;
 import actors.messages.world.LeaveAkkaria;
 import actors.mvc.views.ActorView;
 import akka.actor.ActorRef;
-import akka.actor.Props;
 import akka.testkit.JavaTestKit;
+import graphs.entities.User;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 import views.ui.AkkaUI;
-import views.ui.UserUI;
+import views.ui.WelcomeUI;
 
 import static org.mockito.Mockito.doNothing;
 
@@ -21,14 +21,13 @@ import static org.mockito.Mockito.doNothing;
 public abstract class MVCActorTest extends AbstractActorTest {
 
 
-    protected void testEnterAkkaria(Class<? extends AkkaUI> uiClass, Class<? extends MVCActor> aClass) {
+    protected void testEnterAkkaria(ActorRef subject) {
         new JavaTestKit(getActorSystem()) {
             {
-                AkkaUI ui = Mockito.mock(uiClass);
+                AkkaUI ui = Mockito.mock(WelcomeUI.class);
                 doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
 
-                ActorRef subject = getActorSystem().actorOf(Props.create(aClass));
-                subject.tell(new EnterAkkaria(ui), getRef());
+                subject.tell(new EnterAkkaria(), getRef());
                 expectNoMsg();
             }
         };
@@ -36,31 +35,41 @@ public abstract class MVCActorTest extends AbstractActorTest {
     }
 
 
-    protected void testLeaveAkkaria(Class<? extends AkkaUI> uiClass, Class<? extends MVCActor> aClass, ControlMessage status) {
+    protected void testLeaveAkkaria(ActorRef subject, ControlMessage status) {
         new JavaTestKit(getActorSystem()){
             {
-                UserUI ui = Mockito.mock(UserUI.class);
+                WelcomeUI ui = Mockito.mock(WelcomeUI.class);
                 doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
 
-                ActorRef subject = getActorSystem().actorOf(Props.create(UserActor.class));
                 subject.tell(new LeaveAkkaria(ui, status), getRef());
-                expectMsgEquals(status);
+                //expectMsgEquals(status);
             }
         };
     }
 
-    protected void testControlMessage(Class<? extends AkkaUI> uiClass, Class<? extends MVCActor> aClass, ControlMessage status) {
+    protected void testControlMessage(ActorRef subject, ControlMessage status) {
         new JavaTestKit(getActorSystem()){
             {
-                UserUI ui = Mockito.mock(UserUI.class);
+                WelcomeUI ui = Mockito.mock(WelcomeUI.class);
                 doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
 
-                ActorRef subject = getActorSystem().actorOf(Props.create(UserActor.class));
                 subject.tell(status, getRef());
                 expectNoMsg();
             }
         };
     }
+
+    protected void testUnhandled(Class<? extends MVCActor> actorClass) {
+        new JavaTestKit(getActorSystem()) {
+            {
+                ActorRef loginActor = createActor(actorClass, new WelcomeUI(), new User());
+                loginActor.tell(ControlMessage.UNKNOWN, getRef());
+                expectNoMsg();
+            }
+        };
+    }
+
+
 
     @Test
     public abstract void testUnhandled();

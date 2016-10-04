@@ -36,7 +36,7 @@ public class StackedLayoutTest {
         assertEquals(layout.getCurrentView(), actorView);
 
         ActorView actorView2 = ActorsViewFactory.getInstance().getActorView(ProjectActor.class);
-        ActorRef actor2 = AkkaUI.createActorRef(ProjectActor.class, "PA2");
+        ActorRef actor2 = new WelcomeUI().createActorRef(ProjectActor.class, "PA2");
 
         layout.push(actor2, actorView2);
         assertEquals(layout.getCurrentActor(), actor2);
@@ -65,12 +65,11 @@ public class StackedLayoutTest {
     public Object[][] actorsAndViews() {
 
         return new Object[][] {
-                {AkkaUI.createActorRef(WelcomeActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(WelcomeActor.class)},
-                {AkkaUI.createActorRef(LoginActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(LoginActor.class)},
-                {AkkaUI.createActorRef(RegisterActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(RegisterActor.class)},
-                {AkkaUI.createActorRef(UserActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(UserActor.class)},
-                {AkkaUI.createActorRef(ProfileActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(ProfileActor.class)},
-                {AkkaUI.createActorRef(ProjectActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(ProjectActor.class)},
+                {new WelcomeUI().createActorRef(WelcomeActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(WelcomeActor.class)},
+                {new WelcomeUI().createActorRef(LoginActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(LoginActor.class)},
+                {new WelcomeUI().createActorRef(RegisterActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(RegisterActor.class)},
+                {new WelcomeUI().createActorRef(ProfileActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(ProfileActor.class)},
+                {new WelcomeUI().createActorRef(ProjectActor.class, "WA"), ActorsViewFactory.getInstance().getActorView(ProjectActor.class)},
         };
     }
 

@@ -3,6 +3,7 @@ package actors.mvc.views;
 import actors.messages.ControlMessage;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 
 /**
@@ -22,10 +23,8 @@ public class UserActorView extends ActorView {
 
     @Override
     protected Component createActorContent() {
-        return new Label("Hi, I am your akkar, your avatar in Akkaria");
+        return new HorizontalLayout(new Label("Hi, I am your akkar, your avatar in Akkaria"));
     }
-
-
 
     @Override
     public void buttonClick(Button.ClickEvent event) {

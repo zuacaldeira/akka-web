@@ -1,11 +1,14 @@
 package graphs.entities;
 
+import org.neo4j.ogm.annotation.NodeEntity;
+
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by zua on 26.09.16.
  */
+@NodeEntity
 public class Project extends AliveEntity {
     private final String title;
     private final String description;
@@ -44,5 +47,14 @@ public class Project extends AliveEntity {
     public void addSubProject(Project sub) {
         subprojects.add(sub);
         sub.setParent(this);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

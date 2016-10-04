@@ -1,10 +1,12 @@
 package actors.business;
 
 import actors.Neo4JDatabaseTest;
+import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import graphs.Neo4jSessionFactory;
+import graphs.entities.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.session.Session;
@@ -12,6 +14,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import scala.concurrent.Await;
 import scala.concurrent.duration.Duration;
+import views.ui.WelcomeUI;
 
 import java.util.Collections;
 
@@ -48,12 +51,22 @@ public abstract class AbstractActorTest  extends Neo4JDatabaseTest {
         return actorSystem;
     }
 
-    public ActorRef createActor(Class<?> aclass, String name) {
-        return actorSystem.actorOf(Props.create(aclass), name);
+    public ActorRef createWelcome(Class<WelcomeActor> aclass) {
+        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+    }
+    public ActorRef createActor(Class<?> aclass) {
+        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
     }
 
-    public ActorRef createActor(Class<?> aclass) {
-        return actorSystem.actorOf(Props.create(aclass), RandomStringUtils.randomAlphabetic(10));
+    public ActorRef createActor(Class<?> aclass, User user) {
+        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), user), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+    }
+
+    public ActorRef createActor(Class<?> aclass, WelcomeUI ui) {
+        return actorSystem.actorOf(Props.create(aclass, ui, new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+    }
+    public ActorRef createActor(Class<?> aclass, WelcomeUI ui, User user) {
+        return actorSystem.actorOf(Props.create(aclass, ui, user), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
     }
 
     public ActorRef createActor(Class<?> aClass, ActorRef supervisor) throws Exception {

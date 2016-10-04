@@ -2,6 +2,8 @@ package actors.mvc.views;
 
 import actors.messages.ControlMessage;
 import com.vaadin.ui.*;
+import views.components.Mailbox;
+import views.components.Mailboxes;
 import views.ui.AkkaUI;
 
 import java.util.HashMap;
@@ -31,6 +33,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         setMargin(true);
         setSpacing(true);
         setSizeFull();
+        //setWidth("50%");
         initBase();
         align();
         setStyleName(StyleClassNames.ACTOR.getStyle());
@@ -48,21 +51,21 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     }
 
     private void initExpandRatios() {
-        setExpandRatio(actorNameLabel, .4f);
-        setExpandRatio(actorContent, .5f);
+        setExpandRatio(actorNameLabel, .1f);
+        setExpandRatio(actorContent, .8f);
         setExpandRatio(mailboxes, .1f);
     }
 
     private void initBaseComponents() {
-        initActorName("");
+        initActorName();
         actorContent = createActorContent();
         initMailboxes();
         addComponents(actorNameLabel, actorContent, mailboxes);
 
     }
 
-    private void initActorName(String name) {
-        actorNameLabel = new Label(name);
+    private void initActorName() {
+        actorNameLabel = new Label("");
         actorNameLabel.setSizeUndefined();
         actorNameLabel.setStyleName(StyleClassNames.ACTOR_NAME.getStyle());
     }
@@ -70,7 +73,7 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
     protected abstract Component createActorContent();
 
     public void setActorName(String name) {
-        actorNameLabel.setValue(name);
+        actorNameLabel.setValue("Hi! I am " + name);
     }
 
     private Mailboxes initMailboxes() {

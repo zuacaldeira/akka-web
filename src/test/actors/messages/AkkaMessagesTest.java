@@ -13,7 +13,7 @@ public class AkkaMessagesTest {
     public void testMessageDefined() {
         assertNotNull(ControlMessage.REGISTER);
         assertNotNull(ControlMessage.LOGIN);
-        assertNotNull(ControlMessage.FAILED);
+        assertNotNull(ControlMessage.FAILURE);
         assertNotNull(ControlMessage.INVALID);
     }
 

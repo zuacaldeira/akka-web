@@ -11,6 +11,7 @@ import akka.actor.ActorRef;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
 import views.components.LoginForm;
+import views.components.Mailbox;
 import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
@@ -25,7 +26,7 @@ public class LoginActorViewTest extends Neo4JDatabaseTest {
         ActorView actorView = ActorsViewFactory.getInstance().getActorView(LoginActor.class);
         WelcomeUI ui = new WelcomeUI();
         ActorRef ref = ui.createActorRef(RegisterActor.class, "R");
-        ref.tell(new EnterAkkaria(ui), ui.getMVCActor());
+        ref.tell(new EnterAkkaria(), ui.getMVCActor());
 
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());

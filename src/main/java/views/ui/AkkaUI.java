@@ -10,6 +10,7 @@ import com.vaadin.annotations.Push;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
+import graphs.entities.User;
 
 /**
  * Created by zua on 04.09.16.
@@ -19,10 +20,11 @@ public abstract class AkkaUI extends UI implements ActorListener {
     private ActorRef mvcActor;
     private String actorName;
     private StackedLayout stackedLayout;
+    private User user;
 
-    public static ActorRef createActorRef(Class<? extends MVCActor> actor, String name) {
+    public  ActorRef createActorRef(Class<? extends MVCActor> actor, String name) {
         return ActorSystem.create(ActorSystems.ACTOR_SYSTEM.getAlias())
-                .actorOf(Props.create(actor), name);
+                .actorOf(Props.create(actor, this, null), name);
     }
 
     public AkkaUI(Class<? extends MVCActor> actor, String name) {
@@ -52,16 +54,10 @@ public abstract class AkkaUI extends UI implements ActorListener {
     }
 
     //@Override
-    public void leave(ActorRef actorRef) {
+    public void leave(ActorRef actorRef, Object result) {
         access(() -> {
             stackedLayout.leave();
             setMVCActor(stackedLayout.getCurrentActor());
-        });
-    }
-
-    public void jump(String location) {
-        access(() -> {
-            getPage().setLocation(location);
         });
     }
 
@@ -82,5 +78,10 @@ public abstract class AkkaUI extends UI implements ActorListener {
     public void setContent() {
         stackedLayout = new StackedLayout();
         super.setContent(stackedLayout);
+    }
+
+
+    public User getUser() {
+        return user;
     }
 }

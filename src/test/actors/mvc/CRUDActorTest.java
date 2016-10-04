@@ -1,42 +1,55 @@
 package actors.mvc;
 
-import actors.business.AbstractActorTest;
-import actors.messages.ControlMessage;
 import actors.messages.crud.CreateMessage;
-import actors.messages.crud.CrudMessage;
+import actors.messages.crud.DeleteMessage;
+import actors.messages.crud.ReadMessage;
 import actors.messages.crud.UpdateMessage;
-import akka.actor.ActorRef;
-import akka.actor.Props;
-import akka.testkit.JavaTestKit;
 import graphs.entities.Account;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 /**
  * Created by zua on 27.09.16.
  */
-public class CRUDActorTest extends AbstractActorTest {
+public abstract class CRUDActorTest extends MVCActorTest {
 
-    @DataProvider(name = "crudActors")
-    public Object[][] crudActors() {
+    @DataProvider(name = "create")
+    public Object[][] create() {
         return new Object[][] {
                 {new CreateMessage<User>(new User())},
                 {new CreateMessage<Account>(new Account())},
-                {new UpdateMessage<User>(new User("uername", "Full Name 1"))},
-                {new UpdateMessage<Account>(new Account("u", "p1"))}
         };
     }
 
-    @Test(dataProvider = "crudActors")
-    public void testCreate(CrudMessage<?> message) {
-        new JavaTestKit(getActorSystem()) {
-            {
-                ActorRef crudActor = getActorSystem().actorOf(Props.create(ProjectActor.class), "PA");
-                crudActor.tell(message, getRef());
-                expectMsgAnyOf(ControlMessage.SUCCESSFUL);
-            }
+    @DataProvider(name = "read")
+    public Object[][] readMessage() {
+        return new Object[][] {
+                {new ReadMessage<Account>(1L)}
         };
     }
+
+
+    @DataProvider(name = "update")
+    public Object[][] update() {
+        return new Object[][] {
+                {new UpdateMessage<User>(new User("username", "Full Name 1"))},
+                {new UpdateMessage<Account>(new Account("u", "p1"))},
+        };
+    }
+
+    @DataProvider(name = "delete")
+    public Object[][] delete() {
+        return new Object[][] {
+            {new DeleteMessage<User>(new User())},
+            {new DeleteMessage<Account>(new Account())}
+        };
+    }
+
+    
+    public abstract void testCreate();
+    public abstract void testRead();
+    public abstract void testUpdate();
+    public abstract void testDelete();
+
 
 }

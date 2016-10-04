@@ -1,5 +1,6 @@
 package views.components;
 
+import com.vaadin.data.Property;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -29,7 +30,12 @@ public class ActorFormTest extends UITest {
     public Object[][] equals() {
         ActorForm af1 = new ActorForm() {
             @Override
-            public void validate(Object value) throws InvalidValueException {
+            public void valueChange(Property.ValueChangeEvent event) {
+
+            }
+
+            @Override
+            public void validate() {
 
             }
         };
@@ -41,8 +47,20 @@ public class ActorFormTest extends UITest {
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        ActorForm form1 = new ActorForm() {@Override public void validate(Object value) throws InvalidValueException {}};
-        ActorForm form2 = new ActorForm() {@Override public void validate(Object value) throws InvalidValueException {}};
+        ActorForm form1 = new ActorForm() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+
+            }
+
+            @Override public void validate(){}};
+        ActorForm form2 = new ActorForm() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+
+            }
+
+            @Override public void validate(){}};
 
         return new Object[][]{
                 {form1, form2},

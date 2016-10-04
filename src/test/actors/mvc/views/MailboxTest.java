@@ -8,6 +8,8 @@ import akka.actor.Props;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import views.components.Mailbox;
+import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
 
@@ -17,7 +19,7 @@ import static org.testng.Assert.*;
 public class MailboxTest {
     @Test
     public void testStructure() throws Exception {
-        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class), "MessageViewTestActor");
+        ActorRef ref = ActorSystem.create("TestAS").actorOf(Props.create(WelcomeActor.class, new WelcomeUI(), new User()));
         String content = ControlMessage.REGISTER.name();
         Mailbox mv = new Mailbox(content);
         assertEquals(content, mv.getMessage());
@@ -42,9 +44,10 @@ public class MailboxTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(WelcomeActor.class, new WelcomeUI(), new User()));
+        Mailbox b = new Mailbox(ControlMessage.LOGIN.name());
         return new Object[][]{
-                {new Mailbox(ControlMessage.LOGIN.name()), new Mailbox(ControlMessage.LOGIN.name())}
+                {b, b}
         };
     }
 

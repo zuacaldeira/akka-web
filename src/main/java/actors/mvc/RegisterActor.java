@@ -9,6 +9,7 @@ import graphs.entities.Account;
 import graphs.entities.Registration;
 import graphs.entities.User;
 import org.neo4j.ogm.session.Session;
+import views.ui.AkkaUI;
 
 import java.util.Collections;
 
@@ -16,6 +17,10 @@ import java.util.Collections;
  * Created by zua on 28.08.16.
  */
 public class RegisterActor extends MVCActor {
+
+    protected RegisterActor(AkkaUI ui, User user) {
+        super(ui, user);
+    }
 
     @Override
     public void onReceive(Object message) {
@@ -44,16 +49,17 @@ public class RegisterActor extends MVCActor {
         }
 
         // Otherwise, store a new registration in the graph
-        session.save(new Registration(new User(message.getEmail(), message.getFullname()), new Account(message.getEmail(), message.getPassword())));
+        Registration registration = new Registration(new User(message.getEmail(), message.getFullname()), new Account(message.getEmail(), message.getPassword()));
+        session.save(registration);
         // Return a confirmation message to the caller
         log.info("Stored registration for user [{}]", message.getFullname());
-        leaveAkkariaOnSuccess();
+        leaveAkkariaOnSuccess(registration.getUser());
     }
 
     @Override
-    protected void leaveAkkariaOnSuccess() {
+    protected void leaveAkkariaOnSuccess(Object o) {
         if(getUi() != null) {
-            getUi().leave(getSelf());
+            getUi().leave(getSelf(), o);
         }
         getContext().actorFor(getSelf().path().parent()).tell(ControlMessage.LOGIN, getSelf());
     }

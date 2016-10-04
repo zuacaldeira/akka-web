@@ -9,6 +9,7 @@ import akka.actor.Props;
 import graphs.entities.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
 
@@ -44,7 +45,7 @@ public class RegisterFormTest {
 
     @DataProvider(name = "equals")
     public Object[][] equals() {
-        ActorRef actor = ActorSystem.create().actorOf(Props.create(RegisterActor.class));
+        ActorRef actor = ActorSystem.create().actorOf(Props.create(RegisterActor.class, new WelcomeUI(), new User()));
         RegisterForm r1 = new RegisterForm();
         return new Object[][]{
                 {r1, new RegisterForm()}, {r1, r1}

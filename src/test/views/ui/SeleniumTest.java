@@ -38,36 +38,46 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
 
     protected boolean clickLogin() {
         String name = ControlMessage.LOGIN.name();
-        WebElement button = getButton(name);
-        if(button != null) {
-            return click(button, name);
-        }
-        return false;
+        return clickButtonNamed(name);
     }
 
     protected boolean clickCancel() {
         String name = ControlMessage.CANCELLED.name();
-        WebElement button = getButton(name);
-        if(button != null) {
-            return click(button, name);
-        }
-        return false;
+        return clickButtonNamed(name);
     }
 
     protected boolean clickRegister() {
         String name = ControlMessage.REGISTER.name();
+        return clickButtonNamed(name);
+    }
+
+    protected boolean clickProject() {
+        String name = ControlMessage.PROJECT.name();
+        return clickButtonNamed(name);
+    }
+
+    public boolean clickCreate() {
+        String name = ControlMessage.CREATE.name();
+        return clickButtonNamed(name);
+    }
+
+    private boolean clickButtonNamed(String name) {
         WebElement button = getButton(name);
         if(button != null) {
             return click(button, name);
         } else {
             return false;
         }
+
     }
+
 
     private boolean click(WebElement button, String name) {
         try {
             button.click();
+            selenium.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             System.out.println("\t\t\t3 - Clicked mailbox: " + name);
+
             return true;
         } catch (Exception ex) {
             return false;
@@ -102,8 +112,18 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         return fill(StyleClassNames.FULLNAME.getStyle(), fullname);
     }
 
+    public boolean fillTitle(String title) {
+        return fill(StyleClassNames.TITLE.getStyle(), title);
+    }
+
+    public boolean fillDescription(String description) {
+        return fill(StyleClassNames.DESCRIPTION.getStyle(), description);
+    }
+
+
     private boolean fill(String style, String data) {
         try {
+            selenium.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             WebElement we = selenium.findElement(By.className(style));
             if(we != null) {
                 we.sendKeys(data, Keys.ENTER);
@@ -115,15 +135,6 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         }
     }
 
-
-    protected void fillForm(String style, String... data) {
-        WebElement form = selenium.findElement(By.className(style));
-        form.sendKeys(data);
-    }
-
-    /*public boolean isUserPage() {
-        return selenium.getCurrentUrl().equalsIgnoreCase(PAGE + "/user");
-    }*/
 
     public boolean inUserPage() {
         try {
@@ -137,4 +148,5 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
     public boolean hasViewNamed(String name) {
         return selenium.findElement(By.className(name)) != null;
     }
+
 }

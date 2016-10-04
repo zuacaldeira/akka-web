@@ -1,11 +1,14 @@
 package graphs.entities;
 
+import org.neo4j.ogm.annotation.Relationship;
+
 import java.util.Date;
 
 /**
  * Created by zua on 02.10.16.
  */
-public class AliveEntity extends Entity {
+public abstract class AliveEntity extends Entity {
+
     private Lifecycle lifecycle;
 
     public AliveEntity() {

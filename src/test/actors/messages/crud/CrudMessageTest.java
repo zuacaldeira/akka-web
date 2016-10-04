@@ -14,29 +14,29 @@ import static org.testng.Assert.assertNotEquals;
 public class CrudMessageTest {
     @Test(dataProvider = "get")
     public <T extends Entity> void testGetValue(CrudMessage<T> message, Entity expected) throws Exception {
-        assertEquals(message.getValue(), expected);
+        assertEquals(message.getPayload(), expected);
     }
 
     @Test(dataProvider = "getInvalid", expectedExceptions = IllegalStateException.class)
     public <T extends Entity> void testGetValue(ReadMessage<T> message, Entity expected) throws Exception {
-        assertEquals(message.getValue(), expected);
+        assertEquals(message.getPayload(), expected);
     }
 
     @Test(dataProvider = "set")
     public <T extends Entity> void testSetValue(CrudMessage<T> message, T old, T update) throws Exception {
-        assertEquals(message.getValue(), old);
-        message.setValue(update);
-        assertNotEquals(message.getValue(), old, "InMessage value should not equal old value");
-        assertEquals(message.getValue(), update);
+        assertEquals(message.getPayload(), old);
+        message.setPayload(update);
+        assertNotEquals(message.getPayload(), old, "InMessage value should not equal old value");
+        assertEquals(message.getPayload(), update);
     }
 
     @Test(dataProvider = "setInvalid", expectedExceptions = IllegalStateException.class)
     public <T extends Entity> void testSetValue(ReadMessage<T> message, T old, T update) throws Exception {
-        assertEquals(message.getValue(), old);
+        assertEquals(message.getPayload(), old);
 
-        message.setValue(update);
-        assertNotEquals(message.getValue(), old, "InMessage value should not equal old value");
-        assertEquals(message.getValue(), update);
+        message.setPayload(update);
+        assertNotEquals(message.getPayload(), old, "InMessage value should not equal old value");
+        assertEquals(message.getPayload(), update);
     }
 
 
