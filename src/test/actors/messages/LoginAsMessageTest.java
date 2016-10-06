@@ -9,7 +9,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 /**
  * Created by zua on 02.09.16.
  */
-public class LoginMessageTest {
+public class LoginAsMessageTest {
     @Test
     public void testToString() throws Exception {
         LoginMessage message = new LoginMessage("username", "password");

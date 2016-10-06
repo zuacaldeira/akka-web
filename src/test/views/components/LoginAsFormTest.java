@@ -4,7 +4,7 @@ import actors.mvc.LoginActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import views.ui.WelcomeUI;
@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 01.09.16.
  */
-public class LoginFormTest extends UITest {
+public class LoginAsFormTest extends UITest {
     @Test
     public void testClickCancel() throws Exception {
         ActorRef actor = ActorSystem.create().actorOf(Props.create(LoginActor.class, new WelcomeUI(), new User()));

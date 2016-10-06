@@ -10,9 +10,9 @@ import actors.messages.LoginMessage;
 import akka.actor.ActorRef;
 import graphs.Neo4jQueryFactory;
 import graphs.Neo4jSessionFactory;
-import graphs.entities.Login;
-import graphs.entities.Registration;
-import graphs.entities.User;
+import graphs.entities.nodes.LoginAs;
+import graphs.entities.nodes.RegisteredAs;
+import graphs.entities.nodes.User;
 import org.neo4j.ogm.session.Session;
 import views.ui.AkkaUI;
 
@@ -56,30 +56,30 @@ public class LoginActor extends MVCActor{
     private void login(LoginMessage message) {
         // Create session
         Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-        // Retrieve a registration relationship with this user
-        Registration registration = getRegistration(session, message);
+        // Retrieve a registeredAs relationship with this user
+        RegisteredAs registeredAs = getRegistration(session, message);
         // Save the user
-        createUser(session, registration);
+        createUser(session, registeredAs);
         // Notifies the user
-        leaveAkkariaOnSuccess(registration.getUser());
+        leaveAkkariaOnSuccess(registeredAs.getUser());
     }
 
     private void acknowledgeSender(ControlMessage message) {
         getSender().tell(message, getSelf());
     }
 
-    private void createUser(Session session, Registration registration) {
-        session.save(new Login(registration.getUser(), registration.getAccount()));
+    private void createUser(Session session, RegisteredAs registeredAs) {
+        session.save(new LoginAs(registeredAs.getUser(), registeredAs.getAccount()));
     }
 
-    private Registration getRegistration(Session session, LoginMessage message) {
+    private RegisteredAs getRegistration(Session session, LoginMessage message) {
         // Tries to find a unique registration for this user
-        Iterable<Registration> registrations = findAllRegistrationsByEmail(message.getUsername());
+        Iterable<RegisteredAs> registrations = findAllRegistrationsByEmail(message.getUsername());
         return getTheOneAndOnly(registrations, message.getUsername());
     }
 
-    private Registration getTheOneAndOnly(Iterable<Registration> registrations, String username) {
-        List<Registration> list = new LinkedList<>();
+    private RegisteredAs getTheOneAndOnly(Iterable<RegisteredAs> registrations, String username) {
+        List<RegisteredAs> list = new LinkedList<>();
         registrations.forEach(r -> {
             list.add(r);
         });
@@ -97,9 +97,9 @@ public class LoginActor extends MVCActor{
         return null;
     }
 
-    private Iterable<Registration> findAllRegistrationsByEmail(String username) {
+    private Iterable<RegisteredAs> findAllRegistrationsByEmail(String username) {
         return Neo4jSessionFactory.getInstance().getNeo4jSession().query(
-            Registration.class,
+            RegisteredAs.class,
             Neo4jQueryFactory.getInstance().findRegisterByEmailQuery(username),
             new HashMap<>()
         );

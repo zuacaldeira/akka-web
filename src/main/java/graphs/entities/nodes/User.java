@@ -1,5 +1,6 @@
-package graphs.entities;
+package graphs.entities.nodes;
 
+import graphs.entities.Entity;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import java.util.Objects;

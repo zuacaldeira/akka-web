@@ -3,7 +3,7 @@ package actors.mvc;
 import actors.messages.ControlMessage;
 import actors.messages.world.EnterAkkaria;
 import akka.actor.ActorRef;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import views.ui.AkkaUI;
 
 /**

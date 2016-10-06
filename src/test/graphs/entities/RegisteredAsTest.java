@@ -1,5 +1,8 @@
 package graphs.entities;
 
+import graphs.entities.nodes.Account;
+import graphs.entities.nodes.RegisteredAs;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,14 +13,14 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 01.09.16.
  */
-public class RegistrationTest {
+public class RegisteredAsTest {
     @Test(dataProvider = "equals")
-    public void testEquals(Registration a, Registration b) throws Exception {
+    public void testEquals(RegisteredAs a, RegisteredAs b) throws Exception {
         assertTrue(a.equals(b));
     }
 
     @Test(dataProvider = "equals")
-    public void testHashCode(Registration a, Registration b) throws Exception {
+    public void testHashCode(RegisteredAs a, RegisteredAs b) throws Exception {
         assertEquals(a.hashCode(), b.hashCode());
     }
 
@@ -29,15 +32,15 @@ public class RegistrationTest {
     @DataProvider(name = "equals")
     public Object[][] equals() {
         return new Object[][] {
-                {new Registration(new User(), new Account()), new Registration(new User(), new Account())},
-                {new Registration(new User("e", "f"), new Account("u", "p")), new Registration(new User("e", "f"), new Account("u", "p"))}
+                {new RegisteredAs(new User(), new Account()), new RegisteredAs(new User(), new Account())},
+                {new RegisteredAs(new User("e", "f"), new Account("u", "p")), new RegisteredAs(new User("e", "f"), new Account("u", "p"))}
         };
     }
 
     @DataProvider(name = "inequals")
     public Object[][] inequals() {
-        Registration r1 = new Registration(new User(), new Account());
-        Registration r2 = new Registration(new User("e", "f"), new Account("u", "p"));
+        RegisteredAs r1 = new RegisteredAs(new User(), new Account());
+        RegisteredAs r2 = new RegisteredAs(new User("e", "f"), new Account("u", "p"));
         return new Object[][] {
                 {r1, r2}, {r2, r1}, {r1, new User()}
         };

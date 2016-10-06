@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 20.09.16.
  */
-public class LoginValidatorTest {
+public class LoginAsValidatorTest {
 
     @Test(dataProvider = "validUsernames")
     public void testIsValidUsername(String username) throws Exception {

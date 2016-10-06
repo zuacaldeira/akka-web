@@ -30,10 +30,12 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         System.setProperty("webdriver.gecko.driver", "src/test/tools/geckodriver");
         selenium = new FirefoxDriver();
         getWelcomePage();
+        System.out.println("Selenium test started");
     }
 
     public void stop(){
         selenium.quit();
+        System.out.println("Selenium test stopped");
     }
 
     protected boolean clickLogin() {
@@ -62,7 +64,8 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
     }
 
     private boolean clickButtonNamed(String name) {
-        WebElement button = getButton(name);
+        System.out.println("Selenium chose: " + name);
+        WebElement button = findButton(name);
         if(button != null) {
             return click(button, name);
         } else {
@@ -70,7 +73,6 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         }
 
     }
-
 
     private boolean click(WebElement button, String name) {
         try {
@@ -84,7 +86,8 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         }
     }
 
-    protected WebElement getButton(final String name) {
+    protected WebElement findButton(final String name) {
+        selenium.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         List<WebElement> elementsByClassName = selenium.findElements(By.className(StyleClassNames.MESSAGE.getStyle()));
         for(WebElement e: elementsByClassName) {
             System.out.println("\t1 - Looking at: " + name);
@@ -120,10 +123,10 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         return fill(StyleClassNames.DESCRIPTION.getStyle(), description);
     }
 
-
     private boolean fill(String style, String data) {
         try {
             selenium.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            System.out.printf("Selenium filled field: %s with value %s\n", style, data);
             WebElement we = selenium.findElement(By.className(style));
             if(we != null) {
                 we.sendKeys(data, Keys.ENTER);
@@ -135,7 +138,6 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         }
     }
 
-
     public boolean inUserPage() {
         try {
             selenium.get(PAGE + "/user");
@@ -145,8 +147,19 @@ public abstract class SeleniumTest extends Neo4JDatabaseTest {
         }
     }
 
-    public boolean hasViewNamed(String name) {
+    public boolean hasElementNamed(String name) {
         return selenium.findElement(By.className(name)) != null;
     }
 
+    public WebElement findWebElement(String style) {
+        return selenium.findElement(By.className(style));
+    }
+
+    public WebElement findWelcomeActorView() {
+        return findWebElement(StyleClassNames.WELCOME_ACTOR.getStyle());
+    }
+
+    public boolean hasButtonNamed(String name) {
+        return findButton(name) != null;
+    }
 }

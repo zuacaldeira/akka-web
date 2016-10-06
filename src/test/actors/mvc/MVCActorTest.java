@@ -4,10 +4,9 @@ import actors.business.AbstractActorTest;
 import actors.messages.ControlMessage;
 import actors.messages.world.EnterAkkaria;
 import actors.messages.world.LeaveAkkaria;
-import actors.mvc.views.ActorView;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 import views.ui.AkkaUI;
@@ -25,7 +24,7 @@ public abstract class MVCActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()) {
             {
                 AkkaUI ui = Mockito.mock(WelcomeUI.class);
-                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
+                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.eq(WelcomeActor.class));
 
                 subject.tell(new EnterAkkaria(), getRef());
                 expectNoMsg();
@@ -39,7 +38,7 @@ public abstract class MVCActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()){
             {
                 WelcomeUI ui = Mockito.mock(WelcomeUI.class);
-                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
+                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.eq(WelcomeActor.class));
 
                 subject.tell(new LeaveAkkaria(ui, status), getRef());
                 //expectMsgEquals(status);
@@ -51,7 +50,7 @@ public abstract class MVCActorTest extends AbstractActorTest {
         new JavaTestKit(getActorSystem()){
             {
                 WelcomeUI ui = Mockito.mock(WelcomeUI.class);
-                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.any(ActorView.class));
+                doNothing().when(ui).enter(Mockito.any(ActorRef.class), Mockito.eq(WelcomeActor.class));
 
                 subject.tell(status, getRef());
                 expectNoMsg();

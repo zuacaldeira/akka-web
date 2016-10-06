@@ -1,5 +1,6 @@
 package actors.business;
 
+import actors.exceptions.InvalidRegistrationException;
 import actors.messages.RegisterMessage;
 
 /**
@@ -7,8 +8,15 @@ import actors.messages.RegisterMessage;
  */
 public class RegistrationValidator {
 
-    public boolean isValid(RegisterMessage message) {
-        return new UsernameValidator().isValid(message.getEmail())
-                && new PasswordValidator().isValid(message.getPassword());
+    public boolean isValid(RegisterMessage message) throws InvalidRegistrationException {
+        boolean validEmail = new UsernameValidator().isValid(message.getEmail());
+        if(! validEmail) {
+            throw new InvalidRegistrationException("Invalid Email");
+        }
+        boolean validPassword = new AkkarianPasswordValidator().isValid(message.getPassword());
+        if(! validPassword) {
+            throw new InvalidRegistrationException("Invalid Password");
+        }
+        return validEmail && validPassword;
     }
 }

@@ -47,7 +47,7 @@ public class WelcomeActorTest extends MVCActorTest {
             {
                 ActorRef subject = createActor(WelcomeActor.class);
                 subject.tell(message, getRef());
-                expectNoMsg();
+                expectMsgEquals(ControlMessage.SUCCESS);
             }
         };
     }
@@ -57,9 +57,9 @@ public class WelcomeActorTest extends MVCActorTest {
         new JavaTestKit(getActorSystem()) {
             {
                 ActorRef subject = createActor(WelcomeActor.class);
-                Patterns.ask(subject, REGISTER, new Timeout(5, TimeUnit.SECONDS));
+                subject.tell(REGISTER, getRef());
                 subject.tell(message, getRef());
-                expectNoMsg();
+                expectMsgEquals(ControlMessage.SUCCESS);
             }
         };
     }
@@ -71,15 +71,15 @@ public class WelcomeActorTest extends MVCActorTest {
             {
                 subject.tell(REGISTER, getRef());
                 subject.tell(new RegisterMessage(message.getUsername(), message.getPassword(), "Full Name"), getRef());
-                expectNoMsg();
+                expectMsgEquals(ControlMessage.SUCCESS);
             }
         };
 
         new JavaTestKit(getActorSystem()) {
             {
-                Patterns.ask(subject, LOGIN, new Timeout(5, TimeUnit.SECONDS));
+                subject.tell(LOGIN, getRef());
                 subject.tell(message, getRef());
-                expectNoMsg();
+                expectMsgEquals(ControlMessage.SUCCESS);
             }
         };
     }

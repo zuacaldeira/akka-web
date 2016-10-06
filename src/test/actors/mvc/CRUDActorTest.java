@@ -4,8 +4,8 @@ import actors.messages.crud.CreateMessage;
 import actors.messages.crud.DeleteMessage;
 import actors.messages.crud.ReadMessage;
 import actors.messages.crud.UpdateMessage;
-import graphs.entities.Account;
-import graphs.entities.User;
+import graphs.entities.nodes.Account;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 
 /**

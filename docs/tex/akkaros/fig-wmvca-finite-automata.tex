@@ -15,10 +15,10 @@
       % First net
       \node (welcome) at (0,0) [branch] {\small{$w$}};%
       \node (register) at (-1,-2) [branch, gray] {$r$};%
-      \node (login) at (1,-2) [branch, gray] {$l$};%
+      \node (loginAs) at (1,-2) [branch, gray] {$l$};%
 
       \path (welcome) edge[post] (register);%
-      \path (welcome) edge[post] (login);%
+      \path (welcome) edge[post] (loginAs);%
       \path (-1, 0) edge[post] (welcome);%
     \end{scope}
 

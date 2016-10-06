@@ -1,6 +1,8 @@
 package graphs.entities;
 
 import actors.Neo4JDatabaseTest;
+import graphs.entities.nodes.User;
+import graphs.entities.nodes.WorkingOn;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

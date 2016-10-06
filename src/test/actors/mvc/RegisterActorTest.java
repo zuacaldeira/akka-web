@@ -3,6 +3,7 @@ package actors.mvc;
 
 import actors.business.AbstractActorTest;
 import actors.business.TestDataProvider;
+import actors.messages.ControlMessage;
 import actors.messages.RegisterMessage;
 import akka.actor.ActorRef;
 import akka.testkit.JavaTestKit;
@@ -20,7 +21,7 @@ public class RegisterActorTest extends AbstractActorTest {
             {
                 ActorRef registerActor = createActor(RegisterActor.class);
                 registerActor.tell(message, getRef());
-                expectNoMsg();
+                expectMsgEquals(ControlMessage.SUCCESS);
             }
         };
     }

@@ -1,7 +1,7 @@
 package actors.mvc;
 
 import actors.messages.ControlMessage;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 
 /**
  * Created by zua on 02.10.16.

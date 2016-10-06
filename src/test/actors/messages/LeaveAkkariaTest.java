@@ -23,21 +23,21 @@ public class LeaveAkkariaTest {
         assertTrue(leaveAkkaria.getUi() instanceof WelcomeUI);
         assertEquals(leaveAkkaria.getResult(), status);
 
-        actor = new WelcomeUI().createActorRef(WelcomeActor.class, "WA");
+        actor = new WelcomeUI().createActorRef(WelcomeActor.class);
         actor.tell(leaveAkkaria, ActorRef.noSender());
     }
 
     @DataProvider(name = "actorAndStatus")
     public static Object[][] actorAndStatus() {
         return new Object[][] {
-                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.INVALID},
-                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.FAILURE},
-                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.SUCCESS},
-                {new WelcomeUI().createActorRef(WelcomeActor.class, "wa"), ControlMessage.CANCELLED},
-                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.INVALID},
-                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.FAILURE},
-                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.SUCCESS},
-                {new WelcomeUI().createActorRef(RegisterActor.class, "wa"), ControlMessage.CANCELLED},
+                {new WelcomeUI().createActorRef(WelcomeActor.class), ControlMessage.INVALID},
+                {new WelcomeUI().createActorRef(WelcomeActor.class), ControlMessage.FAILURE},
+                {new WelcomeUI().createActorRef(WelcomeActor.class), ControlMessage.SUCCESS},
+                {new WelcomeUI().createActorRef(WelcomeActor.class), ControlMessage.CANCELLED},
+                {new WelcomeUI().createActorRef(RegisterActor.class), ControlMessage.INVALID},
+                {new WelcomeUI().createActorRef(RegisterActor.class), ControlMessage.FAILURE},
+                {new WelcomeUI().createActorRef(RegisterActor.class), ControlMessage.SUCCESS},
+                {new WelcomeUI().createActorRef(RegisterActor.class), ControlMessage.CANCELLED},
         };
     }
 

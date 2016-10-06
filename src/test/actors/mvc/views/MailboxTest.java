@@ -5,7 +5,7 @@ import actors.mvc.WelcomeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import views.components.Mailbox;

@@ -4,7 +4,6 @@ import actors.messages.ControlMessage;
 import actors.mvc.WelcomeActor;
 import com.vaadin.ui.HorizontalLayout;
 import org.testng.annotations.Test;
-import views.ui.WelcomeUI;
 
 import static org.testng.Assert.*;
 
@@ -17,9 +16,6 @@ public class WelcomeActorViewTest {
     public void testWelcomeActorView() {
 
         ActorView actorView = ActorsViewFactory.getInstance().getActorView(WelcomeActor.class);
-        WelcomeUI ui = new WelcomeUI();
-        ui.setContent(actorView);
-
         assertNotNull(actorView);
         assertEquals(2, actorView.getMailboxes().getComponentCount());
         assertNotNull(actorView.getMessage(ControlMessage.REGISTER));
@@ -30,23 +26,19 @@ public class WelcomeActorViewTest {
 
     @Test
     public void testRegister() {
-        WelcomeUI ui = new WelcomeUI();
         WelcomeActorView wav = new WelcomeActorView();
-        ui.setContent(wav);
-
         assertTrue(wav.getActorContent() instanceof HorizontalLayout);
         assertEquals(wav.getMailboxes().getComponentCount(), 2);
+        assertNotNull(wav.getMailbox(ControlMessage.REGISTER));
         wav.getMailbox(ControlMessage.REGISTER).click();
     }
 
     @Test
     public void testLogin() throws Exception {
-        WelcomeUI ui = new WelcomeUI();
         WelcomeActorView wav = new WelcomeActorView();
-        ui.setContent(wav);
-
         assertTrue(wav.getActorContent() instanceof HorizontalLayout);
         assertEquals(wav.getMailboxes().getComponentCount(), 2);
+        assertNotNull(wav.getMailbox(ControlMessage.LOGIN));
         wav.getMailbox(ControlMessage.LOGIN).click();
     }
 

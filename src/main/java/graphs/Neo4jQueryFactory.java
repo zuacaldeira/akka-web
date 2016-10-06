@@ -22,7 +22,7 @@ public class Neo4jQueryFactory {
     }
 
     public String findRegisterByEmailQuery(String username) {
-            String match = "MATCH (u : User) -[r : register]-> (a : Account) ";
+            String match = "MATCH (u : User) -[r : REGISTERED_AS]-> (a : Account) ";
             String where = "WHERE u.email=" + "'" + username + "' ";
             return match + where + "RETURN r";
     }

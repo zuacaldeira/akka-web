@@ -21,6 +21,7 @@ public class ProjectCreatorActorView extends ActorView {
         setActorName("Kreakktor");
         addMailbox(ControlMessage.CANCELLED, true);
         addMailbox(ControlMessage.CREATE, false);
+        setStyleName(StyleClassNames.PROJECT_CREATOR.getStyle());
     }
 
     @Override

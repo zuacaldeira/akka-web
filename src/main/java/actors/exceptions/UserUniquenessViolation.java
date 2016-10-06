@@ -1,4 +1,4 @@
-package actors.mvc;
+package actors.exceptions;
 
 import actors.exceptions.BusinessViolation;
 

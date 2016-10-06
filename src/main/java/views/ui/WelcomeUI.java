@@ -2,6 +2,7 @@ package views.ui;
 
 import actors.messages.world.EnterAkkaria;
 import actors.mvc.WelcomeActor;
+import akka.actor.ActorRef;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -27,8 +28,8 @@ public class WelcomeUI extends AkkaUI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         checkCredentials(vaadinRequest);
-        super.setContent();
-        getMVCActor().tell(new EnterAkkaria(), getMVCActor());
+        ActorRef actor = createActorRef(WelcomeActor.class);
+        actor.tell(new EnterAkkaria(), actor);
     }
 
     private void checkCredentials(VaadinRequest request) {

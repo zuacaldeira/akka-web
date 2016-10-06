@@ -1,6 +1,6 @@
 package actors.mvc;
 
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import views.ui.AkkaUI;
 
 /**

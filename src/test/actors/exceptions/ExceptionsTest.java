@@ -16,7 +16,7 @@ public class ExceptionsTest {
     @DataProvider(name = "exceptions")
     public Object[][] exceptions() {
         return new Object[][] {
-                {new InvalidLoginException("Invalid Login")},
+                {new InvalidLoginException("Invalid LoginAs")},
                 {new MultipleRegistrationException("Multiple registration")},
                 {new InvalidRegistrationException("Invalid registration")},
                 {new UnregisteredUserException("Me")},

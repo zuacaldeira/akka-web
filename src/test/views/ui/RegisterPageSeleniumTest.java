@@ -32,7 +32,7 @@ public class RegisterPageSeleniumTest extends SeleniumTest {
         assertTrue(fillPasswordConfirmation(password));
         assertTrue(fillFullname(fullname));
         assertTrue(clickRegister());
-        assertTrue(super.hasViewNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
+        assertTrue(super.hasElementNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
         stop();
     }
 

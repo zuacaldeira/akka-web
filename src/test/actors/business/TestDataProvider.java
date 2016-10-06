@@ -55,7 +55,7 @@ public class TestDataProvider {
     @DataProvider(name = "validLoginMessages")
     public static Object[][] validLoginMessages() {
         return new Object[][] {
-                {new LoginMessage("username2@gmail.com", "PaSsw1ord")}
+                {new LoginMessage("username@gmail.com", "PaSsw1ord")}
         };
     }
 

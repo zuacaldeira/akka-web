@@ -4,7 +4,7 @@ import actors.messages.ControlMessage;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.testkit.JavaTestKit;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.testng.annotations.Test;
 import views.ui.WelcomeUI;
 

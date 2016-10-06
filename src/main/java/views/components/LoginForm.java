@@ -20,7 +20,7 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
     private PasswordField passwordField;
 
     /**
-     * Creates a new Login form, with a reference to the actor responsible for logins.
+     * Creates a new LoginAs form, with a reference to the actor responsible for logins.
      *
      */
     public LoginForm() {

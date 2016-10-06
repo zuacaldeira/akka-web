@@ -1,5 +1,7 @@
-package graphs.entities;
+package graphs.entities.nodes;
 
+import graphs.entities.BinaryRelationship;
+import graphs.entities.Project;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 
 /**

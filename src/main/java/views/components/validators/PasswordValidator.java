@@ -1,5 +1,7 @@
 package views.components.validators;
 
+import actors.business.AkkarianPasswordValidator;
+import actors.business.InvalidPasswordException;
 import com.vaadin.data.Validator;
 
 /**
@@ -15,8 +17,12 @@ public class PasswordValidator implements Validator {
 
     @Override
     public void validate(Object value) throws InvalidValueException {
-        if(!new actors.business.PasswordValidator().isValid((String) value)) {
-            throw new InvalidValueException((String)value);
+        try {
+            if(!new AkkarianPasswordValidator().isValid((String) value)) {
+                throw new InvalidValueException((String)value);
+            }
+        } catch (InvalidPasswordException ex) {
+            throw new InvalidValueException(ex.getMessage());
         }
     }
 }

@@ -1,7 +1,7 @@
 package actors.messages.crud;
 
 import graphs.entities.Entity;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

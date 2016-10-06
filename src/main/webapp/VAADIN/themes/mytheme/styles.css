@@ -13010,6 +13010,26 @@ div.v-layout.v-horizontal.v-widget {
 	font-weight: bold;
 }
 
+.mytheme .userActor {
+	margin-border: 50%;
+	font-weight: bold;
+}
+
+.mytheme .projectActor {
+	margin-border: 50%;
+	font-weight: bold;
+}
+
+.mytheme .projectCreatorActor {
+	margin-border: 50%;
+	font-weight: bold;
+}
+
+.mytheme .profileActor {
+	margin-border: 50%;
+	font-weight: bold;
+}
+
 .mytheme .message {
 	background: transparent;
 	border: none;

@@ -1,60 +1,34 @@
 package views.ui;
 
+import actors.business.ActorSystems;
+import actors.mvc.MVCActor;
 import actors.mvc.views.ActorView;
+import actors.mvc.views.ActorsViewFactory;
 import akka.actor.ActorRef;
-import com.vaadin.ui.HorizontalLayout;
-import views.components.Pair;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import com.vaadin.ui.VerticalLayout;
 
-import java.util.Stack;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zua on 28.09.16.
  */
-public class StackedLayout extends HorizontalLayout {
+public class StackedLayout extends VerticalLayout {
 
-    private Stack<ActorRef> actorStack;
-    private Stack<ActorView> viewStack;
-
+    private Map<ActorRef, ActorView> actorViewMap;
     private ActorRef currentActor;
     private ActorView currentView;
+    private ActorView oldView;
+    private ActorRef oldActor;
 
     public StackedLayout() {
         setSizeFull();
         currentActor = null;
-        actorStack = new Stack<>();
         currentView = null;
-        viewStack = new Stack<>();
+        actorViewMap = new HashMap<>();
     }
-
-
-    public Pair<ActorRef, ActorView> pop() {
-        if(!actorStack.isEmpty() && !viewStack.isEmpty()) {
-            ActorRef actor = actorStack.pop();
-            ActorView view = viewStack.pop();
-
-            removeComponent(view);
-            if(!actorStack.isEmpty()) {
-                currentActor = actorStack.peek();
-                currentView = viewStack.peek();
-            }
-            else {
-                currentActor = null;
-                currentView = null;
-            }
-
-            return new Pair(actor, view);
-        }
-        return null;
-    }
-
-    public void push(ActorRef actor, ActorView view) {
-        actorStack.push(actor);
-        viewStack.push(view);
-        currentActor = actor;
-        currentView = view;
-        addComponent(currentView);
-    }
-
 
     public ActorRef getCurrentActor() {
         return currentActor;
@@ -64,20 +38,41 @@ public class StackedLayout extends HorizontalLayout {
         return currentView;
     }
 
-    public void enter(ActorRef actorRef, ActorView actorView) {
-        if(!actorStack.isEmpty()) {
-            pop();
-        }
-        actorView.setEnabled(true);
-        push(actorRef, actorView);
+    public void enter(ActorRef actorRef, Class<? extends MVCActor> mvcActorClass) {
+        System.out.println("STACKED LAYOUT ENTER " + actorRef.path().name());
+        oldActor = currentActor;
+        oldView = currentView;
+        currentActor = actorRef;
+        currentView = ActorsViewFactory.getInstance().getActorView(mvcActorClass);
+        updateView(oldView, currentView);
     }
 
-    public void leave() {
-        if(!actorStack.isEmpty()) {
-            pop();
-        }
-        if(currentView != null) {
-            currentView.setEnabled(true);
+    public void leave(ActorRef actorRef) {
+        if(actorViewMap.containsKey(actorRef)) {
+            removeComponent(actorViewMap.remove(actorRef));
+            currentActor = oldActor;
+            currentView = oldView;
+            System.out.println("LEAVE " + actorRef.path().name());
         }
     }
+
+    private void updateView(ActorView oldView, ActorView newView) {
+        if(oldView != null) {
+            removeComponent(oldView);
+            actorViewMap.remove(oldView);
+        }
+        actorViewMap.put(currentActor, newView);
+        addComponent(newView);
+    }
+
+    public  ActorRef createActorRef(Class<? extends MVCActor> actor, AkkaUI ui) {
+        return ActorSystem.create(ActorSystems.ACTOR_SYSTEM.getAlias())
+                .actorOf(Props.create(actor, ui, null), actor.getSimpleName());
+    }
+
+
+    public ActorRef getMVCActor() {
+        return currentActor;
+    }
+
 }

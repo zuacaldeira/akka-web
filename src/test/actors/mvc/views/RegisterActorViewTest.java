@@ -74,7 +74,7 @@ public class RegisterActorViewTest {
     public void testCancel(RegisterMessage message) {
         ActorView actorView = ActorsViewFactory.getInstance().getActorView(RegisterActor.class);
         WelcomeUI ui = new WelcomeUI();
-        ui.setContent(actorView);
+        ui.setContent(new HorizontalLayout(actorView));
 
         RegisterForm registerForm = (RegisterForm) actorView.getActorContent();
         assertNotNull(registerForm);
@@ -85,6 +85,7 @@ public class RegisterActorViewTest {
 
 
         Mailbox mailbox = ((Mailbox) actorView.getMailboxes().getMailbox(0));
+        assertNotNull( mailbox );
         assertNotNull( mailbox.getMessage() );
         assertEquals( mailbox.getMessage(), ControlMessage.CANCELLED.name());
 

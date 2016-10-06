@@ -1,5 +1,6 @@
-package graphs.entities;
+package graphs.entities.nodes;
 
+import graphs.entities.Entity;
 import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
@@ -7,10 +8,14 @@ import org.neo4j.ogm.annotation.StartNode;
 import java.util.Objects;
 
 /**
+ * LoginAs relationship entity represents a relation between a user
+ * and an account, and can be expressed as login(user, account).
+ * This relationship reads 'user u is loged in with account a'.
+ *
  * Created by zua on 30.08.16.
  */
-@RelationshipEntity(type = "register")
-public class Registration extends Entity {
+@RelationshipEntity(type = "LOGIN_AS")
+public class LoginAs extends Entity {
 
     @StartNode
     private User user;
@@ -18,17 +23,13 @@ public class Registration extends Entity {
     @EndNode
     private Account account;
 
-    public Registration() {
-        // Used by neo4j
-    }
-
     /**
-     * Creates a new Registration relationship between a user and an account.
+     * Creates a new login relationship between a user and it's account.
      *
-     * @param user The user
-     * @param account The account
+     * @param user  The user who wants to login
+     * @param account The account to log in
      */
-    public Registration(User user, Account account) {
+    public LoginAs(User user, Account account) {
         this.user = user;
         this.account = account;
     }
@@ -37,30 +38,30 @@ public class Registration extends Entity {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Account getAccount() {
         return account;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setAccount(Account account) {
         this.account = account;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Registration)) {
+        if (!(o instanceof LoginAs)) {
             return false;
         }
-        Registration that = (Registration) o;
-        return Objects.equals(user, that.user) &&
-                Objects.equals(account, that.account);
+
+        LoginAs loginAs = (LoginAs) o;
+        return Objects.equals(user, loginAs.user) &&
+                Objects.equals(account, loginAs.account);
     }
 
     @Override

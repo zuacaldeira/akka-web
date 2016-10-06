@@ -7,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 06.09.16.
  */
-public class LoginPageSeleniumTest extends SeleniumTest {
+public class LoginAsPageSeleniumTest extends SeleniumTest {
 
 
     @Test

@@ -24,7 +24,7 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
     private final PasswordField passwordConfirmationField;
 
     /**
-     * Registration process form.
+     * RegisteredAs process form.
      *
      */
     public RegisterForm() {

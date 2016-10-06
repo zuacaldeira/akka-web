@@ -9,13 +9,13 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by zua on 22.09.16.
  */
-public class RegistrationValidatorTest {
+public class RegisteredAsValidatorTest {
     @Test(dataProvider = "validRegisterMessages", dataProviderClass = TestDataProvider.class)
     public void testIsValid(RegisterMessage message) throws Exception {
         assertTrue(new RegistrationValidator().isValid(message));
     }
 
-    @Test(dataProvider = "invalidRegisterMessages", dataProviderClass = TestDataProvider.class)
+    @Test(dataProvider = "invalidRegisterMessages", dataProviderClass = TestDataProvider.class, expectedExceptions = AkkarianException.class)
     public void testIsInvalid(RegisterMessage message) throws Exception {
         assertFalse(new RegistrationValidator().isValid(message));
     }

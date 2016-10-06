@@ -3,8 +3,8 @@ package actors.mvc;
 import actors.messages.crud.CreateMessage;
 import actors.messages.crud.CrudMessage;
 import graphs.entities.Project;
-import graphs.entities.User;
-import graphs.entities.WorkingOn;
+import graphs.entities.nodes.User;
+import graphs.entities.nodes.WorkingOn;
 import views.ui.AkkaUI;
 
 /**

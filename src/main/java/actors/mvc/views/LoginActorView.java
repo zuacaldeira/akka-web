@@ -17,7 +17,7 @@ public class LoginActorView extends ActorView {
 
 
     /**
-     * Login actor view.
+     * LoginAs actor view.
      */
     public LoginActorView() {
         addCancelButton();
@@ -36,13 +36,21 @@ public class LoginActorView extends ActorView {
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())){
             cleanLoginForm();
-            getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
+            if(getUI() != null) {
+                if(getUI().getMVCActor() != null) {
+                    getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
+                }
+            }
         }
 
         else if (event.getButton().getCaption().equals(ControlMessage.LOGIN.name())) {
             /* Asks the login actor to login a user, and waits for the response */
             loginForm.validate();
-            getUI().getMVCActor().tell(createLoginMessage(), getUI().getMVCActor());
+            if(getUI() != null) {
+                if(getUI().getMVCActor() != null) {
+                    getUI().getMVCActor().tell(createLoginMessage(), getUI().getMVCActor());
+                }
+            }
         }
     }
 

@@ -20,21 +20,21 @@
 
         \node (welcome) at (1,2) [branch, gray] {\small{$w$}};%
         \node (register) at (0,0) [branch, gray] {$r$};%
-        \node (login) at (2,0) [branch] {$l$};%
+        \node (loginAs) at (2,0) [branch] {$l$};%
 
         \path (welcome) edge[post, gray] (register);%
-        \path (welcome) edge[post, gray] (login);%
+        \path (welcome) edge[post, gray] (loginAs);%
 
         \node (register) at (0,0) [branch, gray] {\small{$r$}};%
         \node (validate) at (2,-2) [select] {$v_l$};%
         \node (welcome) at (1,-4) [branch, gray] {$w$};%
         \node (user) at (3,-4) [branch, gray] {$u$};%
 
-        \path (login) edge[post, bend right] (validate);%
-        \path (validate) edge[post, bend right] (login);%
+        \path (loginAs) edge[post, bend right] (validate);%
+        \path (validate) edge[post, bend right] (loginAs);%
         \path (validate) edge[post] (welcome);%
         \path (validate) edge[post] (user);%
-        \path (3, 0) edge[post] (login);%
+        \path (3, 0) edge[post] (loginAs);%
       \end{scope}
 
     \end{tikzpicture}
@@ -60,20 +60,20 @@
 
         \node (welcome) at (1,2) [branch, gray] {\small{$w$}};%
         \node (register) at (0,0) [branch, gray] {$r$};%
-        \node (login) at (2,0) [branch] {$l$};%
+        \node (loginAs) at (2,0) [branch] {$l$};%
 
         \path (welcome) edge[post, gray] (register);%
-        \path (welcome) edge[post, gray] (login);%
+        \path (welcome) edge[post, gray] (loginAs);%
 
         \node (register) at (0,0) [branch, gray] {\small{$r$}};%
         \node (validate) at (1,-2) [select] {$v_l$};%
         \node (user) at (1,-4) [branch, gray] {$u$};%
 
-        \path (login) edge[post] (validate);%
-        \path (validate) edge[post, bend right] (login);%
+        \path (loginAs) edge[post] (validate);%
+        \path (validate) edge[post, bend right] (loginAs);%
         \path (validate) edge[post] (user);%
         \path (validate) edge[post] (welcome);%
-        \path (3, 0) edge[post] (login);%
+        \path (3, 0) edge[post] (loginAs);%
       \end{scope}
 
     \end{tikzpicture}

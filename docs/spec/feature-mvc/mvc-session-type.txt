@@ -1,13 +1,13 @@
 # Protocol
 
-# The server offer two services, "register" and "login"
-I  = &{"register": R, "login": L}
+# The server offer two services, "register" and "loginAs"
+I  = &{"register": R, "loginAs": L}
 
 #-----------------------------------------------------------------------------
-# If client chooses "register", the server will enter the registration hall,
-# where registration happens (R).
+# If client chooses "register", the server will enter the registeredAs hall,
+# where registeredAs happens (R).
 #
-# Here the client is supposed to provide correct registration data, made of
+# Here the client is supposed to provide correct registeredAs data, made of
 # username, password and fullname.
 #
 # The server will try to proceed, but errors or unexpected conditions may
@@ -16,7 +16,7 @@ I  = &{"register": R, "login": L}
 R  = &{register(u,p,f): VR, "cancel": I}
 
 #-----------------------------------------------------------------------------
-# If the registration process occurred without error (TRUE or FALSE), the
+# If the registeredAs process occurred without error (TRUE or FALSE), the
 # server moves forward to the outer service loop (I).
 #
 # In case of error we go to error recovery state ER before returning to I
@@ -25,20 +25,20 @@ VR = +<TRUE: I, FALSE: I, ERROR: ER>
 ER = &{error(): I}
 
 #-----------------------------------------------------------------------------
-# If client chooses "login", the server will enter the main door, where access
-# is given after a login step.
+# If client chooses "loginAs", the server will enter the main door, where access
+# is given after a loginAs step.
 #
 # Here the client is supposed to provide correct credentials, made of username
 # and password.
 #
-# As in registration case, the server will try to proceed, but errors or
-# unexpected conditions may occur. This is anylized in the login validation
+# As in registeredAs case, the server will try to proceed, but errors or
+# unexpected conditions may occur. This is anylized in the loginAs validation
 # state (VL)
 #-----------------------------------------------------------------------------
-L  = &{login(u, p): VL, "cancel": I}
+L  = &{loginAs(u, p): VL, "cancel": I}
 
 #-----------------------------------------------------------------------------
-# If the login process occurred without error and without violations to
+# If the loginAs process occurred without error and without violations to
 # business rules (TRUE), the server moves forward to the user main page (U).
 #
 # If there is a business violation (FALSE), the server goes to the initial

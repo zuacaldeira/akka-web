@@ -1,7 +1,7 @@
 package actors.mvc;
 
 import graphs.entities.Project;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import views.ui.AkkaUI;
 
 /**

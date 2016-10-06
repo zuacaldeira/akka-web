@@ -11,7 +11,7 @@
 The main entrance is controlled by a doorman, the
 \code{WelcomeMVCActor}. No one enters in the system without his
 acknowledgement. The behavior of this mvc actor is to redirect users
-to the registration hall or to the main access control zone that leads
+to the registeredAs hall or to the main access control zone that leads
 into Akkaria, where other actors will navigate and interact with the
 user through the system. These actors are the \code{RegisterMVCActor}
 and \code{LoginMVCActor}.
@@ -19,11 +19,11 @@ and \code{LoginMVCActor}.
 The session type $w$ is governed by the \code{WelcomeMVCActor}, and is
 a typical session type for a delegator, where upon message reception,
 possibly after some internal tasks, the delegator transfers user
-interaction to other actors, in this case, to the registration or
-login mvc actors, with session types $R$ and $S$, respectively.
+interaction to other actors, in this case, to the registeredAs or
+loginAs mvc actors, with session types $R$ and $S$, respectively.
 %
 \begin{align}
-  W = \branchST{register: R, login: L}
+  W = \branchST{register: R, loginAs: L}
 \end{align}
 %
 \par
@@ -39,11 +39,11 @@ The \code{RegisterMVCActor} governs things from state $r$. He is
 responsible to present the user a register form, collect it and try so
 persist it internally in the database.
 %
-Many things can go wrong during the registration process. The input
+Many things can go wrong during the registeredAs process. The input
 data provided by the client, \emph{username, password, fullname} is
 bound to business rules they must observe. Also, there can be system
 failures or any other abnormal situations that may prevent the
-registration process to be completed. This means that we need a fault
+registeredAs process to be completed. This means that we need a fault
 tolerance mechanism to react adequately to the circumstances.
 %
 A session type $r$ that includes fault tolerance is given below in
@@ -62,14 +62,14 @@ Validation can result in three possible results: \code{SUCCESSFUL,
   INVALID, FAILED}.
 %
 If the data provided from client violates any business rule, the
-registration will be denied. The actor sends an invalid message to the
+registeredAs will be denied. The actor sends an invalid message to the
 caller and resumes to it's initial state $r$.
 %
 If the data is valid, but a system error or exception occurs during
 data persistence in the database, failure will be reported to the
 caller and state resumed to $w$.
 %
-If successful, user interaction will progress to the login state,
+If successful, user interaction will progress to the loginAs state,
 under supervision of the \code{LoginMVCActor}.
 %
 The finite automata representing this interaction is shown in
@@ -95,7 +95,7 @@ the presence of failures, error or invalid data input.
 %
 The \code{LoginMVCActor} behaves in a similar way
 (Figure~\ref{fig:lmvca-finite-automata}). In state $l$, the actor is
-expecting a $login$ message with the input data. When the client sends
+expecting a $loginAs$ message with the input data. When the client sends
 such message, the actor performs a state transition to $v_l$ where the
 result of the operation will be communicated back to the client for
 state synchronization. This happen in $v_l$, where fault tolerance
@@ -144,10 +144,10 @@ To create a reference to this actor:
 
 
 
-The business rules or requirements for the registration process exist.
+The business rules or requirements for the registeredAs process exist.
 \begin{itemize}
 \item Usernames are email valid addresses; users can register only
-  once. The existence of a registration is determined by the existence
+  once. The existence of a registeredAs is determined by the existence
   of one and one only \code{Registration} relationship for an account
   whose username matches the input \emph{username}. A username is
   valid if respects:
@@ -161,7 +161,7 @@ The business rules or requirements for the registration process exist.
 %
 
 %
-After registration there will be new data units in the database. In
+After registeredAs there will be new data units in the database. In
 particular:
 \begin{align}
   \begin{cases}
@@ -173,14 +173,14 @@ particular:
 %
 \par
 %
-The behaviour of \code{WelcomeActor} is to coordinate the registration
-and login processes. This behaviour is represented by session type
+The behaviour of \code{WelcomeActor} is to coordinate the registeredAs
+and loginAs processes. This behaviour is represented by session type
 \begin{align}
   \begin{cases}
-    W &=\ \branchST{register: R, login: L}\\
+    W &=\ \branchST{register: R, loginAs: L}\\
     R &=\ \branchST{register(username,password,fullname): V_r}\\
     V_r &=\ \selectST{true: L, false: R, error: W}\\
-    L &=\ \branchST{login(username, password): V_l}\\
+    L &=\ \branchST{loginAs(username, password): V_l}\\
     V_l &=\ \selectST{true: U, false: L, error: W}
   \end{cases}
           \label{eq:session-type-wa}
@@ -189,7 +189,7 @@ and login processes. This behaviour is represented by session type
 
 %
 In this example, in $Welcome$ state the actor offers two services,
-$register$ and $login$. To access the service clients must send one of
+$register$ and $loginAs$. To access the service clients must send one of
 these messages. Exchanging this message will bring the communication
 into a new state, either $Register$ or $Login$.
 %
@@ -198,12 +198,12 @@ input. Input validation, business rule validation and error handling
 are reported back to the client for state synchronization
 ($Validate Registration$).
 %
-If validation and operation were successful, we can go to the login
+If validation and operation were successful, we can go to the loginAs
 state $Login$. Registered users can go directly to $Login$.
 %
-In the login state the actor expects a message wrapping the user
+In the loginAs state the actor expects a message wrapping the user
 username and password. Input validation, storage, and error are
-reported in state $Validate Login$. Upon successful login, the user
+reported in state $Validate Login$. Upon successful loginAs, the user
 can enter the gates of Akkaria in state $U$.
 %
 \input{akkaros/fig-sessiontype-wa}

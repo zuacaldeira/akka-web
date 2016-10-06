@@ -5,7 +5,7 @@ import actors.messages.ControlMessage;
 import actors.messages.crud.*;
 import graphs.Neo4jSessionFactory;
 import graphs.entities.Entity;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.neo4j.ogm.session.Session;
 import views.ui.AkkaUI;
 

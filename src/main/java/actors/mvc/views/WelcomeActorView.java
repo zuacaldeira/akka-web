@@ -25,18 +25,22 @@ public class WelcomeActorView extends ActorView {
         addMailbox(ControlMessage.LOGIN, true);
         addStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
         setId(StyleClassNames.WELCOME_ACTOR.getStyle());
-        setDebugId(StyleClassNames.WELCOME_ACTOR.getStyle());
+        //setDebugId(StyleClassNames.WELCOME_ACTOR.getStyle());
     }
 
     @Override
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(ControlMessage.REGISTER.name())) {
             getLog().info("REGISTER button clicked");
+            if(getUI() != null) {
                 getUI().getMVCActor().tell(ControlMessage.REGISTER, getUI().getMVCActor());
+            }
         }
         else if (event.getButton().getCaption().equals(ControlMessage.LOGIN.name())) {
             getLog().info("LOGIN button clicked");
+            if(getUI() != null) {
                 getUI().getMVCActor().tell(ControlMessage.LOGIN, getUI().getMVCActor());
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 package graphs.entities;
 
+import graphs.entities.nodes.Account;
+import graphs.entities.nodes.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

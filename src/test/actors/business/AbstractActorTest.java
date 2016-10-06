@@ -6,7 +6,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import graphs.Neo4jSessionFactory;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.session.Session;
@@ -14,6 +14,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import scala.concurrent.Await;
 import scala.concurrent.duration.Duration;
+import views.ui.AkkaMocks;
 import views.ui.WelcomeUI;
 
 import java.util.Collections;
@@ -52,14 +53,14 @@ public abstract class AbstractActorTest  extends Neo4JDatabaseTest {
     }
 
     public ActorRef createWelcome(Class<WelcomeActor> aclass) {
-        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+        return actorSystem.actorOf(Props.create(aclass, AkkaMocks.getWelcomeMockUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
     }
     public ActorRef createActor(Class<?> aclass) {
-        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+        return actorSystem.actorOf(Props.create(aclass, AkkaMocks.getWelcomeMockUI(), new User()), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
     }
 
     public ActorRef createActor(Class<?> aclass, User user) {
-        return actorSystem.actorOf(Props.create(aclass, new WelcomeUI(), user), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
+        return actorSystem.actorOf(Props.create(aclass, AkkaMocks.getWelcomeMockUI(), user), aclass.getSimpleName() + RandomStringUtils.randomAlphabetic(8));
     }
 
     public ActorRef createActor(Class<?> aclass, WelcomeUI ui) {

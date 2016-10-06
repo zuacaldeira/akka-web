@@ -6,10 +6,8 @@ import actors.exceptions.SystemFailure;
 import actors.messages.ControlMessage;
 import actors.messages.world.EnterAkkaria;
 import actors.messages.world.LeaveAkkaria;
-import actors.mvc.views.ActorView;
-import actors.mvc.views.ActorsViewFactory;
 import akka.actor.ActorRef;
-import graphs.entities.User;
+import graphs.entities.nodes.User;
 import views.ui.AkkaUI;
 
 /**
@@ -72,7 +70,7 @@ public abstract class MVCActor extends Supervisor {
     protected final void leaveAkkariaUIOnCancel(LeaveAkkaria message) {
         log.info("Leaving Akkaria onCancel");
         if(message.getUi() != null) {
-            message.getUi().leave(getSelf(), ControlMessage.CANCELLED);
+            message.getUi().leave(getSelf());
             getParentActor().tell(new EnterAkkaria(), getSender());
         }
     }
@@ -80,14 +78,9 @@ public abstract class MVCActor extends Supervisor {
     // TODO: ActorRef or .class?
     protected final void enterUI(EnterAkkaria message) {
         if(getUi() != null) {
-            getUi().enter(getSelf(), getActorView());
+            getUi().enter(getSelf(), getClass());
         }
     }
-
-    protected final ActorView getActorView() {
-        return ActorsViewFactory.getInstance().getActorView(this.getClass());
-    };
-
 
     protected final void leaveAkkariaUIOnBusinessViolation(BusinessViolation exception) {
         log.info("Leaving Akkaria on Violation:" + ControlMessage.INVALID.name());
@@ -100,7 +93,7 @@ public abstract class MVCActor extends Supervisor {
     protected final void leaveAkkariaOnFailure(SystemFailure data) {
         log.info("Leaving Akkaria on Failure:" + ControlMessage.FAILURE.name());
         if(getUi() != null) {
-            getUi().leave(getSelf(), ControlMessage.FAILURE);
+            getUi().leave(getSelf());
             getParentActor().tell(ControlMessage.FAILURE, getSelf());
         }
         // Goes to supervision

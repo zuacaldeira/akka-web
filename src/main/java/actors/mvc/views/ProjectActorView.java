@@ -16,6 +16,8 @@ public class ProjectActorView extends ActorView {
         addMailbox(ControlMessage.READ, true);
         addMailbox(ControlMessage.UPDATE, true);
         addMailbox(ControlMessage.DELETE, true);
+        setStyleName(StyleClassNames.PROFILE_ACTOR.getStyle());
+
     }
 
     @Override

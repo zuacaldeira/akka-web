@@ -13,7 +13,6 @@ public class EnterAkkariaTest {
 
     @Test(dataProviderClass = AkkaMocks.class, dataProvider = "mockUis")
     public void testCreate(AkkaUI mockedUI, ActorRef mockedActor) {
-        mockedUI.setMVCActor(mockedActor);
         EnterAkkaria enterAkkaria = new EnterAkkaria();
     }
 
