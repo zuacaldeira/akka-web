@@ -37,8 +37,6 @@ public class Mailbox extends Button  {
             return true;
         }
         return false;
-        /*Mailbox that = (Mailbox) o;
-        return Objects.equals(message, that.message);*/
     }
 
     @Override

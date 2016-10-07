@@ -37,5 +37,20 @@ public class AccessWelcomePageSeleniumTest extends SeleniumTest {
         assertNotNull(super.findButton(ControlMessage.REGISTER.name()));
         assertTrue(clickRegister());
         assertTrue(super.hasElementNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
+        stop();
     }
+
+    @Test
+    public void testAccessLoginActorView() {
+        start();
+        assertTrue(super.hasElementNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
+        assertNotNull(super.findWelcomeActorView());
+        // Lookup for REGISTER Button
+        assertTrue(super.hasButtonNamed(ControlMessage.LOGIN.name()));
+        assertNotNull(super.findButton(ControlMessage.LOGIN.name()));
+        assertTrue(clickRegister());
+        assertTrue(super.hasElementNamed(StyleClassNames.LOGIN_ACTOR.getStyle()));
+        stop();
+    }
+
 }

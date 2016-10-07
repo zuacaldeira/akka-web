@@ -22,18 +22,15 @@ public class WelcomeUI extends AkkaUI {
 
 
     public WelcomeUI() {
-        super(WelcomeActor.class, "WelcomeActor");
+        super("WelcomeActor");
     }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        checkCredentials(vaadinRequest);
         ActorRef actor = createActorRef(WelcomeActor.class);
         actor.tell(new EnterAkkaria(), actor);
     }
 
-    private void checkCredentials(VaadinRequest request) {
-    }
 
     /**
      * A servlet to process the application requests.

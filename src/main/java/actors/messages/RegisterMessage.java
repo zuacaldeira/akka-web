@@ -39,7 +39,6 @@ public class RegisterMessage {
     public String toString() {
         return "RegisterMessage{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
                 '}';
     }

@@ -37,11 +37,9 @@ public class RegisterActorView extends ActorView {
     public void buttonClick(Button.ClickEvent event) {
         if (event.getButton().getCaption().equals(ControlMessage.CANCELLED.name())){
             cleanRegisterForm();
-            if(getUI() != null) {
-                if(getUI().getMVCActor() != null) {
+            if(getUI() != null && getUI().getMVCActor() != null) {
                     getUI().getMVCActor().tell(new LeaveAkkaria(getUI(), ControlMessage.CANCELLED), getUI().getMVCActor());
                 }
-            }
         }
 
         else if(!isFormEdited()) {
@@ -52,10 +50,8 @@ public class RegisterActorView extends ActorView {
         }
 
         else if (event.getButton().getCaption().equals(ControlMessage.REGISTER.name())) {
-            if(getUI() != null) {
-                if(getUI().getMVCActor() != null) {
+            if(getUI() != null && getUI().getMVCActor() != null) {
                     getUI().getMVCActor().tell(createRegisterMessage(), getUI().getMVCActor());
-                }
             }
         }
     }

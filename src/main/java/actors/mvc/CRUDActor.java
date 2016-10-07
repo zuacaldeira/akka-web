@@ -1,6 +1,5 @@
 package actors.mvc;
 
-import actors.exceptions.SystemFailure;
 import actors.messages.ControlMessage;
 import actors.messages.crud.*;
 import graphs.Neo4jSessionFactory;
@@ -46,50 +45,26 @@ public abstract class CRUDActor<T extends Entity> extends MVCActor {
     }
 
     public  void create(CreateMessage<T> message){
-        try{
-            Neo4jSessionFactory.getInstance().getNeo4jSession().save(message.getPayload());
-        } catch (Exception ex) {
-            log.error("Met Exception " + ex.getMessage());
-            SystemFailure failure = new SystemFailure(ex.getMessage());
-            leaveAkkariaOnFailure(failure);
-            throw failure;
-        }
+        save(message.getPayload());
+    }
+
+    private void save(T payload) {
+         Neo4jSessionFactory.getInstance().getNeo4jSession().save(payload);
     }
 
     public  T read(ReadMessage<T> message){
-        try{
-            Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-            return session.load(message.getType(), message.getId());
-        } catch (Exception ex) {
-            log.error("Met Exception " + ex.getMessage());
-            SystemFailure failure = new SystemFailure(ex.getMessage());
-            leaveAkkariaOnFailure(failure);
-            throw failure;
-        }
+        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+        return session.load(message.getType(), message.getId());
     }
 
     public  void update(UpdateMessage<T> message){
-        try{
-            Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-            session.save(message.getPayload());
-        } catch (Exception ex) {
-            log.error("Met Exception " + ex.getMessage());
-            SystemFailure failure = new SystemFailure(ex.getMessage());
-            leaveAkkariaOnFailure(failure);
-            throw failure;
-        }
+        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+        session.save(message.getPayload());
     }
 
     public  void delete(DeleteMessage<T> message){
-        try{
-            Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
-            session.delete(message.getPayload());
-        } catch (Exception ex) {
-            log.error("Met Exception " + ex.getMessage());
-            SystemFailure failure = new SystemFailure(ex.getMessage());
-            leaveAkkariaOnFailure(failure);
-            throw failure;
-        }
+        Session session = Neo4jSessionFactory.getInstance().getNeo4jSession();
+        session.delete(message.getPayload());
     }
 
 

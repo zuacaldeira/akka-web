@@ -11,6 +11,8 @@ import com.vaadin.ui.TextField;
 import views.components.validators.PasswordValidator;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by zua on 29.08.16.
@@ -78,6 +80,7 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
     public void validate() {
         emailField.validate();
         passwordField.validate();
+
     }
 
 
@@ -86,11 +89,12 @@ public class LoginForm extends ActorForm implements Property.ValueChangeListener
         try {
             validate();
             if(getParent() != null && getParent() instanceof LoginActorView) {
-                LoginActorView parent = ((LoginActorView) getParent());
+                LoginActorView parent = (LoginActorView) getParent();
                 parent.getMailbox(ControlMessage.LOGIN).setEnabled(true);
                 parent.getMailbox(ControlMessage.LOGIN).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         } catch (Validator.InvalidValueException ivx) {
+            Logger.getLogger(LoginForm.class.getSimpleName()).log(Level.INFO, ivx.getMessage(), ivx);
             if(getParent() != null && getParent() instanceof LoginActorView) {
                 ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).setEnabled(false);
                 ((LoginActorView) getParent()).getMailbox(ControlMessage.LOGIN).removeStyleName(StyleClassNames.ENABLED.getStyle());

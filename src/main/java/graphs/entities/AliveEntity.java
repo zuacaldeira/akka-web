@@ -1,18 +1,17 @@
 package graphs.entities;
 
-import org.neo4j.ogm.annotation.Relationship;
-
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by zua on 02.10.16.
  */
 public abstract class AliveEntity extends Entity {
 
-    private Lifecycle lifecycle;
+    private History lifecycle;
 
     public AliveEntity() {
-        this.lifecycle = new Lifecycle();
+        this.lifecycle = new History();
         lifecycle.add(new CreatedAt(new Date()));
     }
 
@@ -52,4 +51,23 @@ public abstract class AliveEntity extends Entity {
         lifecycle.add(new FinishedAt(new Date()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AliveEntity)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        AliveEntity that = (AliveEntity) o;
+        return Objects.equals(lifecycle, that.lifecycle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), lifecycle);
+    }
 }

@@ -11,6 +11,5 @@ public abstract class MyForm extends FormLayout implements Property.ValueChangeL
     public MyForm() {
         setStyleName(ValoTheme.FORMLAYOUT_LIGHT);
     }
-
     public abstract void validate();
 }

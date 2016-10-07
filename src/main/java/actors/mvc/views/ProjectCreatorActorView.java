@@ -9,6 +9,8 @@ import com.vaadin.ui.Notification;
 import graphs.entities.Project;
 import views.components.ProjectForm;
 
+import java.util.Objects;
+
 /**
  * Created by zua on 03.10.16.
  */
@@ -45,5 +47,27 @@ public class ProjectCreatorActorView extends ActorView {
 
     private Project getProjectFromForm() {
         return new Project(form.getTitleField().getValue(), form.getDescriptionField().getValue());
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProjectCreatorActorView)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        ProjectCreatorActorView that = (ProjectCreatorActorView) o;
+        return Objects.equals(form, that.form) &&
+                Objects.equals(project, that.project);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), form, project);
     }
 }

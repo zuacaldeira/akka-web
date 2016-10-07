@@ -11,6 +11,8 @@ import com.vaadin.ui.VerticalLayout;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * Created by zua on 28.09.16.
@@ -39,7 +41,7 @@ public class StackedLayout extends VerticalLayout {
     }
 
     public void enter(ActorRef actorRef, Class<? extends MVCActor> mvcActorClass) {
-        System.out.println("STACKED LAYOUT ENTER " + actorRef.path().name());
+        Logger.getLogger(getClass().getSimpleName()).info("Actor " + actorRef + " entering stacked layout");
         oldActor = currentActor;
         oldView = currentView;
         currentActor = actorRef;
@@ -52,7 +54,7 @@ public class StackedLayout extends VerticalLayout {
             removeComponent(actorViewMap.remove(actorRef));
             currentActor = oldActor;
             currentView = oldView;
-            System.out.println("LEAVE " + actorRef.path().name());
+            Logger.getLogger(getClass().getSimpleName()).info("Actor " + actorRef + " left stacked layout");
         }
     }
 
@@ -75,4 +77,24 @@ public class StackedLayout extends VerticalLayout {
         return currentActor;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof StackedLayout)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        StackedLayout layout = (StackedLayout) o;
+        return Objects.equals(currentActor, layout.currentActor) &&
+                Objects.equals(currentView, layout.currentView);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), currentActor, currentView);
+    }
 }

@@ -7,6 +7,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import views.components.LoginForm;
 
+import java.util.Objects;
+
 /**
  * Created by zua on 02.09.16.
  */
@@ -69,5 +71,26 @@ public class LoginActorView extends ActorView {
     private void cleanLoginForm() {
         loginForm.getEmailField().clear();
         loginForm.getPasswordField().clear();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LoginActorView)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        LoginActorView that = (LoginActorView) o;
+        return Objects.equals(loginForm, that.loginForm);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), loginForm);
     }
 }

@@ -2,6 +2,7 @@ package graphs.entities;
 
 import org.neo4j.ogm.annotation.GraphId;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Objects;
  *
  * Created by zua on 30.08.16.
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
     @GraphId
     private Long id;

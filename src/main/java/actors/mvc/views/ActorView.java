@@ -33,7 +33,6 @@ public abstract class ActorView extends VerticalLayout implements Button.ClickLi
         setMargin(true);
         setSpacing(true);
         setSizeFull();
-        //setWidth("50%");
         initBase();
         align();
         setStyleName(StyleClassNames.ACTOR.getStyle());

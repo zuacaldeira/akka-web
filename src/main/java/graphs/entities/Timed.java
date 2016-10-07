@@ -1,11 +1,12 @@
 package graphs.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by zua on 01.10.16.
  */
-public interface Timed {
+public interface Timed extends Serializable {
     Date getTime();
     Timed getBefore();
     Timed getAfter();

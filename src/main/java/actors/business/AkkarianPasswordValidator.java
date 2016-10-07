@@ -5,11 +5,12 @@ import java.util.regex.Pattern;
 /**
  * Created by zua on 21.09.16.
  */
-public class AkkarianPasswordValidator extends AkkarianValidator<String> {
+public class AkkarianPasswordValidator implements AkkarianValidator<String> {
     private static final String CONTAINS_UPPER_CASE_PATTERN = "^.*[A-Z].*$";
     private static final String CONTAINS_LOWER_CASE_PATTERN = "^.*[a-z].*$";
     private static final String CONTAINS_DIGIT = "^.*\\d.*$";
 
+    @Override
     public boolean isValid(String password) {
         if(password == null) {
             throw new InvalidPasswordException("Null password");
@@ -26,6 +27,6 @@ public class AkkarianPasswordValidator extends AkkarianValidator<String> {
         if(!hasDigit) {
             throw new InvalidPasswordException("Digit missing");
         }
-        return hasUpperCase && hasLowerCase && hasDigit;
+        return true;
     }
 }

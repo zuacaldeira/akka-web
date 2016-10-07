@@ -15,10 +15,12 @@ public class CreateProjectSeleniumTest extends SeleniumTest {
     @Test
     public void createSimpleProject() {
         start();
+        assertTrue(hasElementNamed(StyleClassNames.WELCOME_ACTOR.getStyle()));
         System.out.println("Browser opened");
 
         assertTrue(super.hasButtonNamed(ControlMessage.REGISTER.name()));
         assertTrue(clickRegister());
+        assertTrue(hasElementNamed(StyleClassNames.REGISTER_ACTOR.getStyle()));
 
         assertTrue(fillFullname("Alexandre Zua Caldeira"));
         assertTrue(fillUsername("zuacaldeira@gmail.com"));
@@ -27,6 +29,7 @@ public class CreateProjectSeleniumTest extends SeleniumTest {
         assertTrue(clickRegister());
 
 
+        assertTrue(hasElementNamed(StyleClassNames.LOGIN_ACTOR.getStyle()));
         assertTrue(super.hasElementNamed(StyleClassNames.EMAIL.getStyle()));
         assertTrue(fillUsername("zuacaldeira@gmail.com"));
 

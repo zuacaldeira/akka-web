@@ -1,5 +1,6 @@
 package views.components.validators;
 
+import actors.business.InvalidPasswordException;
 import actors.business.TestDataProvider;
 import actors.messages.RegisterMessage;
 import com.vaadin.data.Validator;
@@ -26,14 +27,14 @@ public class PasswordValidatorTest {
 
     @Test(dataProvider = "invalidPasswords",
             dataProviderClass = TestDataProvider.class,
-            expectedExceptions = Validator.InvalidValueException.class)
+            expectedExceptions = InvalidPasswordException.class)
     public void testInvalidPassword(String password) {
         new PasswordValidator("Invalid Password").validate(password);
     }
 
     @Test(dataProvider = "invalidPasswords",
             dataProviderClass = TestDataProvider.class,
-            expectedExceptions = Validator.InvalidValueException.class)
+            expectedExceptions = InvalidPasswordException.class)
     public void testInvalidPasswordConfirmation(String password) {
         new PasswordConfirmationValidator("Invalid Password", new PasswordField("Password: ", password)).validate(password);
     }

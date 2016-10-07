@@ -11,7 +11,7 @@ public class FullNameValidator implements com.vaadin.data.Validator {
     }
 
     @Override
-    public void validate(Object value) throws InvalidValueException {
+    public void validate(Object value) {
         if(value == null) {
             throw new InvalidValueException(message + ": null value");
         }

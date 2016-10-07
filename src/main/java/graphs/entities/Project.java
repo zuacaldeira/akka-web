@@ -4,6 +4,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by zua on 26.09.16.
@@ -56,5 +57,27 @@ public class Project extends AliveEntity {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Project)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Project project = (Project) o;
+        return Objects.equals(title, project.title) &&
+                Objects.equals(description, project.description) &&
+                Objects.equals(parent, project.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), title, description, parent);
     }
 }

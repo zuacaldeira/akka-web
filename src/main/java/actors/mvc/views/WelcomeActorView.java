@@ -25,7 +25,6 @@ public class WelcomeActorView extends ActorView {
         addMailbox(ControlMessage.LOGIN, true);
         addStyleName(StyleClassNames.WELCOME_ACTOR.getStyle());
         setId(StyleClassNames.WELCOME_ACTOR.getStyle());
-        //setDebugId(StyleClassNames.WELCOME_ACTOR.getStyle());
     }
 
     @Override

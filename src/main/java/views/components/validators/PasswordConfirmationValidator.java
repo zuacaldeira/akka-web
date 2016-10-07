@@ -14,7 +14,7 @@ public class PasswordConfirmationValidator extends PasswordValidator {
     }
 
     @Override
-    public void validate(Object value) throws InvalidValueException {
+    public void validate(Object value) {
         super.validate(value);
         if(value instanceof String) {
             String pass = (String) value;

@@ -6,9 +6,10 @@ import actors.messages.RegisterMessage;
 /**
  * Created by zua on 21.09.16.
  */
-public class RegistrationValidator {
+public class RegistrationValidator implements AkkarianValidator<RegisterMessage> {
 
-    public boolean isValid(RegisterMessage message) throws InvalidRegistrationException {
+    @Override
+    public boolean isValid(RegisterMessage message) {
         boolean validEmail = new UsernameValidator().isValid(message.getEmail());
         if(! validEmail) {
             throw new InvalidRegistrationException("Invalid Email");
@@ -17,6 +18,6 @@ public class RegistrationValidator {
         if(! validPassword) {
             throw new InvalidRegistrationException("Invalid Password");
         }
-        return validEmail && validPassword;
+        return true;
     }
 }

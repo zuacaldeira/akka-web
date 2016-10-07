@@ -17,12 +17,12 @@ public class ReadMessage<T extends Entity> extends CrudMessage<T>{
         return id;
     }
 
-    //@Override
+    @Override
     public T getPayload() {
         throw new IllegalStateException("Read message do not carry a value");
     }
 
-    //@Override
+    @Override
     public void setPayload(T value) {
         throw new IllegalStateException("Read message do not set any value");
     }

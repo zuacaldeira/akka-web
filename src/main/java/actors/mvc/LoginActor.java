@@ -5,7 +5,6 @@ import actors.exceptions.InvalidLoginException;
 import actors.exceptions.MultipleRegistrationException;
 import actors.exceptions.UnexpectedException;
 import actors.exceptions.UnregisteredUserException;
-import actors.messages.ControlMessage;
 import actors.messages.LoginMessage;
 import akka.actor.ActorRef;
 import graphs.Neo4jQueryFactory;
@@ -64,25 +63,19 @@ public class LoginActor extends MVCActor{
         leaveAkkariaOnSuccess(registeredAs.getUser());
     }
 
-    private void acknowledgeSender(ControlMessage message) {
-        getSender().tell(message, getSelf());
-    }
-
     private void createUser(Session session, RegisteredAs registeredAs) {
         session.save(new LoginAs(registeredAs.getUser(), registeredAs.getAccount()));
     }
 
     private RegisteredAs getRegistration(Session session, LoginMessage message) {
         // Tries to find a unique registration for this user
-        Iterable<RegisteredAs> registrations = findAllRegistrationsByEmail(message.getUsername());
+        Iterable<RegisteredAs> registrations = findAllRegistrationsByEmail(session, message.getUsername());
         return getTheOneAndOnly(registrations, message.getUsername());
     }
 
     private RegisteredAs getTheOneAndOnly(Iterable<RegisteredAs> registrations, String username) {
         List<RegisteredAs> list = new LinkedList<>();
-        registrations.forEach(r -> {
-            list.add(r);
-        });
+        registrations.forEach(list::add);
         // If there is one and one registration entity only, then return it
         if(list.size() == 1) {
             return list.get(0);
@@ -97,8 +90,8 @@ public class LoginActor extends MVCActor{
         return null;
     }
 
-    private Iterable<RegisteredAs> findAllRegistrationsByEmail(String username) {
-        return Neo4jSessionFactory.getInstance().getNeo4jSession().query(
+    private Iterable<RegisteredAs> findAllRegistrationsByEmail(Session session, String username) {
+        return session.query(
             RegisteredAs.class,
             Neo4jQueryFactory.getInstance().findRegisterByEmailQuery(username),
             new HashMap<>()

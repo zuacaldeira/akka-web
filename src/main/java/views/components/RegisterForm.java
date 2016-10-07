@@ -12,6 +12,8 @@ import views.components.validators.PasswordConfirmationValidator;
 import views.components.validators.PasswordValidator;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -65,8 +67,6 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
                 passwordField,
                 passwordConfirmationField
         );
-
-        //setStyleName(StyleClassNames.REGISTER_FORM);
     }
 
 
@@ -106,6 +106,7 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
         return fullnameField;
     }
 
+    @Override
     public void validate() {
         emailField.validate();
         passwordField.validate();
@@ -123,7 +124,8 @@ public class RegisterForm extends ActorForm implements Property.ValueChangeListe
                 ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).addStyleName(StyleClassNames.ENABLED.getStyle());
             }
         }
-        catch (Exception e) {
+        catch (Exception ivx) {
+            Logger.getLogger(LoginForm.class.getSimpleName()).log(Level.INFO, ivx.getMessage(), ivx);
             if(getParent() instanceof RegisterActorView) {
                 ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).setEnabled(false);
                 ((RegisterActorView) getParent()).getMessage(ControlMessage.REGISTER).removeStyleName(StyleClassNames.ENABLED.getStyle());

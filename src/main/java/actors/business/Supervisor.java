@@ -2,6 +2,7 @@ package actors.business;
 
 import actors.exceptions.BusinessViolation;
 import actors.exceptions.SystemFailure;
+import actors.messages.world.LeaveAkkaria;
 import akka.actor.ActorRef;
 import akka.actor.OneForOneStrategy;
 import akka.actor.Props;
@@ -14,15 +15,17 @@ import scala.concurrent.duration.Duration;
  */
 public class Supervisor extends AkkaActor {
 
-    private static SupervisorStrategy strategy =
+    private SupervisorStrategy strategy =
         new OneForOneStrategy(
             10,
             Duration.create("1 minute"),
             t -> {
                 if (t instanceof BusinessViolation) {
-                    return SupervisorStrategy.resume();
+                    Supervisor.this.getSender().tell(new LeaveAkkaria(null, (BusinessViolation)t), Supervisor.this.getSelf());
+                    return SupervisorStrategy.stop();
                 }
                 if (t instanceof SystemFailure) {
+                    Supervisor.this.getSender().tell(new LeaveAkkaria(null, (SystemFailure)t), Supervisor.this.getSelf());
                     return SupervisorStrategy.stop();
                 }
                 else {
@@ -39,7 +42,7 @@ public class Supervisor extends AkkaActor {
 
     @Override
     public void onReceive(Object message) {
-        log.info("Received message " + message);
+        log.info("As Supervisor: Received message " + message);
         if (message instanceof Props) {
             getSender().tell(getContext().actorOf((Props) message), getSelf());
         }
@@ -47,7 +50,6 @@ public class Supervisor extends AkkaActor {
             unhandled(message);
         }
     }
-
 
     protected final ActorRef createChildActor(Class<?> actorClass, Object... args) {
         return getContext().actorOf(Props.create(actorClass, args), actorClass.getSimpleName());

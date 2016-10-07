@@ -8,6 +8,8 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import graphs.entities.nodes.User;
 
+import java.util.Objects;
+
 /**
  * Created by zua on 04.09.16.
  */
@@ -17,7 +19,7 @@ public abstract class AkkaUI extends UI implements Akkaria {
     private StackedLayout stackedLayout;
     private User user;
 
-    public AkkaUI(Class<? extends MVCActor> actor, String name) {
+    public AkkaUI(String name) {
         this.actorName = name;
         stackedLayout = new StackedLayout();
         setContent();
@@ -30,16 +32,13 @@ public abstract class AkkaUI extends UI implements Akkaria {
         return stackedLayout.getMVCActor();
     }
 
+    @Override
     public void enter(ActorRef actorRef, Class<? extends MVCActor>  actorClass) {
-        access(() -> {
-            stackedLayout.enter(actorRef, actorClass);
-        });
+        access(() -> stackedLayout.enter(actorRef, actorClass));
     }
 
     public void leave(ActorRef actorRef) {
-        access(() -> {
-            stackedLayout.leave(actorRef);
-        });
+        access(() -> stackedLayout.leave(actorRef));
     }
 
 
@@ -66,6 +65,24 @@ public abstract class AkkaUI extends UI implements Akkaria {
         return (StackedLayout) super.getContent();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AkkaUI)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        AkkaUI that = (AkkaUI) o;
+        return Objects.equals(actorName, that.actorName) &&
+                Objects.equals(user, that.user);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), actorName, user);
+    }
 }

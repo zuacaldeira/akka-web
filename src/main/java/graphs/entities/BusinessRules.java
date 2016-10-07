@@ -5,6 +5,9 @@ package graphs.entities;
  */
 public final class BusinessRules {
 
+
+    private BusinessRules(){}
+
     public static void validateTitle(String title) {
         if(title == null || title.isEmpty()) {
             throw new IllegalArgumentException("Invalid title");
